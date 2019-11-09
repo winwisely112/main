@@ -16,8 +16,8 @@ Future<dynamic> chatReceivingIsolate(SendPort portReceive) async {
   do {
     // create new client
     client ??= ClientChannel(
-      '127.0.0.1', // Your IP here or localhost
-      port: 3000,
+      host, // Your IP here or localhost
+      port: port,
       options: ChannelOptions(
         // TODO(Vineeth): Change to secure with server certificates
         credentials: const ChannelCredentials.insecure(),
@@ -104,8 +104,8 @@ Future<dynamic> chatSendingIsolate(SendPort portSendStatus) async {
     do {
       // create new client
       client ??= ClientChannel(
-        '127.0.0.1', // Your IP here or localhost
-        port: 3000,
+        host, // Your IP here or localhost
+        port: port,
         options: ChannelOptions(
           // TODO(Vineeth): Change to secure with server certificates
           credentials: const ChannelCredentials.insecure(),
@@ -142,9 +142,6 @@ Future<dynamic> chatSendingIsolate(SendPort portSendStatus) async {
         // try to send again
         retries = retries + 1;
         sleep(Duration(seconds: 5));
-      }
-      if (retries > 10) {
-        break;
       }
     } while (!sent);
   }
