@@ -12,7 +12,6 @@ class SupportRolesView extends StatefulWidget {
 }
 
 class _SupportRolesViewState extends State<SupportRolesView> {
-  int _number = 1;
   final List<SupportRoles> supportRoles = [
     SupportRoles("Lawyer", description),
     SupportRoles("Social Media ", description),
@@ -74,7 +73,7 @@ class _SupportRolesViewState extends State<SupportRolesView> {
             children: <Widget>[
               Text("Minimum hours you can dedicate"),
               Spacer(),
-              Text("$_number hr",
+              Text("${role.hours} hr",
                   style: Theme.of(context)
                       .textTheme
                       .body1
@@ -88,15 +87,17 @@ class _SupportRolesViewState extends State<SupportRolesView> {
             children: <Widget>[
               Text("Choose"),
               Spacer(),
-              NumberPicker.horizontal(
-                  initialValue: _number,
-                  minValue: 0,
-                  maxValue: 24,
-                  onChanged: (value) {
-                    setState(() {
-                      _number = value;
-                    });
-                  }),
+              Slider(
+                divisions: 8,
+                min: 0.0,
+                max: 8,
+                value: role.hours,
+                onChanged: (double value) {
+                  setState(() {
+                    role.hours = value;
+                  });
+                },
+              ),
             ],
           )
         ],

@@ -112,7 +112,7 @@ Route<dynamic> routes(RouteSettings settings) {
             builder: (BuildContext context) {
               return CampainDetailsView(
                 key: ValueKey<String>(settings.name),
-                campaign: info[2],
+                campaignID: info[2],
                 // need to add campaign
               );
             },

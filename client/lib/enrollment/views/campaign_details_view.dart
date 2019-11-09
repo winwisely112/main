@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import '../data/mockData/campaigns.dart';
 import '../widgets/video_player.dart';
 
 class CampainDetailsView extends StatelessWidget {
-  const CampainDetailsView({Key key, this.campaign}) : super(key: key);
-  final dynamic campaign;
+  const CampainDetailsView({Key key, this.campaignID}) : super(key: key);
+  final String campaignID;
+  // TODO(Vineeth): Need to add a logic to fetch the campaign using the campaignID
+  static Campaign campaign = Campaign('');
   @override
   Widget build(BuildContext context) {
     return Scaffold(

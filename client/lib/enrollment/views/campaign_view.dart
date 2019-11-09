@@ -70,8 +70,9 @@ class CampaignView extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
+                    // TODO(Vineeth): Need to add logic to pass campaignID
                     Navigator.of(context)
-                        .pushNamed('/campaigndetails/$campaign');
+                        .pushNamed('/campaigndetails/campaignID');
                   },
                   child: Container(
                       width: MediaQuery.of(context).size.width * 0.5 - 16,

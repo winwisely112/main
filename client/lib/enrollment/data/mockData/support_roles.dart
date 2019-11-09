@@ -1,8 +1,8 @@
 String description = 'This is description';
 
 class SupportRoles {
-  SupportRoles(this.title, this.description);
+  SupportRoles(this.title, this.description) : hours = 1;
   String title;
   String description;
-  int hours;
+  double hours;
 }
