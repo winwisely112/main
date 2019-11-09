@@ -1,16 +1,29 @@
 # github.com/winwisely99/main
-
+# windows users run in git-bash. Also might have to add SSH key to github to perform
+# git operations from make file
+# https://help.github.com/en/enterprise/2.17/user/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent	
+ifndef $(GOPATH)
+    GOPATH=$(shell go env GOPATH)
+    export GOPATH
+endif
 LIB_NAME=main
 LIB=github.com/winwisely99/$(LIB_NAME)
 LIB_BRANCH=master
-LIB_FSPATH=$(GOPATH)/src/$(LIB)
 
 GO111MODULE=on
 
 SAMPLE_NAME=client
+
+ifeq ($(OS),Windows_NT)
+LIB_FSPATH=$(subst \,/,$(subst C:\,/c/,$(GOPATH)/src/$(LIB)))
+SAMPLE_FSPATH=$(subst \,/,$(subst C:\,/c/,$(LIB_FSPATH)/$(SAMPLE_NAME)))
+PROTO_OUTPUT=$(subst /c/,C:\,$(subst \,/,$(LIB_FSPATH)))
+HOME_PATH=$(subst \,/,$(subst C:\,/c/,$(HOME)))
+else
+LIB_FSPATH=$(GOPATH)/src/$(LIB)
 SAMPLE_FSPATH=$(LIB_FSPATH)/$(SAMPLE_NAME)
-
-
+HOME_PATH=$(HOME)
+endif 
 
 help:  ## Display this help
 	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"} /^[a-zA-Z_-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
@@ -22,11 +35,14 @@ print: ## print
 	@echo LIB: $(LIB)
 	@echo LIB_BRANCH: $(LIB_BRANCH)
 	@echo LIB_FSPATH: $(LIB_FSPATH)
+	@echo GOPATH $(GOPATH)
+	@echo HOME $(HOME)
 	@echo
 
 	@echo
 	@echo SAMPLE_NAME: $(SAMPLE_NAME)
 	@echo SAMPLE_FSPATH: $(SAMPLE_FSPATH)
+	@echo PROTO_OUTPUT: $(PROTO_OUTPUT)
 	@echo
 
 git-clone:
@@ -43,8 +59,6 @@ code:
 
 os-dep:
 	# Assume hover make file has ben run 
-
-
 ### Flu
 
 flu-config: ## flu-config
@@ -62,10 +76,25 @@ flu-clean:
 	cd $(SAMPLE_FSPATH) && flutter clean
 flu-update:
 	cd $(SAMPLE_FSPATH) && flutter packages get
+	$(MAKE) gen-icons
+	$(MAKE) gen-hive
+	$(MAKE) gen-proto
+	cd $(SAMPLE_FSPATH) && flutter analyze 
+
+gen-icons:
 	cd $(SAMPLE_FSPATH) && flutter pub run flutter_launcher_icons:main
+gen-hive:
 	cd $(SAMPLE_FSPATH) && flutter packages pub run build_runner build --delete-conflicting-outputs
-
-
+gen-proto:
+	pub global activate protoc_plugin
+	mkdir -p $(SAMPLE_FSPATH)/lib/api/v1/google/protobuf
+ifeq ($(OS),Windows_NT)
+	protoc empty.proto timestamp.proto wrappers.proto --proto_path=$(LIB_FSPATH)/server/third_party/google/protobuf/ --plugin=$(HOME_PATH)/AppData/Roaming/Pub/Cache/bin/protoc-gen-dart.bat --dart_out=grpc:"$(PROTO_OUTPUT)/client/lib/chat_view/api/v1/google/protobuf"
+	protoc chat.proto --proto_path=$(LIB_FSPATH)/server/api/proto/v1/ --plugin=$(HOME_PATH)/AppData/Roaming/Pub/Cache/bin/protoc-gen-dart.bat --dart_out=grpc:"$(PROTO_OUTPUT)/client/lib/chat_view/api/v1/"
+else
+	protoc empty.proto timestamp.proto wrappers.proto --proto_path=$(LIB_FSPATH)/server/third_party/google/protobuf --plugin=protoc-gen-dart --dart_out=grpc:$(SAMPLE_FSPATH)/lib/api/v1/google/protobuf
+	protoc chat.proto --proto_path=$(LIB_FSPATH)/server/api/proto/v1/ --plugin=protoc-gen-dart --dart_out=grpc:$(SAMPLE_FSPATH)/client/lib/chat_view/api/v1/
+endif
 ### DESK
 
 flu-desk-local-run: ## flu-desk-local-run
