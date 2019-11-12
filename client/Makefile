@@ -58,8 +58,7 @@ code:
 	code $(LIB_FSPATH)
 
 os-dep:
-	# Assume hover make file has ben run 
-### Flu
+	# Assume hover minstalled
 
 flu-config: ## flu-config
 	flutter config
@@ -95,6 +94,9 @@ else
 	protoc empty.proto timestamp.proto wrappers.proto --proto_path=$(LIB_FSPATH)/server/third_party/google/protobuf --plugin=protoc-gen-dart --dart_out=grpc:$(SAMPLE_FSPATH)/lib/api/v1/google/protobuf
 	protoc chat.proto --proto_path=$(LIB_FSPATH)/server/api/proto/v1/ --plugin=protoc-gen-dart --dart_out=grpc:$(SAMPLE_FSPATH)/client/lib/chat_view/api/v1/
 endif
+
+
+
 ### DESK
 
 flu-desk-local-run: ## flu-desk-local-run
