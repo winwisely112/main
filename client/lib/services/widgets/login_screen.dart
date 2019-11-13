@@ -1,3 +1,4 @@
+import 'package:com.winwisely99.app/localizations.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -5,6 +6,8 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations_Labels labels = AppLocalizations.of(context);
+    print('Plural multiple man: ${labels?.plurals?.man(Plural.multiple)}');
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -22,7 +25,7 @@ class LoginScreen extends StatelessWidget {
                 Navigator.of(context).pushNamedAndRemoveUntil(
                     '/home', ModalRoute.withName('/login'));
               }, // TODO
-              child: const Text('Sign In'),
+              child: Text(labels.login.signIn),
             ),
           ),
           Center(
@@ -30,7 +33,7 @@ class LoginScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pushNamed('/userinfo');
               },
-              child: const Text('Get Started'),
+              child: Text(labels.login.getStarted),
             ),
           )
         ],

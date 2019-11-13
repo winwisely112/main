@@ -44,7 +44,7 @@ Future<void> initializeHive() async {
     ..registerAdapter(ConversationsAdapter(), 9)
     // chat_view module
     ..registerAdapter(AttachmentTypeAdapter(), 10)
-    ..registerAdapter(ChatAdapter(), 11)
+    ..registerAdapter(ChatModelAdapter(), 11)
     // News Module
     ..registerAdapter(NewsAdapter(), 8);
 }
