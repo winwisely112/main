@@ -87,7 +87,7 @@ class _ConversationTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<ChatModel>>(
-        stream: Provider.of<ChatBloc>(context).getChats(),
+        stream: Provider.of<ChatBloc>(context).getChats(conversation.id),
         builder:
             (BuildContext context, AsyncSnapshot<List<ChatModel>> snapshot) {
           if (!snapshot.hasData) {
@@ -102,12 +102,17 @@ class _ConversationTile extends StatelessWidget {
             ChatModel lastChat;
             if (snapshot.data.isNotEmpty) {
               final List<ChatModel> _list = snapshot.data;
-              _list.sort((ChatModel a, ChatModel b) =>
-                  b.createdAt.compareTo(a.createdAt));
-              lastChat = _list.firstWhere(
-                  (ChatModel chat) =>
-                      chat.conversationsId == conversation.id.id,
-                  orElse: null);
+              _list.removeWhere((ChatModel item) => item == null);
+              if (_list.isEmpty) {
+                lastChat = null;
+              } else {
+                _list.sort((ChatModel a, ChatModel b) =>
+                    b.createdAt.compareTo(a.createdAt));
+                lastChat = _list.firstWhere(
+                    (ChatModel chat) =>
+                        chat.conversationsId == conversation.id.id,
+                    orElse: null);
+              }
             } else {
               lastChat = null;
             }

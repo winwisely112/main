@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 
 // TODO(FlutterDevelopers): Import modules here
 import 'package:com.winwisely99.app/chat_view/chat_view.dart';
+import 'package:com.winwisely99.app/chat_list/chat_list.dart';
+import 'package:com.winwisely99.app/news/news.dart';
 import 'package:com.winwisely99.app/services/services.dart';
 import 'app.dart';
 import 'hive.dart';
@@ -19,6 +21,10 @@ class ServicesProvider extends StatelessWidget {
             await initializeHive();
             // TODO(FlutterDevelopers): Initial Hive store here
             hiveBox['chats'] = await Hive.openBox<ChatModel>('chats');
+            hiveBox['news'] = await Hive.openBox<News>('news');
+            hiveBox['users'] = await Hive.openBox<User>('users');
+            hiveBox['conversations'] =
+                await Hive.openBox<Conversations>('conversations');
             final StorageService storage = StorageService();
             // TODO(Vineeth): Removed await for now. Need to fix this later
             storage.initialize();
@@ -65,18 +71,35 @@ class ServicesProvider extends StatelessWidget {
           },
         ),
         // This service offers fetching of the currently logged in user.
-        ProxyProvider2<StorageService, UserService, AuthUserService>(
+        ProxyProvider3<StorageService, UserService, NetworkService,
+            AuthUserService>(
           builder: (
             BuildContext _,
             StorageService storage,
             UserService user,
+            NetworkService network,
             AuthUserService __,
           ) {
             print(
                 '${DateTime.now().toUtc().toString()} GlobalUserService $user');
-            return storage == null || user == null
-                ? null
-                : AuthUserService(storage: storage, user: user);
+            // TODO(Vineeth): Move this to after authentication is successfull
+            if (storage != null && user != null) {
+              final AuthUserService _auth =
+                  AuthUserService(storage: storage, user: user);
+              if (_auth != null) {
+                repos['chats'] = ChatRepository(
+                  user: user,
+                  network: network,
+                  globalUser: _auth,
+                );
+              }
+              return _auth;
+            } else {
+              return null;
+            }
+            //return storage == null || user == null
+            //    ? null
+            //    : AuthUserService(storage: storage, user: user);
           },
           dispose: (BuildContext _, AuthUserService authUser) =>
               authUser?.dispose(),

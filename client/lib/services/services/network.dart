@@ -159,6 +159,7 @@ final Map<String, List<Map<String, dynamic>>> mockData =
       'lastName': 'Last Name A',
       'email': 'userA@email.com',
       'displayName': 'UserA',
+      'conversationIds': <String>['conversationsA', 'conversationsB'],
       'avatarURL':
           'https://upload.wikimedia.org/wikipedia/commons/6/6b/1975_Patty_Hearst.jpg'
     },
@@ -168,6 +169,7 @@ final Map<String, List<Map<String, dynamic>>> mockData =
       'lastName': 'Last Name B',
       'email': 'userB@email.com',
       'displayName': 'UserB',
+      'conversationIds': <String>['conversationsA', 'conversationsB'],
       'avatarURL':
           'https://upload.wikimedia.org/wikipedia/commons/c/c5/Benjamin_Mayi_%D7%91%D7%A0%D7%99%D7%9E%D7%99%D7%9F_%D7%9E%D7%90%D7%99.jpg'
     },
@@ -177,6 +179,7 @@ final Map<String, List<Map<String, dynamic>>> mockData =
       'lastName': 'Last Name C',
       'email': 'userC@email.com',
       'displayName': 'UserC',
+      'conversationIds': <String>['conversationsA', 'conversationsB'],
       'avatarURL':
           'https://upload.wikimedia.org/wikipedia/commons/d/d2/Menashe_Raz.jpg'
     }

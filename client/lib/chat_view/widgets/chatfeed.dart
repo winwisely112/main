@@ -107,10 +107,10 @@ class _ChatFeedBodyState extends State<_ChatFeedBody> {
   @override
   Widget build(BuildContext context) {
     final ChatBloc _chatBloc = Provider.of<ChatBloc>(context);
-    return StreamBuilder<Map<Id<ChatModel>, ChatModel>>(
+    return StreamBuilder<Map<int, ChatModel>>(
       stream: _chatBloc.chatScreen,
-      builder: (BuildContext context,
-          AsyncSnapshot<Map<Id<ChatModel>, ChatModel>> snapshot) {
+      builder:
+          (BuildContext context, AsyncSnapshot<Map<int, ChatModel>> snapshot) {
         if (!snapshot.hasData) {
           return Center(
             child: CircularProgressIndicator(

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:hive/hive.dart';
+import 'package:repository/repository.dart';
 
 export './bloc/app_config.dart';
 export './bloc/data.dart';
@@ -23,3 +24,4 @@ Future<dynamic> get networkReady => networkServiceReadyCompleter.future;
 Future<dynamic> get userServiceReady => userServiceReadyCompleter.future;
 Future<dynamic> get authUserReady => userServiceReadyCompleter.future;
 final Map<String, Box<dynamic>> hiveBox = <String, Box<dynamic>>{};
+final Map<String, Repository<dynamic>> repos = <String, Repository<dynamic>>{};
