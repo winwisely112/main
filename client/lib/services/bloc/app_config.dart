@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 
 class AppConfiguration with ChangeNotifier {
@@ -13,6 +14,7 @@ class AppConfiguration with ChangeNotifier {
   bool _debugShowRainbow = false;
   bool _showPerformanceOverlay = false;
   bool _showSemanticsDebugger = false;
+  Locale _debugLocale = const Locale('en');
 
   bool get debugShowGrid => _debugShowGrid;
   bool get debugShowSizes => _debugShowSizes;
@@ -22,6 +24,7 @@ class AppConfiguration with ChangeNotifier {
   bool get debugShowRainbow => _debugShowRainbow;
   bool get showPerformanceOverlay => _showPerformanceOverlay;
   bool get showSemanticsDebugger => _showSemanticsDebugger;
+  Locale get debugLocale => _debugLocale;
 
   void init() {
     _debugShowGrid = false;
@@ -32,6 +35,7 @@ class AppConfiguration with ChangeNotifier {
     _debugShowRainbow = false;
     _showPerformanceOverlay = false;
     _showSemanticsDebugger = false;
+    _debugLocale = const Locale('en');
   }
 
   void change(
@@ -42,7 +46,8 @@ class AppConfiguration with ChangeNotifier {
       bool debugShowPointers,
       bool debugShowRainbow,
       bool showPerformanceOverlay,
-      bool showSemanticsDebugger}) {
+      bool showSemanticsDebugger,
+      Locale debugLocale}) {
     _debugShowGrid = debugShowGrid ?? _debugShowGrid;
     _debugShowSizes = debugShowSizes ?? _debugShowSizes;
     _debugShowBaselines = debugShowBaselines ?? _debugShowBaselines;
@@ -51,6 +56,7 @@ class AppConfiguration with ChangeNotifier {
     _debugShowRainbow = debugShowRainbow ?? _debugShowRainbow;
     _showPerformanceOverlay = showPerformanceOverlay ?? _showPerformanceOverlay;
     _showSemanticsDebugger = showSemanticsDebugger ?? _showSemanticsDebugger;
+    _debugLocale = debugLocale ?? _debugLocale;
     notifyListeners();
   }
 }

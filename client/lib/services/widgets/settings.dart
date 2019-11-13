@@ -1,5 +1,7 @@
+import 'package:com.winwisely99.app/app.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../localizations.dart';
 import '../bloc/app_config.dart';
 
 class Settings extends StatelessWidget {
@@ -8,7 +10,7 @@ class Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppConfiguration configuration =
-        Provider.of<AppConfiguration>(context);
+    Provider.of<AppConfiguration>(context);
     void _handleShowGridChanged(bool value) {
       configuration.change(debugShowGrid: value);
     }
@@ -139,6 +141,29 @@ class Settings extends StatelessWidget {
             trailing: Switch(
               value: configuration.debugShowRainbow,
               onChanged: _handleShowRainbowChanged,
+            ),
+          ),
+          ListTile(
+            leading: const Icon(Icons.language),
+            title: const Text('Change localisation language (for debugging)'),
+            trailing: DropdownButton<Locale>(
+              icon: Icon(Icons.arrow_drop_down),
+              items: AppLocalizations.languages.keys
+                  .toList()
+                  .map<DropdownMenuItem<Locale>>((Locale value) {
+                return DropdownMenuItem<Locale>(
+                  value: value,
+                  child: Text(value.toString()),
+                );
+              }).toList(),
+              value: Localizations.localeOf(context),
+              onChanged: (Locale locale) async {
+                configuration.change(debugLocale: locale);
+              },
+              underline: Container(
+                height: 2,
+                color: Colors.indigo,
+              ),
             ),
           ),
         ]);

@@ -7,7 +7,8 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppLocalizations_Labels labels = AppLocalizations.of(context);
-    print('Plural multiple man: ${labels?.plurals?.man(Plural.multiple)}');
+    final List<Locale> languages = AppLocalizations.languages.keys.toList();
+    print('LIST: $languages');
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,

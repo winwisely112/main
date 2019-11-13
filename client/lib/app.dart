@@ -21,21 +21,21 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     final AppConfiguration _configuration =
         Provider.of<AppConfiguration>(context);
-//    final Locale locale = Localizations.localeOf(context);
-//    print('Locale:: $locale');
     assert(() {
       debugPaintSizeEnabled = _configuration.debugShowSizes;
       debugPaintBaselinesEnabled = _configuration.debugShowBaselines;
       debugPaintLayerBordersEnabled = _configuration.debugShowLayers;
       debugPaintPointersEnabled = _configuration.debugShowPointers;
       debugRepaintRainbowEnabled = _configuration.debugShowRainbow;
+
       return true;
     }());
+    _configuration.change(debugLocale: Localizations.localeOf(context));
     return MaterialApp(
       title: 'WinWisely99',
       initialRoute: '/',
-      locale: const Locale('en', ''),
-//      [Locale.fromSubtags(languageCode: "en")],
+      // TODO(JAMES) Get the devices local configuration when initializing the app
+      locale: _configuration.debugLocale,
       localizationsDelegates: [
         const AppLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,
