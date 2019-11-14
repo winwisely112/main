@@ -87,10 +87,16 @@ class ServicesProvider extends StatelessWidget {
               final AuthUserService _auth =
                   AuthUserService(storage: storage, user: user);
               if (_auth != null) {
-                repos['chats'] = ChatRepository(
+                repos['chats'] = ItemRepository<ChatModel>(
                   user: user,
                   network: network,
                   globalUser: _auth,
+                  source: ChatFetcher(
+                    user: user,
+                    network: network,
+                    globalUser: _auth,
+                  ),
+                  cache: 'chats',
                 );
               }
               return _auth;
