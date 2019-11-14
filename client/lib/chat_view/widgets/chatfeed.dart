@@ -40,8 +40,9 @@ class _ChatFeedView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: FutureBuilder<Conversations>(
-          future: Provider.of<ChatBloc>(context)
-              .getConversation(Id<Conversations>(conversationsId)),
+          future: repos['conversations']
+              .fetch(Id<Conversations>(conversationsId))
+              .first,
           builder: (
             BuildContext context,
             AsyncSnapshot<Conversations> snapshot,

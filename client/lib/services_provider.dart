@@ -91,12 +91,23 @@ class ServicesProvider extends StatelessWidget {
                   user: user,
                   network: network,
                   globalUser: _auth,
-                  source: ChatFetcher(
+                  source: ChatRepository(
                     user: user,
                     network: network,
                     globalUser: _auth,
                   ),
                   cache: 'chats',
+                );
+                repos['conversations'] = ItemRepository<Conversations>(
+                  user: user,
+                  network: network,
+                  globalUser: _auth,
+                  source: ConversationsRepository(
+                    user: user,
+                    network: network,
+                    globalUser: _auth,
+                  ),
+                  cache: 'conversations',
                 );
               }
               return _auth;

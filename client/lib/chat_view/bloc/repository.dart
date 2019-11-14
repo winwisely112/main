@@ -5,8 +5,8 @@ import 'package:com.winwisely99.app/services/services.dart';
 
 import 'data.dart';
 
-class ChatFetcher extends CollectionFetcher<ChatModel> {
-  ChatFetcher({
+class ChatRepository extends CollectionFetcher<ChatModel> {
+  ChatRepository({
     @required this.network,
     @required this.user,
     @required this.globalUser,

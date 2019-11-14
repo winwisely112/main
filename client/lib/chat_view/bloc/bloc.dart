@@ -5,7 +5,6 @@ import 'package:rxdart/rxdart.dart';
 
 import 'package:com.winwisely99.app/services/services.dart';
 import 'package:com.winwisely99.app/chat_list/chat_list.dart';
-import 'package:com.winwisely99.app/vendor_plugins/vendor_plugins.dart';
 
 import 'data.dart';
 
@@ -15,12 +14,7 @@ class ChatBloc {
       @required this.user,
       @required this.conversationsId})
       : assert(network != null),
-        assert(user != null),
-        _conversations = CachedRepository<Conversations>(
-          // strategy: CacheStrategy.onlyFetchFromSourceIfNotInCache,
-          source: ConversationsDownloader(network: network, user: user),
-          cache: HiveRepository<Conversations>('conversations'),
-        ) {
+        assert(user != null) {
     _chatFetcher.stream
         .transform(_chatScreenTransformer())
         .pipe(_chatScreenOutput);
@@ -30,7 +24,6 @@ class ChatBloc {
   final NetworkService network;
   final UserService user;
   final String conversationsId;
-  final Repository<Conversations> _conversations;
 
 // Streams for building chatscreen
   final PublishSubject<ChatModel> _chatFetcher = PublishSubject<ChatModel>();
@@ -44,6 +37,7 @@ class ChatBloc {
       _chatScreenTransformer() {
     return ScanStreamTransformer<ChatModel, Map<int, ChatModel>>(
         (Map<int, ChatModel> cache, ChatModel value, int index) {
+      cache ??= <int, ChatModel>{};
       final List<ChatModel> _chats = <ChatModel>[];
       _chats.addAll(cache.values);
       _chats.add(value);
@@ -109,8 +103,6 @@ class ChatBloc {
     }
   }
 
-  Future<Conversations> getConversation(Id<Conversations> id) =>
-      _conversations.fetch(id).first;
   Future<User> getCurrentUser() async {
     // TODO(Vineeth): Remove this logic later once authentication is complete
     return user.getUser(const Id<User>('A'));

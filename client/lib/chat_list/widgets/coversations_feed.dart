@@ -31,10 +31,10 @@ class ConversationsFeed extends StatelessWidget {
 class _ConversationsFeedBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<List<Conversations>>(
-      stream: Provider.of<ConversationsBloc>(context).getConversations(),
-      builder:
-          (BuildContext context, AsyncSnapshot<List<Conversations>> snapshot) {
+    return StreamBuilder<Map<int, Conversations>>(
+      stream: Provider.of<ConversationsBloc>(context).chatList,
+      builder: (BuildContext context,
+          AsyncSnapshot<Map<int, Conversations>> snapshot) {
         if (snapshot.hasError) {
           return Center(child: Text('Error occurred: ${snapshot.error}'));
         } else if (!snapshot.hasData) {
@@ -43,7 +43,7 @@ class _ConversationsFeedBody extends StatelessWidget {
 
         final Map<DateTime, List<Conversations>> conversations =
             groupBy<Conversations, DateTime>(
-          snapshot.data,
+          snapshot.data.values,
           (Conversations h) => h.timestamp,
         );
         final List<DateTime> dates = conversations.keys.toList()
