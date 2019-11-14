@@ -87,17 +87,7 @@ class ServicesProvider extends StatelessWidget {
               final AuthUserService _auth =
                   AuthUserService(storage: storage, user: user);
               if (_auth != null) {
-                repos['chats'] = ItemRepository<ChatModel>(
-                  user: user,
-                  network: network,
-                  globalUser: _auth,
-                  source: ChatRepository(
-                    user: user,
-                    network: network,
-                    globalUser: _auth,
-                  ),
-                  cache: 'chats',
-                );
+                // this order is important
                 repos['conversations'] = ItemRepository<Conversations>(
                   user: user,
                   network: network,
@@ -108,6 +98,17 @@ class ServicesProvider extends StatelessWidget {
                     globalUser: _auth,
                   ),
                   cache: 'conversations',
+                );
+                repos['chats'] = ItemRepository<ChatModel>(
+                  user: user,
+                  network: network,
+                  globalUser: _auth,
+                  source: ChatRepository(
+                    user: user,
+                    network: network,
+                    globalUser: _auth,
+                  ),
+                  cache: 'chats',
                 );
               }
               return _auth;
