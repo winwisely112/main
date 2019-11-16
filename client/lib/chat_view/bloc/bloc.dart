@@ -5,6 +5,7 @@ import 'package:rxdart/rxdart.dart';
 
 import 'package:com.winwisely99.app/services/services.dart';
 import 'package:com.winwisely99.app/chat_list/chat_list.dart';
+import 'package:com.winwisely99.app/vendor_plugins/vendor_plugins.dart';
 
 import 'data.dart';
 
@@ -109,6 +110,7 @@ class ChatBloc {
   }
 
   Future<dynamic> sendChat(ChatModel chat) async {
+    hiveBox['chats'].put(chat.id.id, chat);
     network.send(
       MessageHandler<ChatModel>(
         message: chat,

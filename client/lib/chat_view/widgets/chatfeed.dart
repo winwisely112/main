@@ -1,11 +1,12 @@
-import 'package:intl/intl.dart';
 import 'package:dash_chat/dash_chat.dart';
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:repository/repository.dart';
 
 import 'package:com.winwisely99.app/chat_list/chat_list.dart';
 import 'package:com.winwisely99.app/services/services.dart';
+//import 'package:com.winwisely99.app/vendor_plugins/vendor_plugins.dart';
 import '../bloc/bloc.dart';
 import '../bloc/data.dart';
 
@@ -112,40 +113,32 @@ class _ChatFeedBodyState extends State<_ChatFeedBody> {
       stream: _chatBloc.chatScreen,
       builder:
           (BuildContext context, AsyncSnapshot<Map<int, ChatModel>> snapshot) {
+        List<ChatMessage> messages = <ChatMessage>[];
         if (!snapshot.hasData) {
-          return Center(
+/*           return Center(
             child: CircularProgressIndicator(
               valueColor: AlwaysStoppedAnimation<Color>(
                 Theme.of(context).primaryColor,
               ),
             ),
-          );
-        }
-        if (snapshot.data == null) {
-          return Center(
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(
-                Theme.of(context).primaryColor,
-              ),
-            ),
-          );
-        }
-        List<ChatMessage> messages = snapshot.data.values
-            .map((ChatModel chat) => ChatMessage(
-                  id: chat.id.id,
-                  text: chat.text,
-                  user: ChatUser(
-                    uid: chat.user.id.id,
-                    name: chat.user.displayName,
-                    avatar: chat.user.avatarURL,
-                  ),
-                  image: chat.attachmentType == AttachmentType.image
-                      ? chat.attachmentUrl
-                      : null,
-                  vedio: chat.attachmentType == AttachmentType.video
-                      ? chat.attachmentUrl
-                      : null,
-                  createdAt: chat.createdAt,
+          ); */
+        } else {
+          messages.addAll(snapshot.data.values
+              .map((ChatModel chat) => ChatMessage(
+                    id: chat.id.id,
+                    text: chat.text,
+                    user: ChatUser(
+                      uid: chat.user.id.id,
+                      name: chat.user.displayName,
+                      avatar: chat.user.avatarURL,
+                    ),
+                    image: chat.attachmentType == AttachmentType.image
+                        ? chat.attachmentUrl
+                        : null,
+                    vedio: chat.attachmentType == AttachmentType.video
+                        ? chat.attachmentUrl
+                        : null,
+                    createdAt: chat.createdAt,
 /*                     quickReplies: QuickReplies(
                       values: <Reply>[
                         Reply(
@@ -158,8 +151,18 @@ class _ChatFeedBodyState extends State<_ChatFeedBody> {
                         ),
                       ],
                     ), */
-                ))
-            .toList();
+                  ))
+              .toList());
+        }
+/*         if (snapshot.data == null) {
+          return Center(
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(
+                Theme.of(context).primaryColor,
+              ),
+            ),
+          );
+        } */
 
         return DashChat(
           key: _chatViewKey,
