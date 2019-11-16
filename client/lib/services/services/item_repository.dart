@@ -25,6 +25,10 @@ class ItemRepository<Entity> extends Repository<Entity> {
   final Repository<Entity> _repository;
   final Repository<Entity> source;
   final String cache;
+
   @override
   Stream<Entity> fetch(Id<Entity> id) => _repository.fetch(id);
+
+  @override
+  Stream<Map<Id<Entity>, Entity>> fetchAll() => _repository.fetchAll();
 }

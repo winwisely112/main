@@ -4,6 +4,6 @@ import 'services_provider.dart';
 
 void main() {
   runApp(DevicePreview(
-    builder: (context) => ServicesProvider(),
+    builder: (BuildContext context) => ServicesProvider(),
   ));
 }

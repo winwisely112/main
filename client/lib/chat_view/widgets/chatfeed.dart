@@ -38,6 +38,7 @@ class _ChatFeedView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(conversationsId);
     return Scaffold(
       appBar: AppBar(
         title: FutureBuilder<Conversations>(
@@ -57,6 +58,7 @@ class _ChatFeedView extends StatelessWidget {
                 ),
               );
             } else {
+              print('BLOR hovez${snapshot.data.id.id} ${snapshot.data.title}');
               return ListTile(
                 title: Text(snapshot.data.title),
                 leading: CircleAvatar(

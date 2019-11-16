@@ -19,8 +19,8 @@ class SignUpView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Image.network(
-                'https://images.squarespace-cdn.com/content/5985dfd0b8a79b27663a4a57/1539539574841-CEC34OXJ778L6EN32SGN/Logo+png.png?content-type=image%2Fpng',
+              Image.asset(
+                'Logo.png',
                 width: 200,
                 height: 100,
               ),
