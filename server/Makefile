@@ -43,11 +43,10 @@ code:
 	code $(LIB_FSPATH)
 
 dep:
-	# none
-
-setup-proto-go:
+	# setup-proto-go:
 	go get -u github.com/golang/protobuf/protoc-gen-go
 	go install github.com/golang/protobuf/protoc-gen-go
+
 gen-proto:
 	#pub global activate protoc_plugin
 	mkdir -p $(SAMPLE_FSPATH)/pkg/api/v1/
