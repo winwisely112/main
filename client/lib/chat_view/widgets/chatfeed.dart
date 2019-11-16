@@ -38,10 +38,20 @@ class _ChatFeedView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(conversationsId);
+    //repos['conversations'].fetch(Id<Conversations>(conversationsId)).first;
+    final Conversations conv = hiveBox['conversations'].get(conversationsId);
     return Scaffold(
       appBar: AppBar(
-        title: FutureBuilder<Conversations>(
+        title: ListTile(
+          title: Text(conv.title),
+          leading: CircleAvatar(
+            backgroundImage: NetworkImage(
+              conv.avatarURL,
+            ),
+            child: const Text(''),
+          ),
+        ),
+/*         title: FutureBuilder<Conversations>(
           future: repos['conversations']
               .fetch(Id<Conversations>(conversationsId))
               .first,
@@ -70,7 +80,7 @@ class _ChatFeedView extends StatelessWidget {
               );
             }
           },
-        ),
+        ), */
       ),
       body: FutureBuilder<User>(
           future: Provider.of<ChatBloc>(context).getCurrentUser(),
