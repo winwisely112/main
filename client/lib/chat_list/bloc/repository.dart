@@ -17,6 +17,7 @@ class ConversationsRepository extends CollectionFetcher<Conversations> {
   final AuthUserService globalUser;
   @override
   Future<List<Conversations>> downloadAll() async {
+    await networkReady;
     final List<Map<String, dynamic>> _dataList = <Map<String, dynamic>>[];
     final User _globalUser = await globalUser.globalUser;
 

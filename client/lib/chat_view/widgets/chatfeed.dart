@@ -1,4 +1,4 @@
-import 'package:dash_chat/dash_chat.dart';
+//import 'package:dash_chat/dash_chat.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -6,7 +6,7 @@ import 'package:repository/repository.dart';
 
 import 'package:com.winwisely99.app/chat_list/chat_list.dart';
 import 'package:com.winwisely99.app/services/services.dart';
-//import 'package:com.winwisely99.app/vendor_plugins/vendor_plugins.dart';
+import 'package:com.winwisely99.app/vendor_plugins/vendor_plugins.dart';
 import '../bloc/bloc.dart';
 import '../bloc/data.dart';
 
@@ -39,15 +39,17 @@ class _ChatFeedView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //repos['conversations'].fetch(Id<Conversations>(conversationsId)).first;
-    final Conversations conv = hiveBox['conversations'].get(conversationsId);
+    final Conversations conversation =
+        hiveBox['conversations'].get(conversationsId);
     return Scaffold(
       appBar: AppBar(
         title: ListTile(
-          title: Text(conv.title),
+          title: Text(conversation.title),
           leading: CircleAvatar(
-            backgroundImage: NetworkImage(
-              conv.avatarURL,
-            ),
+            backgroundImage: AssetImage(conversation.avatarURL),
+/*             NetworkImage(
+              conversation.avatarURL
+            ), */
             child: const Text(''),
           ),
         ),
@@ -179,6 +181,18 @@ class _ChatFeedBodyState extends State<_ChatFeedBody> {
         return DashChat(
           key: _chatViewKey,
           inverted: false,
+/*           messageImageBuilder: (String url) {
+            return Padding(
+              padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+              child: FadeInImage.assetNetwork(
+                height: MediaQuery.of(context).size.height * 0.3,
+                width: MediaQuery.of(context).size.width * 0.7,
+                fit: BoxFit.contain,
+                placeholder: url,
+                image: 'assets/mockData/chats/$url',
+              ),
+            );
+          }, */
           onSend: (ChatMessage message) async {
             await _chatBloc.sendChat(
               ChatModel(

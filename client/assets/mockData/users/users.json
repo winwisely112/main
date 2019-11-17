@@ -1,0 +1,38 @@
+[
+    {
+        "_id": "A",
+        "firstName": "User A",
+        "lastName": "Last Name A",
+        "email": "userA@email.com",
+        "displayName": "UserA",
+        "conversationIds": [
+            "conversationsA",
+            "conversationsB"
+        ],
+        "avatarURL": "assets/mockData/users/A.jpg"
+    },
+    {
+        "_id": "B",
+        "firstName": "User B",
+        "lastName": "Last Name B",
+        "email": "userB@email.com",
+        "displayName": "UserB",
+        "conversationIds": [
+            "conversationsA",
+            "conversationsB"
+        ],
+        "avatarURL": "assets/mockData/users/B.jpg"
+    },
+    {
+        "_id": "C",
+        "firstName": "User C",
+        "lastName": "Last Name C",
+        "email": "userC@email.com",
+        "displayName": "UserC",
+        "conversationIds": [
+            "conversationsA",
+            "conversationsB"
+        ],
+        "avatarURL": "assets/mockData/users/C.jpg"
+    }
+]

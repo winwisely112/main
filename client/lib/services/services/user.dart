@@ -35,8 +35,10 @@ class _UserDownloader extends Repository<User> {
 
   @override
   Stream<User> fetch(Id<User> id) async* {
+    await networkReady;
     final Map<String, dynamic> data =
         await network.getItem(path: 'users', id: id.id);
+
     yield User(
       id: Id<User>(data['_id']),
       firstName: data['firstName'],
@@ -44,7 +46,9 @@ class _UserDownloader extends Repository<User> {
       email: data['email'],
       displayName: data['displayName'],
       avatarURL: data['avatarURL'],
-      conversationIds: data['conversationIds'],
+      conversationIds: <String>[
+        for (dynamic item in data['conversationIds']) item.toString()
+      ],
     );
   }
 }
