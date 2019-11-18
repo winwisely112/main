@@ -8,7 +8,8 @@ import (
 
 	"github.com/golang/protobuf/ptypes"
 	"github.com/golang/protobuf/ptypes/empty"
-	v1 "github.com/thevzurd/flutter-grpc-tutorial-master/go-server/pkg/api/v1"
+	guuid "github.com/google/uuid"
+	v1 "github.com/winwisely99/main/server/go-server/internal/api/v1"
 )
 
 // chatServiceServer is implementation of v1.ChatServiceServer proto interface
@@ -36,11 +37,11 @@ func (s *chatServiceServer) Send(ctx context.Context, message *v1.Chat) (*empty.
 // Subscribe is streaming method to get echo messages from the server
 func (s *chatServiceServer) Subscribe(e *empty.Empty, stream v1.ChatService_SubscribeServer) error {
 	log.Print("Subscribe requested")
-	chatTimeStamp, _ := ptypes.TimestampProto(time.Now())
 	for {
 		m := <-s.chat
+		chatTimeStamp, _ := ptypes.TimestampProto(time.Now())
 		n := v1.Chat{Text: fmt.Sprintf("I have received from you: %s. Thanks!", m.GetText()),
-			Id:              chatTimeStamp.String(),
+			Id:              guuid.New().String(),
 			Uid:             "B",
 			CreatedAt:       chatTimeStamp,
 			AttachmentType:  v1.Chat_NONE,

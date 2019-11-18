@@ -2,6 +2,8 @@ import 'package:hive/hive.dart';
 import 'package:meta/meta.dart';
 import 'package:repository/repository.dart';
 
+import 'package:com.winwisely99.app/chat_list/chat_list.dart';
+
 import '../utils/utils.dart';
 
 part 'data.g.dart';
@@ -16,6 +18,7 @@ class User implements Entity {
     @required this.email,
     @required this.displayName,
     @required this.avatarURL,
+    @required this.conversationIds,
   })  : assert(id != null),
         assert(firstName != null),
         assert(lastName != null),
@@ -39,6 +42,9 @@ class User implements Entity {
 
   @HiveField(5)
   final String avatarURL;
+
+  @HiveField(6)
+  final List<String> conversationIds;
 
   String get name => '$firstName $lastName';
   String get shortName => '${firstName[0]}. $lastName';

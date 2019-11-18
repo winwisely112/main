@@ -68,9 +68,10 @@ class _NewsFeedBody extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(5.0),
                                 child: news.thumbnailUrl == null
                                     ? const Text('')
-                                    : Image.network(
+                                    : Image.asset(news.thumbnailUrl),
+                                /*                                   Image.network(
                                         news.thumbnailUrl,
-                                      ),
+                                      ), */
                               ),
                             ),
                             const SizedBox(height: 10.0),
@@ -90,9 +91,10 @@ class _NewsFeedBody extends StatelessWidget {
                           ],
                         ),
                         leading: CircleAvatar(
-                          backgroundImage: NetworkImage(
+                          backgroundImage: AssetImage(news.createdBy.avatarURL),
+/*                           NetworkImage(
                             news.createdBy.avatarURL,
-                          ),
+                          ), */
                           child: const Text(''),
                         ),
                       ),

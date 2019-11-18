@@ -36,7 +36,9 @@ class AuthUserService {
 
   final BehaviorSubject<User> _meSubject = BehaviorSubject<User>();
   Stream<User> get globalUserStream => _meSubject.stream;
-  User get globalUser => _meSubject.value;
+  //User get globalUser => _meSubject.value;
+  // TODO(Vineeth): Change once authentication is setup
+  Future<User> get globalUser async => await user.getUser(const Id<User>('A'));
   void dispose() => _meSubject.close();
 
   Future<void> _updateUser(String token) async {

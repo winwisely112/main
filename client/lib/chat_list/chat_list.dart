@@ -1,3 +1,3 @@
-export './bloc/bloc.dart' show ConversationsDownloader;
 export './bloc/data.dart';
+export './bloc/repository.dart';
 export './widgets/coversations_feed.dart';

@@ -5,6 +5,7 @@ import 'package:meta/meta.dart';
 
 import '../services.dart';
 import 'message_handler.dart';
+import 'mockdata_loader.dart';
 import 'storage.dart';
 import 'subscriptions.dart';
 
@@ -36,7 +37,7 @@ class NetworkService {
       _cache[_name].subscriptions = subscriptions;
       _cache[_name]._startSending();
       _cache[_name]._startReceiving();
-      networkServiceReadyCompleter.complete();
+      _cache[_name]._loadMockData();
       return _instance;
     }
   }
@@ -51,6 +52,8 @@ class NetworkService {
 
   /// Subscriptions
   Map<MessageType, Subscriptions<dynamic>> subscriptions;
+  Map<String, List<Map<String, dynamic>>> mockData =
+      <String, List<Map<String, dynamic>>>{};
 
   /// Start thread to send messages
   Future<bool> _startSending() async {
@@ -98,6 +101,14 @@ class NetworkService {
     assert(subscriptions[message.messageType].portSending != null,
         "Port to send message can't be null");
     subscriptions[message.messageType].portSending.send(message);
+  }
+
+  Future<void> _loadMockData() async {
+    mockData['chats'] = await loadFile('chats');
+    mockData['conversations'] = await loadFile('conversations');
+    mockData['news'] = await loadFile('news');
+    mockData['users'] = await loadFile('users');
+    networkServiceReadyCompleter.complete();
   }
 
   Future<Map<String, dynamic>> getItem({
@@ -150,7 +161,7 @@ class NetworkService {
   }
 }
 
-final Map<String, List<Map<String, dynamic>>> mockData =
+/* final Map<String, List<Map<String, dynamic>>> mockData =
     <String, List<Map<String, dynamic>>>{
   'users': <Map<String, dynamic>>[
     <String, dynamic>{
@@ -159,6 +170,7 @@ final Map<String, List<Map<String, dynamic>>> mockData =
       'lastName': 'Last Name A',
       'email': 'userA@email.com',
       'displayName': 'UserA',
+      'conversationIds': <String>['conversationsA', 'conversationsB'],
       'avatarURL':
           'https://upload.wikimedia.org/wikipedia/commons/6/6b/1975_Patty_Hearst.jpg'
     },
@@ -168,6 +180,7 @@ final Map<String, List<Map<String, dynamic>>> mockData =
       'lastName': 'Last Name B',
       'email': 'userB@email.com',
       'displayName': 'UserB',
+      'conversationIds': <String>['conversationsA', 'conversationsB'],
       'avatarURL':
           'https://upload.wikimedia.org/wikipedia/commons/c/c5/Benjamin_Mayi_%D7%91%D7%A0%D7%99%D7%9E%D7%99%D7%9F_%D7%9E%D7%90%D7%99.jpg'
     },
@@ -177,6 +190,7 @@ final Map<String, List<Map<String, dynamic>>> mockData =
       'lastName': 'Last Name C',
       'email': 'userC@email.com',
       'displayName': 'UserC',
+      'conversationIds': <String>['conversationsA', 'conversationsB'],
       'avatarURL':
           'https://upload.wikimedia.org/wikipedia/commons/d/d2/Menashe_Raz.jpg'
     }
@@ -271,3 +285,4 @@ final Map<String, List<Map<String, dynamic>>> mockData =
     },
   ]
 };
+ */

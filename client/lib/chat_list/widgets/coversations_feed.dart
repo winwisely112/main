@@ -31,10 +31,10 @@ class ConversationsFeed extends StatelessWidget {
 class _ConversationsFeedBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<List<Conversations>>(
-      stream: Provider.of<ConversationsBloc>(context).getConversations(),
-      builder:
-          (BuildContext context, AsyncSnapshot<List<Conversations>> snapshot) {
+    return StreamBuilder<Map<int, Conversations>>(
+      stream: Provider.of<ConversationsBloc>(context).chatList,
+      builder: (BuildContext context,
+          AsyncSnapshot<Map<int, Conversations>> snapshot) {
         if (snapshot.hasError) {
           return Center(child: Text('Error occurred: ${snapshot.error}'));
         } else if (!snapshot.hasData) {
@@ -43,7 +43,7 @@ class _ConversationsFeedBody extends StatelessWidget {
 
         final Map<DateTime, List<Conversations>> conversations =
             groupBy<Conversations, DateTime>(
-          snapshot.data,
+          snapshot.data.values,
           (Conversations h) => h.timestamp,
         );
         final List<DateTime> dates = conversations.keys.toList()
@@ -87,7 +87,7 @@ class _ConversationTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<ChatModel>>(
-        stream: Provider.of<ChatBloc>(context).getChats(),
+        stream: Provider.of<ChatBloc>(context).getChats(conversation.id),
         builder:
             (BuildContext context, AsyncSnapshot<List<ChatModel>> snapshot) {
           if (!snapshot.hasData) {
@@ -102,12 +102,17 @@ class _ConversationTile extends StatelessWidget {
             ChatModel lastChat;
             if (snapshot.data.isNotEmpty) {
               final List<ChatModel> _list = snapshot.data;
-              _list.sort((ChatModel a, ChatModel b) =>
-                  b.createdAt.compareTo(a.createdAt));
-              lastChat = _list.firstWhere(
-                  (ChatModel chat) =>
-                      chat.conversationsId == conversation.id.id,
-                  orElse: null);
+              _list.removeWhere((ChatModel item) => item == null);
+              if (_list.isEmpty) {
+                lastChat = null;
+              } else {
+                _list.sort((ChatModel a, ChatModel b) =>
+                    b.createdAt.compareTo(a.createdAt));
+                lastChat = _list.firstWhere(
+                    (ChatModel chat) =>
+                        chat.conversationsId == conversation.id.id,
+                    orElse: null);
+              }
             } else {
               lastChat = null;
             }
@@ -123,7 +128,8 @@ class _ConversationTile extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
               leading: CircleAvatar(
-                backgroundImage: NetworkImage(conversation.avatarURL),
+                backgroundImage: AssetImage(conversation.avatarURL),
+                // NetworkImage(conversation.avatarURL),
                 child: const Text(''),
               ),
             );
