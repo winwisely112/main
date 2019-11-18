@@ -24,7 +24,6 @@ message Chat{
     AttachmentType attachmentType = 5; // Attachment type
     string attachmentUrl = 6; // attachment path
     string conversationsId = 7; // conversationsId
-    string testcrap = 8; // test crap
 
 }
 
