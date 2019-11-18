@@ -172,12 +172,13 @@ flu-desk-pack-init:
 
 flu-desk-pack:
 
+
+	# NOTE: Mac devs: # For docker builds on MAC you need to add "/var/folders/wp/" to your docker file sharing.
 	# hover build --help
 
 
 	# darwin (works)
-	# For docker builds on MAC you need to add "/var/folders/wp/" to your docker file sharing.
-	#cd $(SAMPLE_FSPATH) && hover build darwin-pkg
+	cd $(SAMPLE_FSPATH) && hover build darwin-pkg
 	
 	# windows (works)
 	#cd $(SAMPLE_FSPATH) && hover build windows-msi
@@ -193,7 +194,7 @@ flu-desk-pack:
 	# We need to try and make sure it works with flutter ! Who has an ubuntu laptop ?
 
 	# Update: works for basic go-flutter example
-	cd $(SAMPLE_FSPATH) && hover build linux-snap
+	#cd $(SAMPLE_FSPATH) && hover build linux-snap
 
 	# broken: Issue: https://github.com/go-flutter-desktop/go-flutter/issues/289
 	# Marked "as wont fix". So have to ask AppImage team.
