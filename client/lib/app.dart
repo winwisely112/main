@@ -27,10 +27,8 @@ class App extends StatelessWidget {
       debugPaintLayerBordersEnabled = _configuration.debugShowLayers;
       debugPaintPointersEnabled = _configuration.debugShowPointers;
       debugRepaintRainbowEnabled = _configuration.debugShowRainbow;
-
       return true;
     }());
-    _configuration.change(debugLocale: Localizations.localeOf(context));
     return MaterialApp(
       title: 'WinWisely99',
       initialRoute: '/',

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:com.winwisely99.app/conversations/conversations.dart';
 import 'package:com.winwisely99.app/news/news.dart';
 
+import '../../localizations.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key key}) : super(key: key);
 
@@ -34,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations_Labels labels = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Winwisely99'),
@@ -53,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            title: Text('News'),
+            title: Text(),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.chat_bubble),
