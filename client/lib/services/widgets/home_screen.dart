@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:com.winwisely99.app/conversations/conversations.dart';
+import 'package:com.winwisely99.app/chat_list/chat_list.dart';
 import 'package:com.winwisely99.app/news/news.dart';
 
 import '../../localizations.dart';
@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            title: Text(),
+            title: Text('Home'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.chat_bubble),

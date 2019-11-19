@@ -34,6 +34,7 @@ class _NewsDownloader extends CollectionFetcher<News> {
   final UserService user;
   @override
   Future<List<News>> downloadAll() async {
+    await networkReady;
     final List<Map<String, dynamic>> dataList =
         await network.getAllItem(path: 'news');
     return <News>[

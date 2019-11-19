@@ -1,5 +1,6 @@
 import 'package:com.winwisely99.app/localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/rendering.dart'
@@ -33,13 +34,14 @@ class App extends StatelessWidget {
       title: 'WinWisely99',
       initialRoute: '/',
       // TODO(JAMES) Get the devices local configuration when initializing the app
-      locale: _configuration.debugLocale,
       localizationsDelegates: [
         const AppLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.languages.keys.toList(),
+      locale: DevicePreview.of(context)?.locale, // <--
+      builder: DevicePreview.appBuilder, // <--
       debugShowMaterialGrid: _configuration.debugShowGrid,
       showPerformanceOverlay: _configuration.showPerformanceOverlay,
       showSemanticsDebugger: _configuration.showSemanticsDebugger,

@@ -2,7 +2,7 @@ import 'dart:io' show Directory;
 
 // TODO(FlutterDevelopers): Import modules here
 import 'package:com.winwisely99.app/chat_view/chat_view.dart';
-import 'package:com.winwisely99.app/conversations/conversations.dart';
+import 'package:com.winwisely99.app/chat_list/chat_list.dart';
 import 'package:com.winwisely99.app/news/news.dart';
 import 'package:com.winwisely99.app/services/services.dart';
 import 'package:hive/hive.dart';

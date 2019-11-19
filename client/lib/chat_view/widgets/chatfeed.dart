@@ -1,11 +1,12 @@
+//import 'package:dash_chat/dash_chat.dart';
 import 'package:intl/intl.dart';
-import 'package:dash_chat/dash_chat.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:repository/repository.dart';
 
-import 'package:com.winwisely99.app/conversations/conversations.dart';
+import 'package:com.winwisely99.app/chat_list/chat_list.dart';
 import 'package:com.winwisely99.app/services/services.dart';
+import 'package:com.winwisely99.app/vendor_plugins/vendor_plugins.dart';
 import '../bloc/bloc.dart';
 import '../bloc/data.dart';
 
@@ -37,11 +38,25 @@ class _ChatFeedView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //repos['conversations'].fetch(Id<Conversations>(conversationsId)).first;
+    final Conversations conversation =
+        hiveBox['conversations'].get(conversationsId);
     return Scaffold(
       appBar: AppBar(
-        title: FutureBuilder<Conversations>(
-          future: Provider.of<ChatBloc>(context)
-              .getConversation(Id<Conversations>(conversationsId)),
+        title: ListTile(
+          title: Text(conversation.title),
+          leading: CircleAvatar(
+            backgroundImage: AssetImage(conversation.avatarURL),
+/*             NetworkImage(
+              conversation.avatarURL
+            ), */
+            child: const Text(''),
+          ),
+        ),
+/*         title: FutureBuilder<Conversations>(
+          future: repos['conversations']
+              .fetch(Id<Conversations>(conversationsId))
+              .first,
           builder: (
             BuildContext context,
             AsyncSnapshot<Conversations> snapshot,
@@ -55,6 +70,7 @@ class _ChatFeedView extends StatelessWidget {
                 ),
               );
             } else {
+              print('BLOR hovez${snapshot.data.id.id} ${snapshot.data.title}');
               return ListTile(
                 title: Text(snapshot.data.title),
                 leading: CircleAvatar(
@@ -66,7 +82,7 @@ class _ChatFeedView extends StatelessWidget {
               );
             }
           },
-        ),
+        ), */
       ),
       body: FutureBuilder<User>(
           future: Provider.of<ChatBloc>(context).getCurrentUser(),
@@ -107,44 +123,36 @@ class _ChatFeedBodyState extends State<_ChatFeedBody> {
   @override
   Widget build(BuildContext context) {
     final ChatBloc _chatBloc = Provider.of<ChatBloc>(context);
-    return StreamBuilder<Map<Id<ChatModel>, ChatModel>>(
+    return StreamBuilder<Map<int, ChatModel>>(
       stream: _chatBloc.chatScreen,
-      builder: (BuildContext context,
-          AsyncSnapshot<Map<Id<ChatModel>, ChatModel>> snapshot) {
+      builder:
+          (BuildContext context, AsyncSnapshot<Map<int, ChatModel>> snapshot) {
+        List<ChatMessage> messages = <ChatMessage>[];
         if (!snapshot.hasData) {
-          return Center(
+/*           return Center(
             child: CircularProgressIndicator(
               valueColor: AlwaysStoppedAnimation<Color>(
                 Theme.of(context).primaryColor,
               ),
             ),
-          );
-        }
-        if (snapshot.data == null) {
-          return Center(
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(
-                Theme.of(context).primaryColor,
-              ),
-            ),
-          );
-        }
-        List<ChatMessage> messages = snapshot.data.values
-            .map((ChatModel chat) => ChatMessage(
-                  id: chat.id.id,
-                  text: chat.text,
-                  user: ChatUser(
-                    uid: chat.user.id.id,
-                    name: chat.user.displayName,
-                    avatar: chat.user.avatarURL,
-                  ),
-                  image: chat.attachmentType == AttachmentType.image
-                      ? chat.attachmentUrl
-                      : null,
-                  vedio: chat.attachmentType == AttachmentType.video
-                      ? chat.attachmentUrl
-                      : null,
-                  createdAt: chat.createdAt,
+          ); */
+        } else {
+          messages.addAll(snapshot.data.values
+              .map((ChatModel chat) => ChatMessage(
+                    id: chat.id.id,
+                    text: chat.text,
+                    user: ChatUser(
+                      uid: chat.user.id.id,
+                      name: chat.user.displayName,
+                      avatar: chat.user.avatarURL,
+                    ),
+                    image: chat.attachmentType == AttachmentType.image
+                        ? chat.attachmentUrl
+                        : null,
+                    vedio: chat.attachmentType == AttachmentType.video
+                        ? chat.attachmentUrl
+                        : null,
+                    createdAt: chat.createdAt,
 /*                     quickReplies: QuickReplies(
                       values: <Reply>[
                         Reply(
@@ -157,12 +165,34 @@ class _ChatFeedBodyState extends State<_ChatFeedBody> {
                         ),
                       ],
                     ), */
-                ))
-            .toList();
+                  ))
+              .toList());
+        }
+/*         if (snapshot.data == null) {
+          return Center(
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(
+                Theme.of(context).primaryColor,
+              ),
+            ),
+          );
+        } */
 
         return DashChat(
           key: _chatViewKey,
           inverted: false,
+/*           messageImageBuilder: (String url) {
+            return Padding(
+              padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+              child: FadeInImage.assetNetwork(
+                height: MediaQuery.of(context).size.height * 0.3,
+                width: MediaQuery.of(context).size.width * 0.7,
+                fit: BoxFit.contain,
+                placeholder: url,
+                image: 'assets/mockData/chats/$url',
+              ),
+            );
+          }, */
           onSend: (ChatMessage message) async {
             await _chatBloc.sendChat(
               ChatModel(

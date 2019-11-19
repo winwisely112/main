@@ -1,6 +1,8 @@
+import 'package:com.winwisely99.app/chat_list/bloc/data.dart';
 import 'package:meta/meta.dart';
 import 'package:repository/repository.dart';
 
+import 'package:com.winwisely99.app/chat_list/chat_list.dart';
 import 'package:com.winwisely99.app/vendor_plugins/vendor_plugins.dart';
 import '../bloc/data.dart';
 import '../services.dart';
@@ -33,8 +35,10 @@ class _UserDownloader extends Repository<User> {
 
   @override
   Stream<User> fetch(Id<User> id) async* {
+    await networkReady;
     final Map<String, dynamic> data =
         await network.getItem(path: 'users', id: id.id);
+
     yield User(
       id: Id<User>(data['_id']),
       firstName: data['firstName'],
@@ -42,6 +46,9 @@ class _UserDownloader extends Repository<User> {
       email: data['email'],
       displayName: data['displayName'],
       avatarURL: data['avatarURL'],
+      conversationIds: <String>[
+        for (dynamic item in data['conversationIds']) item.toString()
+      ],
     );
   }
 }

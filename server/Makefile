@@ -10,7 +10,7 @@ SELF_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
 
 # Incldue your env.mk
 # DEVELOPER: make a env.mk by coping env.template.mk and change to whatever you need.
-include $(SELF_DIR)/env.mk
+include $(SELF_DIR)/env.template.mk
 
 
 help:  ## Display this help
@@ -43,8 +43,18 @@ code:
 	code $(LIB_FSPATH)
 
 dep:
-	# none
+	# setup-proto-go:
+	go get -u github.com/golang/protobuf/protoc-gen-go
+	go install github.com/golang/protobuf/protoc-gen-go
 
+gen-proto:
+	#pub global activate protoc_plugin
+	mkdir -p $(SAMPLE_FSPATH)/pkg/api/v1/
+ifeq ($(OS),Windows_NT)
+	protoc chat.proto --proto_path="$(PROTO_PATH)/server/api/proto/v1/"  --proto_path=. --plugin= --go_out=plugins=grpc:"$(PROTO_OUTPUT)/pkg/api/v1/"
+else
+	protoc chat.proto --proto_path=$(LIB_FSPATH)/server/api/proto/v1/  --proto_path=. --plugin= --go_out=plugins=grpc:$(SAMPLE_FSPATH)/pkg/api/v1/
+endif
 
 ### cloud
 

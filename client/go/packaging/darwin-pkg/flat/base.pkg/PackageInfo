@@ -1,0 +1,5 @@
+<pkg-info format-version="2" identifier="com.winwisely99.base.pkg" version="" install-location="/" auth="root">
+	<bundle-version>
+		<bundle id="com.winwisely99" CFBundleIdentifier="com.winwisely99" path="./Applications/com.winwisely99.app.app" CFBundleVersion=""/>
+    </bundle-version>
+</pkg-info>
