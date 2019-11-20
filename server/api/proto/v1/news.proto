@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package v1;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+//import "google/protobuf/wrappers.proto";
+
+message News{
+    // message body
+    string id = 1; // News ID
+    string title = 2; // News Title
+    string text = 3; //  News Text
+    string thumbnailUrl = 4; // News thumbnailUrl
+    google.protobuf.Timestamp timestamp = 5; // News created timestamp
+    string uid = 6; // News Author ID
+}
+
+service NewsService {
+}

@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package v1;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+//import "google/protobuf/wrappers.proto";
+
+message User{
+    // message body
+    string id = 1; // User ID
+    string firstName = 2; // User firstName
+    string lastName = 3; // User lastName
+    string email = 4; // User email
+    string displayName = 5; // User displayName
+    string avatarURL = 6; // User avatarURL
+    repeated string chatgroupIds = 7; //  User chatgroupIds
+}
+
+service UserService {
+}

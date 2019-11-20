@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package v1;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+//import "google/protobuf/wrappers.proto";
+
+
+message ChatGroup{
+    // message body
+    string id = 1; // Chatgroup ID
+    string title = 2; // Chatgroup title
+    repeated string membersIds = 3; //  Member IDs
+    string avatarURL = 4; // Chatgroup avatar
+    google.protobuf.Timestamp timestamp = 5; // last updated timestamp
+}
+
+service ChatGroupService {
+}
