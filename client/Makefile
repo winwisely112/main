@@ -95,6 +95,11 @@ else
 	protoc chat.proto --proto_path=$(LIB_FSPATH)/server/api/proto/v1/ --plugin=protoc-gen-dart=$(HOME)/.pub-cache/bin/protoc-gen-dart --dart_out=grpc:$(SAMPLE_FSPATH)/client/lib/chat_view/api/v1/
 endif
 
+GSHEET_FSPATH=$(PWD)/../../bootstrap/tool/googlesheet
+gen-mockdata:
+	#cd $(GSHEET_FSPATH) && $(MAKE) local-run-datadump
+	cp -r $(GSHEET_FSPATH)/outputs/datadump/json ./assets/mockData2
+
 
 
 ### DESK
