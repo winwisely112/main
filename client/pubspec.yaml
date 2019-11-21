@@ -30,7 +30,6 @@ dependencies:
   transparent_image: ^1.0.0
   #dash_chat: ^1.0.9
   device_preview: ^0.2.6
-  flutter_sheet_localization: ^1.0.0
 
 dev_dependencies:
   flutter_test:
@@ -39,7 +38,8 @@ dev_dependencies:
   hive_generator: ^0.5.2
   json_serializable: ^3.2.3
   flutter_launcher_icons: ^0.7.3
-  flutter_sheet_localization_generator: ^1.0.0
+  flutter_json_localization_generator:
+    path: ./flutter_json_localization_generator
 
 
 flutter_icons:
@@ -61,6 +61,7 @@ flutter:
     - assets/mockData/conversations/
     - assets/mockData/news/
     - assets/mockData/users/
+    - assets/localizations/
   #  - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
