@@ -33,7 +33,6 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'WinWisely99',
       initialRoute: '/',
-      // TODO(JAMES) Get the devices local configuration when initializing the app
       localizationsDelegates: [
         const AppLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,

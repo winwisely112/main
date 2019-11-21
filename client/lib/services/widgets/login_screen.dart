@@ -7,6 +7,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppLocalizations_Labels labels = AppLocalizations.of(context);
+    print('LOGIN: ${labels.login.getStarted}');
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
