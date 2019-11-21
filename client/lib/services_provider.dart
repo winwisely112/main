@@ -50,12 +50,12 @@ class ServicesProvider extends StatelessWidget {
                     storage: storage,
                     subscriptions: <MessageType, Subscriptions<dynamic>>{
                         // TODO(FlutterDevelopers): Import your subscriptions here
-                        MessageType.CHAT: Subscriptions<Chat>(
+/*                         MessageType.CHAT: Subscriptions<Chat>(
                           receivingIsolate: chatReceivingIsolate,
                           sendingIsolate: chatSendingIsolate,
                           onSendDo: chatOnSendDo,
                           onRecieveDo: chatOnRecieveDo,
-                        ),
+                        ), */
                       });
           },
         ),
