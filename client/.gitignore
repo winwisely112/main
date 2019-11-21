@@ -1,5 +1,9 @@
+# mock data from gsheet
+assets/mockData2
+
 # Miscellaneous
 *.class
+*.lock
 *.log
 *.pyc
 *.swp
@@ -7,7 +11,6 @@
 .atom/
 .buildlog/
 .history
-.svn/
 
 # IntelliJ related
 *.iml
@@ -15,10 +18,11 @@
 *.iws
 .idea/
 
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-#.vscode/
+# Visual Studio Code related
+.classpath
+.project
+.settings/
+.vscode/
 
 # Flutter/Dart/Pub related
 **/doc/api/
@@ -27,7 +31,11 @@
 .packages
 .pub-cache/
 .pub/
-/build/
+build/
+flutter_*.png
+linked_*.ds
+unlinked.ds
+unlinked_spec.ds
 
 # Android related
 **/android/**/gradle-wrapper.jar
@@ -37,6 +45,9 @@
 **/android/gradlew.bat
 **/android/local.properties
 **/android/**/GeneratedPluginRegistrant.java
+**/android/key.properties
+*.jks
+
 
 # iOS/XCode related
 **/ios/**/*.mode1v3
@@ -57,6 +68,7 @@
 **/ios/.generated/
 **/ios/Flutter/App.framework
 **/ios/Flutter/Flutter.framework
+**/ios/Flutter/Flutter.podspec
 **/ios/Flutter/Generated.xcconfig
 **/ios/Flutter/app.flx
 **/ios/Flutter/app.zip
@@ -65,9 +77,13 @@
 **/ios/ServiceDefinitions.json
 **/ios/Runner/GeneratedPluginRegistrant.*
 
+# Coverage
+coverage/
+
 # Exceptions to above rules.
 !**/ios/**/default.mode1v3
 !**/ios/**/default.mode2v3
 !**/ios/**/default.pbxuser
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
+!/dev/ci/**/Gemfile.lock
