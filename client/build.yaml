@@ -1,0 +1,15 @@
+#targets:
+#  $default:
+#    builders:
+#      flutter_json_localization_generator|flutter_json_localization:
+#        enabled: true
+
+builders:
+  flutter_sheet_localization:
+    target: ":flutter_json_localization_generator"
+    import: "package:com.winwisely99.app/localizations/builder.dart"
+    builder_factories: ["flutterJSONLocalization"]
+    build_extensions: {".dart": [".flutter_json_localization.g.part"]}
+    auto_apply: dependents
+    build_to: cache
+    applies_builders: ["source_gen|combining_builder"]

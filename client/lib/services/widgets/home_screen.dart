@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final AppLocalizations_Labels labels = AppLocalizations.of(context);
+//    final AppLocalizations_Labels labels = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Winwisely99'),

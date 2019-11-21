@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_json_localization_generator/flutter_json_localization.dart';
+import 'package:com.winwisely99.app/localizations/flutter_json_localization.dart';
 
 part 'localizations.g.dart';
 

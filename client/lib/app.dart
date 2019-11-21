@@ -33,12 +33,12 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'WinWisely99',
       initialRoute: '/',
-      localizationsDelegates: [
-        const AppLocalizationsDelegate(),
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      supportedLocales: AppLocalizations.languages.keys.toList(),
+//      localizationsDelegates: <LocalizationsDelegate>[
+//        const AppLocalizationsDelegate(),
+//        GlobalMaterialLocalizations.delegate,
+//        GlobalWidgetsLocalizations.delegate,
+//      ],
+//      supportedLocales: AppLocalizations.languages.keys.toList(),
       locale: DevicePreview.of(context)?.locale, // <--
       builder: DevicePreview.appBuilder, // <--
       debugShowMaterialGrid: _configuration.debugShowGrid,

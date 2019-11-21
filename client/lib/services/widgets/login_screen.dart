@@ -6,8 +6,8 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AppLocalizations_Labels labels = AppLocalizations.of(context);
-    print('LOGIN: ${labels.login.getStarted}');
+//    final AppLocalizations_Labels labels = AppLocalizations.of(context);
+//    print('LOGIN: ${labels.login.getStarted}');
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -25,7 +25,7 @@ class LoginScreen extends StatelessWidget {
                 Navigator.of(context).pushNamedAndRemoveUntil(
                     '/home', ModalRoute.withName('/login'));
               }, // TODO
-              child: Text(labels.login.signIn),
+              child: const Text('Sign In'),
             ),
           ),
           Center(
@@ -33,7 +33,7 @@ class LoginScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pushNamed('/userinfo');
               },
-              child: Text(labels.login.getStarted),
+              child: const Text('Get Started'),
             ),
           )
         ],
