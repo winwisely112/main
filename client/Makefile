@@ -276,6 +276,14 @@ flu-desk-dist-unzip:
 flu-mob-run: ## flu-mob-run
 	cd $(SAMPLE_FSPATH) && flutter run -d all
 
+flu-web-config:
+	flutter channel dev
+	flutter upgrade
+	flutter config --enable-web
+flu-web-run:
+	cd $(SAMPLE_FSPATH) && flutter run -d chrome
+flu-web-build:
+	cd $(SAMPLE_FSPATH) && flutter build web
 ### i18n
 
 #SAMPLE=keyboard_event
