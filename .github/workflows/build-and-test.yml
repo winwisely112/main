@@ -44,8 +44,7 @@ jobs:
           java-version: '12.x'
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: '1.9.1+hotfix.4'
-          channel: 'stable'
+          channel: 'dev'
       - name: Upgrade flutter
         run: |
           flutter channel master
