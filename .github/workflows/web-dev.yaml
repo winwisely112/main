@@ -5,31 +5,35 @@ on:
       - master
 jobs:
   build:
-    name: Build
-    runs-on: ubuntu-latest
+    name: Build Web
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
     steps:
-    - uses: actions/checkout@v1
-    - uses: actions/setup-java@v1
-      with:
-        java-version: '12.x'
-    - uses: subosito/flutter-action@v1
-      with:
-          channel: 'dev'
-    - name: Upgrade flutter
+      - uses: actions/checkout@v1
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '12.x'
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '1.9.1+hotfix.2'
+          channel: 'stable'
+      - name: Upgrade flutter
         run: |
           flutter channel master
           flutter upgrade
-    name: Build web package
+      - name: Build web package
         run: |
           cd ./client
           flutter pub get
           flutter config --enable-web
           flutter build web
-    - name: Archive Production Artifact
-      uses: actions/upload-artifact@master
-      with:
-        name: web-build
-        path: build/web
+      - name: Archive Production Artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: web-build
+          path: build/web
   deploy:
     name: Deploy
     needs: build
