@@ -282,7 +282,7 @@ flu-mob-run: ## flu-mob-run
 	cd $(SAMPLE_FSPATH) && flutter run -d all
 
 
-
+### WEB
 
 flu-web-config:
 	# flutter channel ?
@@ -309,6 +309,12 @@ flu-web-build: flu-web-config
 flu-web-test: flu-web-config
 	# works :)
 	cd $(SAMPLE_FSPATH) && flutter test --platform=chrome
+
+firebase-ci-get:
+	firebase login:ci
+	# record the secret
+fire-ci-revoke:
+	firebase logout --token <token>
 
 ### i18n
 
