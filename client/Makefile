@@ -310,8 +310,20 @@ flu-web-test: flu-web-config
 	# works :)
 	cd $(SAMPLE_FSPATH) && flutter test --platform=chrome
 
+### CLOUD
+
+CLOUD_PROJ_NAME=winwisely99-main-master
+cloud-console:
+	opem https://console.cloud.google.com/home/dashboard?project=$(CLOUD_PROJ_NAME)
+	open https://console.firebase.google.com/project/$(CLOUD_PROJ_NAME)/hosting/main
+
+cloud-public:
+	open https://$(winwisely99-main-master).firebaseapp.com/	
+	# TODO: domain mapping 
+
 firebase-ci-get:
 	firebase login:ci
+	# PROJ: winwisely99-main-master
 	# record the secret
 fire-ci-revoke:
 	firebase logout --token <token>
