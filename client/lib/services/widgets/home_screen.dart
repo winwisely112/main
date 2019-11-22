@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:com.winwisely99.app/chat_list/chat_list.dart';
-import 'package:com.winwisely99.app/news/news.dart';
+
+import './home_screen_mobile.dart';
+import './web_layout.dart';
+import './web_screen/home_screen_web.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key key}) : super(key: key);
@@ -10,64 +12,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    NewsFeed(
-      key: ValueKey<String>('/news'),
-    ),
-    ConversationsFeed(
-      key: ValueKey<String>('/conversations'),
-    ),
-    Text(
-      'Enrollments',
-      style: optionStyle,
-    ),
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Winwisely99'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.settings),
-            onPressed: () {
-              Navigator.of(context).pushNamed('/settings');
-            },
-          )
-        ],
-      ),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text('News'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.chat_bubble),
-            title: Text('Chats'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.event_note),
-            title: Text('Enrollments'),
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.indigo,
-        onTap: _onItemTapped,
-      ),
+    return WebLayout(
+      mobileLayout: MobileHomeScreen(),
+      webLayout: WebHomeScreen(),
     );
   }
 }

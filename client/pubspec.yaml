@@ -28,6 +28,8 @@ dependencies:
   transparent_image: ^1.0.0
   #dash_chat: ^1.0.9
   device_preview: ^0.2.6
+  avatar_glow: ^1.1.0
+  font_awesome_flutter: ^8.5.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
