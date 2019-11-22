@@ -16,5 +16,19 @@ message News{
     string uid = 6; // News Author ID
 }
 
+message NewNews{
+    string title = 1; // News Title
+    string text = 2; //  News Text
+    string thumbnailUrl = 3; // News thumbnailUrl
+    string uid = 4; // News Author ID
+}
+
+message RequestNewsID{
+    string id = 1; // News ID
+}
+
 service NewsService {
+    rpc AddNews (NewNews) returns (google.protobuf.Empty) {}
+    rpc GetNewsID (RequestNewsID) returns (News) {}
+    rpc StreamNews (google.protobuf.Empty) returns (stream News) {}
 }
