@@ -1,8 +1,24 @@
 import 'package:flutter/material.dart';
+import './web_screen/simple_route.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({Key key}) : super(key: key);
 
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+
+  static Route<dynamic> route() {
+    return SimpleRoute(
+      name: '/login',
+      title: 'Login',
+      builder: (_) => const LoginScreen(
+        key: ValueKey<String>('/login'),
+      ),
+    );
+  }
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,8 +27,8 @@ class LoginScreen extends StatelessWidget {
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 32),
-            child: Image.network(
-              'https://images.squarespace-cdn.com/content/5985dfd0b8a79b27663a4a57/1539539574841-CEC34OXJ778L6EN32SGN/Logo+png.png?content-type=image%2Fpng',
+            child: Image.asset(
+              'assets/icon/Logo.png',
               height: MediaQuery.of(context).size.height * 0.8,
             ),
           ),

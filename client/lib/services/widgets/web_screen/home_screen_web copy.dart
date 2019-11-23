@@ -1,8 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:com.winwisely99.app/chat_list/chat_list.dart';
 import 'package:com.winwisely99.app/news/news.dart';
-import 'package:responsive_scaffold/responsive_scaffold.dart';
 
 import './drawer.dart';
 
@@ -34,38 +32,6 @@ class WebHomeScreen extends StatelessWidget {
         ),
       ],
     );
-
-    return ResponsiveListScaffold.builder(
-      detailBuilder: (
-        BuildContext context,
-        int index,
-        bool flag,
-      ) {
-        return const DetailsScreen(
-          body: Text(
-            'Details',
-            style: optionStyle,
-          ),
-        );
-      },
-      //drawer: AppDrawer(),
-      tabletSideMenu: (kIsWeb ||
-              debugDefaultTargetPlatformOverride == TargetPlatform.fuchsia)
-          ? Flexible(
-              flex: 1,
-              child: LeftDrawer(onItemTap),
-            )
-          : null,
-      tabletFlexListView: 4,
-      itemCount: 0,
-      itemBuilder: (BuildContext context, int index) {
-        return const Text(
-          'Items',
-          style: optionStyle,
-        );
-      },
-    );
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Winwisely99'),

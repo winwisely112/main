@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 // TODO(FlutterDevelopers): Import modules here
@@ -5,6 +6,7 @@ import 'package:com.winwisely99.app/chat_view/chat_view.dart';
 import 'package:com.winwisely99.app/enrollment/enrollment.dart';
 import 'package:com.winwisely99.app/signup/signup.dart';
 import 'package:com.winwisely99.app/services/services.dart';
+import 'package:rxdart/rxdart.dart';
 
 Route<dynamic> routes(RouteSettings settings) {
   MaterialPageRoute<dynamic> _route;
@@ -48,6 +50,9 @@ Route<dynamic> routes(RouteSettings settings) {
       );
       break;
     case '/home':
+/*       if (kIsWeb) {
+        _route = HomeScreen.route();
+      } else { */
       _route = MaterialPageRoute<dynamic>(
         builder: (BuildContext context) {
           return HomeScreen(
@@ -55,6 +60,7 @@ Route<dynamic> routes(RouteSettings settings) {
           );
         },
       );
+      // }
       break;
     case '/login':
       _route = MaterialPageRoute<dynamic>(
