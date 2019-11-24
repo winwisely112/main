@@ -1,28 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../bloc/app_nav.dart';
 
 class DrawerListTile extends StatelessWidget {
-  const DrawerListTile({this.title, this.index, this.onItemTap, this.child});
+  const DrawerListTile({this.title, this.index, this.child});
   final String title;
   final Widget child;
   final int index;
-  final void Function(int index) onItemTap;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Material(
-        shape: const CircleBorder(),
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: () {
-            onItemTap(index);
-          },
-          hoverColor: Colors.blueGrey,
-          child: CircleAvatar(
-            backgroundColor: Colors.transparent,
-            radius: 32.0,
-            child: child,
-          ),
+    final AppNavigation _nav = Provider.of<AppNavigation>(context);
+    return Material(
+      shape: CircleBorder(
+        side: _nav.selections[index] == true
+            ? BorderSide(
+                color: Theme.of(context).colorScheme.primaryVariant,
+                width: 1.0,
+              )
+            : BorderSide.none,
+      ),
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: () {
+          _nav.setIndex(index);
+          //onItemTap(index);
+        },
+        hoverColor: Colors.blueGrey,
+        child: CircleAvatar(
+          backgroundColor: _nav.selections[index] == true
+              ? Theme.of(context).colorScheme.primaryVariant
+              : Colors.transparent,
+          //radius: 32.0,
+          child: child,
         ),
       ),
     );

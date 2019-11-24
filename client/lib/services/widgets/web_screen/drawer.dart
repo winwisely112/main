@@ -1,16 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import './drawer_list_tile.dart';
+import '../../bloc/app_nav.dart';
 
 class LeftDrawer extends StatelessWidget {
-  const LeftDrawer(this.onItemTap);
-  final void Function(int index) onItemTap;
+  const LeftDrawer();
+  //final void Function(int index) onItemTap;
 
   @override
   Widget build(BuildContext context) {
+    final AppNavigation _nav = Provider.of<AppNavigation>(context);
+    final List<Widget> _topList = <Widget>[
+      Icon(
+        Icons.home,
+        color: Colors.white,
+        //size: 32.0,
+      ),
+      Icon(
+        Icons.chat_bubble,
+        color: Colors.white,
+        // size: 32.0,
+      ),
+      Icon(
+        Icons.settings_input_antenna,
+        color: Colors.white,
+        //size: 32.0,
+      ),
+    ];
+    final List<Widget> _bottomList = <Widget>[
+      const CircleAvatar(
+        backgroundImage: AssetImage('assets/mockData/users/A.jpg'),
+      ),
+      Icon(
+        Icons.settings,
+        color: Colors.white,
+        // size: 32.0,
+      ),
+    ];
     return SafeArea(
       child: Container(
-        color: const Color(0xFF34495e),
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        color: Theme.of(context).colorScheme.primary,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
@@ -21,7 +52,7 @@ class LeftDrawer extends StatelessWidget {
                   const SizedBox(height: 8),
                   CircleAvatar(
                     backgroundColor: Colors.transparent,
-                    radius: 32.0,
+                    //radius: 32.0,
                     child: IconButton(
                       hoverColor: Colors.blueGrey,
                       icon: Icon(
@@ -33,37 +64,20 @@ class LeftDrawer extends StatelessWidget {
                       },
                     ),
                   ),
-                  const SizedBox(height: 16),
-                  DrawerListTile(
-                    index: 0,
-                    onItemTap: onItemTap,
-                    child: Icon(
-                      Icons.home,
-                      color: Colors.white,
-                      //size: 32.0,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  DrawerListTile(
-                    index: 1,
-                    onItemTap: onItemTap,
-                    child: Icon(
-                      Icons.chat_bubble,
-                      color: Colors.white,
-                      // size: 32.0,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  DrawerListTile(
-                    index: 2,
-                    onItemTap: onItemTap,
-                    child: Icon(
-                      Icons.settings_input_antenna,
-                      color: Colors.white,
-                      //size: 32.0,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
+                  for (int i = 0; i < _topList.length; i++)
+                    Column(
+                      children: <Widget>[
+                        const SizedBox(height: 8),
+                        ChangeNotifierProvider<AppNavigation>.value(
+                          value: Provider.of<AppNavigation>(context),
+                          child: DrawerListTile(
+                            index: i,
+                            child: _topList[i],
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                      ],
+                    )
                 ],
               ),
             ),
@@ -71,25 +85,20 @@ class LeftDrawer extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               child: Column(
                 children: <Widget>[
-                  const SizedBox(height: 16),
-                  DrawerListTile(
-                    index: 3,
-                    onItemTap: onItemTap,
-                    child: const CircleAvatar(
-                      backgroundImage:
-                          AssetImage('assets/mockData/users/A.jpg'),
-                    ),
-                  ),
-                  DrawerListTile(
-                    index: 4,
-                    onItemTap: onItemTap,
-                    child: Icon(
-                      Icons.settings,
-                      color: Colors.white,
-                      // size: 32.0,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
+                  for (int i = 0; i < _bottomList.length; i++)
+                    Column(
+                      children: <Widget>[
+                        const SizedBox(height: 8),
+                        ChangeNotifierProvider<AppNavigation>.value(
+                          value: Provider.of<AppNavigation>(context),
+                          child: DrawerListTile(
+                            index: _topList.length + i,
+                            child: _bottomList[i],
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                      ],
+                    )
                 ],
               ),
             ),
@@ -98,4 +107,25 @@ class LeftDrawer extends StatelessWidget {
       ),
     );
   }
+
+/*   List<Widget> _populateTabs(List<Widget> children, BuildContext context) {
+    return <Widget>[
+      for (int i = 0; i < children.length; i++)
+        Column(
+          children: <Widget>[
+            const SizedBox(height: 8),
+            ChangeNotifierProvider<AppNavigation>.value(
+              value: Provider.of<AppNavigation>(context),
+              child: DrawerListTile(
+                selected: _nav.selections[1],
+                index: 1,
+                onItemTap: onItemTap,
+                child: children[i],
+              ),
+            ),
+            const SizedBox(height: 8),
+          ],
+        )
+    ];
+  } */
 }

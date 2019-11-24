@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import './home_screen_mobile.dart';
 import './web_layout.dart';
+import '../bloc/app_nav.dart';
 import './web_screen/home_screen_web.dart';
 import './web_screen/simple_route.dart';
 
@@ -27,7 +29,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return WebLayout(
       mobileLayout: MobileHomeScreen(),
-      webLayout: WebHomeScreen(),
+      webLayout: ChangeNotifierProvider<AppNavigation>(
+        builder: (BuildContext context) => AppNavigation(),
+        child: WebHomeScreen(),
+      ),
     );
   }
 }

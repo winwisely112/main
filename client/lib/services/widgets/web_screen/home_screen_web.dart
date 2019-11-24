@@ -1,9 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:com.winwisely99.app/chat_list/chat_list.dart';
-import 'package:com.winwisely99.app/news/news.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_scaffold/responsive_scaffold.dart';
 
+import 'package:com.winwisely99.app/chat_list/chat_list.dart';
+import 'package:com.winwisely99.app/news/news.dart';
+
+import '../../bloc/app_nav.dart';
 import './drawer.dart';
 
 class WebHomeScreen extends StatelessWidget {
@@ -13,26 +16,33 @@ class WebHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var drawer = LeftDrawer(onItemTap);
-    var body = PageView(
+    final AppNavigation _nav = Provider.of<AppNavigation>(context);
+
+    final List<Widget> _tabs = <Widget>[
+      const NewsFeed(
+        key: ValueKey<String>('/news'),
+      ),
+      const ConversationsFeed(
+        key: ValueKey<String>('/conversations'),
+      ),
+      const Text(
+        'Enrollments',
+        style: optionStyle,
+      ),
+      const Text(
+        'Profile',
+        style: optionStyle,
+      ),
+    ];
+    _nav.init(_tabs.length);
+    final Widget drawer = ChangeNotifierProvider<AppNavigation>.value(
+      value: Provider.of<AppNavigation>(context),
+      child: const LeftDrawer(),
+    );
+    final Widget body = PageView(
       controller: _controller,
       scrollDirection: Axis.vertical,
-      children: <Widget>[
-        const NewsFeed(
-          key: ValueKey<String>('/news'),
-        ),
-        const ConversationsFeed(
-          key: ValueKey<String>('/conversations'),
-        ),
-        const Text(
-          'Enrollments',
-          style: optionStyle,
-        ),
-        const Text(
-          'Profile',
-          style: optionStyle,
-        ),
-      ],
+      children: _tabs,
     );
 
     return ResponsiveListScaffold.builder(
@@ -51,9 +61,10 @@ class WebHomeScreen extends StatelessWidget {
       //drawer: AppDrawer(),
       tabletSideMenu: (kIsWeb ||
               debugDefaultTargetPlatformOverride == TargetPlatform.fuchsia)
-          ? Flexible(
-              flex: 1,
-              child: LeftDrawer(onItemTap),
+          ? const Flexible(
+              flex: 0,
+              child: LeftDrawer(),
+              fit: FlexFit.tight,
             )
           : null,
       tabletFlexListView: 4,
@@ -93,9 +104,5 @@ class WebHomeScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  void onItemTap(int index) {
-    _controller.jumpToPage(index);
   }
 }
