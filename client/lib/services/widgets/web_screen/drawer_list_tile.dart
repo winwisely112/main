@@ -15,7 +15,7 @@ class DrawerListTile extends StatelessWidget {
       shape: CircleBorder(
         side: _nav.selections[index] == true
             ? BorderSide(
-                color: Theme.of(context).colorScheme.primaryVariant,
+                color: Colors.white,
                 width: 1.0,
               )
             : BorderSide.none,
