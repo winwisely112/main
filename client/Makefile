@@ -281,14 +281,53 @@ flu-desk-dist-unzip:
 flu-mob-run: ## flu-mob-run
 	cd $(SAMPLE_FSPATH) && flutter run -d all
 
+
+### WEB
+
 flu-web-config:
-	flutter channel dev
-	flutter upgrade
+	# flutter channel ?
+	#flutter channel dev
+	#flutter upgrade
+
 	flutter config --enable-web
-flu-web-run:
+	# turn off any desktop
+	flutter config --no-enable-linux-desktop
+	flutter config --no-enable-macos-desktop
+	flutter config --no-enable-windows-desktop
+flu-web-create: flu-web-config
+	# works 
+	# make sure using new dir.
+	mkdir -p $(SAMPLE_FSPATH)
+	cd $(SAMPLE_FSPATH) && flutter create --web .
+flu-web-run: flu-web-config ## flu-web-run
+	# works
+	# Reload works too :)
 	cd $(SAMPLE_FSPATH) && flutter run -d chrome
-flu-web-build:
-	cd $(SAMPLE_FSPATH) && flutter build web
+flu-web-build: flu-web-config
+	# works :)
+	cd $(SAMPLE_FSPATH) && flutter build web --release
+flu-web-test: flu-web-config
+	# works :)
+	cd $(SAMPLE_FSPATH) && flutter test --platform=chrome
+
+### CLOUD
+
+CLOUD_PROJ_NAME=winwisely99-main-master
+cloud-console:
+	opem https://console.cloud.google.com/home/dashboard?project=$(CLOUD_PROJ_NAME)
+	open https://console.firebase.google.com/project/$(CLOUD_PROJ_NAME)/hosting/main
+
+cloud-public:
+	open https://$(winwisely99-main-master).firebaseapp.com/	
+	# TODO: domain mapping 
+
+firebase-ci-get:
+	firebase login:ci
+	# PROJ: winwisely99-main-master
+	# record the secret
+fire-ci-revoke:
+	firebase logout --token <token>
+
 ### i18n
 
 #SAMPLE=keyboard_event
