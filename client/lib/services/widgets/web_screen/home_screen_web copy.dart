@@ -34,7 +34,7 @@ class WebHomeScreen extends StatelessWidget {
         style: optionStyle,
       ),
     ];
-
+    _nav.init(_tabs.length);
     final Widget drawer = ChangeNotifierProvider<AppNavigation>.value(
       value: Provider.of<AppNavigation>(context),
       child: const LeftDrawer(),
@@ -46,55 +46,43 @@ class WebHomeScreen extends StatelessWidget {
     );
 
     return Scaffold(
-      appBar: AppBar(
-        leading: const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: CircleAvatar(
-            backgroundColor: Colors.transparent,
-            backgroundImage: AssetImage('assets/icon/icon-old.png'),
+        appBar: AppBar(
+          leading: const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: CircleAvatar(
+              backgroundColor: Colors.transparent,
+              backgroundImage: AssetImage('assets/icon/icon-old.png'),
+            ),
           ),
+          title: const Text('Winwisely99'),
         ),
-        title: const Text('Winwisely99'),
-      ),
-      body: ResponsiveListScaffold.builder(
-        slivers: <Widget>[
-          SliverToBoxAdapter(
-            child: Container(
-              padding: EdgeInsets.all(8.0),
-              child: Text("News"),
-            ),
-          ),
-        ],
-        detailBuilder: (
-          BuildContext context,
-          int index,
-          bool flag,
-        ) {
-          return DetailsScreen(
-            appBar: AppBar(
-              title: Text(index.toString()),
-            ),
-            body: _tabs[index],
-          );
-        },
-        //drawer: AppDrawer(),
-        tabletSideMenu: (kIsWeb ||
-                debugDefaultTargetPlatformOverride == TargetPlatform.fuchsia)
-            ? Flexible(
-                flex: 0,
-                child: drawer,
-                fit: FlexFit.tight,
-              )
-            : null,
-        tabletFlexListView: 4,
-        itemCount: 1,
-        itemBuilder: (BuildContext context, int index) {
-          return const Text(
-            'Items',
-            style: optionStyle,
-          );
-        },
-      ),
-    );
+        body: ResponsiveListScaffold.builder(
+          detailBuilder: (
+            BuildContext context,
+            int index,
+            bool flag,
+          ) {
+            return DetailsScreen(
+              body: _tabs[1],
+            );
+          },
+          //drawer: AppDrawer(),
+          tabletSideMenu: (kIsWeb ||
+                  debugDefaultTargetPlatformOverride == TargetPlatform.fuchsia)
+              ? const Flexible(
+                  flex: 0,
+                  child: LeftDrawer(),
+                  fit: FlexFit.tight,
+                )
+              : null,
+          tabletFlexListView: 4,
+          itemCount: 1,
+          itemBuilder: (BuildContext context, int index) {
+            return const Text(
+              'Items',
+              style: optionStyle,
+            );
+          },
+        ));
   }
 }

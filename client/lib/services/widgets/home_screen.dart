@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -27,12 +28,31 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return WebLayout(
-      mobileLayout: MobileHomeScreen(),
-      webLayout: ChangeNotifierProvider<AppNavigation>(
-        builder: (BuildContext context) => AppNavigation(),
-        child: WebHomeScreen(),
-      ),
+    if (kIsWeb ||
+        debugDefaultTargetPlatformOverride == TargetPlatform.fuchsia) {
+      return ChangeNotifierProvider<AppNavigation>(
+        builder: (BuildContext context) => AppNavigation.init(4, 0),
+        child: const Redirect(),
+      );
+    } else {
+      return MobileHomeScreen();
+    }
+  }
+}
+
+class Redirect extends StatelessWidget {
+  const Redirect({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Future<dynamic>.microtask(() async {
+      Navigator.of(context).pushNamed('/news');
+    });
+
+    return Container(
+      color: Colors.white,
+      alignment: Alignment.center,
+      child: const CircularProgressIndicator(),
     );
   }
 }

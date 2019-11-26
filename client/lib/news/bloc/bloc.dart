@@ -23,6 +23,7 @@ class NewsBloc {
 
   final Repository<News> _news;
   Stream<List<News>> getNews() => _news.fetchAllItems();
+  Future<News> getNewsId(String id) => _news.fetch(Id<News>(id)).first;
 }
 
 class _NewsDownloader extends CollectionFetcher<News> {

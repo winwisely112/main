@@ -3,6 +3,7 @@ import 'package:hive/hive.dart';
 import './services/item_repository.dart';
 
 export './bloc/app_config.dart';
+export './bloc/app_nav.dart';
 export './bloc/data.dart';
 export './config/chat_config.dart';
 export './services/auth_user_service.dart';
@@ -15,6 +16,8 @@ export './widgets/home_screen.dart';
 export './widgets/login_screen.dart';
 export './widgets/settings.dart';
 export './widgets/splash_screen.dart';
+export './widgets/web_layout.dart';
+export './widgets/web_screen/drawer.dart';
 export './widgets/web_screen/simple_route.dart';
 
 Completer<dynamic> storageServiceReadyCompleter = Completer<dynamic>();

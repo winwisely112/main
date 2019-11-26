@@ -12,19 +12,36 @@ class LeftDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final AppNavigation _nav = Provider.of<AppNavigation>(context);
     final List<Widget> _topList = <Widget>[
-      Icon(
-        Icons.home,
-        color: Colors.white,
+      IconButton(
+        icon: Icon(
+          Icons.home,
+          color: Colors.white,
+        ),
+        onPressed: () {
+          Navigator.of(context).pushNamed('/news');
+        },
         //size: 32.0,
       ),
-      Icon(
-        Icons.chat_bubble,
-        color: Colors.white,
-        // size: 32.0,
+      IconButton(
+        icon: Icon(
+          Icons.chat_bubble,
+          color: Colors.white,
+          // size: 32.0,
+        ),
+        onPressed: () {
+          Navigator.of(context).pushNamed('/chatgroup');
+        },
+        //size: 32.0,
       ),
-      Icon(
-        Icons.settings_input_antenna,
-        color: Colors.white,
+      IconButton(
+        icon: Icon(
+          Icons.settings_input_antenna,
+          color: Colors.white,
+          //size: 32.0,
+        ),
+        onPressed: () {
+          Navigator.of(context).pushNamed('/enrollments');
+        },
         //size: 32.0,
       ),
     ];
@@ -107,25 +124,4 @@ class LeftDrawer extends StatelessWidget {
       ),
     );
   }
-
-/*   List<Widget> _populateTabs(List<Widget> children, BuildContext context) {
-    return <Widget>[
-      for (int i = 0; i < children.length; i++)
-        Column(
-          children: <Widget>[
-            const SizedBox(height: 8),
-            ChangeNotifierProvider<AppNavigation>.value(
-              value: Provider.of<AppNavigation>(context),
-              child: DrawerListTile(
-                selected: _nav.selections[1],
-                index: 1,
-                onItemTap: onItemTap,
-                child: children[i],
-              ),
-            ),
-            const SizedBox(height: 8),
-          ],
-        )
-    ];
-  } */
 }
