@@ -22,11 +22,14 @@ class AvatarContainer extends StatelessWidget {
   /// [Widget Function(ChatUser)] to build the avatar
   final Widget Function(ChatUser) avatarBuilder;
 
+  final BoxConstraints constraints;
+
   const AvatarContainer({
     @required this.user,
     this.onPress,
     this.onLongPress,
     this.avatarBuilder,
+    this.constraints,
   });
 
   @override
@@ -41,8 +44,8 @@ class AvatarContainer extends StatelessWidget {
               children: <Widget>[
                 ClipOval(
                   child: Container(
-                    height: MediaQuery.of(context).size.width * 0.08,
-                    width: MediaQuery.of(context).size.width * 0.08,
+                    height: 48.0, //constraints.maxWidth * 0.08,
+                    width: 48.0, //constraints.maxWidth * 0.08,
                     color: Colors.grey,
                     child: Center(child: Text(user.name[0])),
                   ),
@@ -56,8 +59,8 @@ class AvatarContainer extends StatelessWidget {
                             //placeholder: kTransparentImage,
                             placeholder: user.avatar,
                             fit: BoxFit.contain,
-                            height: MediaQuery.of(context).size.width * 0.08,
-                            width: MediaQuery.of(context).size.width * 0.08,
+                            height: 48.0, //constraints.maxWidth * 0.08,
+                            width: 48.0, //constraints.maxWidth * 0.08,
                           ),
                         ),
                       )

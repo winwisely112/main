@@ -30,6 +30,7 @@ class MessageListView extends StatefulWidget {
   final Widget Function() showLoadEarlierWidget;
   final Function onLoadEarlier;
   final Function(bool) defaultLoadCallback;
+  final BoxConstraints constraints;
 
   MessageListView({
     this.showLoadEarlierWidget,
@@ -62,6 +63,7 @@ class MessageListView extends StatefulWidget {
     this.changeVisible,
     this.visible,
     this.showLoadMore,
+    this.constraints,
   });
 
   @override
@@ -181,13 +183,13 @@ class _MessageListViewState extends State<MessageListView> {
                               Padding(
                                 padding: EdgeInsets.symmetric(
                                     horizontal:
-                                        MediaQuery.of(context).size.width *
-                                            0.02),
+                                        widget.constraints.maxWidth * 0.02),
                                 child: ((widget.showAvatarForEverMessage ||
                                             showAvatar) &&
                                         widget.messages[i].user.uid !=
                                             widget.user.uid)
                                     ? AvatarContainer(
+                                        constraints: widget.constraints,
                                         user: widget.messages[i].user,
                                         onPress: widget.onPressAvatar,
                                         onLongPress: widget.onLongPressAvatar,
@@ -196,10 +198,7 @@ class _MessageListViewState extends State<MessageListView> {
                                     : SizedBox(
                                         width: widget.messages[i].user.uid !=
                                                 widget.user.uid
-                                            ? MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.08
+                                            ? widget.constraints.maxWidth * 0.08
                                             : 0.0,
                                       ),
                               ),
@@ -237,6 +236,7 @@ class _MessageListViewState extends State<MessageListView> {
                                 child: widget.messageBuilder != null
                                     ? widget.messageBuilder(widget.messages[i])
                                     : MessageContainer(
+                                        constraints: widget.constraints,
                                         isUser: widget.messages[i].user.uid ==
                                             widget.user.uid,
                                         message: widget.messages[i],
@@ -256,13 +256,13 @@ class _MessageListViewState extends State<MessageListView> {
                                 Padding(
                                   padding: EdgeInsets.symmetric(
                                       horizontal:
-                                          MediaQuery.of(context).size.width *
-                                              0.02),
+                                          widget.constraints.maxWidth * 0.02),
                                   child: ((widget.showAvatarForEverMessage ||
                                               showAvatar) &&
                                           widget.messages[i].user.uid ==
                                               widget.user.uid)
                                       ? AvatarContainer(
+                                          constraints: widget.constraints,
                                           user: widget.messages[i].user,
                                           onPress: widget.onPressAvatar,
                                           onLongPress: widget.onLongPressAvatar,
@@ -271,9 +271,7 @@ class _MessageListViewState extends State<MessageListView> {
                                       : SizedBox(
                                           width: widget.messages[i].user.uid ==
                                                   widget.user.uid
-                                              ? MediaQuery.of(context)
-                                                      .size
-                                                      .width *
+                                              ? widget.constraints.maxWidth *
                                                   0.08
                                               : 0.0,
                                         ),

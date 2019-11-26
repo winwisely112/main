@@ -40,22 +40,24 @@ class MessageContainer extends StatelessWidget {
   /// A flag which is used for assiging styles
   final bool isUser;
 
-  const MessageContainer({
-    @required this.message,
-    @required this.timeFormat,
-    this.messageImageBuilder,
-    this.messageTextBuilder,
-    this.messageTimeBuilder,
-    this.messageContainerDecoration,
-    this.parsePatterns = const <MatchText>[],
-    this.isUser,
-  });
+  final BoxConstraints constraints;
+
+  const MessageContainer(
+      {@required this.message,
+      @required this.timeFormat,
+      this.messageImageBuilder,
+      this.messageTextBuilder,
+      this.messageTimeBuilder,
+      this.messageContainerDecoration,
+      this.parsePatterns = const <MatchText>[],
+      this.isUser,
+      this.constraints});
 
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
       constraints: BoxConstraints(
-        maxWidth: MediaQuery.of(context).size.width * 0.8,
+        maxWidth: constraints.maxWidth * 0.8,
       ),
       child: Container(
         decoration: messageContainerDecoration != null
@@ -99,8 +101,8 @@ class MessageContainer extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                   child: FadeInImage.assetNetwork(
-                    height: MediaQuery.of(context).size.height * 0.3,
-                    width: MediaQuery.of(context).size.width * 0.7,
+                    height: constraints.maxHeight * 0.3,
+                    width: constraints.maxWidth * 0.7,
                     fit: BoxFit.contain,
                     //placeholder: kTransparentImage,
                     placeholder: message.image,
