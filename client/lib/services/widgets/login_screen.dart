@@ -38,11 +38,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   //Padding(
                   // padding: const EdgeInsets.all(32),
                   //child:
-                  Image.asset(
-                    'assets/icon/Logo.png',
-                    //scale: 0.25,
-                    fit: BoxFit.contain,
-                    //height: MediaQuery.of(context).size.height * 0.8,
+                  Center(
+                    child: Image.asset(
+                      'assets/icon/Logo.png',
+                      //scale: 0.25,
+                      fit: BoxFit.contain,
+                      //height: MediaQuery.of(context).size.height * 0.8,
+                    ),
                   ),
                   //),
                   Center(

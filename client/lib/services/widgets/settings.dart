@@ -1,9 +1,67 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:responsive_scaffold/responsive_scaffold.dart';
 import '../bloc/app_config.dart';
+import '../widgets/web_screen/drawer.dart';
 
 class Settings extends StatelessWidget {
   const Settings({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    if (kIsWeb ||
+        debugDefaultTargetPlatformOverride == TargetPlatform.fuchsia) {
+      return const _WebSettings(child: _Settings());
+    } else {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('Settings'),
+        ),
+        body: const _Settings(),
+      );
+      ;
+    }
+  }
+}
+
+class _WebSettings extends StatelessWidget {
+  const _WebSettings({Key key, this.child}) : super(key: key);
+  final Widget child;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: CircleAvatar(
+            backgroundColor: Colors.transparent,
+            backgroundImage: AssetImage('assets/icon/icon-old.png'),
+          ),
+        ),
+        title: const Text('Winwisely99'),
+      ),
+      body: Flex(
+        direction: Axis.horizontal,
+        children: <Widget>[
+          const Flexible(
+            flex: 0,
+            child: LeftDrawer(index: 4),
+            fit: FlexFit.tight,
+          ),
+          Flexible(
+            flex: 4,
+            fit: FlexFit.tight,
+            child: child,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _Settings extends StatelessWidget {
+  const _Settings({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +97,6 @@ class Settings extends StatelessWidget {
 
     void _handleShowSemanticsDebuggerChanged(bool value) {
       configuration.change(showSemanticsDebugger: value);
-    }
-
-    Widget buildAppBar(BuildContext context) {
-      return AppBar(title: const Text('Settings'));
     }
 
     Widget buildSettingsPane(BuildContext context) {
@@ -150,7 +204,6 @@ class Settings extends StatelessWidget {
       );
     }
 
-    return Scaffold(
-        appBar: buildAppBar(context), body: buildSettingsPane(context));
+    return buildSettingsPane(context);
   }
 }
