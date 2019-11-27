@@ -6,11 +6,10 @@ import 'package:responsive_scaffold/responsive_scaffold.dart';
 
 import 'package:com.winwisely99.app/services/services.dart';
 import 'package:com.winwisely99.app/chat_view/chat_view.dart';
+import 'package:com.winwisely99.app/vendor_plugins/vendor_plugins.dart';
 
 import '../bloc/bloc.dart';
 import '../bloc/data.dart';
-
-final ValueNotifier<int> _previndex = ValueNotifier<int>(0);
 
 class WebConversationsFeed extends StatelessWidget {
   const WebConversationsFeed({Key key}) : super(key: key);
@@ -26,6 +25,15 @@ class WebConversationsFeed extends StatelessWidget {
             user: user,
           ),
         ),
+        ProxyProvider2<NetworkService, UserService, ChatBloc>(
+          builder: (BuildContext _, NetworkService network, UserService user,
+                  ChatBloc __) =>
+              ChatBloc(
+            network: network,
+            user: user,
+            conversationsId: null,
+          ),
+        )
       ],
       child: _ConversationsFeedBody(),
     );
@@ -84,15 +92,32 @@ class __ConversationsFeedBodyState extends State<_ConversationsFeedBody> {
               int index,
               bool flag,
             ) {
-              if (_previndex.value != index) {
-                _previndex.value = index;
-                setState(() {});
-              }
               return DetailsScreen(
                 body: Material(
                   color: Colors.white,
                   elevation: 8.0,
-                  child: ChatFeed(conversationsId: snapshot.data[index].id.id),
+                  child: FutureBuilder<User>(
+                      future: Provider.of<ChatBloc>(context).getCurrentUser(),
+                      builder:
+                          (BuildContext context, AsyncSnapshot<User> user) {
+                        if (!user.hasData) {
+                          return Center(
+                            child: CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                Theme.of(context).primaryColor,
+                              ),
+                            ),
+                          );
+                        }
+                        return ChatFeedBody(
+                          user: ChatUser(
+                            name: user.data.name,
+                            uid: user.data.id.id,
+                            avatar: user.data.avatarURL,
+                          ),
+                          conversationsId: snapshot.data[index].id.id,
+                        );
+                      }),
                 ),
               );
             },
@@ -112,17 +137,16 @@ class __ConversationsFeedBodyState extends State<_ConversationsFeedBody> {
                 child: Column(
                   children: <Widget>[
                     const SizedBox(height: 8.0),
-                    ProxyProvider2<NetworkService, UserService, ChatBloc>(
+/*                     ProxyProvider2<NetworkService, UserService, ChatBloc>(
                       builder: (BuildContext _, NetworkService network,
                               UserService user, ChatBloc __) =>
                           ChatBloc(
                               network: network,
                               user: user,
                               conversationsId: conversation.id.id),
-                      child: _ConversationTile(
-                        conversation: conversation,
-                      ),
-                    ),
+                      child:  */
+                    _ConversationTile(conversation: conversation),
+                    //),
                     const SizedBox(height: 8.0),
                   ],
                 ),

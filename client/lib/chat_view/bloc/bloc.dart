@@ -5,15 +5,11 @@ import 'package:rxdart/rxdart.dart';
 
 import 'package:com.winwisely99.app/services/services.dart';
 import 'package:com.winwisely99.app/chat_list/chat_list.dart';
-import 'package:com.winwisely99.app/vendor_plugins/vendor_plugins.dart';
 
 import 'data.dart';
 
 class ChatBloc {
-  ChatBloc(
-      {@required this.network,
-      @required this.user,
-      @required this.conversationsId})
+  ChatBloc({@required this.network, @required this.user, this.conversationsId})
       : assert(network != null),
         assert(user != null) {
     _chatFetcher.stream
@@ -65,7 +61,8 @@ class ChatBloc {
   }
 
   Future<bool> _addToStream(ChatModel chatModel) async {
-    if (chatModel.conversationsId == conversationsId) {
+    if (chatModel.conversationsId == conversationsId ||
+        conversationsId == null) {
       final User _user = await user.getUser(chatModel.uid);
       _addChatToScreen(
         ChatModel(

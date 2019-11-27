@@ -96,7 +96,7 @@ class _ChatFeedView extends StatelessWidget {
                 ),
               );
             }
-            return _ChatFeedBody(
+            return ChatFeedBody(
               user: ChatUser(
                 name: user.data.name,
                 uid: user.data.id.id,
@@ -109,15 +109,15 @@ class _ChatFeedView extends StatelessWidget {
   }
 }
 
-class _ChatFeedBody extends StatefulWidget {
-  const _ChatFeedBody({this.user, this.conversationsId});
+class ChatFeedBody extends StatefulWidget {
+  const ChatFeedBody({this.user, this.conversationsId});
   final ChatUser user;
   final String conversationsId;
   @override
   _ChatFeedBodyState createState() => _ChatFeedBodyState();
 }
 
-class _ChatFeedBodyState extends State<_ChatFeedBody> {
+class _ChatFeedBodyState extends State<ChatFeedBody> {
   final GlobalKey<DashChatState> _chatViewKey = GlobalKey<DashChatState>();
 
   @override
@@ -138,6 +138,8 @@ class _ChatFeedBodyState extends State<_ChatFeedBody> {
           ); */
         } else {
           messages.addAll(snapshot.data.values
+              .where((ChatModel chat) =>
+                  chat.conversationsId == widget.conversationsId)
               .map((ChatModel chat) => ChatMessage(
                     id: chat.id.id,
                     text: chat.text,
@@ -208,7 +210,7 @@ class _ChatFeedBodyState extends State<_ChatFeedBody> {
           },
           user: widget.user,
           inputDecoration:
-              InputDecoration.collapsed(hintText: 'Add message here...'),
+              const InputDecoration.collapsed(hintText: 'Add message here...'),
           dateFormat: DateFormat('yyyy-MMM-dd'),
           timeFormat: DateFormat('HH:mm'),
           messages: messages,
@@ -224,7 +226,7 @@ class _ChatFeedBodyState extends State<_ChatFeedBody> {
           inputMaxLines: 5,
           messageContainerPadding: const EdgeInsets.only(left: 5.0, right: 5.0),
           alwaysShowSend: true,
-          inputTextStyle: TextStyle(fontSize: 16.0),
+          inputTextStyle: const TextStyle(fontSize: 16.0),
           inputContainerStyle: BoxDecoration(
             border: Border.all(width: 0.0),
             color: Colors.white,
