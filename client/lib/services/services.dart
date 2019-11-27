@@ -3,7 +3,6 @@ import 'package:hive/hive.dart';
 import './services/item_repository.dart';
 
 export './bloc/app_config.dart';
-export './bloc/app_nav.dart';
 export './bloc/data.dart';
 export './config/chat_config.dart';
 export './services/auth_user_service.dart';

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import './home_screen_mobile.dart';
-import '../bloc/app_nav.dart';
 import './web_screen/simple_route.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -28,10 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     if (kIsWeb ||
         debugDefaultTargetPlatformOverride == TargetPlatform.fuchsia) {
-      return ChangeNotifierProvider<AppNavigation>(
-        builder: (BuildContext context) => AppNavigation.init(4, 0),
-        child: const Redirect(),
-      );
+      return const Redirect();
     } else {
       return MobileHomeScreen();
     }

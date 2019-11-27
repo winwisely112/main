@@ -48,14 +48,6 @@ class _ConversationsFeedBody extends StatefulWidget {
 class __ConversationsFeedBodyState extends State<_ConversationsFeedBody> {
   @override
   Widget build(BuildContext context) {
-    final Widget drawer = Flexible(
-      flex: 0,
-      child: ChangeNotifierProvider<AppNavigation>.value(
-        value: Provider.of<AppNavigation>(context),
-        child: const LeftDrawer(),
-      ),
-      fit: FlexFit.tight,
-    );
     return StreamBuilder<Map<int, Conversations>>(
       stream: Provider.of<ConversationsBloc>(context).chatList,
       builder: (BuildContext context,
@@ -125,7 +117,11 @@ class __ConversationsFeedBodyState extends State<_ConversationsFeedBody> {
             tabletSideMenu: (kIsWeb ||
                     debugDefaultTargetPlatformOverride ==
                         TargetPlatform.fuchsia)
-                ? drawer
+                ? const Flexible(
+                    flex: 0,
+                    child: LeftDrawer(index: 1),
+                    fit: FlexFit.tight,
+                  )
                 : null,
             tabletFlexListView: 4,
             nullItems: const Center(child: CircularProgressIndicator()),

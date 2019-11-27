@@ -26,10 +26,7 @@ class WebNewsFeed extends StatelessWidget {
         network: network,
         user: user,
       ),
-      child: ChangeNotifierProvider<AppNavigation>.value(
-        value: Provider.of<AppNavigation>(context),
-        child: _NewsFeedBody(),
-      ),
+      child: _NewsFeedBody(),
     );
   }
 }
@@ -37,15 +34,6 @@ class WebNewsFeed extends StatelessWidget {
 class _NewsFeedBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final Widget drawer = Flexible(
-      flex: 0,
-      child: ChangeNotifierProvider<AppNavigation>.value(
-        value: Provider.of<AppNavigation>(context),
-        child: const LeftDrawer(),
-      ),
-      fit: FlexFit.tight,
-    );
-
     return StreamBuilder<List<News>>(
       stream: Provider.of<NewsBloc>(context).getNews(),
       builder: (BuildContext context, AsyncSnapshot<List<News>> snapshot) {
@@ -94,7 +82,11 @@ class _NewsFeedBody extends StatelessWidget {
             tabletSideMenu: (kIsWeb ||
                     debugDefaultTargetPlatformOverride ==
                         TargetPlatform.fuchsia)
-                ? drawer
+                ? const Flexible(
+                    flex: 0,
+                    child: LeftDrawer(index: 0),
+                    fit: FlexFit.tight,
+                  )
                 : null,
             tabletFlexListView: 4,
             nullItems: const Center(child: CircularProgressIndicator()),

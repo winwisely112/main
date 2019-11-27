@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
 import './drawer_list_tile.dart';
-import '../../bloc/app_nav.dart';
 
 class LeftDrawer extends StatelessWidget {
-  const LeftDrawer();
+  const LeftDrawer({this.index});
   //final void Function(int index) onItemTap;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
-    final AppNavigation _nav = Provider.of<AppNavigation>(context);
     final List<Widget> _topList = <Widget>[
       IconButton(
         icon: Icon(
@@ -49,12 +46,20 @@ class LeftDrawer extends StatelessWidget {
       const CircleAvatar(
         backgroundImage: AssetImage('assets/mockData/users/A.jpg'),
       ),
-      Icon(
-        Icons.settings,
-        color: Colors.white,
-        // size: 32.0,
+      IconButton(
+        icon: Icon(
+          Icons.settings,
+          color: Colors.white,
+          //size: 32.0,
+        ),
+        onPressed: () {
+          Navigator.of(context).pushNamed('/settings');
+        },
+        //size: 32.0,
       ),
     ];
+    final List<bool> _menuList =
+        _setIndex(index, _topList.length + _bottomList.length + 2);
     return SafeArea(
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -85,12 +90,10 @@ class LeftDrawer extends StatelessWidget {
                     Column(
                       children: <Widget>[
                         const SizedBox(height: 8),
-                        ChangeNotifierProvider<AppNavigation>.value(
-                          value: Provider.of<AppNavigation>(context),
-                          child: DrawerListTile(
-                            index: i,
-                            child: _topList[i],
-                          ),
+                        DrawerListTile(
+                          selected: _menuList[i],
+                          index: i,
+                          child: _topList[i],
                         ),
                         const SizedBox(height: 8),
                       ],
@@ -106,12 +109,10 @@ class LeftDrawer extends StatelessWidget {
                     Column(
                       children: <Widget>[
                         const SizedBox(height: 8),
-                        ChangeNotifierProvider<AppNavigation>.value(
-                          value: Provider.of<AppNavigation>(context),
-                          child: DrawerListTile(
-                            index: _topList.length + i,
-                            child: _bottomList[i],
-                          ),
+                        DrawerListTile(
+                          selected: _menuList[_topList.length + i],
+                          index: _topList.length + i,
+                          child: _bottomList[i],
                         ),
                         const SizedBox(height: 8),
                       ],
@@ -123,5 +124,11 @@ class LeftDrawer extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  List<bool> _setIndex(int _index, int _length) {
+    final List<bool> _list = List<bool>.filled(_length, false);
+    _list[_index] = true;
+    return _list;
   }
 }
