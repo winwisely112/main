@@ -10,6 +10,8 @@ import 'package:com.winwisely99.app/chat_view/chat_view.dart';
 import '../bloc/bloc.dart';
 import '../bloc/data.dart';
 
+final ValueNotifier<int> _previndex = ValueNotifier<int>(0);
+
 class WebConversationsFeed extends StatelessWidget {
   const WebConversationsFeed({Key key}) : super(key: key);
   @override
@@ -30,7 +32,12 @@ class WebConversationsFeed extends StatelessWidget {
   }
 }
 
-class _ConversationsFeedBody extends StatelessWidget {
+class _ConversationsFeedBody extends StatefulWidget {
+  @override
+  __ConversationsFeedBodyState createState() => __ConversationsFeedBodyState();
+}
+
+class __ConversationsFeedBodyState extends State<_ConversationsFeedBody> {
   @override
   Widget build(BuildContext context) {
     final Widget drawer = Flexible(
@@ -41,7 +48,6 @@ class _ConversationsFeedBody extends StatelessWidget {
       ),
       fit: FlexFit.tight,
     );
-
     return StreamBuilder<Map<int, Conversations>>(
       stream: Provider.of<ConversationsBloc>(context).chatList,
       builder: (BuildContext context,
@@ -78,6 +84,10 @@ class _ConversationsFeedBody extends StatelessWidget {
               int index,
               bool flag,
             ) {
+              if (_previndex.value != index) {
+                _previndex.value = index;
+                setState(() {});
+              }
               return DetailsScreen(
                 body: Material(
                   color: Colors.white,
@@ -120,13 +130,6 @@ class _ConversationsFeedBody extends StatelessWidget {
             },
           ),
         );
-/*         final Map<DateTime, List<Conversations>> conversations =
-            groupBy<Conversations, DateTime>(
-          snapshot.data.values,
-          (Conversations h) => h.timestamp,
-        );
-        final List<DateTime> dates = conversations.keys.toList()
-          ..sort((DateTime a, DateTime b) => b.compareTo(a)); */
       },
     );
   }
@@ -168,10 +171,6 @@ class _ConversationTile extends StatelessWidget {
               lastChat = null;
             }
             return ListTile(
-/*               onTap: () {
-                Navigator.of(context)
-                    .pushNamed('/chatfeed/${conversation.id.id}');
-              }, */
               title: Text(conversation.title),
               subtitle: Text(
                 lastChat != null ? lastChat.text : 'No messages',
