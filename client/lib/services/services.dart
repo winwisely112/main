@@ -16,7 +16,6 @@ export './widgets/home_screen.dart';
 export './widgets/login_screen.dart';
 export './widgets/settings.dart';
 export './widgets/splash_screen.dart';
-export './widgets/web_layout.dart';
 export './widgets/web_screen/drawer.dart';
 export './widgets/web_screen/simple_route.dart';
 

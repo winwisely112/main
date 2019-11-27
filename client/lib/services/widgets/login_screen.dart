@@ -23,32 +23,49 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32),
-            child: Image.asset(
-              'assets/icon/Logo.png',
-              height: MediaQuery.of(context).size.height * 0.8,
+            padding: EdgeInsets.symmetric(
+                horizontal: MediaQuery.of(context).size.width * 0.2),
+            child: Card(
+              elevation: 5.0,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  //Padding(
+                  // padding: const EdgeInsets.all(32),
+                  //child:
+                  Image.asset(
+                    'assets/icon/Logo.png',
+                    //scale: 0.25,
+                    fit: BoxFit.contain,
+                    //height: MediaQuery.of(context).size.height * 0.8,
+                  ),
+                  //),
+                  Center(
+                    child: RaisedButton(
+                      onPressed: () {
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                            '/home', ModalRoute.withName('/login'));
+                      }, // TODO
+                      child: const Text('Sign In'),
+                    ),
+                  ),
+                  Center(
+                    child: FlatButton(
+                      onPressed: () {
+                        Navigator.of(context).pushNamed('/userinfo');
+                      },
+                      child: const Text('Get Started'),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-          Center(
-            child: RaisedButton(
-              onPressed: () {
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/home', ModalRoute.withName('/login'));
-              }, // TODO
-              child: const Text('Sign In'),
-            ),
-          ),
-          Center(
-            child: FlatButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed('/userinfo');
-              },
-              child: const Text('Get Started'),
-            ),
-          )
         ],
       ),
     );
