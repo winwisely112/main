@@ -57,7 +57,7 @@ class MessageContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return ConstrainedBox(
       constraints: BoxConstraints(
-        maxWidth: constraints.maxWidth * 0.8,
+        maxWidth: constraints.maxWidth * 0.76,
       ),
       child: Container(
         decoration: messageContainerDecoration != null

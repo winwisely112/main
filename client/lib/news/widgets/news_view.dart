@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:intl/intl.dart';
@@ -8,6 +9,26 @@ import '../bloc/data.dart';
 
 class NewsView extends StatelessWidget {
   const NewsView({Key key, this.newsId}) : super(key: key);
+  final String newsId;
+
+  @override
+  Widget build(BuildContext context) {
+    if (kIsWeb ||
+        debugDefaultTargetPlatformOverride == TargetPlatform.fuchsia) {
+      return _NewsView(newsId: newsId);
+    } else {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('News View'),
+        ),
+        body: _NewsView(newsId: newsId),
+      );
+    }
+  }
+}
+
+class _NewsView extends StatelessWidget {
+  const _NewsView({Key key, this.newsId}) : super(key: key);
   final String newsId;
 
   @override

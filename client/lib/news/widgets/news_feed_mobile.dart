@@ -57,6 +57,10 @@ class _NewsFeedBody extends StatelessWidget {
                     children: <Widget>[
                       const SizedBox(height: 10.0),
                       ListTile(
+                        onTap: () {
+                          Navigator.of(context)
+                              .pushNamed('/newsview/${news.id.id}');
+                        },
                         title: Text(news.title),
                         subtitle: Column(
                           children: <Widget>[

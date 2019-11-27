@@ -156,6 +156,19 @@ Route<dynamic> routes(RouteSettings settings) {
             },
           );
           break;
+        case 'newsview':
+          // /newsview/{news.id}
+          _route = MaterialPageRoute<dynamic>(
+            settings: settings,
+            builder: (BuildContext context) {
+              return NewsView(
+                key: ValueKey<String>(settings.name),
+                newsId: info[2],
+                //         user: ,
+              );
+            },
+          );
+          break;
         default:
           _route = MaterialPageRoute<dynamic>(
             builder: (BuildContext context) {

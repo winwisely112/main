@@ -4,11 +4,11 @@ import 'package:device_preview/device_preview.dart';
 import 'services_provider.dart';
 
 void main() {
-  if (kIsWeb) {
-    runApp(ServicesProvider());
-  } else {
+  //if (kIsWeb) {
+  runApp(ServicesProvider());
+/*   } else {
     runApp(DevicePreview(
       builder: (BuildContext context) => ServicesProvider(),
     ));
-  }
+  } */
 }
