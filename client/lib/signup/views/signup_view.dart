@@ -20,7 +20,7 @@ class SignUpView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Image.asset(
-                'Logo.png',
+                'assets/icon/Logo.png',
                 width: 200,
                 height: 100,
               ),

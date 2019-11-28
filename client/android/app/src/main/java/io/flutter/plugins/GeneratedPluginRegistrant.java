@@ -1,6 +1,7 @@
 package io.flutter.plugins;
 
 import io.flutter.plugin.common.PluginRegistry;
+import com.befovy.fijkplayer.FijkPlugin;
 import io.flutter.plugins.pathprovider.PathProviderPlugin;
 
 /**
@@ -11,6 +12,7 @@ public final class GeneratedPluginRegistrant {
     if (alreadyRegisteredWith(registry)) {
       return;
     }
+    FijkPlugin.registerWith(registry.registrarFor("com.befovy.fijkplayer.FijkPlugin"));
     PathProviderPlugin.registerWith(registry.registrarFor("io.flutter.plugins.pathprovider.PathProviderPlugin"));
   }
 

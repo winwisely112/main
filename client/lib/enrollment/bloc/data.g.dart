@@ -20,7 +20,7 @@ class CampaignAdapter extends TypeAdapter<Campaign> {
       logoUrl: fields[3] as String,
       description: fields[4] as String,
       crgIdsMany: (fields[6] as List)?.cast<String>(),
-      crgQuantityMany: (fields[5] as List)?.cast<int>(),
+      crgQuantityMany: (fields[5] as List)?.cast<String>(),
     );
   }
 

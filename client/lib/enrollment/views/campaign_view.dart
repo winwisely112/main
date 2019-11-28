@@ -75,11 +75,68 @@ class _CampaignViewBody extends StatelessWidget {
         child: Column(
           children: <Widget>[
             ExpansionTile(
+              leading: Container(
+                child: Image.asset(campaign.logoUrl),
+              ),
               title: Text(campaign.name),
               children: <Widget>[
+                const SizedBox(height: 8.0),
                 ListTile(
-                  title: Image.asset(campaign.logoUrl),
-                )
+                  title: const Text('Description'),
+                  subtitle: Text(campaign.description),
+                ),
+                const SizedBox(height: 8.0),
+                ListTile(
+                  title: const Text('Other'),
+                  subtitle: Text(campaign.other),
+                ),
+                const SizedBox(height: 8.0),
+                ListTile(
+                  title: const Text('CRQ Ids'),
+                  subtitle: Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Wrap(
+                      children: <Widget>[
+                        for (String id in campaign.crgIdsMany)
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                color: Theme.of(context).colorScheme.primary,
+                              )),
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(id),
+                            ),
+                          )
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 8.0),
+                ListTile(
+                  title: const Text('CRQ Quantity'),
+                  subtitle: Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Wrap(
+                      children: <Widget>[
+                        for (String id in campaign.crgQuantityMany)
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                color: Theme.of(context).colorScheme.primary,
+                              )),
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(id),
+                            ),
+                          )
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 8.0),
               ],
             ),
             Container(

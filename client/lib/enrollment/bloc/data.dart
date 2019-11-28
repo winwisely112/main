@@ -31,7 +31,7 @@ class Campaign implements Entity {
             ? data['crg_ids_many'].split(',')
             : <String>[],
         crgQuantityMany = data['crg_quantity_many'] != null
-            ? data['crg_quantity_many'].split(',').cast<int>()
+            ? data['crg_quantity_many'].split(',')
             : <int>[],
         description = data['description'],
         logoUrl = data['logo_url'],
@@ -54,14 +54,8 @@ class Campaign implements Entity {
   final String description;
 
   @HiveField(5)
-  final List<int> crgQuantityMany;
+  final List<String> crgQuantityMany;
 
   @HiveField(6)
   final List<String> crgIdsMany;
-
-  List<int> _getCrgQuantityMany(String data) {
-    final List<int> _list =
-        data == null ? <int>[] : data.split(',').cast<int>();
-    return _list;
-  }
 }
