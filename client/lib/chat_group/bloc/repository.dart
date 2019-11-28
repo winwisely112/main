@@ -46,9 +46,7 @@ class ChatGroupRepository extends CollectionFetcher<ChatGroup> {
           title: data['title'],
           avatarUrl: data['avatar_url'],
           timestamp: DateTime.parse(data['timestamp']),
-          memberIds: <Id<User>>[
-            for (String id in _getMemberIDs(data['member_ids'])) Id<User>(id)
-          ],
+          memberIds: _getMemberIDs(data['member_ids']),
           members: <User>[
             for (String id in _getMemberIDs(data['member_ids']))
               await user.getUser(Id<User>(id)),

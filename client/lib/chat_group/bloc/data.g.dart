@@ -19,7 +19,7 @@ class ChatGroupAdapter extends TypeAdapter<ChatGroup> {
       members: (fields[2] as List)?.cast<User>(),
       avatarUrl: fields[3] as String,
       timestamp: fields[4] as DateTime,
-      memberIds: (fields[5] as List)?.cast<Id>(),
+      memberIds: (fields[5] as List)?.cast<String>(),
       lastChat: fields[6] as ChatModel,
       ownerUid: fields[7] as Id,
       owner: fields[8] as User,

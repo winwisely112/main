@@ -42,7 +42,7 @@ class ChatGroup implements Entity {
   final DateTime timestamp;
 
   @HiveField(5)
-  final List<Id<User>> memberIds;
+  final List<String> memberIds;
 
   @HiveField(6)
   final ChatModel lastChat;
