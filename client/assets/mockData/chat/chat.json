@@ -1,0 +1,173 @@
+[
+  {
+    "_id": "chat001",
+    "attachment_type": "image",
+    "attachment_url": "assets/mockData/chat/1kVzp2zpICBUUnPg2LWSoMSZDFXDUUMmH.jpg",
+    "chatgroup_id": "chatgroup001",
+    "created_at": "2019-10-19 10:10:45",
+    "text": "They've got the entire area here, all 4 corners around location E1 blocked off, so we are unable to get to the entrance doors of Exxon. What do we do?",
+    "user_id": "user001"
+  },
+  {
+    "_id": "chat002",
+    "attachment_type": "",
+    "attachment_url": "",
+    "chatgroup_id": "chatgroup001",
+    "created_at": "2019-10-19 10:11:31",
+    "text": "Have everyone go asap to alternate B2 mtg location, taking 2-3 different routes.",
+    "user_id": "user002"
+  },
+  {
+    "_id": "chat003",
+    "attachment_type": "",
+    "attachment_url": "",
+    "chatgroup_id": "chatgroup002",
+    "created_at": "2019-11-01 13:01:29",
+    "text": "The lawyer phone # rubbed off my arm. Can you resend it please?",
+    "user_id": "user003"
+  },
+  {
+    "_id": "chat004",
+    "attachment_type": "",
+    "attachment_url": "",
+    "chatgroup_id": "chatgroup002",
+    "created_at": "2019-11-01 13:04:15",
+    "text": "The number is 614 567 1812",
+    "user_id": "user004"
+  },
+  {
+    "_id": "chat005",
+    "attachment_type": "",
+    "attachment_url": "",
+    "chatgroup_id": "chatgroup002",
+    "created_at": "2019-11-01 13:05:59",
+    "text": "Thanks!",
+    "user_id": "user003"
+  },
+  {
+    "_id": "chat006",
+    "attachment_type": "",
+    "attachment_url": "",
+    "chatgroup_id": "chatgroup003",
+    "created_at": "2019-12-20 16:45:03",
+    "text": "Hey! Something is odd. Everybody has been released from the jail except Rhonda and she should have been released an hour ago, when everyone else was released. Should we keep waiting for her? Can we get some pizza delivered to us while waiting?",
+    "user_id": "user005"
+  },
+  {
+    "_id": "chat007",
+    "attachment_type": "",
+    "attachment_url": "",
+    "chatgroup_id": "chatgroup003",
+    "created_at": "2019-12-20 16:55:18",
+    "text": "Hmm. We'll see if one of the lawyers can check. Meanwhile we'd appreciate it if you can wait there and check back in 30min. We'll send pizza.",
+    "user_id": "user006"
+  },
+  {
+    "_id": "chat008",
+    "attachment_type": "",
+    "attachment_url": "",
+    "chatgroup_id": "chatgroup003",
+    "created_at": "2019-12-20 18:59:01",
+    "text": "Thanks and will do",
+    "user_id": "user005"
+  },
+  {
+    "_id": "chat009",
+    "attachment_type": "",
+    "attachment_url": "",
+    "chatgroup_id": "chatgroup003",
+    "created_at": "2019-12-20 19:01:29",
+    "text": "Give us names of who were last 2 to be let out so we can ask them re Rhonda",
+    "user_id": "user007"
+  },
+  {
+    "_id": "chat010",
+    "attachment_type": "",
+    "attachment_url": "",
+    "chatgroup_id": "chatgroup004",
+    "created_at": "2019-12-01 17:28:31",
+    "text": "We are not coming back to the church to sleep tonight. New location. So bring your sleeping bag etc with you to the bus.",
+    "user_id": "user008"
+  },
+  {
+    "_id": "chat011",
+    "attachment_type": "",
+    "attachment_url": "",
+    "chatgroup_id": "chatgroup004",
+    "created_at": "2019-12-01 17:41:20",
+    "text": "Got it.",
+    "user_id": "user009"
+  },
+  {
+    "_id": "chat012",
+    "attachment_type": "",
+    "attachment_url": "",
+    "chatgroup_id": "chatgroup005",
+    "created_at": "2019-11-30 07:10:43",
+    "text": "If we have shoulder issues, can we ask the officer to handcuff our hands in front of us?",
+    "user_id": "user10"
+  },
+  {
+    "_id": "chat013",
+    "attachment_type": "",
+    "attachment_url": "",
+    "chatgroup_id": "chatgroup005",
+    "created_at": "2019-11-30 07:11:21",
+    "text": "You can ask but no guarantees",
+    "user_id": "user11"
+  },
+  {
+    "_id": "chat14",
+    "attachment_type": "",
+    "attachment_url": "",
+    "chatgroup_id": "chatgroup005",
+    "created_at": "2019-11-30 07:12:10",
+    "text": "And which detention center should we try to get sent to?",
+    "user_id": "user10"
+  },
+  {
+    "_id": "chat15",
+    "attachment_type": "",
+    "attachment_url": "",
+    "chatgroup_id": "chatgroup005",
+    "created_at": "2019-11-30 07:12:50",
+    "text": "The Dennison Street Center",
+    "user_id": "user11"
+  },
+  {
+    "_id": "chat16",
+    "attachment_type": "",
+    "attachment_url": "",
+    "chatgroup_id": "chatgroup005",
+    "created_at": "2019-11-30 07:12:59",
+    "text": "or the 5th street center",
+    "user_id": "user11"
+  },
+  {
+    "_id": "chat17",
+    "attachment_type": "",
+    "attachment_url": "",
+    "chatgroup_id": "chatgroup006",
+    "created_at": "2019-11-01 12:11:48",
+    "text": "I have a funny feeling James in our group could be an infiltrator. Can you call me. I still have my cell.",
+    "user_id": "user 12"
+  },
+  {
+    "_id": "chat18",
+    "attachment_type": "",
+    "attachment_url": "",
+    "chatgroup_id": "chatgroup006",
+    "created_at": "2019-11-01 12:40:09",
+    "text": "Be discreet and be sure to take a pic of him (don't want to risk tipping him off). Just keep an eye on him.",
+    "user_id": "user 13"
+  },
+  {
+    "_id": "chat19",
+    "attachment_type": "",
+    "attachment_url": "",
+    "chatgroup_id": "chatgroup006",
+    "created_at": "2019-11-01 12:45:32",
+    "text": "Will do!",
+    "user_id": "user 12"
+  }
+]

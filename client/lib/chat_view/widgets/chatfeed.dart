@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:repository/repository.dart';
 
-import 'package:com.winwisely99.app/chat_list/chat_list.dart';
+import 'package:com.winwisely99.app/chat_group/chat_group.dart';
 import 'package:com.winwisely99.app/services/services.dart';
 import 'package:com.winwisely99.app/vendor_plugins/vendor_plugins.dart';
 import '../bloc/bloc.dart';
 import '../bloc/data.dart';
 
 class ChatFeed extends StatelessWidget {
-  const ChatFeed({Key key, @required this.conversationsId}) : super(key: key);
-  final String conversationsId;
+  const ChatFeed({Key key, @required this.chatGroupId}) : super(key: key);
+  final String chatGroupId;
   @override
   Widget build(BuildContext context) {
     return ProxyProvider2<NetworkService, UserService, ChatBloc>(
@@ -21,9 +21,9 @@ class ChatFeed extends StatelessWidget {
           ChatBloc(
         network: network,
         user: user,
-        conversationsId: conversationsId,
+        chatGroupId: chatGroupId,
       ),
-      child: _ChatFeedView(conversationsId: conversationsId),
+      child: _ChatFeedView(chatGroupId: chatGroupId),
     );
   }
 }
@@ -31,22 +31,21 @@ class ChatFeed extends StatelessWidget {
 class _ChatFeedView extends StatelessWidget {
   const _ChatFeedView({
     Key key,
-    @required this.conversationsId,
+    @required this.chatGroupId,
   }) : super(key: key);
 
-  final String conversationsId;
+  final String chatGroupId;
 
   @override
   Widget build(BuildContext context) {
     //repos['conversations'].fetch(Id<Conversations>(conversationsId)).first;
-    final Conversations conversation =
-        hiveBox['conversations'].get(conversationsId);
+    final ChatGroup chatGroup = hiveBox['chatGroup'].get(chatGroupId);
     return Scaffold(
       appBar: AppBar(
         title: ListTile(
-          title: Text(conversation.title),
+          title: Text(chatGroup.title),
           leading: CircleAvatar(
-            backgroundImage: AssetImage(conversation.avatarURL),
+            backgroundImage: AssetImage(chatGroup.avatarUrl),
 /*             NetworkImage(
               conversation.avatarURL
             ), */
@@ -102,7 +101,7 @@ class _ChatFeedView extends StatelessWidget {
                 uid: user.data.id.id,
                 avatar: user.data.avatarURL,
               ),
-              conversationsId: conversationsId,
+              chatGroupId: chatGroupId,
             );
           }),
     );
@@ -110,9 +109,9 @@ class _ChatFeedView extends StatelessWidget {
 }
 
 class ChatFeedBody extends StatefulWidget {
-  const ChatFeedBody({this.user, this.conversationsId});
+  const ChatFeedBody({this.user, this.chatGroupId});
   final ChatUser user;
-  final String conversationsId;
+  final String chatGroupId;
   @override
   _ChatFeedBodyState createState() => _ChatFeedBodyState();
 }
@@ -138,8 +137,7 @@ class _ChatFeedBodyState extends State<ChatFeedBody> {
           ); */
         } else {
           messages.addAll(snapshot.data.values
-              .where((ChatModel chat) =>
-                  chat.conversationsId == widget.conversationsId)
+              .where((ChatModel chat) => chat.chatGroupId == widget.chatGroupId)
               .map((ChatModel chat) => ChatMessage(
                     id: chat.id.id,
                     text: chat.text,
@@ -204,7 +202,7 @@ class _ChatFeedBodyState extends State<ChatFeedBody> {
                 createdAt: DateTime.now().toUtc(),
                 attachmentType: AttachmentType.none,
                 attachmentUrl: '',
-                conversationsId: widget.conversationsId,
+                chatGroupId: widget.chatGroupId,
               ),
             );
           },

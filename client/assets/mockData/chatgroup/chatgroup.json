@@ -1,0 +1,50 @@
+[
+  {
+    "_id": "chatgroup001",
+    "avatar_url": "assets/mockData/chatgroup/1rhxmb9a1ndegKfwzzKkHsdhQaVWs0m-N.png",
+    "member_ids": "user001,user002",
+    "owner_uid": "user001",
+    "timestamp": "2019-10-19 10:10:45",
+    "title": "Exxon entrance blocked"
+  },
+  {
+    "_id": "chatgroup002",
+    "avatar_url": "assets/mockData/chatgroup/1CtTV1DvICQwIOa6rZqDGxG71xbkjcfbS.png",
+    "member_ids": "user003,user004",
+    "owner_uid": "user003",
+    "timestamp": "2019-11-01 13:01:29",
+    "title": "Lawyer's #"
+  },
+  {
+    "_id": "chatgroup003",
+    "avatar_url": "assets/mockData/chatgroup/1JTZbmmimkzwvhadalDjufou6yigzsUmY.png",
+    "member_ids": "user005,user006,user007",
+    "owner_uid": "user005",
+    "timestamp": "2019-12-20 16:45:03",
+    "title": "Where's Rhonda?"
+  },
+  {
+    "_id": "chatgroup004",
+    "avatar_url": "assets/mockData/chatgroup/1d0tsCuB12EH3TTFKsYbWDbg1bGxg0SSZ.png",
+    "member_ids": "user008,user009",
+    "owner_uid": "user008",
+    "timestamp": "2019-12-01 17:28:31",
+    "title": "Change of plans"
+  },
+  {
+    "_id": "chatgroup005",
+    "avatar_url": "assets/mockData/chatgroup/1nT3ofoLUvzW429WINGC8L3TFKLY3necc.png",
+    "member_ids": "user010,user011",
+    "owner_uid": "user010",
+    "timestamp": "2019-11-30 07:11:21",
+    "title": "Shoulder issues and handcuffing"
+  },
+  {
+    "_id": "chatgroup006",
+    "avatar_url": "assets/mockData/chatgroup/126z7VVArjFXQpWU10THzYndULK33vnJ1.jpg",
+    "member_ids": "user012,user013",
+    "owner_uid": "user012",
+    "timestamp": "2019-11-01 12:11:48",
+    "title": "Infiltrator Alert!"
+  }
+]

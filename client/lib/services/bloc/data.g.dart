@@ -20,7 +20,7 @@ class UserAdapter extends TypeAdapter<User> {
       email: fields[3] as String,
       displayName: fields[4] as String,
       avatarURL: fields[5] as String,
-      conversationIds: (fields[6] as List)?.cast<String>(),
+      chatGroupIds: (fields[6] as List)?.cast<String>(),
     );
   }
 
@@ -41,7 +41,7 @@ class UserAdapter extends TypeAdapter<User> {
       ..writeByte(5)
       ..write(obj.avatarURL)
       ..writeByte(6)
-      ..write(obj.conversationIds);
+      ..write(obj.chatGroupIds);
   }
 }
 

@@ -4,12 +4,12 @@ import 'package:repository/repository.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'package:com.winwisely99.app/services/services.dart';
-import 'package:com.winwisely99.app/chat_list/chat_list.dart';
+import 'package:com.winwisely99.app/chat_group/chat_group.dart';
 
 import 'data.dart';
 
 class ChatBloc {
-  ChatBloc({@required this.network, @required this.user, this.conversationsId})
+  ChatBloc({@required this.network, @required this.user, this.chatGroupId})
       : assert(network != null),
         assert(user != null) {
     _chatFetcher.stream
@@ -20,7 +20,7 @@ class ChatBloc {
 
   final NetworkService network;
   final UserService user;
-  final String conversationsId;
+  final String chatGroupId;
 
 // Streams for building chatscreen
   final PublishSubject<ChatModel> _chatFetcher = PublishSubject<ChatModel>();
@@ -61,8 +61,7 @@ class ChatBloc {
   }
 
   Future<bool> _addToStream(ChatModel chatModel) async {
-    if (chatModel.conversationsId == conversationsId ||
-        conversationsId == null) {
+    if (chatModel.chatGroupId == chatGroupId || chatGroupId == null) {
       final User _user = await user.getUser(chatModel.uid);
       _addChatToScreen(
         ChatModel(
@@ -73,20 +72,20 @@ class ChatBloc {
           createdAt: chatModel.createdAt,
           attachmentType: chatModel.attachmentType,
           attachmentUrl: chatModel.attachmentUrl,
-          conversationsId: chatModel.conversationsId,
+          chatGroupId: chatModel.chatGroupId,
         ),
       );
     }
     return true;
   }
 
-  Stream<List<ChatModel>> getChats(Id<Conversations> id) async* {
+  Stream<List<ChatModel>> getChats(Id<ChatGroup> id) async* {
     List<ChatModel> getCurrent() {
       return <ChatModel>[
         // ignore: sdk_version_ui_as_code
         for (MapEntry<dynamic, ChatModel> entry
             in hiveBox['chats'].toMap().entries)
-          entry.value.conversationsId == id.id ? entry.value : null
+          entry.value.chatGroupId == id.id ? entry.value : null
       ];
     }
 
@@ -103,7 +102,7 @@ class ChatBloc {
 
   Future<User> getCurrentUser() async {
     // TODO(Vineeth): Remove this logic later once authentication is complete
-    return user.getUser(const Id<User>('A'));
+    return user.getUser(const Id<User>('user001'));
   }
 
   Future<dynamic> sendChat(ChatModel chat) async {

@@ -1,8 +1,6 @@
-import 'package:com.winwisely99.app/chat_list/bloc/data.dart';
 import 'package:meta/meta.dart';
 import 'package:repository/repository.dart';
 
-import 'package:com.winwisely99.app/chat_list/chat_list.dart';
 import 'package:com.winwisely99.app/vendor_plugins/vendor_plugins.dart';
 import '../bloc/data.dart';
 import '../services.dart';
@@ -45,10 +43,17 @@ class _UserDownloader extends Repository<User> {
       lastName: data['lastName'],
       email: data['email'],
       displayName: data['displayName'],
-      avatarURL: data['avatarURL'],
-      conversationIds: <String>[
-        for (dynamic item in data['conversationIds']) item.toString()
+      avatarURL: data['avatar_url'],
+      chatGroupIds: <String>[
+        for (dynamic item in _getMemberIDs(data['chatgroup_ids']))
+          item.toString()
       ],
     );
+  }
+
+  List<String> _getMemberIDs(String data) {
+    final List<String> _list = data == null ? <String>[] : data.split(',');
+    _list.removeWhere((String item) => item.isEmpty);
+    return _list;
   }
 }

@@ -38,7 +38,7 @@ class ChatModel implements Entity {
     @required this.attachmentType,
     this.attachmentUrl,
     this.user,
-    this.conversationsId,
+    this.chatGroupId,
   })  : assert(id != null),
         assert(uid != null),
         assert(attachmentType != null),
@@ -66,7 +66,7 @@ class ChatModel implements Entity {
   final String attachmentUrl;
 
   @HiveField(7)
-  final String conversationsId;
+  final String chatGroupId;
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -76,7 +76,7 @@ class ChatModel implements Entity {
       'createdAt': createdAt,
       'attachmentType': attachmentType,
       'attachmentUrl': attachmentUrl,
-      'conversationsId': conversationsId,
+      'chatGroupId': chatGroupId,
     };
   }
 }

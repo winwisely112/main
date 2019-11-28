@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 // TODO(FlutterDevelopers): Import modules here
-import 'package:com.winwisely99.app/chat_list/chat_list.dart';
+import 'package:com.winwisely99.app/chat_group/chat_group.dart';
 import 'package:com.winwisely99.app/chat_view/chat_view.dart';
 import 'package:com.winwisely99.app/enrollment/enrollment.dart';
 import 'package:com.winwisely99.app/news/news.dart';
@@ -44,7 +44,7 @@ Route<dynamic> routes(RouteSettings settings) {
     case '/chatgroup':
       _route = MaterialPageRoute<dynamic>(
         builder: (BuildContext context) {
-          return ConversationsFeed(
+          return ChatGroupFeed(
             key: ValueKey<String>(settings.name),
           );
         },
@@ -150,7 +150,7 @@ Route<dynamic> routes(RouteSettings settings) {
             builder: (BuildContext context) {
               return ChatFeed(
                 key: ValueKey<String>(settings.name),
-                conversationsId: info[2],
+                chatGroupId: info[2],
                 //         user: ,
               );
             },

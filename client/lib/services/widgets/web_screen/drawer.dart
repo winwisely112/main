@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:com.winwisely99.app/services/services.dart';
+
 import './drawer_list_tile.dart';
 
 class LeftDrawer extends StatelessWidget {
-  const LeftDrawer({this.index});
+  const LeftDrawer({@required this.index});
   //final void Function(int index) onItemTap;
   final int index;
-
   @override
   Widget build(BuildContext context) {
+    final AuthUserService _user = Provider.of<AuthUserService>(context);
+
     final List<Widget> _topList = <Widget>[
       IconButton(
         icon: Icon(
@@ -43,8 +47,34 @@ class LeftDrawer extends StatelessWidget {
       ),
     ];
     final List<Widget> _bottomList = <Widget>[
-      const CircleAvatar(
-        backgroundImage: AssetImage('assets/mockData/users/A.jpg'),
+      FutureBuilder<User>(
+        future: _user.globalUser,
+        builder: (BuildContext context, AsyncSnapshot<User> snapshot) {
+          if (!snapshot.hasData) {
+            return const CircleAvatar(
+              backgroundImage: AssetImage('assets/commons/avatar.jpg'),
+            );
+          }
+          if (snapshot.data == null) {
+            return const CircleAvatar(
+              backgroundImage: AssetImage('assets/commons/avatar.jpg'),
+            );
+          }
+          if (snapshot.data.avatarURL == null) {
+            return const CircleAvatar(
+              backgroundImage: AssetImage('assets/commons/avatar.jpg'),
+            );
+          }
+          if (snapshot.data.avatarURL.isEmpty) {
+            return const CircleAvatar(
+              backgroundImage: AssetImage('assets/commons/avatar.jpg'),
+            );
+          }
+
+          return CircleAvatar(
+            backgroundImage: AssetImage(snapshot.data.avatarURL),
+          );
+        },
       ),
       IconButton(
         icon: Icon(

@@ -26,12 +26,13 @@ class WebNewsFeed extends StatelessWidget {
         network: network,
         user: user,
       ),
-      child: _NewsFeedBody(),
+      child: const _NewsFeedBody(),
     );
   }
 }
 
 class _NewsFeedBody extends StatelessWidget {
+  const _NewsFeedBody({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<News>>(

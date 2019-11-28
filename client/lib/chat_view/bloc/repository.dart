@@ -21,12 +21,12 @@ class ChatRepository extends CollectionFetcher<ChatModel> {
     final List<Map<String, dynamic>> _dataList = <Map<String, dynamic>>[];
     final User _globalUser = await globalUser.globalUser;
 
-    for (String conversationsId in _globalUser.conversationIds) {
+    for (String chatGroupId in _globalUser.chatGroupIds) {
       _dataList.addAll(
         await network.getAllItemForId(
           path: 'chats',
-          field: 'conversationsId',
-          id: conversationsId,
+          field: 'chatgroup_id',
+          id: chatGroupId,
         ),
       );
     }
@@ -37,12 +37,12 @@ class ChatRepository extends CollectionFetcher<ChatModel> {
         ChatModel(
           id: Id<ChatModel>(data['_id']),
           text: data['text'],
-          uid: Id<User>(data['uid']),
-          user: await user.getUser(Id<User>(data['uid'])),
-          createdAt: DateTime.parse(data['createdAt']),
-          attachmentType: getAttachmentType(data['attachmentType']),
-          attachmentUrl: data['attachmentUrl'],
-          conversationsId: data['conversationsId'],
+          uid: Id<User>(data['user_id']),
+          user: await user.getUser(Id<User>(data['user_id'])),
+          createdAt: DateTime.parse(data['created_at']),
+          attachmentType: getAttachmentType(data['attachment_type']),
+          attachmentUrl: data['attachment_url'],
+          chatGroupId: data['chatgroup_id'],
         ),
     ];
   }

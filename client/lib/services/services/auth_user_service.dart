@@ -38,7 +38,8 @@ class AuthUserService {
   Stream<User> get globalUserStream => _meSubject.stream;
   //User get globalUser => _meSubject.value;
   // TODO(Vineeth): Change once authentication is setup
-  Future<User> get globalUser async => await user.getUser(const Id<User>('A'));
+  Future<User> get globalUser async =>
+      await user.getUser(const Id<User>('user001'));
   void dispose() => _meSubject.close();
 
   Future<void> _updateUser(String token) async {

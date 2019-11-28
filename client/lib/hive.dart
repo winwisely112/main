@@ -2,7 +2,8 @@ import 'dart:io' show Directory;
 import 'package:flutter/foundation.dart';
 // TODO(FlutterDevelopers): Import modules here
 import 'package:com.winwisely99.app/chat_view/chat_view.dart';
-import 'package:com.winwisely99.app/chat_list/chat_list.dart';
+import 'package:com.winwisely99.app/chat_group/chat_group.dart';
+import 'package:com.winwisely99.app/enrollment/enrollment.dart';
 import 'package:com.winwisely99.app/news/news.dart';
 import 'package:com.winwisely99.app/services/services.dart';
 import 'package:hive/hive.dart';
@@ -39,10 +40,12 @@ Future<void> initializeHive() async {
     // News Module
     ..registerAdapter(IdAdapter<News>(), 2)
     // conversations module
-    ..registerAdapter(IdAdapter<Conversations>(), 3)
+    ..registerAdapter(IdAdapter<ChatGroup>(), 3)
     // chat_view module
     ..registerAdapter(IdAdapter<AttachmentType>(), 4)
     ..registerAdapter(IdAdapter<ChatModel>(), 5)
+    // Campaign
+    ..registerAdapter(IdAdapter<Campaign>(), 13)
     // TODO(FlutterDevelopers): Register the adapter generated in data.g here
     // with a unique typeID. Do not change the typeID.
     //
@@ -50,12 +53,14 @@ Future<void> initializeHive() async {
     ..registerAdapter(UserAdapter(), 6)
     ..registerAdapter(StorageDataAdapter(), 7)
     // conversations module
-    ..registerAdapter(ConversationsAdapter(), 9)
+    ..registerAdapter(ChatGroupAdapter(), 9)
     // chat_view module
     ..registerAdapter(AttachmentTypeAdapter(), 10)
     ..registerAdapter(ChatModelAdapter(), 11)
     // News Module
-    ..registerAdapter(NewsAdapter(), 8);
+    ..registerAdapter(NewsAdapter(), 8)
+    // Campaign
+    ..registerAdapter(CampaignAdapter(), 12);
 }
 
 class IdAdapter<T> extends TypeAdapter<Id<T>> {

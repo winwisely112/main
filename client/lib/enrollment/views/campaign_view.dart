@@ -1,16 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import '../data/mockData/campaigns.dart';
+import 'package:com.winwisely99.app/services/services.dart';
+
+import '../bloc/bloc.dart';
+import '../bloc/data.dart';
+//import '../data/mockData/campaigns.dart';
 
 class CampaignView extends StatelessWidget {
-  CampaignView({Key key}) : super(key: key);
-  final List<Campaign> campaigns = [
-    Campaign('XR'),
-    Campaign('Fridays for future'),
-    Campaign('Greta'),
-    Campaign('Campain 4'),
-    Campaign('Campain 5'),
-  ];
+  const CampaignView({Key key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return ProxyProvider<NetworkService, CampaignBloc>(
+      builder: (
+        BuildContext _,
+        NetworkService network,
+        CampaignBloc __,
+      ) =>
+          CampaignBloc(
+        network: network,
+      ),
+      child: _CampaignView(),
+    );
+  }
+}
+
+class _CampaignView extends StatelessWidget {
+  const _CampaignView({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +35,33 @@ class CampaignView extends StatelessWidget {
         title: const Text('Select Campaign'),
         centerTitle: true,
       ),
-      body: ListView.builder(
-        itemCount: campaigns.length,
-        itemBuilder: (BuildContext context, int index) {
-          return _buildExpando(campaigns[index], context);
+      body: StreamBuilder<List<Campaign>>(
+        stream: Provider.of<CampaignBloc>(context).getCampaign(),
+        builder:
+            (BuildContext context, AsyncSnapshot<List<Campaign>> snapshot) {
+          if (snapshot.hasError) {
+            return Center(child: Text('Error occurred: ${snapshot.error}'));
+          } else if (!snapshot.hasData) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          return _CampaignViewBody(campaigns: snapshot.data);
         },
       ),
+    );
+  }
+}
+
+class _CampaignViewBody extends StatelessWidget {
+  const _CampaignViewBody({Key key, this.campaigns}) : super(key: key);
+  final List<Campaign> campaigns;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: campaigns.length,
+      itemBuilder: (BuildContext context, int index) {
+        return _buildExpando(campaigns[index], context);
+      },
     );
   }
 
@@ -41,7 +78,7 @@ class CampaignView extends StatelessWidget {
               title: Text(campaign.name),
               children: <Widget>[
                 ListTile(
-                  title: Text(campaign.videoUrl),
+                  title: Image.asset(campaign.logoUrl),
                 )
               ],
             ),

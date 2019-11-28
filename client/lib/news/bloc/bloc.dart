@@ -20,7 +20,6 @@ class NewsBloc {
         );
   final NetworkService network;
   final UserService user;
-
   final Repository<News> _news;
   Stream<List<News>> getNews() => _news.fetchAllItems();
   Future<News> getNewsId(String id) => _news.fetch(Id<News>(id)).first;
@@ -45,9 +44,9 @@ class _NewsDownloader extends CollectionFetcher<News> {
           id: Id<News>(data['_id']),
           title: data['title'],
           text: data['text'],
-          thumbnailUrl: data['thumbnailUrl'],
+          thumbnailUrl: data['thumbnail_url'],
           timestamp: DateTime.parse(data['timestamp']),
-          createdBy: await user.getUser(Id<User>(data['uid'])),
+          createdBy: await user.getUser(Id<User>(data['user_id'])),
         ),
     ];
   }

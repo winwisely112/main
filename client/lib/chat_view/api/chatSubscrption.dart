@@ -38,7 +38,7 @@ Future<dynamic> chatReceivingIsolate(SendPort portReceive) async {
               createdAt: message.createdAt.toDateTime(),
               attachmentType: _getAttachmentType(message.attachmentType),
               attachmentUrl: message.attachmentUrl,
-              conversationsId: message.conversationsId),
+              chatGroupId: message.conversationsId),
           status: MessageStatus.RECIEVED,
           messageType: MessageType.CHAT,
         ));
@@ -123,7 +123,7 @@ Future<dynamic> chatSendingIsolate(SendPort portSendStatus) async {
           ..attachmentType =
               _convertAttachmentType(message.message.attachmentType)
           ..attachmentUrl = message.message.attachmentUrl
-          ..conversationsId = message.message.conversationsId;
+          ..conversationsId = message.message.chatGroupId;
         await grpc.ChatServiceClient(client).send(request);
         // sent successfully
         message.status = MessageStatus.SENT;

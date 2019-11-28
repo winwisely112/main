@@ -67,7 +67,7 @@ class ChatModelAdapter extends TypeAdapter<ChatModel> {
       attachmentType: fields[5] as AttachmentType,
       attachmentUrl: fields[6] as String,
       user: fields[3] as User,
-      conversationsId: fields[7] as String,
+      chatGroupId: fields[7] as String,
     );
   }
 
@@ -90,6 +90,6 @@ class ChatModelAdapter extends TypeAdapter<ChatModel> {
       ..writeByte(6)
       ..write(obj.attachmentUrl)
       ..writeByte(7)
-      ..write(obj.conversationsId);
+      ..write(obj.chatGroupId);
   }
 }

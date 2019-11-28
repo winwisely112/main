@@ -55,10 +55,12 @@ flutter:
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/mockData/chats/
-    - assets/mockData/conversations/
+    - assets/commons/
+    - assets/mockData/chat/
+    - assets/mockData/chatgroup/
     - assets/mockData/news/
     - assets/mockData/users/
+    - assets/mockData/campaign/
     - assets/icon/
   #  - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see

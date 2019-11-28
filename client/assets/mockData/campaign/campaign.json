@@ -1,0 +1,47 @@
+[
+  {
+    "_id": "001",
+    "crg_ids_many": "crg002,crg005,crg006,crg010",
+    "crg_quantity_many": "500,5,50,80",
+    "description": "Hunger Strike for People and Planet: This action aims to highlight how millions are already living through the hell of our #PlanetaryCrisis. Migrant justice and the rights of indigenous peoples must be put at the heart of efforts to end the climate and ecological breakdown.",
+    "logo_url": "assets/mockData/campaign/1gvysI1R4sey5QThm2RpdpqVY4AdmjRjy.png",
+    "name": "Extinction Rebellion001",
+    "other": "Parliament Square, London, UK. 18 Nov at 09:30 – 25 Nov at 14:00 UTC"
+  },
+  {
+    "_id": "002",
+    "crg_ids_many": "crg002,crg005,crg016,crg010",
+    "crg_quantity_many": "1000,5,2,6",
+    "description": "Local Climate Emergency Protest: Every Friday 'Extinction Rebellion Northern Sydney' host a local protest. We need people to join the rebellion, to demand change from the government.",
+    "logo_url": "assets/mockData/campaign/1gvysI1R4sey5QThm2RpdpqVY4AdmjRjy.png",
+    "name": "Extinction Rebellion002",
+    "other": "Hornsby Westfield Fountain, Sydney, AUS. 20 Dec at 15:30 – 17:00 UTC+11"
+  },
+  {
+    "_id": "003",
+    "crg_ids_many": "crg002,crg005,crg016,crg010,crg020",
+    "crg_quantity_many": "5000,3,3,6,1000",
+    "description": "Strike for the Climate: We will be meeting in-front of Orlando's City Hall, holding handmade recycled signs, hearing speeches from environmental leaders, peacefully marching through downtown Orlando, and convening with an after party event TBD to encourage further climate action conversations for attendees.",
+    "logo_url": "assets/mockData/campaign/1ImebXG1Y1_E_Px1og_BhAEjAUCIASyPo.jpg",
+    "name": "Fridays for Future003",
+    "other": "City Hall, Orlando, USA. 6 Dec at 12:00 – 15:00 EST"
+  },
+  {
+    "_id": "004",
+    "crg_ids_many": "crg002,crg005,crg016,crg010",
+    "crg_quantity_many": "10,000,8,5,7,2000",
+    "description": "Don't Shop. Strike! We will have a march through Downtown Santa Monica, a die-in, live performances, and networking time. Our message: DIVEST from fossil fuels and destroying nature \u0026 INVEST in restoring nature, funding nature-based solutions and renewable energy, a just transition, and protecting Indigenous and frontline communities.",
+    "logo_url": "assets/mockData/campaign/1ImebXG1Y1_E_Px1og_BhAEjAUCIASyPo.jpg",
+    "name": "Fridays for Future004",
+    "other": "Downtown Santa Monica, USA. 29 Nov,\nat 12:00 – 15:00 PST"
+  },
+  {
+    "_id": "005",
+    "crg_ids_many": "crg002,crg005,crg016,crg010,crg013",
+    "crg_quantity_many": "4000,6,4,7,500,4",
+    "description": "Stand up to the Williams Pipeline \u0026 Con Edison: Con Ed has publicly supported the Williams Pipeline and just like National Grid, want to lock us into decades of fracked gas use by expanding pipelines in the Bronx, Queens and Manhattan. And they want to use our money to do it!\n\nAnd what’s even more infuriating is that New York State and New York City have signed off on their climate disaster of a plan. We need to be there to let them know what the people say: “No rate hikes, no fracked gas”",
+    "logo_url": "assets/mockData/campaign/1wh9M-r-OnWR9eNP0Ytz1Lk0X2WV41E3i.png",
+    "name": "350005",
+    "other": "Church Street, New York City, USA. 19 Nov at 10:00 – 12:00 EST"
+  }
+]

@@ -104,10 +104,11 @@ class NetworkService {
   }
 
   Future<void> _loadMockData() async {
-    mockData['chats'] = await loadFile('chats');
-    mockData['conversations'] = await loadFile('conversations');
-    mockData['news'] = await loadFile('news');
     mockData['users'] = await loadFile('users');
+    mockData['chats'] = await loadFile('chat');
+    mockData['chatgroup'] = await loadFile('chatgroup');
+    mockData['news'] = await loadFile('news');
+    mockData['campaign'] = await loadFile('campaign');
     networkServiceReadyCompleter.complete();
   }
 

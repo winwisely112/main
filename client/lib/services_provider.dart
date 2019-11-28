@@ -4,7 +4,8 @@ import 'package:provider/provider.dart';
 
 // TODO(FlutterDevelopers): Import modules here
 import 'package:com.winwisely99.app/chat_view/chat_view.dart';
-import 'package:com.winwisely99.app/chat_list/chat_list.dart';
+import 'package:com.winwisely99.app/chat_group/chat_group.dart';
+import 'package:com.winwisely99.app/enrollment/enrollment.dart';
 import 'package:com.winwisely99.app/news/news.dart';
 import 'package:com.winwisely99.app/services/services.dart';
 import 'app.dart';
@@ -23,8 +24,8 @@ class ServicesProvider extends StatelessWidget {
             hiveBox['chats'] = await Hive.openBox<ChatModel>('chats');
             hiveBox['news'] = await Hive.openBox<News>('news');
             hiveBox['users'] = await Hive.openBox<User>('users');
-            hiveBox['conversations'] =
-                await Hive.openBox<Conversations>('conversations');
+            hiveBox['chatgroup'] = await Hive.openBox<ChatGroup>('chatgroup');
+            hiveBox['campaign'] = await Hive.openBox<Campaign>('campaign');
             final StorageService storage = StorageService();
             // TODO(Vineeth): Removed await for now. Need to fix this later
             storage.initialize();
@@ -88,16 +89,16 @@ class ServicesProvider extends StatelessWidget {
                   AuthUserService(storage: storage, user: user);
               if (_auth != null) {
                 // this order is important
-                repos['conversations'] = ItemRepository<Conversations>(
+                repos['chatgroup'] = ItemRepository<ChatGroup>(
                   user: user,
                   network: network,
                   globalUser: _auth,
-                  source: ConversationsRepository(
+                  source: ChatGroupRepository(
                     user: user,
                     network: network,
                     globalUser: _auth,
                   ),
-                  cache: 'conversations',
+                  cache: 'chatgroup',
                 );
                 repos['chats'] = ItemRepository<ChatModel>(
                   user: user,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:com.winwisely99.app/chat_list/chat_list.dart';
+import 'package:com.winwisely99.app/chat_group/chat_group.dart';
 import 'package:com.winwisely99.app/news/news.dart';
 
 class MobileHomeScreen extends StatefulWidget {
@@ -15,7 +15,7 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
     NewsFeed(
       key: ValueKey<String>('/news'),
     ),
-    ConversationsFeed(
+    ChatGroupFeed(
       key: ValueKey<String>('/conversations'),
     ),
     Text(

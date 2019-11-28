@@ -1,3 +1,4 @@
+export 'bloc/data.dart';
 export 'views/campaign_details_view.dart';
 export 'views/campaign_view.dart';
 export 'views/general_campaign_view.dart';
