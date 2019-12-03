@@ -2,12 +2,31 @@ import 'package:flutter/material.dart';
 
 import 'package:com.winwisely99.app/services/services.dart';
 
-class UserInfoView extends StatelessWidget {
+class UserInfoView extends StatefulWidget {
   UserInfoView({Key key}) : super(key: key);
+
+  @override
+  _UserInfoViewState createState() => _UserInfoViewState();
+}
+
+class _UserInfoViewState extends State<UserInfoView> {
   final countries = ['Germany', 'Australia', 'Pakistan', 'USA'];
+
   final cities = ['Berlin', 'Newyork', 'Vancouver', 'Shanghai'];
+
   final issues = ['Student Debt', 'Health Care', 'Climate'];
+
   final campaings = ['XR', 'Fridays for future'];
+  final Map<String, String> dropdownValue = {};
+  @override
+  void initState() {
+    // TODO: implement initState
+    dropdownValue['countries'] = countries[0];
+    dropdownValue['cities'] = cities[0];
+    dropdownValue['issues'] = issues[0];
+    dropdownValue['campaings'] = campaings[0];
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +48,9 @@ class UserInfoView extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 32),
                 child: Column(
                   children: <Widget>[
-                    _select(countries, 'Select Country'),
+                    _select(countries, 'Select Country', 'countries'),
                     Utils.verticalMargin(10),
-                    _select(cities, 'Select City'),
+                    _select(cities, 'Select City', 'cities'),
                     Utils.verticalMargin(10),
                     TextFormField(
                       keyboardType: TextInputType.number,
@@ -66,13 +85,14 @@ class UserInfoView extends StatelessWidget {
               Utils.verticalMargin(16),
               Padding(
                   padding: EdgeInsets.symmetric(horizontal: 32),
-                  child: _select(issues, 'Your Issue')),
+                  child: _select(issues, 'Your Issue', 'issues')),
               Utils.verticalMargin(32),
               Text('4. Any Campaign Affiliations ?'),
               Utils.verticalMargin(16),
               Padding(
                   padding: EdgeInsets.symmetric(horizontal: 32),
-                  child: _select(campaings, 'Select Affiliation ')),
+                  child:
+                      _select(campaings, 'Select Affiliation ', 'campaings')),
               Utils.verticalMargin(32),
               Container(
                 alignment: Alignment.centerRight,
@@ -91,10 +111,10 @@ class UserInfoView extends StatelessWidget {
     );
   }
 
-  DropdownButton _select(List<String> items, String hint,
-      [IconData iconData = Icons.arrow_drop_down]) {
+  DropdownButton _select(List<String> items, String hint, String item) {
     return DropdownButton<String>(
-      icon: Icon(iconData),
+      value: dropdownValue[item],
+      icon: Icon(Icons.arrow_drop_down),
       iconSize: 24,
       elevation: 16,
       isExpanded: true,
@@ -103,7 +123,11 @@ class UserInfoView extends StatelessWidget {
         height: 2,
         color: Colors.deepPurpleAccent,
       ),
-      onChanged: (String newValue) {},
+      onChanged: (String newValue) {
+        setState(() {
+          dropdownValue[item] = newValue;
+        });
+      },
       items: items.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
