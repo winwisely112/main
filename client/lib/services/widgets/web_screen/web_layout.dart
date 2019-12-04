@@ -5,9 +5,11 @@ import 'package:responsive_scaffold/responsive_scaffold.dart';
 import '../profile_info.dart';
 import './drawer.dart';
 
-class WebLayoutScaffold extends StatelessWidget {
-  const WebLayoutScaffold({Key key, this.child}) : super(key: key);
+class HomeScaffold extends StatelessWidget {
+  const HomeScaffold({Key key, this.child, this.bottomNavigationBar})
+      : super(key: key);
   final Widget child;
+  final Widget bottomNavigationBar;
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
@@ -41,6 +43,7 @@ class WebLayoutScaffold extends StatelessWidget {
         ),
       ),
       body: child,
+      bottomNavigationBar: bottomNavigationBar,
     );
   }
 }

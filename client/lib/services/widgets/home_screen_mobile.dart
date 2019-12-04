@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:com.winwisely99.app/chat_group/chat_group.dart';
 import 'package:com.winwisely99.app/news/news.dart';
 
+import './web_screen/web_layout.dart';
+
 class MobileHomeScreen extends StatefulWidget {
   @override
   _MobileHomeScreenState createState() => _MobileHomeScreenState();
@@ -32,19 +34,8 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Winwisely99'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.settings),
-            onPressed: () {
-              Navigator.of(context).pushNamed('/settings');
-            },
-          )
-        ],
-      ),
-      body: Center(
+    return HomeScaffold(
+      child: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(

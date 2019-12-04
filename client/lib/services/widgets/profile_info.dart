@@ -86,6 +86,14 @@ class ProfileInfo extends StatelessWidget {
                             color: Colors.white,
                           ),
                           Tile(
+                            iconData: Icons.settings,
+                            title: 'Settings',
+                            onTap: () {
+                              Navigator.of(context).pop();
+                              Navigator.of(context).pushNamed('/settings');
+                            },
+                          ),
+                          Tile(
                             iconData: Icons.exit_to_app,
                             title: 'Sign Out',
                             onTap: () {
@@ -140,9 +148,9 @@ class Tile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        const SizedBox(
-          height: 8,
-        ),
+        //const SizedBox(
+        //  height: 8,
+        //),
         Container(
           child: Material(
             color: Colors.transparent,

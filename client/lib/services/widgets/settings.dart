@@ -1,9 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:responsive_scaffold/responsive_scaffold.dart';
+
 import '../bloc/app_config.dart';
 import '../widgets/web_screen/drawer.dart';
+import '../widgets/web_screen/web_layout.dart';
 
 class Settings extends StatelessWidget {
   const Settings({Key key}) : super(key: key);
@@ -20,7 +21,6 @@ class Settings extends StatelessWidget {
         ),
         body: const _Settings(),
       );
-      ;
     }
   }
 }
@@ -30,18 +30,8 @@ class _WebSettings extends StatelessWidget {
   final Widget child;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: CircleAvatar(
-            backgroundColor: Colors.transparent,
-            backgroundImage: AssetImage('assets/icon/icon-old.png'),
-          ),
-        ),
-        title: const Text('Winwisely99'),
-      ),
-      body: Flex(
+    return HomeScaffold(
+      child: Flex(
         direction: Axis.horizontal,
         children: <Widget>[
           const Flexible(

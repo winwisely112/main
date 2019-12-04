@@ -35,7 +35,7 @@ class _NewsFeedBody extends StatelessWidget {
   const _NewsFeedBody({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return WebLayoutScaffold(
+    return HomeScaffold(
       child: StreamBuilder<List<News>>(
         stream: Provider.of<NewsBloc>(context).getNews(),
         builder: (BuildContext context, AsyncSnapshot<List<News>> snapshot) {

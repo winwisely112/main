@@ -48,7 +48,7 @@ class _ChatGroupFeedBody extends StatefulWidget {
 class __ChatGroupFeedBodyState extends State<_ChatGroupFeedBody> {
   @override
   Widget build(BuildContext context) {
-    return WebLayoutScaffold(
+    return HomeScaffold(
       child: StreamBuilder<Map<int, ChatGroup>>(
           stream: Provider.of<ChatGroupBloc>(context).chatList,
           builder: (BuildContext context,
