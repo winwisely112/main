@@ -35,37 +35,13 @@ class _NewsFeedBody extends StatelessWidget {
   const _NewsFeedBody({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<List<News>>(
-      stream: Provider.of<NewsBloc>(context).getNews(),
-      builder: (BuildContext context, AsyncSnapshot<List<News>> snapshot) {
-/*         final Map<DateTime, List<News>> news = groupBy<News, DateTime>(
-          snapshot.data,
-          (News h) => h.timestamp,
-        );
-        final List<DateTime> dates = news.keys.toList()
-          ..sort((DateTime a, DateTime b) => b.compareTo(a)); */
-        return Scaffold(
-          appBar: AppBar(
-            leading: const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: CircleAvatar(
-                backgroundColor: Colors.transparent,
-                backgroundImage: AssetImage('assets/icon/icon-old.png'),
-              ),
-            ),
-            title: const Text('Winwisely99'),
-          ),
-          body: ResponsiveListScaffold.builder(
-            slivers: <Widget>[
-              SliverToBoxAdapter(
-                child: ListTile(
-                  title: Text(
-                    'News',
-                    style: Theme.of(context).textTheme.title,
-                  ),
-                ),
-              ),
-            ],
+    return WebLayoutScaffold(
+      child: StreamBuilder<List<News>>(
+        stream: Provider.of<NewsBloc>(context).getNews(),
+        builder: (BuildContext context, AsyncSnapshot<List<News>> snapshot) {
+          return WebLayoutBody(
+            drawerSelection: 0,
+            title: 'News',
             detailBuilder: (
               BuildContext context,
               int index,
@@ -79,26 +55,13 @@ class _NewsFeedBody extends StatelessWidget {
                 ),
               );
             },
-            //drawer: AppDrawer(),
-            tabletSideMenu: (kIsWeb ||
-                    debugDefaultTargetPlatformOverride ==
-                        TargetPlatform.fuchsia)
-                ? const Flexible(
-                    flex: 0,
-                    child: LeftDrawer(index: 0),
-                    fit: FlexFit.tight,
-                  )
-                : null,
-            tabletFlexListView: 4,
-            nullItems: const Center(child: CircularProgressIndicator()),
-            emptyItems: const Center(child: CircularProgressIndicator()),
             itemCount: snapshot.hasData ? snapshot.data.length : 0,
             itemBuilder: (BuildContext context, int index) {
               return NewsTile(news: snapshot.data[index]);
             },
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

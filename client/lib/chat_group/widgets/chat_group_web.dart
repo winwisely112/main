@@ -48,109 +48,63 @@ class _ChatGroupFeedBody extends StatefulWidget {
 class __ChatGroupFeedBodyState extends State<_ChatGroupFeedBody> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: CircleAvatar(
-            backgroundColor: Colors.transparent,
-            backgroundImage: AssetImage('assets/icon/icon-old.png'),
-          ),
-        ),
-        title: const Text('Winwisely99'),
-      ),
-      body: StreamBuilder<Map<int, ChatGroup>>(
-        stream: Provider.of<ChatGroupBloc>(context).chatList,
-        builder: (BuildContext context,
-            AsyncSnapshot<Map<int, ChatGroup>> snapshot) {
-/*           if (snapshot.hasError) {
-            return Center(child: Text('Error occurred: ${snapshot.error}'));
-          } else if (!snapshot.hasData) {
-            return const Center(child: CircularProgressIndicator());
-          } */
-          return ResponsiveListScaffold.builder(
-            slivers: <Widget>[
-              SliverToBoxAdapter(
-                child: ListTile(
-                  title: Text(
-                    'Groups',
-                    style: Theme.of(context).textTheme.title,
-                  ),
-                ),
-              ),
-            ],
-            detailBuilder: (
-              BuildContext context,
-              int index,
-              bool flag,
-            ) {
-              return DetailsScreen(
-                body: Material(
-                  color: Colors.white,
-                  elevation: 8.0,
-                  child: FutureBuilder<User>(
-                      future: Provider.of<ChatBloc>(context).getCurrentUser(),
-                      builder:
-                          (BuildContext context, AsyncSnapshot<User> user) {
-                        if (!user.hasData) {
-                          return Center(
-                            child: CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                Theme.of(context).primaryColor,
+    return WebLayoutScaffold(
+      child: StreamBuilder<Map<int, ChatGroup>>(
+          stream: Provider.of<ChatGroupBloc>(context).chatList,
+          builder: (BuildContext context,
+              AsyncSnapshot<Map<int, ChatGroup>> snapshot) {
+            return WebLayoutBody(
+              drawerSelection: 1,
+              title: 'Group',
+              detailBuilder: (
+                BuildContext context,
+                int index,
+                bool flag,
+              ) {
+                return DetailsScreen(
+                  body: Material(
+                    color: Colors.white,
+                    elevation: 8.0,
+                    child: FutureBuilder<User>(
+                        future: Provider.of<ChatBloc>(context).getCurrentUser(),
+                        builder:
+                            (BuildContext context, AsyncSnapshot<User> user) {
+                          if (!user.hasData) {
+                            return Center(
+                              child: CircularProgressIndicator(
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  Theme.of(context).primaryColor,
+                                ),
                               ),
+                            );
+                          }
+                          return ChatFeedBody(
+                            user: ChatUser(
+                              name: user.data.name,
+                              uid: user.data.id.id,
+                              avatar: user.data.avatarURL,
                             ),
+                            chatGroupId: snapshot.data[index].id.id,
                           );
-                        }
-                        return ChatFeedBody(
-                          user: ChatUser(
-                            name: user.data.name,
-                            uid: user.data.id.id,
-                            avatar: user.data.avatarURL,
-                          ),
-                          chatGroupId: snapshot.data[index].id.id,
-                        );
-                      }),
-                ),
-              );
-            },
-            //drawer: AppDrawer(),
-            tabletSideMenu: (kIsWeb ||
-                    debugDefaultTargetPlatformOverride ==
-                        TargetPlatform.fuchsia)
-                ? const Flexible(
-                    flex: 0,
-                    child: LeftDrawer(index: 1),
-                    fit: FlexFit.tight,
-                  )
-                : null,
-            tabletFlexListView: 4,
-            nullItems: const Center(child: CircularProgressIndicator()),
-            emptyItems: const Center(child: CircularProgressIndicator()),
-            itemCount: snapshot.hasData ? snapshot.data.length : 0,
-            itemBuilder: (BuildContext context, int index) {
-              final ChatGroup chatGroup = snapshot.data[index];
-              return Card(
-                child: Column(
-                  children: <Widget>[
-                    const SizedBox(height: 8.0),
-/*                     ProxyProvider2<NetworkService, UserService, ChatBloc>(
-                      builder: (BuildContext _, NetworkService network,
-                              UserService user, ChatBloc __) =>
-                          ChatBloc(
-                              network: network,
-                              user: user,
-                              chatGroupId: chatGroup.id.id),
-                      child:  */
-                    _ConversationTile(chatGroup: chatGroup),
-                    //),
-                    const SizedBox(height: 8.0),
-                  ],
-                ),
-              );
-            },
-          );
-        },
-      ),
+                        }),
+                  ),
+                );
+              },
+              itemCount: snapshot.hasData ? snapshot.data.length : 0,
+              itemBuilder: (BuildContext context, int index) {
+                final ChatGroup chatGroup = snapshot.data[index];
+                return Card(
+                  child: Column(
+                    children: <Widget>[
+                      const SizedBox(height: 8.0),
+                      _ConversationTile(chatGroup: chatGroup),
+                      const SizedBox(height: 8.0),
+                    ],
+                  ),
+                );
+              },
+            );
+          }),
     );
   }
 }

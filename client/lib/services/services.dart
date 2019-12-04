@@ -16,8 +16,8 @@ export './widgets/login_screen.dart';
 export './widgets/settings.dart';
 export './widgets/splash_screen.dart';
 export './widgets/video_player.dart';
-export './widgets/web_screen/drawer.dart';
 export './widgets/web_screen/simple_route.dart';
+export './widgets/web_screen/web_layout.dart';
 
 Completer<dynamic> storageServiceReadyCompleter = Completer<dynamic>();
 Completer<dynamic> networkServiceReadyCompleter = Completer<dynamic>();

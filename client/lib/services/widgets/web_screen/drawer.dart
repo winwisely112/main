@@ -87,6 +87,15 @@ class LeftDrawer extends StatelessWidget {
         },
         //size: 32.0,
       ),
+      IconButton(
+        icon: Icon(
+          Icons.exit_to_app,
+          color: Colors.white,
+        ),
+        onPressed: () {
+          Navigator.of(context).pushNamed('/signout');
+        },
+      ),
     ];
     final List<bool> _menuList =
         _setIndex(index, _topList.length + _bottomList.length + 2);
@@ -101,21 +110,6 @@ class LeftDrawer extends StatelessWidget {
               alignment: Alignment.topCenter,
               child: Column(
                 children: <Widget>[
-                  const SizedBox(height: 8),
-                  CircleAvatar(
-                    backgroundColor: Colors.transparent,
-                    //radius: 32.0,
-                    child: IconButton(
-                      hoverColor: Colors.blueGrey,
-                      icon: Icon(
-                        Icons.menu,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {
-                        Scaffold.of(context).openDrawer();
-                      },
-                    ),
-                  ),
                   for (int i = 0; i < _topList.length; i++)
                     Column(
                       children: <Widget>[

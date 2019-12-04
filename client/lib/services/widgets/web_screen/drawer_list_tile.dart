@@ -20,10 +20,7 @@ class DrawerListTile extends StatelessWidget {
       ),
       color: Colors.transparent,
       child: InkWell(
-/*         onTap: () {
-          _nav.setIndex(index);
-          //onItemTap(index);
-        }, */
+        onTap: () {},
         hoverColor: Colors.blueGrey,
         child: CircleAvatar(
           backgroundColor: selected == true
