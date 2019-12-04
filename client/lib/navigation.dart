@@ -99,6 +99,15 @@ Route<dynamic> routes(RouteSettings settings) {
         },
       );
       break;
+    case '/signout':
+      _route = MaterialPageRoute<dynamic>(
+        builder: (BuildContext context) {
+          return LoginScreen(
+            key: ValueKey<String>(settings.name),
+          );
+        },
+      );
+      break;
     case '/signup':
       _route = MaterialPageRoute<dynamic>(
         builder: (BuildContext context) {
