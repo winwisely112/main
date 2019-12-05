@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_scaffold/responsive_scaffold.dart';
 
+import '../../services/auth_user_service.dart';
 import '../profile_info.dart';
 import './drawer.dart';
 
@@ -10,23 +12,36 @@ class HomeScaffold extends StatelessWidget {
       : super(key: key);
   final Widget child;
   final Widget bottomNavigationBar;
+
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
+    final AuthUserService _user = Provider.of<AuthUserService>(context);
     return Scaffold(
       key: _key,
       drawer: ProfileInfo(),
       appBar: AppBar(
-        leading: IconButton(
-          hoverColor: Colors.blueGrey,
-          icon: Icon(
-            Icons.menu,
-            color: Colors.white,
-          ),
-          onPressed: () {
-            _key.currentState.openDrawer();
-          },
-        ),
+        leading: !_user.isLoggedIn
+            ? IconButton(
+                hoverColor: Colors.blueGrey,
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            : IconButton(
+                hoverColor: Colors.blueGrey,
+                icon: Icon(
+                  Icons.menu,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  _key.currentState.openDrawer();
+                },
+              ),
         title: ListTile(
           leading: const Padding(
             padding: EdgeInsets.all(8.0),
@@ -62,6 +77,7 @@ class WebLayoutBody extends StatefulWidget {
   final int drawerSelection;
   final int itemCount;
   final Widget Function(BuildContext, int) itemBuilder;
+
   @override
   _WebLayoutState createState() => _WebLayoutState();
 }
@@ -69,6 +85,7 @@ class WebLayoutBody extends StatefulWidget {
 class _WebLayoutState extends State<WebLayoutBody> {
   @override
   Widget build(BuildContext context) {
+    final AuthUserService _user = Provider.of<AuthUserService>(context);
     return ResponsiveListScaffold.builder(
       slivers: <Widget>[
         SliverToBoxAdapter(
@@ -86,7 +103,9 @@ class _WebLayoutState extends State<WebLayoutBody> {
               debugDefaultTargetPlatformOverride == TargetPlatform.fuchsia)
           ? Flexible(
               flex: 0,
-              child: LeftDrawer(index: widget.drawerSelection),
+              child: LeftDrawer(
+                index: widget.drawerSelection,
+              ),
               fit: FlexFit.tight,
             )
           : null,

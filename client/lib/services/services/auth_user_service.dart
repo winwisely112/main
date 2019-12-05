@@ -33,6 +33,10 @@ class AuthUserService {
 
   final StorageService storage;
   final UserService user;
+  bool _loggedIn = false;
+
+  bool get isLoggedIn => _loggedIn;
+  set userLoggedIn(bool b) => _loggedIn = b;
 
   final BehaviorSubject<User> _meSubject = BehaviorSubject<User>();
   Stream<User> get globalUserStream => _meSubject.stream;

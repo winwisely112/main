@@ -1,104 +1,125 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:com.winwisely99.app/services/services.dart';
 
+import '../../bloc/data.dart';
+import '../../services/auth_user_service.dart';
 import './drawer_list_tile.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({@required this.index});
   //final void Function(int index) onItemTap;
   final int index;
+
   @override
   Widget build(BuildContext context) {
     final AuthUserService _user = Provider.of<AuthUserService>(context);
 
-    final List<Widget> _topList = <Widget>[
-      IconButton(
-        icon: Icon(
-          Icons.home,
-          color: Colors.white,
-        ),
-        onPressed: () {
-          Navigator.of(context).pushNamed('/news');
-        },
-        //size: 32.0,
-      ),
-      IconButton(
-        icon: Icon(
-          Icons.chat_bubble,
-          color: Colors.white,
-          // size: 32.0,
-        ),
-        onPressed: () {
-          Navigator.of(context).pushNamed('/chatgroup');
-        },
-        //size: 32.0,
-      ),
-      IconButton(
-        icon: Icon(
-          Icons.settings_input_antenna,
-          color: Colors.white,
-          //size: 32.0,
-        ),
-        onPressed: () {
-          Navigator.of(context).pushNamed('/enrollments');
-        },
-        //size: 32.0,
-      ),
-    ];
-    final List<Widget> _bottomList = <Widget>[
-      FutureBuilder<User>(
-        future: _user.globalUser,
-        builder: (BuildContext context, AsyncSnapshot<User> snapshot) {
-          if (!snapshot.hasData) {
-            return const CircleAvatar(
-              backgroundImage: AssetImage('assets/commons/avatar.jpg'),
-            );
-          }
-          if (snapshot.data == null) {
-            return const CircleAvatar(
-              backgroundImage: AssetImage('assets/commons/avatar.jpg'),
-            );
-          }
-          if (snapshot.data.avatarURL == null) {
-            return const CircleAvatar(
-              backgroundImage: AssetImage('assets/commons/avatar.jpg'),
-            );
-          }
-          if (snapshot.data.avatarURL.isEmpty) {
-            return const CircleAvatar(
-              backgroundImage: AssetImage('assets/commons/avatar.jpg'),
-            );
-          }
+    final List<Widget> _topList = !_user.isLoggedIn
+        ? <Widget>[]
+        : <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.home,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                Navigator.of(context).pushNamed('/news');
+              },
+              //size: 32.0,
+            ),
+            IconButton(
+              icon: Icon(
+                Icons.chat_bubble,
+                color: Colors.white,
+                // size: 32.0,
+              ),
+              onPressed: () {
+                Navigator.of(context).pushNamed('/chatgroup');
+              },
+              //size: 32.0,
+            ),
+            IconButton(
+              icon: Icon(
+                Icons.settings_input_antenna,
+                color: Colors.white,
+                //size: 32.0,
+              ),
+              onPressed: () {
+                Navigator.of(context).pushNamed('/enrollments');
+              },
+              //size: 32.0,
+            ),
+          ];
+    final List<Widget> _bottomList = !_user.isLoggedIn
+        ? <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.settings,
+                color: Colors.white,
+                //size: 32.0,
+              ),
+              onPressed: () {
+                Navigator.of(context).pushNamed('/settings');
+              },
+              //size: 32.0,
+            ),
+          ]
+        : <Widget>[
+            FutureBuilder<User>(
+              future: _user.globalUser,
+              builder: (BuildContext context, AsyncSnapshot<User> snapshot) {
+                if (!snapshot.hasData) {
+                  return const CircleAvatar(
+                    backgroundImage: AssetImage('assets/commons/avatar.jpg'),
+                  );
+                }
+                if (snapshot.data == null) {
+                  return const CircleAvatar(
+                    backgroundImage: AssetImage('assets/commons/avatar.jpg'),
+                  );
+                }
+                if (snapshot.data.avatarURL == null) {
+                  return const CircleAvatar(
+                    backgroundImage: AssetImage('assets/commons/avatar.jpg'),
+                  );
+                }
+                if (snapshot.data.avatarURL.isEmpty) {
+                  return const CircleAvatar(
+                    backgroundImage: AssetImage('assets/commons/avatar.jpg'),
+                  );
+                }
 
-          return CircleAvatar(
-            backgroundImage: AssetImage(snapshot.data.avatarURL),
-          );
-        },
-      ),
-      IconButton(
-        icon: Icon(
-          Icons.settings,
-          color: Colors.white,
-          //size: 32.0,
-        ),
-        onPressed: () {
-          Navigator.of(context).pushNamed('/settings');
-        },
-        //size: 32.0,
-      ),
-      IconButton(
-        icon: Icon(
-          Icons.exit_to_app,
-          color: Colors.white,
-        ),
-        onPressed: () {
-          Navigator.of(context).pushNamed('/signout');
-        },
-      ),
-    ];
-    final List<bool> _menuList =
-        _setIndex(index, _topList.length + _bottomList.length + 2);
+                return CircleAvatar(
+                  backgroundImage: AssetImage(snapshot.data.avatarURL),
+                );
+              },
+            ),
+            IconButton(
+              icon: Icon(
+                Icons.settings,
+                color: Colors.white,
+                //size: 32.0,
+              ),
+              onPressed: () {
+                Navigator.of(context).pushNamed('/settings');
+              },
+              //size: 32.0,
+            ),
+            IconButton(
+              icon: Icon(
+                Icons.exit_to_app,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                _user.userLoggedIn = false;
+                //print('user log ${_user.isLoggedIn}');
+                Navigator.of(context).pushNamed('/signout');
+              },
+            ),
+          ];
+    final List<bool> _menuList = !_user.isLoggedIn
+        ? _setIndex(0, _bottomList.length)
+        : _setIndex(index, _topList.length + _bottomList.length + 2);
     return SafeArea(
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),

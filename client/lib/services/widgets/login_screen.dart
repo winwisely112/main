@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../services/auth_user_service.dart';
 import './web_screen/simple_route.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -41,6 +44,10 @@ class _LoginScreenState extends State<LoginScreen> {
           Center(
             child: RaisedButton(
               onPressed: () {
+                final AuthUserService _user =
+                    Provider.of<AuthUserService>(context);
+                _user.userLoggedIn = true;
+                //print('user log ${_user.isLoggedIn}');
                 Navigator.of(context).pushNamedAndRemoveUntil(
                     '/home', ModalRoute.withName('/login'));
               },

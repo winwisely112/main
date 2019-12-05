@@ -97,6 +97,8 @@ class ProfileInfo extends StatelessWidget {
                             iconData: Icons.exit_to_app,
                             title: 'Sign Out',
                             onTap: () {
+                              _user.userLoggedIn = false;
+                              //print('user log ${_user.isLoggedIn}');
                               Navigator.of(context).pushNamed('/signout');
                             },
                           ),
