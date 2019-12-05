@@ -49,12 +49,42 @@ func (d *documentServiceServer) Update(ctx context.Context, document *v1.Documen
 	ctx, f := context.WithTimeout(context.Background(), time.Second*10)
 	defer f()
 
-	return nil, nil
+	doc, err := d.repository.Update(ctx, document.GetUid(), document)
+
+	if err != nil {
+		return &v1.ResponseCheckSync{
+			Id:       doc.GetId(),
+			LocalId:  doc.GetLocalId(),
+			Conflict: v1.ConflictStatus_OUTDATED,
+		}, errors.New("Error to update document on server side")
+	}
+
+	return &v1.ResponseCheckSync{
+		Id:       doc.GetId(),
+		LocalId:  doc.GetLocalId(),
+		Conflict: v1.ConflictStatus_SYNC,
+	}, nil
 }
 
 // Delete a document
 func (d *documentServiceServer) Delete(ctx context.Context, document *v1.Document) (*v1.ResponseCheckSync, error) {
-	return nil, nil
+
+	ctx, f := context.WithTimeout(context.Background(), time.Second*10)
+	defer f()
+
+	err := d.repository.Delete(ctx, document.GetId(), document.GetId())
+
+	if err != nil {
+		return &v1.ResponseCheckSync{
+			Id:      document.GetId(),
+			LocalId: document.GetLocalId(),
+		}, errors.New("Error to delete the document on server")
+	}
+	return &v1.ResponseCheckSync{
+		Id:       document.GetId(),
+		LocalId:  document.GetLocalId(),
+		Conflict: v1.ConflictStatus_SYNC,
+	}, nil
 }
 
 // CheckIfDocumentsSync Check if local documents are sync with server
