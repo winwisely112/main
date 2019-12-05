@@ -1,5 +1,6 @@
 # general housekeeping stuff
 
+# Pick a version !!!
 TAG_NAME=v1.0.1
 
 
