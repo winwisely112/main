@@ -2,10 +2,12 @@ package document
 
 import (
 	"context"
-	v1 "github.com/winwisely99/main/server/packages/document/api/v1"
-
-	db "github.com/winwisely99/main/server/packages/document/repository/memory"
 	"log"
+
+	v1 "github.com/winwisely99/main/packages/document/server/api/v1"
+
+	db "github.com/winwisely99/main/packages/document/server/repository/memory"
+
 	"net"
 	"testing"
 	"time"
@@ -61,6 +63,57 @@ func init() {
 // buffDialer
 func buffDialer(string, time.Duration) (net.Conn, error) {
 	return lis.Dial()
+}
+
+// Test to create a new document
+func TestNewDocument(t *testing.T) {
+
+	document := &v1.Document{
+		LocalId: "23",
+		Data:    "data file",
+		Uid:     "1",
+	}
+
+	resp, err := dTest.New(context.Background(), document)
+
+	if err != nil {
+		t.Error(err)
+	} else {
+		if resp.LocalId != document.GetLocalId() {
+			t.Error("Error local id does not match")
+		}
+	}
+}
+
+// Test to update a document
+func TestUpdateDocument(t *testing.T) {
+
+	document := &v1.Document{Id: "1", LocalId: "1", Data: "data file", Uid: "1", CreatedAt: createdTimeStamp, LastUpdate: createdTimeStamp}
+	resp, err := dTest.Update(context.Background(), document)
+
+	if err != nil {
+		t.Error(err)
+	} else {
+		if resp.GetConflict() != v1.ConflictStatus_SYNC {
+			t.Errorf("Error conflict should be %v but got %v", resp.GetConflict(), v1.ConflictStatus_SYNC)
+		}
+	}
+}
+
+// Test to delete a document
+func TestDeleteDocument(t *testing.T) {
+
+	document := &v1.Document{Id: "1", LocalId: "1", Data: "data file", Uid: "1", CreatedAt: createdTimeStamp, LastUpdate: createdTimeStamp}
+
+	resp, err := dTest.Delete(context.Background(), document)
+
+	if err != nil {
+		t.Error(err)
+	} else {
+		if resp.GetConflict() != v1.ConflictStatus_SYNC {
+			t.Errorf("Error conflict should be %v but got %v", resp.GetConflict(), v1.ConflictStatus_SYNC)
+		}
+	}
 }
 
 // Test check if local files are sync
