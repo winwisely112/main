@@ -55,7 +55,10 @@ class __ChatGroupFeedBodyState extends State<_ChatGroupFeedBody> {
               AsyncSnapshot<Map<int, ChatGroup>> snapshot) {
             return WebLayoutBody(
               drawerSelection: 1,
-              title: 'Group',
+              title: TitleWidget(
+                title: 'Groups',
+                icon: Icons.chat_bubble,
+              ),
               detailBuilder: (
                 BuildContext context,
                 int index,

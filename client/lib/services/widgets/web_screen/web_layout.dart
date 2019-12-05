@@ -72,7 +72,7 @@ class WebLayoutBody extends StatefulWidget {
       this.itemBuilder,
       this.itemCount})
       : super(key: key);
-  final String title;
+  final Widget title;
   final DetailsScreen Function(BuildContext, int, bool) detailBuilder;
   final int drawerSelection;
   final int itemCount;
@@ -89,12 +89,7 @@ class _WebLayoutState extends State<WebLayoutBody> {
     return ResponsiveListScaffold.builder(
       slivers: <Widget>[
         SliverToBoxAdapter(
-          child: ListTile(
-            title: Text(
-              widget.title,
-              style: Theme.of(context).textTheme.title,
-            ),
-          ),
+          child: widget.title,
         ),
       ],
       detailBuilder: widget.detailBuilder,
@@ -114,6 +109,67 @@ class _WebLayoutState extends State<WebLayoutBody> {
       emptyItems: const Center(child: CircularProgressIndicator()),
       itemCount: widget.itemCount,
       itemBuilder: widget.itemBuilder,
+    );
+  }
+}
+
+class WebInfoView extends StatelessWidget {
+  const WebInfoView({Key key, this.child, this.title, this.index = 4})
+      : super(key: key);
+  final Widget child;
+  final Widget title;
+  final int index;
+  @override
+  Widget build(BuildContext context) {
+    if (kIsWeb ||
+        debugDefaultTargetPlatformOverride == TargetPlatform.fuchsia) {
+      return _WebView(
+        title: title,
+        child: child,
+        index: index ?? 4,
+      );
+    } else {
+      return Scaffold(
+        appBar: AppBar(
+          title: title,
+        ),
+        body: child,
+      );
+    }
+    ;
+  }
+}
+
+class _WebView extends StatelessWidget {
+  const _WebView({Key key, this.child, this.index = 4, this.title})
+      : super(key: key);
+  final Widget child;
+  final Widget title;
+  final int index;
+  @override
+  Widget build(BuildContext context) {
+    return HomeScaffold(
+      child: Flex(
+        direction: Axis.horizontal,
+        children: <Widget>[
+          Flexible(
+            flex: 0,
+            child: LeftDrawer(index: index),
+            fit: FlexFit.tight,
+          ),
+          Flexible(
+            flex: 4,
+            fit: FlexFit.tight,
+            child: Column(
+              children: <Widget>[
+                title,
+                const Divider(),
+                child,
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

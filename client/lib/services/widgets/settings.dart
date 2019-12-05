@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../bloc/app_config.dart';
-import '../widgets/web_screen/drawer.dart';
+import '../widgets/title_widget.dart';
 import '../widgets/web_screen/web_layout.dart';
 
 class Settings extends StatelessWidget {
@@ -11,41 +11,13 @@ class Settings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (kIsWeb ||
-        debugDefaultTargetPlatformOverride == TargetPlatform.fuchsia) {
-      return const _WebSettings(child: _Settings());
-    } else {
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text('Settings'),
-        ),
-        body: const _Settings(),
-      );
-    }
-  }
-}
-
-class _WebSettings extends StatelessWidget {
-  const _WebSettings({Key key, this.child}) : super(key: key);
-  final Widget child;
-  @override
-  Widget build(BuildContext context) {
-    return HomeScaffold(
-      child: Flex(
-        direction: Axis.horizontal,
-        children: <Widget>[
-          const Flexible(
-            flex: 0,
-            child: LeftDrawer(index: 4),
-            fit: FlexFit.tight,
-          ),
-          Flexible(
-            flex: 4,
-            fit: FlexFit.tight,
-            child: child,
-          ),
-        ],
+    return WebInfoView(
+      title: TitleWidget(
+        title: 'Settings',
+        icon: Icons.settings,
       ),
+      child: const _Settings(),
+      index: 4,
     );
   }
 }
@@ -189,6 +161,7 @@ class _Settings extends StatelessWidget {
         return true;
       }());
       return ListView(
+        shrinkWrap: true,
         padding: const EdgeInsets.symmetric(vertical: 20.0),
         children: rows,
       );

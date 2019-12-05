@@ -118,7 +118,9 @@ class LeftDrawer extends StatelessWidget {
             ),
           ];
     final List<bool> _menuList = !_user.isLoggedIn
-        ? _setIndex(0, _bottomList.length)
+        ? index < 0
+            ? List<bool>.filled(_bottomList.length, false)
+            : _setIndex(0, _bottomList.length)
         : _setIndex(index, _topList.length + _bottomList.length + 2);
     return SafeArea(
       child: Container(

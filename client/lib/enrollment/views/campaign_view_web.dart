@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_scaffold/responsive_scaffold.dart';
 
@@ -19,15 +20,12 @@ class WebCampaignView extends StatelessWidget {
         stream: Provider.of<CampaignBloc>(context).getCampaign(),
         builder:
             (BuildContext context, AsyncSnapshot<List<Campaign>> snapshot) {
-          //if (snapshot.hasError) {
-          //  return Center(child: Text('Error occurred: ${snapshot.error}'));
-          //} else if (!snapshot.hasData) {
-          //   return const Center(child: CircularProgressIndicator());
-          // }
-          // return _CampaignViewBody(campaigns: snapshot.data);
           return WebLayoutBody(
             drawerSelection: 0,
-            title: 'Campaigns',
+            title: TitleWidget(
+              icon: FontAwesomeIcons.fistRaised,
+              title: 'Campaign',
+            ),
             detailBuilder: (
               BuildContext context,
               int index,
@@ -38,7 +36,8 @@ class WebCampaignView extends StatelessWidget {
                   color: Colors.white,
                   elevation: 8.0,
                   child: CampainDetailsView(
-                      campaignID: snapshot.data[index].id.id),
+                    campaignID: snapshot.data[index].id.id,
+                  ),
                 ),
               );
             },

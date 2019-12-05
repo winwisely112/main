@@ -41,7 +41,10 @@ class _NewsFeedBody extends StatelessWidget {
         builder: (BuildContext context, AsyncSnapshot<List<News>> snapshot) {
           return WebLayoutBody(
             drawerSelection: 0,
-            title: 'News',
+            title: TitleWidget(
+              title: 'News',
+              icon: Icons.home,
+            ),
             detailBuilder: (
               BuildContext context,
               int index,
