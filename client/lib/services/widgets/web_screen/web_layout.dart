@@ -88,8 +88,9 @@ class _WebLayoutState extends State<WebLayoutBody> {
     final AuthUserService _user = Provider.of<AuthUserService>(context);
     return ResponsiveListScaffold.builder(
       slivers: <Widget>[
-        SliverToBoxAdapter(
-          child: widget.title,
+        SliverList(
+          delegate:
+              SliverChildListDelegate(<Widget>[widget.title, const Divider()]),
         ),
       ],
       detailBuilder: widget.detailBuilder,

@@ -36,47 +36,32 @@ class _NewsView extends StatelessWidget {
     final News _news = hiveBox['news'].get(newsId);
     final User _user = hiveBox['users'].get(_news.uid);
 
-    return Scrollbar(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Container(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Expanded(
-                  child: Text(
-                    _news == null ? 'Unable to load News !' : _news.title ?? '',
-                    maxLines: 2,
-                    style: Theme.of(context).textTheme.title,
-                  ),
-                ),
-              ],
-            ),
+    return ListView(
+      padding: const EdgeInsets.all(24.0),
+      children: <Widget>[
+        ListTile(
+          title: Text(
+            _news == null ? 'Unable to load News !' : _news.title ?? '',
+            maxLines: 2,
+            style: Theme.of(context).textTheme.title,
           ),
-          Container(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
-              children: <Widget>[
-                _user != null
-                    ? CircleAvatar(
-                        backgroundImage: AssetImage(_user.avatarURL),
-                        child: const Text(''),
-                      )
-                    : const SizedBox(width: 0),
-                Text(
-                    'Posted on ${DateFormat('MMM dd').format(_news.timestamp)}'),
-              ],
-            ),
-          ),
-          Expanded(
-            child: _news == null
-                ? 'Unable to load News !'
-                : Markdown(data: _news.text),
-          ),
-        ],
-      ),
+        ),
+        ListTile(
+          leading: _user != null
+              ? CircleAvatar(
+                  backgroundImage: AssetImage(_user.avatarURL),
+                  child: const Text(''),
+                )
+              : const SizedBox(width: 0),
+          title:
+              Text('Posted on ${DateFormat('MMM dd').format(_news.timestamp)}'),
+        ),
+        ListTile(
+          title: _news == null
+              ? 'Unable to load News !'
+              : MarkdownBody(data: _news.text),
+        ),
+      ],
     );
   }
 }

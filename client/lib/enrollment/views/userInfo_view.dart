@@ -47,8 +47,8 @@ class _UserInfoViewState extends State<_UserInfoView> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      padding: const EdgeInsets.all(24.0),
       child: Container(
-        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -105,7 +105,7 @@ class _UserInfoViewState extends State<_UserInfoView> {
             Utils.verticalMargin(32),
             Container(
               alignment: Alignment.centerRight,
-              margin: const EdgeInsets.only(right: 16),
+              margin: const EdgeInsets.only(right: 24),
               child: RaisedButton(
                 onPressed: () {
                   Navigator.of(context).pushNamed('/campaignview');
