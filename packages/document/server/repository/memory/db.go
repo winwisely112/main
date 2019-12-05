@@ -2,6 +2,7 @@ package memory
 
 import (
 	"context"
+	"errors"
 	"sync"
 	"time"
 
@@ -23,6 +24,9 @@ func (m *Memory) Close() {
 // New Document
 func (m *Memory) New(ctx context.Context, userID string, document *v1.Document) (*v1.Document, error) {
 
+	m.Lock()
+	defer m.Unlock()
+
 	updatedTimeStamp, _ := ptypes.TimestampProto(time.Now())
 
 	document.Id = guuid.New().String()
@@ -41,8 +45,38 @@ func (m *Memory) New(ctx context.Context, userID string, document *v1.Document) 
 	return document, nil
 }
 
+// Update Document
+func (m *Memory) Update(ctx context.Context, userID string, document *v1.Document) (*v1.Document, error) {
+
+	return m.Merge(ctx, userID, document)
+}
+
+// Delete Document
+func (m *Memory) Delete(ctx context.Context, userID string, documentID string) error {
+
+	m.Lock()
+	defer m.Unlock()
+
+	docs, ok := m.Documents[userID]
+
+	if !ok {
+		return nil
+	}
+
+	for i, d := range docs {
+		if d.GetId() == documentID {
+			m.Documents[userID] = append(m.Documents[userID][:i], m.Documents[userID][i+1:]...)
+		}
+	}
+
+	return nil
+}
+
 // Merge Document
 func (m *Memory) Merge(ctx context.Context, userID string, document *v1.Document) (*v1.Document, error) {
+
+	m.Lock()
+	defer m.Unlock()
 
 	docs, ok := m.Documents[userID]
 
@@ -66,10 +100,13 @@ func (m *Memory) Merge(ctx context.Context, userID string, document *v1.Document
 // List Documents
 func (m *Memory) List(ctx context.Context, userID string) ([]*v1.Document, error) {
 
+	m.Lock()
+	defer m.Unlock()
+
 	docs, ok := m.Documents[userID]
 
 	if !ok {
-		return []*v1.Document{}, nil
+		return []*v1.Document{}, errors.New("There are no documents")
 	}
 
 	return docs, nil

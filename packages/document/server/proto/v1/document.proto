@@ -55,6 +55,16 @@ message ResponseCheckSync{
 
 // Document Services
 service DocumentService{
+
+    // Create a new Document
+    rpc New (Document) returns (ResponseCheckSync) {}
+
+    // Update a Document
+    rpc Update (Document) returns (ResponseCheckSync) {}
+
+    // Delete a document
+    rpc Delete (Document) returns (ResponseCheckSync) {}
+    
     // Check if local documents are sync with server
     rpc CheckIfDocumentsSync (RequestCheckSync) returns (stream ResponseCheckSync) {}
 

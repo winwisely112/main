@@ -2,9 +2,9 @@ package document
 
 import (
 	"context"
-	v1 "github.com/winwisely99/main/server/packages/document/api/v1"
+	v1 "github.com/winwisely99/main/packages/document/server/api/v1"
 
-	db "github.com/winwisely99/main/server/packages/document/repository/memory"
+	db "github.com/winwisely99/main/packages/document/server/repository/memory"
 	"log"
 	"net"
 	"testing"
@@ -61,6 +61,28 @@ func init() {
 // buffDialer
 func buffDialer(string, time.Duration) (net.Conn, error) {
 	return lis.Dial()
+}
+
+// Test to create a new document
+func TestNewDocument(t *testing.T) {
+
+	document := &v1.Document{
+		
+	}
+
+	resp, err := dTest.New(context.Background(), document *v1.Document)
+
+	if err != nil{
+		t.Error(err)
+	}
+}
+
+// Test to delete a document
+func TestDeleteDocument(t *testing.T) {
+}
+
+// Test to update a document
+func TestUpdateDocument(t *testing.T) {
 }
 
 // Test check if local files are sync

@@ -2,11 +2,13 @@ package document
 
 import (
 	"context"
+	"errors"
 	"fmt"
-	v1 "github.com/winwisely99/main/server/packages/document/api/v1"
 	"log"
 	"sync"
 	"time"
+
+	v1 "github.com/winwisely99/main/packages/document/server/api/v1"
 )
 
 // documentServiceServer is implementation of DocumentServiceServer proto interface
@@ -17,6 +19,42 @@ type documentServiceServer struct {
 // NewDocumentServiceServer creates Document service object
 func NewDocumentServiceServer() v1.DocumentServiceServer {
 	return &documentServiceServer{}
+}
+
+// Create a new Document
+func (d *documentServiceServer) New(ctx context.Context, document *v1.Document) (*v1.ResponseCheckSync, error) {
+
+	ctx, f := context.WithTimeout(context.Background(), time.Second*10)
+	defer f()
+
+	doc, err := d.repository.New(ctx, document.GetUid(), document)
+
+	if err != nil {
+		return &v1.ResponseCheckSync{
+			LocalId:  document.GetLocalId(),
+			Conflict: v1.ConflictStatus_NEW,
+		}, errors.New("Could not create document")
+	}
+
+	return &v1.ResponseCheckSync{
+		Id:       doc.GetId(),
+		LocalId:  doc.GetLocalId(),
+		Conflict: v1.ConflictStatus_SYNC,
+	}, nil
+}
+
+// Update a Document
+func (d *documentServiceServer) Update(ctx context.Context, document *v1.Document) (*v1.ResponseCheckSync, error) {
+
+	ctx, f := context.WithTimeout(context.Background(), time.Second*10)
+	defer f()
+
+	return nil, nil
+}
+
+// Delete a document
+func (d *documentServiceServer) Delete(ctx context.Context, document *v1.Document) (*v1.ResponseCheckSync, error) {
+	return nil, nil
 }
 
 // CheckIfDocumentsSync Check if local documents are sync with server
