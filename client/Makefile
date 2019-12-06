@@ -374,8 +374,7 @@ fb-deploy:
 	# rebuilds flutter web
 	$(MAKE) flu-web-build
 
-	
-	# copy code from web build to public folder
+	# copy code from web build folder to public folder
 	rm -R ./public
 	cp -R $(LIB_FSPATH)/client/build/web ./public
 
