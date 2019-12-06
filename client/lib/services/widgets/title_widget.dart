@@ -9,8 +9,9 @@ class TitleWidget extends StatelessWidget {
     return ListTile(
       leading: Card(
         shape: const CircleBorder(),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
+        child: CircleAvatar(
+          //padding: const EdgeInsets.all(8.0),
+          backgroundColor: Colors.white,
           child: Icon(
             icon,
             color: Theme.of(context).primaryColor,
