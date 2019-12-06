@@ -321,11 +321,72 @@ cloud-public:
 	open https://$(winwisely99-main-master).firebaseapp.com/	
 	# TODO: domain mapping 
 
-firebase-ci-get:
+
+### Firebase
+
+
+# Deploy to Firebase ( using this for ease for now )
+
+# TOGGLE environment:
+# PROD
+FB_PROD_PROJ_ID=winwisely-app-prod
+
+# DEV
+FB_DEV_PROJ_ID=winwisely-app-dev
+
+# User ( the developer)
+FB_USER_PROJ_ID=winwisely99-main-master
+
+# Set the final variables used here !
+FB_SESSION_PROJECT_ID=$(FB_USER_PROJ_ID)
+
+FB_SESSION_PROJECT_CONSOLE_URL=https://console.firebase.google.com/project/$(FB_SESSION_PROJECT_ID)
+
+fb-print: ## fb-print
+	@echo
+	@echo FB_SESSION_PROJECT_ID: $(FB_SESSION_PROJECT_ID)
+	@echo FB_SESSION_PROJECT_CONSOLE_URL: $(FB_SESSION_PROJECT_CONSOLE_URL)
+	@echo
+
+
+fb-auth:
+	
+	# firebase logout
+	firebase logout
+
+	# firebase login and pick which account to use via which browser you hit.
+	firebase login --no-localhost
+
+	# see what projects you have setup
+	firebase projects:list
+
+fb-init:
+	# This is a one time thing for a project
+
+	#firebase init 
+	firebase init
+
+fb-console:
+	# opens the web console.
+	open $(FB_SESSION_PROJECT_CONSOLE_URL)
+
+fb-deploy:
+	# rebuilds flutter web
+	
+	# copy code from web build to public folder
+	rm -R ./public
+	cp -R $(LIB_FSPATH)/client/build/web ./public
+
+	firebase deploy
+
+fb-ci-get:
+	# gets secure keys used for CI automation
 	firebase login:ci
 	# PROJ: winwisely99-main-master
 	# record the secret
-fire-ci-revoke:
+
+fb-ci-revoke:
+	# revokes secure keys used for CI automation
 	firebase logout --token <token>
 
 ### i18n
