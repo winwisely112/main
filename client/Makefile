@@ -372,6 +372,8 @@ fb-console:
 
 fb-deploy:
 	# rebuilds flutter web
+	$(MAKE) flu-web-build
+
 	
 	# copy code from web build to public folder
 	rm -R ./public
