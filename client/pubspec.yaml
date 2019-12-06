@@ -30,9 +30,10 @@ dependencies:
   device_preview: ^0.2.6
   avatar_glow: ^1.1.0
   font_awesome_flutter: ^8.5.0
-  responsive_scaffold: ^1.1.1
+  ##responsive_scaffold: ^1.1.1
   flutter_markdown: ^0.3.0
   package_info: ^0.4.0+12
+  scroll_to_index: ^1.0.4+1
 dev_dependencies:
   flutter_test:
     sdk: flutter

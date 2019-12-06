@@ -2,7 +2,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:responsive_scaffold/responsive_scaffold.dart';
+//import 'package:responsive_scaffold/responsive_scaffold.dart';
 
 import 'package:com.winwisely99.app/services/services.dart';
 import 'package:com.winwisely99.app/chat_view/chat_view.dart';

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:responsive_scaffold/responsive_scaffold.dart';
+//import 'package:responsive_scaffold/responsive_scaffold.dart';
 
 import 'package:com.winwisely99.app/services/services.dart';
+import 'package:com.winwisely99.app/vendor_plugins/vendor_plugins.dart';
 
 import '../bloc/bloc.dart';
 import '../bloc/data.dart';
