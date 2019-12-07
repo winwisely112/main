@@ -11,14 +11,15 @@ export './services/network.dart';
 export './services/storage.dart';
 export './services/user.dart';
 export './utils/utils.dart';
+export './widgets/avatar_loader.dart';
 export './widgets/home_screen.dart';
 export './widgets/login_screen.dart';
 export './widgets/settings.dart';
 export './widgets/splash_screen.dart';
 export './widgets/title_widget.dart';
 export './widgets/video_player.dart';
+export './widgets/web_screen/layouts.dart';
 export './widgets/web_screen/simple_route.dart';
-export './widgets/web_screen/web_layout.dart';
 
 Completer<dynamic> storageServiceReadyCompleter = Completer<dynamic>();
 Completer<dynamic> networkServiceReadyCompleter = Completer<dynamic>();

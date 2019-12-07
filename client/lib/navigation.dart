@@ -50,15 +50,6 @@ Route<dynamic> routes(RouteSettings settings) {
         },
       );
       break;
-    case '/generalcampaign':
-      _route = MaterialPageRoute<dynamic>(
-        builder: (BuildContext context) {
-          return GeneralCampaignView(
-            key: ValueKey<String>(settings.name),
-          );
-        },
-      );
-      break;
     case '/home':
 /*       if (kIsWeb) {
         _route = HomeScreen.route();

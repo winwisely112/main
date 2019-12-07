@@ -12,17 +12,11 @@ class CampainDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (kIsWeb ||
-        debugDefaultTargetPlatformOverride == TargetPlatform.fuchsia) {
-      return _CampainDetailsBody(campaignID: campaignID);
-    } else {
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text('Campaign Details'),
-        ),
-        body: _CampainDetailsBody(campaignID: campaignID),
-      );
-    }
+    return ResponsiveDetailView(
+      child: _CampainDetailsBody(campaignID: campaignID),
+      title: 'Campaign Details',
+      icon: Icons.details,
+    );
   }
 }
 
@@ -33,8 +27,7 @@ class _CampainDetailsBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Campaign campaign = hiveBox['campaign'].get(campaignID);
-    return ListView(
-      padding: const EdgeInsets.all(24.0),
+    return ResponsiveListView(
       children: <Widget>[
         ListTile(
           leading: Container(

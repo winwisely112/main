@@ -46,76 +46,81 @@ class _UserInfoViewState extends State<_UserInfoView> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(24.0),
-      child: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            const Text('1. Where are you?'),
-            Utils.verticalMargin(16),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32),
-              child: Column(
-                children: <Widget>[
-                  _select(countries, 'Select Country', 'countries'),
-                  Utils.verticalMargin(10),
-                  _select(cities, 'Select City', 'cities'),
-                  Utils.verticalMargin(10),
-                  TextFormField(
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                      hintText: 'Zip Code',
-                    ),
-                  ),
-                  Utils.verticalMargin(10),
-                  TextFormField(
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                        hintText: 'Your Location', suffix: Icon(Icons.search)),
-                  ),
-                ],
-              ),
+    return ResponsiveListView(
+      children: <Widget>[
+        ListTile(
+            title: Text(
+          '1. Where are you?',
+          style: Theme.of(context).textTheme.title,
+        )),
+        ListTile(
+          title: _select(countries, 'Select Country', 'countries'),
+        ),
+        ListTile(
+          title: _select(cities, 'Select City', 'cities'),
+        ),
+        ListTile(
+          title: TextFormField(
+            keyboardType: TextInputType.number,
+            decoration: const InputDecoration(
+              hintText: 'Zip Code',
             ),
-            Utils.verticalMargin(32),
-            const Text('2. Travel distance you can afford?'),
-            Utils.verticalMargin(16),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32),
-              child: TextFormField(
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  hintText: 'Distance in KM',
-                ),
-              ),
+          ),
+        ),
+        ListTile(
+          title: TextFormField(
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(
+                hintText: 'Your Location', suffix: Icon(Icons.search)),
+          ),
+        ),
+        const SizedBox(height: 48.0),
+        ListTile(
+          title: Text(
+            '2. Travel distance you can afford?',
+            style: Theme.of(context).textTheme.title,
+          ),
+        ),
+        ListTile(
+          title: TextFormField(
+            keyboardType: TextInputType.number,
+            decoration: const InputDecoration(
+              hintText: 'Distance in KM',
             ),
-            Utils.verticalMargin(32),
-            const Text('3. Issue with enviornment?'),
-            Utils.verticalMargin(16),
-            Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32),
-                child: _select(issues, 'Your Issue', 'issues')),
-            Utils.verticalMargin(32),
-            const Text('4. Any Campaign Affiliations ?'),
-            Utils.verticalMargin(16),
-            Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32),
-                child: _select(campaings, 'Select Affiliation ', 'campaings')),
-            Utils.verticalMargin(32),
-            Container(
-              alignment: Alignment.centerRight,
-              margin: const EdgeInsets.only(right: 24),
-              child: RaisedButton(
+          ),
+        ),
+        const SizedBox(height: 48.0),
+        ListTile(
+          title: Text(
+            '3. Cause',
+            style: Theme.of(context).textTheme.title,
+          ),
+        ),
+        ListTile(title: _select(issues, 'Your Issue', 'issues')),
+        const SizedBox(height: 48.0),
+        ListTile(
+          title: Text(
+            '4. Any Campaign Affiliations ?',
+            style: Theme.of(context).textTheme.title,
+          ),
+        ),
+        ListTile(title: _select(campaings, 'Select Affiliation ', 'campaings')),
+        const SizedBox(height: 48.0),
+        ListTile(
+          title: ButtonBar(
+            children: <Widget>[
+              RaisedButton(
                 onPressed: () {
                   Navigator.of(context).pushNamed('/campaignview');
                 },
                 child: const Text('Next'),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
+      ],
+      // ),
+      //   ),
     );
   }
 
