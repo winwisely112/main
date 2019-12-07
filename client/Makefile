@@ -303,29 +303,102 @@ flu-web-run: flu-web-config ## flu-web-run
 	# works
 	# Reload works too :)
 	cd $(SAMPLE_FSPATH) && flutter run -d chrome
-flu-web-build: flu-web-config
+flu-web-build: flu-web-config ## flu-web-build
 	# works :)
 	cd $(SAMPLE_FSPATH) && flutter build web --release
-flu-web-test: flu-web-config
+flu-web-test: flu-web-config ## flu-web-test
 	# works :)
 	cd $(SAMPLE_FSPATH) && flutter test --platform=chrome
 
-### CLOUD
 
-CLOUD_PROJ_NAME=winwisely99-main-master
-cloud-console:
-	opem https://console.cloud.google.com/home/dashboard?project=$(CLOUD_PROJ_NAME)
-	open https://console.firebase.google.com/project/$(CLOUD_PROJ_NAME)/hosting/main
 
-cloud-public:
-	open https://$(winwisely99-main-master).firebaseapp.com/	
-	# TODO: domain mapping 
 
-firebase-ci-get:
+### Firebase
+
+
+# Deploy to Firebase ( using this for ease for now )
+
+# TOGGLE environment:
+# PROD
+FB_PROD_PROJ_ID=winwisely-app-prod
+
+# DEV
+FB_DEV_PROJ_ID=winwisely-app-dev
+
+# User ( the developer)
+FB_USER_PROJ_ID=winwisely99-main-master
+
+# Set the final variables used here !
+FB_SESSION_PROJECT_ID=$(FB_USER_PROJ_ID)
+
+FB_SESSION_PROJECT_CONSOLE_URL=https://console.firebase.google.com/project/$(FB_SESSION_PROJECT_ID)/hosting/main
+FB_SESSION_PROJECT_WEB_URL=https://$(FB_SESSION_PROJECT_ID).firebaseapp.com/
+GCLOUD_SESSION_PROJECT_CONSOLE_URL=https://console.cloud.google.com/home/dashboard?project=$(FB_SESSION_PROJECT_ID)
+
+
+fb-print: ## fb-print
+	@echo
+	@echo FB_SESSION_PROJECT_ID: $(FB_SESSION_PROJECT_ID)
+
+	@echo FB_SESSION_PROJECT_CONSOLE_URL: $(FB_SESSION_PROJECT_CONSOLE_URL)
+	@echo FB_SESSION_PROJECT_WEB_URL: $(FB_SESSION_PROJECT_WEB_URL)
+	@echo GCLOUD_SESSION_PROJECT_CONSOLE_URL: $(GCLOUD_SESSION_PROJECT_CONSOLE_URL)
+	@echo
+
+fb-auth:
+	
+	# firebase logout
+	firebase logout
+
+	# firebase login and pick which account to use via which browser you hit.
+	firebase login --no-localhost
+
+	# see what projects you have setup
+	firebase projects:list
+
+fb-init:
+	# This is a one time thing for a project
+
+	#firebase init 
+	firebase init
+
+fb-console:
+	# opens the web console.
+	open $(FB_SESSION_PROJECT_CONSOLE_URL)
+
+fb-test:
+	@echo $(LIB_FSPATH)/client/build/web
+
+fb-serve:
+	# runs locally
+
+	# rebuilds flutter web
+	$(MAKE) flu-web-build
+
+	# copy code from web build folder to public folder
+	rm -R ./public
+	cp -R $(LIB_FSPATH)/client/build/web ./public
+
+	firebase serve --only hosting
+
+fb-deploy:
+	# rebuilds flutter web
+	$(MAKE) flu-web-build
+
+	# copy code from web build folder to public folder
+	rm -R ./public
+	cp -R $(LIB_FSPATH)/client/build/web ./public
+
+	firebase deploy --only hosting -m "githash: ***"
+
+fb-ci-get:
+	# gets secure keys used for CI automation
 	firebase login:ci
 	# PROJ: winwisely99-main-master
 	# record the secret
-fire-ci-revoke:
+
+fb-ci-revoke:
+	# revokes secure keys used for CI automation
 	firebase logout --token <token>
 
 ### i18n
