@@ -69,28 +69,9 @@ class __ChatGroupFeedBodyState extends State<_ChatGroupFeedBody> {
                   body: Material(
                     color: Colors.white,
                     elevation: 5.0,
-                    child: FutureBuilder<User>(
-                        future: Provider.of<ChatBloc>(context).getCurrentUser(),
-                        builder:
-                            (BuildContext context, AsyncSnapshot<User> user) {
-                          if (!user.hasData) {
-                            return Center(
-                              child: CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  Theme.of(context).primaryColor,
-                                ),
-                              ),
-                            );
-                          }
-                          return ChatFeedBody(
-                            user: ChatUser(
-                              name: user.data.name,
-                              uid: user.data.id.id,
-                              avatar: user.data.avatarURL,
-                            ),
-                            chatGroupId: snapshot.data[index].id.id,
-                          );
-                        }),
+                    child: ChatFeed(
+                      chatGroupId: snapshot.data[index].id.id,
+                    ),
                   ),
                 );
               },

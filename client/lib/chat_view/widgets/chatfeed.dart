@@ -98,7 +98,7 @@ class _ChatFeedView extends StatelessWidget {
                 ),
               );
             }
-            return ChatFeedBody(
+            return _ChatFeedBody(
               user: ChatUser(
                 name: user.data.name,
                 uid: user.data.id.id,
@@ -111,15 +111,15 @@ class _ChatFeedView extends StatelessWidget {
   }
 }
 
-class ChatFeedBody extends StatefulWidget {
-  const ChatFeedBody({this.user, this.chatGroupId});
+class _ChatFeedBody extends StatefulWidget {
+  const _ChatFeedBody({this.user, this.chatGroupId});
   final ChatUser user;
   final String chatGroupId;
   @override
   _ChatFeedBodyState createState() => _ChatFeedBodyState();
 }
 
-class _ChatFeedBodyState extends State<ChatFeedBody> {
+class _ChatFeedBodyState extends State<_ChatFeedBody> {
   final GlobalKey<DashChatState> _chatViewKey = GlobalKey<DashChatState>();
 
   @override
