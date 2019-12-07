@@ -43,7 +43,8 @@ class _NewsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final News _news = hiveBox['news'].get(newsId);
-    final User _user = hiveBox['users'].get(_news.uid);
+    //final User _user = hiveBox['users'].get(_news.uid);
+    final UserService _user = Provider.of<UserService>(context);
     return ResponsiveListView(
       children: <Widget>[
         ListTile(
@@ -54,12 +55,7 @@ class _NewsView extends StatelessWidget {
           ),
         ),
         ListTile(
-          leading: _user != null
-              ? CircleAvatar(
-                  backgroundImage: AssetImage(_user.avatarURL),
-                  child: const Text(''),
-                )
-              : const SizedBox(width: 0),
+          leading: AvatarLoader(future: _user.getUser(_news.uid)),
           title:
               Text('Posted on ${DateFormat('MMM dd').format(_news.timestamp)}'),
         ),

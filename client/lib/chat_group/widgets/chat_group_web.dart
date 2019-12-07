@@ -2,6 +2,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:repository/repository.dart';
 //import 'package:responsive_scaffold/responsive_scaffold.dart';
 
 import 'package:com.winwisely99.app/services/services.dart';
@@ -67,7 +68,7 @@ class __ChatGroupFeedBodyState extends State<_ChatGroupFeedBody> {
                 return DetailsScreen(
                   body: Material(
                     color: Colors.white,
-                    elevation: 8.0,
+                    elevation: 5.0,
                     child: FutureBuilder<User>(
                         future: Provider.of<ChatBloc>(context).getCurrentUser(),
                         builder:

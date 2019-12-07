@@ -39,11 +39,14 @@ class _ChatFeedView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //repos['conversations'].fetch(Id<Conversations>(conversationsId)).first;
-    final ChatGroup chatGroup = hiveBox['chatGroup'].get(chatGroupId);
+    final ChatGroup chatGroup = hiveBox['chatgroup'].get(chatGroupId);
     return Scaffold(
       appBar: AppBar(
         title: ListTile(
-          title: Text(chatGroup.title),
+          title: Text(
+            chatGroup.title,
+            style: TextStyle(color: Colors.white),
+          ),
           leading: CircleAvatar(
             backgroundImage: AssetImage(chatGroup.avatarUrl),
 /*             NetworkImage(

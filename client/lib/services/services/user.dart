@@ -24,12 +24,37 @@ class UserService {
   Future<User> getUser(Id<User> id) => _storage.fetch(id).first;
 }
 
-class _UserDownloader extends Repository<User> {
-  _UserDownloader({@required this.network})
-      : assert(network != null),
-        super(isFinite: false, isMutable: false);
+class _UserDownloader extends CollectionFetcher<User> {
+  _UserDownloader({@required this.network});
+  //: assert(network != null),
+  //  super(isFinite: false, isMutable: false);
 
   final NetworkService network;
+
+  @override
+  Future<List<User>> downloadAll() async {
+    await networkReady;
+
+    final List<Map<String, dynamic>> _dataList =
+        await network.getAllItem(path: 'users');
+
+    return <User>[
+      // ignore: sdk_version_ui_as_code
+      for (Map<String, dynamic> data in _dataList)
+        User(
+          id: Id<User>(data['_id']),
+          firstName: data['firstName'],
+          lastName: data['lastName'],
+          email: data['email'],
+          displayName: data['displayName'],
+          avatarURL: data['avatar_url'],
+          chatGroupIds: <String>[
+            for (dynamic item in _getMemberIDs(data['chatgroup_ids']))
+              item.toString()
+          ],
+        ),
+    ];
+  }
 
   @override
   Stream<User> fetch(Id<User> id) async* {

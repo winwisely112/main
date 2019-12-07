@@ -89,6 +89,7 @@ class _WebLayoutState extends State<WebLayoutBody> {
   @override
   Widget build(BuildContext context) {
     return ResponsiveListScaffold.builder(
+      bottomNavigationBar: null,
       slivers: <Widget>[
         SliverList(
           delegate:
@@ -163,13 +164,28 @@ class ResponsiveDetailView extends StatelessWidget {
   Widget build(BuildContext context) {
     if (kIsWeb ||
         debugDefaultTargetPlatformOverride == TargetPlatform.fuchsia) {
-      return Scrollbar(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            child,
-          ],
+      return Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: Theme.of(context).primaryColor,
+            ),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          elevation: 0.0,
+          backgroundColor: Colors.transparent,
+        ),
+        body: Scrollbar(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              child,
+            ],
+          ),
         ),
       );
     } else {
