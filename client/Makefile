@@ -335,10 +335,13 @@ FB_SESSION_PROJECT_CONSOLE_URL=https://console.firebase.google.com/project/$(FB_
 FB_SESSION_PROJECT_WEB_URL=https://$(FB_SESSION_PROJECT_ID).firebaseapp.com/
 GCLOUD_SESSION_PROJECT_CONSOLE_URL=https://console.cloud.google.com/home/dashboard?project=$(FB_SESSION_PROJECT_ID)
 
+GIT_HASH=$(shell git log -1 --pretty=format:"%H")
 
 fb-print: ## fb-print
 	@echo
 	@echo FB_SESSION_PROJECT_ID: $(FB_SESSION_PROJECT_ID)
+
+	@echo GIT_HASH=$(GIT_HASH)
 
 	@echo FB_SESSION_PROJECT_CONSOLE_URL: $(FB_SESSION_PROJECT_CONSOLE_URL)
 	@echo FB_SESSION_PROJECT_WEB_URL: $(FB_SESSION_PROJECT_WEB_URL)
@@ -389,7 +392,7 @@ fb-deploy:
 	rm -R ./public
 	cp -R $(LIB_FSPATH)/client/build/web ./public
 
-	firebase deploy --only hosting -m "githash: ***"
+	firebase deploy --only hosting -m "githash: $(GIT_HASH)"
 
 fb-ci-get:
 	# gets secure keys used for CI automation
