@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class TitleWidget extends StatelessWidget {
@@ -20,7 +21,13 @@ class TitleWidget extends StatelessWidget {
       ),
       title: Text(
         title,
-        style: Theme.of(context).textTheme.title,
+        style: kIsWeb ||
+                debugDefaultTargetPlatformOverride == TargetPlatform.fuchsia
+            ? Theme.of(context).textTheme.title
+            : Theme.of(context)
+                .textTheme
+                .title
+                .copyWith(color: Theme.of(context).colorScheme.onPrimary),
       ),
     );
   }

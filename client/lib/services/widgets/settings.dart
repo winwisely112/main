@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../bloc/app_config.dart';
 import '../widgets/title_widget.dart';
-import '../widgets/web_screen/web_layout.dart';
+import '../widgets/web_screen/layouts.dart';
 
 class Settings extends StatelessWidget {
   const Settings({Key key}) : super(key: key);
@@ -160,11 +160,7 @@ class _Settings extends StatelessWidget {
         ]);
         return true;
       }());
-      return ListView(
-        shrinkWrap: true,
-        padding: const EdgeInsets.symmetric(vertical: 20.0),
-        children: rows,
-      );
+      return ResponsiveListView(children: rows);
     }
 
     return buildSettingsPane(context);

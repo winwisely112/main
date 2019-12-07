@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../bloc/data.dart';
 import '../../services/auth_user_service.dart';
+import '../avatar_loader.dart';
 import './drawer_list_tile.dart';
 
 class LeftDrawer extends StatelessWidget {
@@ -65,35 +66,7 @@ class LeftDrawer extends StatelessWidget {
             ),
           ]
         : <Widget>[
-            FutureBuilder<User>(
-              future: _user.globalUser,
-              builder: (BuildContext context, AsyncSnapshot<User> snapshot) {
-                if (!snapshot.hasData) {
-                  return const CircleAvatar(
-                    backgroundImage: AssetImage('assets/commons/avatar.jpg'),
-                  );
-                }
-                if (snapshot.data == null) {
-                  return const CircleAvatar(
-                    backgroundImage: AssetImage('assets/commons/avatar.jpg'),
-                  );
-                }
-                if (snapshot.data.avatarURL == null) {
-                  return const CircleAvatar(
-                    backgroundImage: AssetImage('assets/commons/avatar.jpg'),
-                  );
-                }
-                if (snapshot.data.avatarURL.isEmpty) {
-                  return const CircleAvatar(
-                    backgroundImage: AssetImage('assets/commons/avatar.jpg'),
-                  );
-                }
-
-                return CircleAvatar(
-                  backgroundImage: AssetImage(snapshot.data.avatarURL),
-                );
-              },
-            ),
+            AvatarLoader(future: _user.globalUser),
             IconButton(
               icon: Icon(
                 Icons.settings,

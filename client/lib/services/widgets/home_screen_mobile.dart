@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:com.winwisely99.app/chat_group/chat_group.dart';
 import 'package:com.winwisely99.app/news/news.dart';
 
-import './web_screen/web_layout.dart';
+import './web_screen/layouts.dart';
 
 class MobileHomeScreen extends StatefulWidget {
   @override
