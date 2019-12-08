@@ -14,7 +14,7 @@ class SignUpView extends StatelessWidget {
   Widget build(BuildContext context) {
     return WebInfoView(
       title: TitleWidget(
-        icon: FontAwesomeIcons.users,
+        icon: Icons.lock,
         title: 'Sign Up',
       ),
       child: const _SignUpView(),

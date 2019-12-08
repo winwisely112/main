@@ -20,7 +20,7 @@ class SupportRolesView extends StatelessWidget {
   Widget build(BuildContext context) {
     return const WebInfoView(
       title: TitleWidget(
-        icon: FontAwesomeIcons.criticalRole,
+        icon: Icons.supervisor_account,
         title: 'Support Roles',
       ),
       child: _SupportRolesView(),

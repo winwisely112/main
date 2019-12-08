@@ -175,17 +175,13 @@ class ResponsiveDetailView extends StatelessWidget {
         debugDefaultTargetPlatformOverride == TargetPlatform.fuchsia) {
       return Scaffold(
         appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back,
-              color: Theme.of(context).colorScheme.onSurface,
-            ),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
+          centerTitle: true,
           elevation: 0.0,
-          backgroundColor: Colors.transparent,
+          //backgroundColor: Colors.transparent,
+          title: Text(
+            title,
+            // style: Theme.of(context).textTheme.title,
+          ),
         ),
         body: Scrollbar(
           child: Column(
@@ -201,9 +197,10 @@ class ResponsiveDetailView extends StatelessWidget {
       return SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            title: TitleWidget(
-              icon: icon,
-              title: title,
+            centerTitle: true,
+            title: Text(
+              title,
+              // style: Theme.of(context).textTheme.title,
             ),
           ),
           body: Scrollbar(
