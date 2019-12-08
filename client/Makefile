@@ -372,7 +372,7 @@ fb-console:
 fb-test:
 	@echo $(LIB_FSPATH)/client/build/web
 
-fb-serve:
+fb-serve: ## fb-serve
 	# runs locally
 
 	# rebuilds flutter web
@@ -384,7 +384,7 @@ fb-serve:
 
 	firebase serve --only hosting
 
-fb-deploy:
+fb-deploy: ## fb-deploy
 	# rebuilds flutter web
 	$(MAKE) flu-web-build
 
