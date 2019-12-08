@@ -10,6 +10,7 @@ export './services/item_repository.dart';
 export './services/network.dart';
 export './services/storage.dart';
 export './services/user.dart';
+export './utils/apptheme.dart';
 export './utils/utils.dart';
 export './widgets/avatar_loader.dart';
 export './widgets/home_screen.dart';

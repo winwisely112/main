@@ -95,6 +95,7 @@ class _NewsFeedBody extends StatelessWidget {
                           ],
                         ),
                         leading: CircleAvatar(
+                          backgroundColor: Theme.of(context).cardColor,
                           backgroundImage: AssetImage(news.createdBy.avatarURL),
 /*                           NetworkImage(
                             news.createdBy.avatarURL,

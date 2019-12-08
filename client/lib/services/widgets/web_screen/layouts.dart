@@ -24,22 +24,21 @@ class HomeScaffold extends StatelessWidget {
       key: _key,
       drawer: ProfileInfo(),
       appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColorDark,
         leading: !_user.isLoggedIn
             ? IconButton(
-                hoverColor: Colors.blueGrey,
                 icon: Icon(
                   Icons.arrow_back,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
               )
             : IconButton(
-                hoverColor: Colors.blueGrey,
                 icon: Icon(
                   Icons.menu,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
                 onPressed: () {
                   _key.currentState.openDrawer();
@@ -55,8 +54,9 @@ class HomeScaffold extends StatelessWidget {
           ),
           title: Text(
             'Winwisely99',
-            style:
-                Theme.of(context).textTheme.title.copyWith(color: Colors.white),
+            style: Theme.of(context).textTheme.title.copyWith(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
           ),
         ),
       ),
@@ -169,7 +169,7 @@ class ResponsiveDetailView extends StatelessWidget {
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back,
-              color: Theme.of(context).primaryColor,
+              color: Theme.of(context).colorScheme.onSurface,
             ),
             onPressed: () {
               Navigator.of(context).pop();

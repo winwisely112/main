@@ -34,7 +34,7 @@ class WebCampaignView extends StatelessWidget {
             ) {
               return DetailsScreen(
                 body: Material(
-                  color: Colors.white,
+                  color: Theme.of(context).cardColor,
                   elevation: 8.0,
                   child: CampainDetailsView(
                     campaignID: snapshot.data[index].id.id,

@@ -91,12 +91,11 @@ class ChatInputToolbar extends StatelessWidget {
                       bool isFocused,
                     }) =>
                         null,
-                    decoration: inputDecoration != null
-                        ? inputDecoration
-                        : InputDecoration.collapsed(
-                            hintText: "",
-                            fillColor: Colors.white,
-                          ),
+                    decoration: inputDecoration ??
+                        InputDecoration.collapsed(
+                          hintText: "",
+                          fillColor: Colors.white,
+                        ),
                     controller: controller,
                     style: inputTextStyle,
                     maxLength: maxInputLength,

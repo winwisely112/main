@@ -129,13 +129,9 @@ class _UserInfoViewState extends State<_UserInfoView> {
       value: dropdownValue[item],
       icon: Icon(Icons.arrow_drop_down),
       iconSize: 24,
-      elevation: 16,
+      elevation: 5,
       isExpanded: true,
       hint: Text(hint),
-      underline: Container(
-        height: 2,
-        color: Colors.deepPurpleAccent,
-      ),
       onChanged: (String newValue) {
         setState(() {
           dropdownValue[item] = newValue;

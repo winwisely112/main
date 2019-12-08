@@ -27,6 +27,11 @@ class App extends StatelessWidget {
       debugRepaintRainbowEnabled = _configuration.debugShowRainbow;
       return true;
     }());
+    final ThemeData _theme = ThemeData(
+      brightness: Brightness.light,
+      primaryColor: Colors.indigo,
+      fontFamily: 'Roboto',
+    );
     return MaterialApp(
       title: 'WinWisely99',
       initialRoute: '/',
@@ -36,10 +41,9 @@ class App extends StatelessWidget {
       showPerformanceOverlay: _configuration.showPerformanceOverlay,
       showSemanticsDebugger: _configuration.showSemanticsDebugger,
       onGenerateRoute: routes,
-      theme: ThemeData(
-        primaryColor: Colors.indigo,
-        fontFamily: 'Roboto',
-      ),
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
+      themeMode: _configuration.theme,
     );
   }
 }

@@ -10,27 +10,32 @@ class AvatarLoader extends StatelessWidget {
       future: future,
       builder: (BuildContext context, AsyncSnapshot<User> snapshot) {
         if (!snapshot.hasData) {
-          return const CircleAvatar(
-            backgroundImage: AssetImage('assets/commons/avatar.jpg'),
+          return CircleAvatar(
+            backgroundColor: Theme.of(context).cardColor,
+            backgroundImage: const AssetImage('assets/commons/avatar.jpg'),
           );
         }
         if (snapshot.data == null) {
-          return const CircleAvatar(
-            backgroundImage: AssetImage('assets/commons/avatar.jpg'),
+          return CircleAvatar(
+            backgroundColor: Theme.of(context).cardColor,
+            backgroundImage: const AssetImage('assets/commons/avatar.jpg'),
           );
         }
         if (snapshot.data.avatarURL == null) {
-          return const CircleAvatar(
-            backgroundImage: AssetImage('assets/commons/avatar.jpg'),
+          return CircleAvatar(
+            backgroundColor: Theme.of(context).cardColor,
+            backgroundImage: const AssetImage('assets/commons/avatar.jpg'),
           );
         }
         if (snapshot.data.avatarURL.isEmpty) {
-          return const CircleAvatar(
-            backgroundImage: AssetImage('assets/commons/avatar.jpg'),
+          return CircleAvatar(
+            backgroundColor: Theme.of(context).cardColor,
+            backgroundImage: const AssetImage('assets/commons/avatar.jpg'),
           );
         }
 
         return CircleAvatar(
+          backgroundColor: Theme.of(context).cardColor,
           backgroundImage: AssetImage(snapshot.data.avatarURL),
         );
       },

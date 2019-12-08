@@ -53,7 +53,7 @@ class _NewsFeedBody extends StatelessWidget {
             ) {
               return DetailsScreen(
                 body: Material(
-                  color: Colors.white,
+                  color: Theme.of(context).cardColor,
                   elevation: 8.0,
                   child: NewsView(newsId: snapshot.data[index].id.id),
                 ),
@@ -114,6 +114,7 @@ class NewsTile extends StatelessWidget {
               ],
             ),
             leading: CircleAvatar(
+              backgroundColor: Theme.of(context).cardColor,
               backgroundImage: AssetImage(news.createdBy.avatarURL),
 /*                           NetworkImage(
                               news.createdBy.avatarURL,

@@ -11,11 +11,10 @@ class TitleWidget extends StatelessWidget {
       leading: Card(
         shape: const CircleBorder(),
         child: CircleAvatar(
-          //padding: const EdgeInsets.all(8.0),
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).cardColor,
           child: Icon(
             icon,
-            color: Theme.of(context).primaryColor,
+            color: Theme.of(context).colorScheme.secondary,
           ),
         ),
       ),

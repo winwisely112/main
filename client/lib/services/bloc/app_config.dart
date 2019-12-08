@@ -1,7 +1,4 @@
-// Copyright 2015 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
+import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
 class AppConfiguration with ChangeNotifier {
@@ -13,6 +10,7 @@ class AppConfiguration with ChangeNotifier {
   bool _debugShowRainbow = false;
   bool _showPerformanceOverlay = false;
   bool _showSemanticsDebugger = false;
+  ThemeMode _theme = ThemeMode.system;
 
   bool get debugShowGrid => _debugShowGrid;
   bool get debugShowSizes => _debugShowSizes;
@@ -22,6 +20,7 @@ class AppConfiguration with ChangeNotifier {
   bool get debugShowRainbow => _debugShowRainbow;
   bool get showPerformanceOverlay => _showPerformanceOverlay;
   bool get showSemanticsDebugger => _showSemanticsDebugger;
+  ThemeMode get theme => _theme;
 
   void init() {
     _debugShowGrid = false;
@@ -32,6 +31,7 @@ class AppConfiguration with ChangeNotifier {
     _debugShowRainbow = false;
     _showPerformanceOverlay = false;
     _showSemanticsDebugger = false;
+    _theme = ThemeMode.system;
   }
 
   void change(
@@ -42,7 +42,8 @@ class AppConfiguration with ChangeNotifier {
       bool debugShowPointers,
       bool debugShowRainbow,
       bool showPerformanceOverlay,
-      bool showSemanticsDebugger}) {
+      bool showSemanticsDebugger,
+      ThemeMode theme}) {
     _debugShowGrid = debugShowGrid ?? _debugShowGrid;
     _debugShowSizes = debugShowSizes ?? _debugShowSizes;
     _debugShowBaselines = debugShowBaselines ?? _debugShowBaselines;
@@ -51,6 +52,7 @@ class AppConfiguration with ChangeNotifier {
     _debugShowRainbow = debugShowRainbow ?? _debugShowRainbow;
     _showPerformanceOverlay = showPerformanceOverlay ?? _showPerformanceOverlay;
     _showSemanticsDebugger = showSemanticsDebugger ?? _showSemanticsDebugger;
+    _theme = theme ?? _theme;
     notifyListeners();
   }
 }

@@ -15,15 +15,11 @@ class ProfileInfo extends StatelessWidget {
           future: _user.globalUser,
           builder: (BuildContext context, AsyncSnapshot<User> snapshot) {
             return Container(
-              //width: 260,
-              //height: double.infinity,
-              color: Theme.of(context).colorScheme.primaryVariant,
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Container(
                       alignment: Alignment.topLeft,
-                      color: Theme.of(context).colorScheme.primaryVariant,
                       child: Column(
                         children: <Widget>[
                           const SizedBox(height: 8),
@@ -38,8 +34,9 @@ class ProfileInfo extends StatelessWidget {
                               shape: const CircleBorder(),
                               color: Colors.transparent,
                               child: CircleAvatar(
-                                backgroundColor:
-                                    Theme.of(context).colorScheme.primary,
+                                backgroundColor: Theme.of(context).cardColor,
+                                //backgroundColor:
+                                //    Theme.of(context).colorScheme.primary,
                                 backgroundImage: !snapshot.hasData
                                     ? const AssetImage(
                                         'assets/commons/avatar.jpg')
@@ -53,7 +50,6 @@ class ProfileInfo extends StatelessWidget {
                                 ? 'John Doe'
                                 : snapshot.data.displayName,
                             style: const TextStyle(
-                              color: Colors.white,
                               fontSize: 18,
                             ),
                           ),
@@ -65,7 +61,7 @@ class ProfileInfo extends StatelessWidget {
                             children: <Widget>[
                               Icon(
                                 Icons.email,
-                                color: Colors.white,
+                                color: Theme.of(context).accentColor,
                               ),
                               const SizedBox(
                                 width: 8,
@@ -75,16 +71,13 @@ class ProfileInfo extends StatelessWidget {
                                     ? 'john.doe@email.com'
                                     : snapshot.data.email,
                                 style: TextStyle(
-                                  color: Colors.white,
                                   fontWeight: FontWeight.w300,
                                   fontSize: 14,
                                 ),
                               ),
                             ],
                           ),
-                          const Divider(
-                            color: Colors.white,
-                          ),
+                          const Divider(),
                           Tile(
                             iconData: Icons.settings,
                             title: 'Settings',
@@ -107,12 +100,9 @@ class ProfileInfo extends StatelessWidget {
                     ),
                     Container(
                       alignment: Alignment.bottomLeft,
-                      color: Theme.of(context).colorScheme.primary,
                       child: Column(
                         children: <Widget>[
-                          const Divider(
-                            color: Colors.white,
-                          ),
+                          const Divider(),
                           FutureBuilder<PackageInfo>(
                             future: PackageInfo.fromPlatform(),
                             builder: (BuildContext context,
@@ -150,9 +140,6 @@ class Tile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        //const SizedBox(
-        //  height: 8,
-        //),
         Container(
           child: Material(
             color: Colors.transparent,
@@ -161,27 +148,20 @@ class Tile extends StatelessWidget {
               child: ListTile(
                 leading: Icon(
                   iconData,
-                  color: Colors.white,
                 ),
                 title: Text(
                   title,
-                  style: const TextStyle(
-                    color: Colors.white,
-                  ),
+                  style: const TextStyle(),
                 ),
                 subtitle: Text(
                   subtitle ?? '',
-                  style: const TextStyle(
-                      color: Colors.white, fontStyle: FontStyle.italic),
+                  style: const TextStyle(fontStyle: FontStyle.italic),
                 ),
                 onTap: onTap,
               ),
             ),
           ),
         ),
-        //const Divider(
-        //  color: Colors.white,
-        //),
       ],
     );
   }

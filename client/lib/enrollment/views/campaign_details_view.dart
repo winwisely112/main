@@ -96,16 +96,12 @@ class _CampainDetailsBody extends StatelessWidget {
         ButtonBar(
           children: <Widget>[
             FlatButton(
-              color: Colors.white,
-              textColor: Colors.blue,
               onPressed: () {
                 Navigator.of(context).pushNamed('/notready');
               },
               child: const Text('Not Ready'),
             ),
             RaisedButton(
-              color: Colors.blue,
-              textColor: Colors.white,
               onPressed: () {
                 Navigator.of(context).pushNamed('/signup');
               },

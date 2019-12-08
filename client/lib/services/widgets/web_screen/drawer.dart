@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../bloc/data.dart';
 import '../../services/auth_user_service.dart';
 import '../avatar_loader.dart';
 import './drawer_list_tile.dart';
@@ -18,87 +17,68 @@ class LeftDrawer extends StatelessWidget {
     final List<Widget> _topList = !_user.isLoggedIn
         ? <Widget>[]
         : <Widget>[
-            IconButton(
-              icon: Icon(
-                Icons.home,
-                color: Colors.white,
-              ),
+            DrawerListTile(
+              icon: Icons.home,
+              selected: index == 0,
+              index: 0,
               onPressed: () {
                 Navigator.of(context).pushNamed('/news');
               },
-              //size: 32.0,
             ),
-            IconButton(
-              icon: Icon(
-                Icons.chat_bubble,
-                color: Colors.white,
-                // size: 32.0,
-              ),
+            DrawerListTile(
+              icon: Icons.chat_bubble,
+              selected: index == 1,
+              index: 1,
               onPressed: () {
                 Navigator.of(context).pushNamed('/chatgroup');
               },
-              //size: 32.0,
             ),
-            IconButton(
-              icon: Icon(
-                Icons.settings_input_antenna,
-                color: Colors.white,
-                //size: 32.0,
-              ),
+            DrawerListTile(
+              icon: Icons.settings_input_antenna,
+              selected: index == 2,
+              index: 2,
               onPressed: () {
                 Navigator.of(context).pushNamed('/enrollments');
               },
-              //size: 32.0,
             ),
           ];
+
     final List<Widget> _bottomList = !_user.isLoggedIn
         ? <Widget>[
-            IconButton(
-              icon: Icon(
-                Icons.settings,
-                color: Colors.white,
-                //size: 32.0,
-              ),
+            DrawerListTile(
+              icon: Icons.settings,
+              selected: index == 4,
+              index: 4,
               onPressed: () {
                 Navigator.of(context).pushNamed('/settings');
               },
-              //size: 32.0,
             ),
           ]
         : <Widget>[
-            AvatarLoader(future: _user.globalUser),
-            IconButton(
-              icon: Icon(
-                Icons.settings,
-                color: Colors.white,
-                //size: 32.0,
-              ),
+            AvatarLoader(future: _user.globalUser), // index 3
+            DrawerListTile(
+              icon: Icons.settings,
+              selected: index == 4,
+              index: 4,
               onPressed: () {
                 Navigator.of(context).pushNamed('/settings');
               },
-              //size: 32.0,
             ),
-            IconButton(
-              icon: Icon(
-                Icons.exit_to_app,
-                color: Colors.white,
-              ),
+            DrawerListTile(
+              icon: Icons.exit_to_app,
+              selected: index == 5,
+              index: 5,
               onPressed: () {
                 _user.userLoggedIn = false;
-                //print('user log ${_user.isLoggedIn}');
                 Navigator.of(context).pushNamed('/signout');
               },
             ),
           ];
-    final List<bool> _menuList = !_user.isLoggedIn
-        ? index < 0
-            ? List<bool>.filled(_bottomList.length, false)
-            : _setIndex(0, _bottomList.length)
-        : _setIndex(index, _topList.length + _bottomList.length + 2);
+
     return SafeArea(
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        color: Theme.of(context).colorScheme.primary,
+        color: Theme.of(context).primaryColor,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
@@ -106,15 +86,11 @@ class LeftDrawer extends StatelessWidget {
               alignment: Alignment.topCenter,
               child: Column(
                 children: <Widget>[
-                  for (int i = 0; i < _topList.length; i++)
+                  for (Widget child in _topList)
                     Column(
                       children: <Widget>[
                         const SizedBox(height: 8),
-                        DrawerListTile(
-                          selected: _menuList[i],
-                          index: i,
-                          child: _topList[i],
-                        ),
+                        child,
                         const SizedBox(height: 8),
                       ],
                     )
@@ -125,15 +101,11 @@ class LeftDrawer extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               child: Column(
                 children: <Widget>[
-                  for (int i = 0; i < _bottomList.length; i++)
+                  for (Widget child in _bottomList)
                     Column(
                       children: <Widget>[
                         const SizedBox(height: 8),
-                        DrawerListTile(
-                          selected: _menuList[_topList.length + i],
-                          index: _topList.length + i,
-                          child: _bottomList[i],
-                        ),
+                        child,
                         const SizedBox(height: 8),
                       ],
                     )
@@ -144,11 +116,5 @@ class LeftDrawer extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  List<bool> _setIndex(int _index, int _length) {
-    final List<bool> _list = List<bool>.filled(_length, false);
-    _list[_index] = true;
-    return _list;
   }
 }

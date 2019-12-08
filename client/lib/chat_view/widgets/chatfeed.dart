@@ -45,9 +45,10 @@ class _ChatFeedView extends StatelessWidget {
         title: ListTile(
           title: Text(
             chatGroup.title,
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
           ),
           leading: CircleAvatar(
+            backgroundColor: Theme.of(context).cardColor,
             backgroundImage: AssetImage(chatGroup.avatarUrl),
 /*             NetworkImage(
               conversation.avatarURL
@@ -230,7 +231,7 @@ class _ChatFeedBodyState extends State<_ChatFeedBody> {
           inputTextStyle: const TextStyle(fontSize: 16.0),
           inputContainerStyle: BoxDecoration(
             border: Border.all(width: 0.0),
-            color: Colors.white,
+            color: Theme.of(context).inputDecorationTheme.fillColor,
           ),
           onQuickReply: (Reply reply) {
             setState(

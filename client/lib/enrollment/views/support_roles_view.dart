@@ -106,8 +106,7 @@ class _SupportRolesViewState extends State<_SupportRolesView> {
               secondary: Card(
                 shape: const CircleBorder(),
                 child: CircleAvatar(
-                  //padding: const EdgeInsets.all(8.0),
-                  backgroundColor: Colors.white,
+                  backgroundColor: Theme.of(context).cardColor,
                   child: Icon(
                     supportRoles[index].icon,
                     color: Theme.of(context).accentColor,

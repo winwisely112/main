@@ -54,7 +54,7 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.indigo,
+        //selectedItemColor: Theme.of(context).,
         onTap: _onItemTapped,
       ),
     );

@@ -67,7 +67,7 @@ class __ChatGroupFeedBodyState extends State<_ChatGroupFeedBody> {
               ) {
                 return DetailsScreen(
                   body: Material(
-                    color: Colors.white,
+                    color: Theme.of(context).cardColor,
                     elevation: 5.0,
                     child: ChatFeed(
                       chatGroupId: snapshot.data[index].id.id,
@@ -136,6 +136,7 @@ class _ConversationTile extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
               leading: CircleAvatar(
+                backgroundColor: Theme.of(context).cardColor,
                 backgroundImage: AssetImage(chatGroup.avatarUrl),
                 // NetworkImage(chatGroup.avatarURL),
                 child: const Text(''),

@@ -158,12 +158,11 @@ class __NotReadyViewState extends State<_NotReadyView> {
             labelText: 'Is there any other need you have....',
             alignLabelWithHint: true,
             hintText: 'Is there any other need you have....',
-            fillColor: Colors.white,
+            fillColor: Theme.of(context).inputDecorationTheme.fillColor,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(4.0),
               borderSide: const BorderSide(),
             ),
-            //fillColor: Colors.green
           ),
           validator: (String val) {
             if (val.isEmpty) {
@@ -191,15 +190,12 @@ class __NotReadyViewState extends State<_NotReadyView> {
         ButtonBar(
           children: <Widget>[
             FlatButton(
-              textColor: Colors.blue,
               onPressed: () {
                 Navigator.of(context).pop();
               },
               child: const Text('No'),
             ),
             RaisedButton(
-              color: Colors.blue,
-              textColor: Colors.white,
               onPressed: () {
                 Navigator.of(context).pushNamed('/supportroles');
               },

@@ -64,6 +64,24 @@ class _Settings extends StatelessWidget {
     Widget buildSettingsPane(BuildContext context) {
       final List<Widget> rows = <Widget>[
         ListTile(
+          leading: Icon(Icons.palette),
+          title: const Text('Change Theme'),
+          trailing: DropdownButton<ThemeMode>(
+            value: configuration.theme,
+            onChanged: (ThemeMode value) {
+              configuration.change(theme: value);
+            },
+            items: ThemeMode.values
+                .map<DropdownMenuItem<ThemeMode>>((ThemeMode value) {
+              return DropdownMenuItem<ThemeMode>(
+                value: value,
+                child: Text(
+                    value.toString().replaceAll(RegExp(r'ThemeMode.'), '')),
+              );
+            }).toList(),
+          ),
+        ),
+        ListTile(
           leading: const Icon(Icons.picture_in_picture),
           title: const Text('Show rendering performance overlay'),
           onTap: () {

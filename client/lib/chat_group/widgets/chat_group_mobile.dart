@@ -126,6 +126,7 @@ class _ConversationTile extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
               leading: CircleAvatar(
+                backgroundColor: Theme.of(context).cardColor,
                 backgroundImage: AssetImage(chatGroup.avatarUrl),
                 // NetworkImage(chatGroup.avatarURL),
                 child: const Text(''),
