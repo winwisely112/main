@@ -19,6 +19,7 @@ export './widgets/settings.dart';
 export './widgets/splash_screen.dart';
 export './widgets/title_widget.dart';
 export './widgets/video_player.dart';
+export './widgets/web_screen/bottom_nav.dart';
 export './widgets/web_screen/layouts.dart';
 export './widgets/web_screen/simple_route.dart';
 

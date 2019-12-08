@@ -8,6 +8,7 @@ import 'package:com.winwisely99.app/vendor_plugins/vendor_plugins.dart';
 import '../../services/auth_user_service.dart';
 import '../profile_info.dart';
 import '../title_widget.dart';
+import './bottom_nav.dart';
 import './drawer.dart';
 
 class HomeScaffold extends StatelessWidget {
@@ -21,48 +22,49 @@ class HomeScaffold extends StatelessWidget {
     final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
     final AuthUserService _user = Provider.of<AuthUserService>(context);
     return Scaffold(
-      key: _key,
-      drawer: ProfileInfo(),
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).primaryColorDark,
-        leading: !_user.isLoggedIn
-            ? IconButton(
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: Theme.of(context).colorScheme.onPrimary,
+        key: _key,
+        drawer: ProfileInfo(),
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).primaryColorDark,
+          leading: !_user.isLoggedIn
+              ? IconButton(
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                )
+              : IconButton(
+                  icon: Icon(
+                    Icons.menu,
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
+                  onPressed: () {
+                    _key.currentState.openDrawer();
+                  },
                 ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              )
-            : IconButton(
-                icon: Icon(
-                  Icons.menu,
-                  color: Theme.of(context).colorScheme.onPrimary,
-                ),
-                onPressed: () {
-                  _key.currentState.openDrawer();
-                },
+          title: ListTile(
+            leading: const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: CircleAvatar(
+                backgroundColor: Colors.transparent,
+                backgroundImage: AssetImage('assets/icon/icon-old.png'),
               ),
-        title: ListTile(
-          leading: const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: CircleAvatar(
-              backgroundColor: Colors.transparent,
-              backgroundImage: AssetImage('assets/icon/icon-old.png'),
+            ),
+            title: Text(
+              'Winwisely99',
+              style: Theme.of(context).textTheme.title.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
             ),
           ),
-          title: Text(
-            'Winwisely99',
-            style: Theme.of(context).textTheme.title.copyWith(
-                  color: Theme.of(context).colorScheme.onPrimary,
-                ),
-          ),
         ),
-      ),
-      body: child,
-      bottomNavigationBar: bottomNavigationBar,
-    );
+        body: child,
+        bottomNavigationBar: bottomNavigationBar
+        // MediaQuery.of(context).size.width >= 720.0 ? null : const BottomNav(),
+        );
   }
 }
 
@@ -88,8 +90,15 @@ class WebLayoutBody extends StatefulWidget {
 class _WebLayoutState extends State<WebLayoutBody> {
   @override
   Widget build(BuildContext context) {
+    final AuthUserService _user = Provider.of<AuthUserService>(context);
     return ResponsiveListScaffold.builder(
-      bottomNavigationBar: null,
+      bottomNavigationBar: !_user.isLoggedIn
+          ? null
+          : MediaQuery.of(context).size.width >= 720.0
+              ? null
+              : BottomNav(
+                  index: widget.drawerSelection,
+                ),
       slivers: <Widget>[
         SliverList(
           delegate:
@@ -209,7 +218,6 @@ class ResponsiveDetailView extends StatelessWidget {
         ),
       );
     }
-    ;
   }
 }
 
@@ -222,27 +230,35 @@ class _WebView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return HomeScaffold(
-      child: Flex(
-        direction: Axis.horizontal,
-        children: <Widget>[
-          Flexible(
-            flex: 0,
-            child: LeftDrawer(index: index),
-            fit: FlexFit.tight,
-          ),
-          Flexible(
-            flex: 4,
-            fit: FlexFit.tight,
-            child: Column(
+      child: MediaQuery.of(context).size.width >= 720.0
+          ? Flex(
+              direction: Axis.horizontal,
+              children: <Widget>[
+                Flexible(
+                  flex: 0,
+                  child: LeftDrawer(index: index),
+                  fit: FlexFit.tight,
+                ),
+                Flexible(
+                  flex: 4,
+                  fit: FlexFit.tight,
+                  child: Column(
+                    children: <Widget>[
+                      title,
+                      const Divider(),
+                      child,
+                    ],
+                  ),
+                ),
+              ],
+            )
+          : Column(
               children: <Widget>[
                 title,
                 const Divider(),
                 child,
               ],
             ),
-          ),
-        ],
-      ),
     );
   }
 }

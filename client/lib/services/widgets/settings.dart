@@ -178,6 +178,23 @@ class _Settings extends StatelessWidget {
         ]);
         return true;
       }());
+      if (MediaQuery.of(context).size.width < 720.0) {
+        rows.add(
+          ListTile(
+            title: ButtonBar(
+              children: <Widget>[
+                RaisedButton(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: const Text('Back'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+          ),
+        );
+      }
       return ResponsiveListView(children: rows);
     }
 
