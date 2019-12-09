@@ -1,4 +1,4 @@
-# mod-videoconf
+# mod-ion
 
 ION and CloudWebrtc are a powerful Pub Sub system.
 
