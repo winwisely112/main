@@ -1,3 +1,8 @@
+# feature flags
+
+Allows us to easily bring in Modules at runtime.
+
+This will make it safe to deploy stuff to production and then turn it on as needed.
 
 
 a great explanation of why and how.
