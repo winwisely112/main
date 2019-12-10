@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'package:com.winwisely99.app/services/services.dart';
+import 'package:com.whitelabel/services/services.dart';
 
 class NotReadyView extends StatelessWidget {
   const NotReadyView({Key key}) : super(key: key);

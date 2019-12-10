@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 //import 'package:responsive_scaffold/responsive_scaffold.dart';
 
-import 'package:com.winwisely99.app/vendor_plugins/vendor_plugins.dart';
+import 'package:com.whitelabel/vendor_plugins/vendor_plugins.dart';
 
 import '../../services/auth_user_service.dart';
 import '../profile_info.dart';

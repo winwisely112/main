@@ -3,11 +3,11 @@ import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
 // TODO(FlutterDevelopers): Import modules here
-import 'package:com.winwisely99.app/chat_view/chat_view.dart';
-import 'package:com.winwisely99.app/chat_group/chat_group.dart';
-import 'package:com.winwisely99.app/enrollment/enrollment.dart';
-import 'package:com.winwisely99.app/news/news.dart';
-import 'package:com.winwisely99.app/services/services.dart';
+import 'package:com.whitelabel/chat_view/chat_view.dart';
+import 'package:com.whitelabel/chat_group/chat_group.dart';
+import 'package:com.whitelabel/enrollment/enrollment.dart';
+import 'package:com.whitelabel/news/news.dart';
+import 'package:com.whitelabel/services/services.dart';
 import 'app.dart';
 import 'hive.dart';
 

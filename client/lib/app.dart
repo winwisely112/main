@@ -9,7 +9,7 @@ import 'package:flutter/rendering.dart'
         debugPaintPointersEnabled,
         debugRepaintRainbowEnabled;
 //import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:com.winwisely99.app/services/services.dart';
+import 'package:com.whitelabel/services/services.dart';
 import 'navigation.dart';
 
 class App extends StatelessWidget {

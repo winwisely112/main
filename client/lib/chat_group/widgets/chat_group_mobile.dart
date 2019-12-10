@@ -2,8 +2,8 @@ import 'package:collection/collection.dart' show groupBy;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:com.winwisely99.app/services/services.dart';
-import 'package:com.winwisely99.app/chat_view/chat_view.dart';
+import 'package:com.whitelabel/services/services.dart';
+import 'package:com.whitelabel/chat_view/chat_view.dart';
 
 import '../bloc/bloc.dart';
 import '../bloc/data.dart';

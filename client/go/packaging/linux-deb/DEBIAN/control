@@ -1,6 +1,6 @@
-Package: com.winwisely99.app
+Package: com.whitelabel
 Architecture: amd64
-Maintainer: @com.winwisely99.app
+Maintainer: @com.whitelabel
 Priority: optional
 Version: 
 Description: Demonstrates how to use the News module.

@@ -23,7 +23,7 @@
   <key>MinimumOSVersion</key>
   <string>8.0</string>
   <key>FlutterEngine</key>
-  <string>e7b69ced2e2408da86261227a04f09e0c0fe905d</string>
+  <string>12bf95fd49b7456f08a1274078c4b55e675ad018</string>
   <key>ClangVersion</key>
   <string>Apple LLVM version 10.0.1 (clang-1001.0.46.3)</string>
 </dict>

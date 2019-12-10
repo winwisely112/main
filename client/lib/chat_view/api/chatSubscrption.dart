@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:isolate';
 
-import 'package:com.winwisely99.app/services/services.dart';
+import 'package:com.whitelabel/services/services.dart';
 import 'package:grpc/grpc.dart';
 import 'package:repository/repository.dart';
 

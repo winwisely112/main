@@ -3,8 +3,8 @@ import 'package:hive/hive.dart';
 import 'package:repository/repository.dart';
 import 'package:rxdart/rxdart.dart';
 
-import 'package:com.winwisely99.app/services/services.dart';
-import 'package:com.winwisely99.app/chat_group/chat_group.dart';
+import 'package:com.whitelabel/services/services.dart';
+import 'package:com.whitelabel/chat_group/chat_group.dart';
 
 import 'data.dart';
 

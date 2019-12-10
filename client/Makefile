@@ -151,13 +151,14 @@ flu-desk-local-run: ## flu-desk-local-run
 	cd $(SAMPLE_FSPATH) && hover run
 
 flu-desk-local-build: ## flu-desk-local-build
+
 ifeq ($(GO_OS), linux)
 	@echo Linux detected
 
-	cd $(SAMPLE_FSPATH) && hover build $(GO_OS)-appimage
-	cd $(SAMPLE_FSPATH) && hover build $(GO_OS)-deb
-	cd $(SAMPLE_FSPATH) && hover build $(GO_OS)-rpm
-	cd $(SAMPLE_FSPATH) && hover build $(GO_OS)-snap
+	cd $(SAMPLE_FSPATH) && hover build $(GO_OS)-appimage --version-number $(GIT_VERSION)
+	cd $(SAMPLE_FSPATH) && hover build $(GO_OS)-deb --version-number $(GIT_VERSION)
+	cd $(SAMPLE_FSPATH) && hover build $(GO_OS)-rpm --version-number $(GIT_VERSION)
+	cd $(SAMPLE_FSPATH) && hover build $(GO_OS)-snap --version-number $(GIT_VERSION)
 
 endif
 
@@ -167,14 +168,14 @@ ifeq ($(GO_OS), darwin)
 	#cd $(SAMPLE_FSPATH) && hover build $(GO_OS)-bundle --version-number $(GIT_VERSION)
 	#cd $(SAMPLE_FSPATH) && hover build $(GO_OS) --version-number $(GIT_VERSION)
 	cd $(SAMPLE_FSPATH) && hover build $(GO_OS)-pkg --version-number $(GIT_VERSION)
-	#cd $(SAMPLE_FSPATH) && hover build $(GO_OS)-dmg
+	#cd $(SAMPLE_FSPATH) && hover build $(GO_OS)-dmg --version-number $(GIT_VERSION)
 
 endif
 
 ifeq ($(GO_OS), windows)
 	@echo Windows detected
-	cd $(SAMPLE_FSPATH) && hover build $(GO_OS)
-	cd $(SAMPLE_FSPATH) && hover build $(GO_OS)-msi
+	cd $(SAMPLE_FSPATH) && hover build $(GO_OS) --version-number $(GIT_VERSION)
+	cd $(SAMPLE_FSPATH) && hover build $(GO_OS)-msi --version-number $(GIT_VERSION)
 endif
 
 	
@@ -195,10 +196,10 @@ flu-desk-build-clean:
 flu-desk-build:
 	# uses docker to build
 
-	cd $(SAMPLE_FSPATH) && hover build darwin
-	cd $(SAMPLE_FSPATH) && hover build windows
+	cd $(SAMPLE_FSPATH) && hover build darwin --version-number $(GIT_VERSION)
+	cd $(SAMPLE_FSPATH) && hover build windows --version-number $(GIT_VERSION)
 	# broken: need to look into
-	#cd $(SAMPLE_FSPATH) && hover build linux
+	#cd $(SAMPLE_FSPATH) && hover build linux --version-number $(GIT_VERSION)
 
 flu-desk-buildrun: flu-desk-build
 
@@ -251,7 +252,7 @@ flu-desk-pack:
 
 
 	# darwin (works)
-	cd $(SAMPLE_FSPATH) && hover build darwin-pkg
+	cd $(SAMPLE_FSPATH) && hover build darwin-pkg --version-number $(GIT_VERSION)
 	
 	# windows (works)
 	#cd $(SAMPLE_FSPATH) && hover build windows-msi
@@ -348,6 +349,33 @@ flu-desk-dist-unzip:
 
 flu-mob-run: ## flu-mob-run
 	cd $(SAMPLE_FSPATH) && flutter run -d all
+
+flu-mob-build-and: ## flu-mob-build-and
+
+	# Create keystore
+	# Warning: Keep the keystore file private; do not check it into public source control.
+	@echo Creating Keystore 
+ifeq ($(GO_OS), linux)
+	@echo Linux detected
+	keytool -genkey -v -keystore ~/key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias key
+endif
+
+ifeq ($(GO_OS), darwin)
+	@echo Mac detected
+	keytool -genkey -v -keystore ~/key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias key
+endif
+
+ifeq ($(GO_OS), windows)
+	@echo Windows detected
+	keytool -genkey -v -keystore c:/Users/USER_NAME/key.jks -storetype JKS -keyalg RSA -keysize 2048 -validity 10000 -alias key
+endif
+
+	# Create keystore
+	
+
+	# TODO and sign
+	#cd $(SAMPLE_FSPATH) && flutter 
+
 
 
 ### WEB

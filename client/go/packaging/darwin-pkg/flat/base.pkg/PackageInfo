@@ -1,5 +1,5 @@
-<pkg-info format-version="2" identifier="com.winwisely99.base.pkg" version="" install-location="/" auth="root">
+<pkg-info format-version="2" identifier="com.whitelabel.base.pkg" version="" install-location="/" auth="root">
 	<bundle-version>
-		<bundle id="com.winwisely99" CFBundleIdentifier="com.winwisely99" path="./Applications/com.winwisely99.app.app" CFBundleVersion=""/>
+		<bundle id="com.whitelabel" CFBundleIdentifier="com.whitelabel" path="./Applications/com.whitelabel.app" CFBundleVersion=""/>
     </bundle-version>
 </pkg-info>

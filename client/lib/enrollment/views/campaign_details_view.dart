@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:com.winwisely99.app/services/services.dart';
+import 'package:com.whitelabel/services/services.dart';
 
 import '../bloc/data.dart';
 import '../widgets/video_player.dart';

@@ -2,12 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 // TODO(FlutterDevelopers): Import modules here
-import 'package:com.winwisely99.app/chat_group/chat_group.dart';
-import 'package:com.winwisely99.app/chat_view/chat_view.dart';
-import 'package:com.winwisely99.app/enrollment/enrollment.dart';
-import 'package:com.winwisely99.app/news/news.dart';
-import 'package:com.winwisely99.app/signup/signup.dart';
-import 'package:com.winwisely99.app/services/services.dart';
+import 'package:com.whitelabel/chat_group/chat_group.dart';
+import 'package:com.whitelabel/chat_view/chat_view.dart';
+import 'package:com.whitelabel/enrollment/enrollment.dart';
+import 'package:com.whitelabel/news/news.dart';
+import 'package:com.whitelabel/signup/signup.dart';
+import 'package:com.whitelabel/services/services.dart';
 
 Route<dynamic> routes(RouteSettings settings) {
   MaterialPageRoute<dynamic> _route;

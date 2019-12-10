@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:repository/repository.dart';
 
-import 'package:com.winwisely99.app/chat_group/chat_group.dart';
-import 'package:com.winwisely99.app/services/services.dart';
-import 'package:com.winwisely99.app/vendor_plugins/vendor_plugins.dart';
+import 'package:com.whitelabel/chat_group/chat_group.dart';
+import 'package:com.whitelabel/services/services.dart';
+import 'package:com.whitelabel/vendor_plugins/vendor_plugins.dart';
 import '../bloc/bloc.dart';
 import '../bloc/data.dart';
 

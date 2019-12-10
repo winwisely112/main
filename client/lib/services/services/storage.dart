@@ -1,6 +1,6 @@
 import 'package:repository/repository.dart';
 
-import 'package:com.winwisely99.app/vendor_plugins/vendor_plugins.dart';
+import 'package:com.whitelabel/vendor_plugins/vendor_plugins.dart';
 import '../bloc/data.dart';
 
 /// A service that offers storage of app-wide data.

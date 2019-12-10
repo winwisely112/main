@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:repository/repository.dart';
 
-import 'package:com.winwisely99.app/services/services.dart';
-import 'package:com.winwisely99.app/chat_view/chat_view.dart';
+import 'package:com.whitelabel/services/services.dart';
+import 'package:com.whitelabel/chat_view/chat_view.dart';
 
 part 'data.g.dart';
 

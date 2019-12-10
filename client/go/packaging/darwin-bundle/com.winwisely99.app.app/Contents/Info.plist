@@ -5,19 +5,19 @@
         <key>CFBundleDevelopmentRegion</key>
         <string>English</string>
         <key>CFBundleExecutable</key>
-        <string>com.winwisely99.app</string>
+        <string>com.whitelabel</string>
         <key>CFBundleGetInfoString</key>
         <string>Demonstrates how to use the News module.</string>
         <key>CFBundleIconFile</key>
         <string>icon.icns</string>
         <key>CFBundleIdentifier</key>
-        <string>com.winwisely99</string>
+        <string>com.whitelabel</string>
         <key>CFBundleInfoDictionaryVersion</key>
         <string>6.0</string>
         <key>CFBundleLongVersionString</key>
         <string></string>
         <key>CFBundleName</key>
-        <string>com.winwisely99.app</string>
+        <string>com.whitelabel</string>
         <key>CFBundlePackageType</key>
         <string>APPL</string>
         <key>CFBundleShortVersionString</key>

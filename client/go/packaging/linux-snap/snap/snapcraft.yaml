@@ -1,4 +1,4 @@
-name: com.winwisely99.app
+name: com.whitelabel
 base: core18
 version: ''
 summary: Demonstrates how to use the News module.
@@ -7,9 +7,9 @@ description: |
 confinement: devmode
 grade: devel
 apps:
-  com.winwisely99.app:
-    command: com.winwisely99.app
-    desktop: local/com.winwisely99.app.desktop
+  com.whitelabel:
+    command: com.whitelabel
+    desktop: local/com.whitelabel.desktop
 parts:
   desktop:
     plugin: dump

@@ -1,7 +1,7 @@
 import 'package:meta/meta.dart';
 import 'package:repository/repository.dart';
 
-import 'package:com.winwisely99.app/services/services.dart';
+import 'package:com.whitelabel/services/services.dart';
 
 import 'data.dart';
 

@@ -1,4 +1,4 @@
-package com.winwisely99.app
+package com.whitelabel
 
 import android.os.Bundle
 

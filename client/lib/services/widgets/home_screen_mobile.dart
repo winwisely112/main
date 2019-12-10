@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:com.winwisely99.app/chat_group/chat_group.dart';
-import 'package:com.winwisely99.app/news/news.dart';
+import 'package:com.whitelabel/chat_group/chat_group.dart';
+import 'package:com.whitelabel/news/news.dart';
 
 import './web_screen/layouts.dart';
 

@@ -3,6 +3,6 @@ Version=1.0
 Type=Application
 Terminal=false
 Categories=
-Name=com.winwisely99.app
+Name=com.whitelabel
 Icon=/build/assets/icon
 Exec=

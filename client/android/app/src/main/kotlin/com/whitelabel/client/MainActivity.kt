@@ -1,4 +1,4 @@
-package com.winwisely99.client
+package com.whitelabel.client
 
 import android.os.Bundle
 
