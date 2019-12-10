@@ -16,7 +16,7 @@ BIN_FSPATH=$(GOPATH)/bin/$(BIN_NAME)
 OS=$(shell uname)
 export ENABLE_FLUTTER_DESKTOP=true
 	
-docker-pem:
+docker-build:
 ifeq ($(OS), Linux)
 
 	sudo apt install libnss3-tools
@@ -27,22 +27,22 @@ ifeq ($(OS), Linux)
 
 	mkcert 127.0.0.1
 
-	cp 127.0.0.1-key.pem ./pion/key.pem
-	cp 127.0.0.1-key.pem ./cloudwebrtc/key.pem
-
-	cp 127.0.0.1.pem ./pion/cert.pem 
-	cp 127.0.0.1.pem  ./cloudwebrtc/cert.pem
-
-	rm 127.0.0.1-key.pem
-	rm 127.0.0.1.pem
-
+else ifeq ($(OS), Mac)
+	@echo Docker build for MAc not implemented
+	
 endif
 
-docker-pion:
-	cd ./pion && sudo docker-compose up	
-
-docker-cloudwebrtc:
+ifeq ($(ion), cloudwebrtc)
+	mv 127.0.0.1-key.pem ./cloudwebrtc/key.pem
+	mv 127.0.0.1.pem  ./cloudwebrtc/cert.pem
+	
 	cd ./cloudwebrtc && sudo docker-compose up	
+else
+	mv 127.0.0.1-key.pem ./pion/key.pem
+	mv 127.0.0.1.pem ./pion/cert.pem 
+
+	cd ./pion && sudo docker-compose up	
+endif
 
 print:
 	@echo
