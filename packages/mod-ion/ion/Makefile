@@ -62,30 +62,16 @@ endif
 
 ifeq ($(GO_OS), windows)
 	@echo Windows detected
+
+	# mkcert needs nothing
 endif
 
-	
+
 
 docker-build: ##docker-build
 	go get -u github.com/FiloSottile/mkcert
 	mkcert -install
 	mkcert 127.0.0.1
-
-docker-build-linux: ##docker-build-linux
-ifeq ($(OS), Linux)
-
-	
-	
-	go get -u github.com/FiloSottile/mkcert
-
-	mkcert -install
-
-	mkcert 127.0.0.1
-
-else ifeq ($(OS), Mac)
-	@echo Docker build for MAc not implemented
-	
-endif
 
 ifeq ($(ion), cloudwebrtc)
 	mv 127.0.0.1-key.pem ./cloudwebrtc/key.pem
