@@ -73,8 +73,22 @@ git-clean:
 code:
 	code $(LIB_FSPATH)
 
-os-dep:
-	# Assume hover minstalled
+os-dep: ##os-dep
+	@echo Installing OS required tools
+	
+	hover doctor
+
+ifeq ($(GO_OS), linux)
+	@echo Linux detected
+endif
+
+ifeq ($(GO_OS), darwin)
+	@echo Mac detected
+endif
+
+ifeq ($(GO_OS), windows)
+	@echo Windows detected
+endif
 
 flu-config: ## flu-config
 	flutter config
@@ -97,13 +111,26 @@ flu-update:
 	cd $(SAMPLE_FSPATH) && flutter analyze 
 
 gen-icons:
+	# mobile and web
+	@echo
+	@echo Generating icons for Flutter
+	@echo
 	cd $(SAMPLE_FSPATH) && flutter pub run flutter_launcher_icons:main
+
+	# desktop
+	@echo
+	@echo Copying icon-png from flutter assets into go assets, so hover can use it
+	@echo
+	cp $(SAMPLE_FSPATH)/assets/icon/icon.png $(SAMPLE_FSPATH)/go/assets
 gen-hive:
 	cd $(SAMPLE_FSPATH) && flutter packages pub run build_runner build --delete-conflicting-outputs
 gen-proto:
 	pub global activate protoc_plugin
 	mkdir -p $(SAMPLE_FSPATH)/lib/api/v1/google/protobuf
-ifeq ($(OS),Windows_NT)
+
+
+ifeq ($(GO_OS), windows)
+	@echo Windows detected
 	protoc empty.proto timestamp.proto wrappers.proto --proto_path=$(LIB_FSPATH)/server/third_party/google/protobuf/ --plugin=$(HOME_PATH)/AppData/Roaming/Pub/Cache/bin/protoc-gen-dart.bat --dart_out=grpc:"$(PROTO_OUTPUT)/client/lib/chat_view/api/v1/google/protobuf"
 	protoc chat.proto --proto_path=$(LIB_FSPATH)/server/api/proto/v1/ --plugin=$(HOME_PATH)/AppData/Roaming/Pub/Cache/bin/protoc-gen-dart.bat --dart_out=grpc:"$(PROTO_OUTPUT)/client/lib/chat_view/api/v1/"
 else
@@ -137,9 +164,9 @@ endif
 ifeq ($(GO_OS), darwin)
 	@echo Mac detected
 
-	cd $(SAMPLE_FSPATH) && hover build $(GO_OS) --version-number $(GIT_VERSION)
-	#cd $(SAMPLE_FSPATH) && hover build $(GO_OS)-bundle
-	#cd $(SAMPLE_FSPATH) && hover build $(GO_OS)-pkg
+	#cd $(SAMPLE_FSPATH) && hover build $(GO_OS)-bundle --version-number $(GIT_VERSION)
+	#cd $(SAMPLE_FSPATH) && hover build $(GO_OS) --version-number $(GIT_VERSION)
+	cd $(SAMPLE_FSPATH) && hover build $(GO_OS)-pkg --version-number $(GIT_VERSION)
 	#cd $(SAMPLE_FSPATH) && hover build $(GO_OS)-dmg
 
 endif
