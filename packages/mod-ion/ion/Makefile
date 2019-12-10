@@ -15,8 +15,60 @@ BIN_FSPATH=$(GOPATH)/bin/$(BIN_NAME)
 
 OS=$(shell uname)
 export ENABLE_FLUTTER_DESKTOP=true
+
+help:  ## Display this help
+	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"} /^[a-zA-Z_-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
+
+
+print:
+	@echo
+	@echo LIB_NAME: $(LIB_NAME)
+	@echo LIB: $(LIB)
+	@echo LIB_BRANCH: $(LIB_BRANCH)
+	@echo LIB_FSPATH: $(LIB_FSPATH)
+	@echo
+
+	@echo
+	@echo BIN_NAME: $(BIN_NAME)
+	@echo BIN_FSPATH: $(BIN_FSPATH)
+	@echo
+
+OS_FOUND=?
+os-get: ##os-get
+	@echo OS_FOUND: $(OS_FOUND)
+
+ifeq ($(OS),Windows_NT) 
+    OS_FOUND := Windows
+else
+    OS_FOUND := $(shell sh -c 'uname 2>/dev/null || echo Unknown')
+endif
+
 	
-docker-build:
+
+os-dep: ##os-dep
+
+	@echo Installing OS required tools
+
+ifeq ($(OS), Linux)
+	@echo Linux detected
+
+
+else ifeq ($(OS), Mac)
+	@echo Linux detected
+
+	# mkcert needs brew install nss
+	brew install nss
+	
+endif
+
+	
+
+docker-build: ##docker-build
+	go get -u github.com/FiloSottile/mkcert
+	mkcert -install
+	mkcert 127.0.0.1
+
+docker-build-linux: ##docker-build-linux
 ifeq ($(OS), Linux)
 
 	sudo apt install libnss3-tools
@@ -44,46 +96,34 @@ else
 	cd ./pion && sudo docker-compose up	
 endif
 
-print:
-	@echo
-	@echo LIB_NAME: $(LIB_NAME)
-	@echo LIB: $(LIB)
-	@echo LIB_BRANCH: $(LIB_BRANCH)
-	@echo LIB_FSPATH: $(LIB_FSPATH)
-	@echo
-
-	@echo
-	@echo BIN_NAME: $(BIN_NAME)
-	@echo BIN_FSPATH: $(BIN_FSPATH)
-	@echo
 
 
 # https://github.com/pion/ion
-git-clone-o:
+git-clone: ##git-clone
 	# need flutter desktop :)
 	mkdir -p $(LIB_FSPATH)
 	cd $(LIB_FSPATH) && cd .. && rm -rf $(LIB_NAME) && git clone ssh://git@$(LIB).git
 	cd $(LIB_FSPATH) && git checkout $(LIB_BRANCH)
 	cp -r ./pion/. $(LIB_FSPATH)
 
-git-pull-o:
+git-pull:
 	cd $(LIB_FSPATH) && git pull
 
-git-clean-o:
+git-clean: ##git-clean
 	rm -rf $(LIB_FSPATH)
 
 # https://github.com/cloudwebrtc/ion
-git-clone-f:
+git-clone-fork: ##git-clone-fork
 	# need flutter desktop :)
 	mkdir -p $(LIB_FSPATH_FORKED)
 	cd $(LIB_FSPATH_FORKED) && cd .. && rm -rf $(LIB_NAME) && git clone ssh://git@$(LIB_FORKED).git
 	cd $(LIB_FSPATH_FORKED) && git checkout $(LIB_BRANCH)
 	cp -r ./cloudwebrtc/. $(LIB_FSPATH_FORKED)
 	
-git-pull-f:
+git-pull-fork:
 	cd $(LIB_FSPATH_FORKED) && git pull
 
-git-clean-f:
+git-clean-fork: ##git-clean-fork
 	rm -rf $(LIB_FSPATH_FORKED)
 
 code:
