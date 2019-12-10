@@ -13,14 +13,22 @@ LIB_FSPATH_FORKED=$(GOPATH)/src/$(LIB_FORKED)
 BIN_NAME=$(LIB_NAME)
 BIN_FSPATH=$(GOPATH)/bin/$(BIN_NAME)
 
-OS=$(shell uname)
+
 export ENABLE_FLUTTER_DESKTOP=true
+
+GO_OS 		:= $(shell go env GOOS)
+GO_ARCH		:= $(shell go env GOARCH)
 
 help:  ## Display this help
 	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"} /^[a-zA-Z_-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
 
 
 print:
+	@echo
+	@echo GO_OS: $(GO_OS)
+	@echo GO_OS: $(GO_ARCH)
+	@echo
+
 	@echo
 	@echo LIB_NAME: $(LIB_NAME)
 	@echo LIB: $(LIB)
@@ -33,32 +41,24 @@ print:
 	@echo BIN_FSPATH: $(BIN_FSPATH)
 	@echo
 
-OS_FOUND=?
-os-get: ##os-get
-	@echo OS_FOUND: $(OS_FOUND)
-
-ifeq ($(OS),Windows_NT) 
-    OS_FOUND := Windows
-else
-    OS_FOUND := $(shell sh -c 'uname 2>/dev/null || echo Unknown')
-endif
-
-	
 
 os-dep: ##os-dep
 
 	@echo Installing OS required tools
 
-ifeq ($(OS), Linux)
+ifeq ($(GO_OS), linux)
 	@echo Linux detected
+endif
 
-
-else ifeq ($(OS), Mac)
-	@echo Linux detected
+ifeq ($(GO_OS), darwin)
+	@echo Mac detected
 
 	# mkcert needs brew install nss
-	brew install nss
-	
+	#brew install nss
+endif
+
+ifeq ($(GO_OS), windows)
+	@echo Windows detected
 endif
 
 	
