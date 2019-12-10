@@ -48,13 +48,16 @@ os-dep: ##os-dep
 
 ifeq ($(GO_OS), linux)
 	@echo Linux detected
+
+	# mkcert needs:
+	sudo apt install libnss3-tools
 endif
 
 ifeq ($(GO_OS), darwin)
 	@echo Mac detected
 
-	# mkcert needs brew install nss
-	#brew install nss
+	# mkcert needs:
+	brew install nss
 endif
 
 ifeq ($(GO_OS), windows)
@@ -71,7 +74,7 @@ docker-build: ##docker-build
 docker-build-linux: ##docker-build-linux
 ifeq ($(OS), Linux)
 
-	sudo apt install libnss3-tools
+	
 	
 	go get -u github.com/FiloSottile/mkcert
 
