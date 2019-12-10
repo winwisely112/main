@@ -1,22 +1,22 @@
 version: '3'
 services: 
     ion:
-        container_name: ion
+        container_name: cloudwebrtc-ion
         build: 
             context: .
             dockerfile: Dockerfile-ion
-        image: ion
+        image: cloudwebrtc-ion
         network_mode: "host"
         restart: on-failure
         depends_on: 
             - rabbit
 
     islb:
-        container_name: islb
+        container_name: cloudwebrtc-islb
         build: 
             context: .
             dockerfile: Dockerfile-islb
-        image: islb
+        image: cloudwebrtc-islb
         network_mode: "host"
         restart: on-failure
         depends_on: 

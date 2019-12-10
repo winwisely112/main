@@ -1,5 +1,6 @@
 version: '3'
 services: 
+
     ion:
         container_name: ion
         build: 
@@ -32,4 +33,3 @@ services:
         container_name: redis
         image: redis
         network_mode: "host"
-        

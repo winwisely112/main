@@ -13,7 +13,36 @@ LIB_FSPATH_FORKED=$(GOPATH)/src/$(LIB_FORKED)
 BIN_NAME=$(LIB_NAME)
 BIN_FSPATH=$(GOPATH)/bin/$(BIN_NAME)
 
+OS=$(shell uname)
 export ENABLE_FLUTTER_DESKTOP=true
+	
+docker-pem:
+ifeq ($(OS), Linux)
+
+	sudo apt install libnss3-tools
+	
+	go get -u github.com/FiloSottile/mkcert
+
+	mkcert -install
+
+	mkcert 127.0.0.1
+
+	cp 127.0.0.1-key.pem ./pion/key.pem
+	cp 127.0.0.1-key.pem ./cloudwebrtc/key.pem
+
+	cp 127.0.0.1.pem ./pion/cert.pem 
+	cp 127.0.0.1.pem  ./cloudwebrtc/cert.pem
+
+	rm 127.0.0.1-key.pem
+	rm 127.0.0.1.pem
+
+endif
+
+docker-pion:
+	cd ./pion && sudo docker-compose up	
+
+docker-cloudwebrtc:
+	cd ./cloudwebrtc && sudo docker-compose up	
 
 print:
 	@echo
@@ -27,6 +56,7 @@ print:
 	@echo BIN_NAME: $(BIN_NAME)
 	@echo BIN_FSPATH: $(BIN_FSPATH)
 	@echo
+
 
 # https://github.com/pion/ion
 git-clone-o:

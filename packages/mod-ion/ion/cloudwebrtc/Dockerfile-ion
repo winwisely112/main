@@ -1,11 +1,18 @@
 FROM golang:1.13
 
-RUN mkdir /app
-
-COPY . /app
+RUN GOPATH=`pwd` && go get -v -d github.com/cloudwebrtc/ion/...
 
 WORKDIR /app
 
-RUN go build -o cloud-ion ./main.go
+RUN go build -o cloudwebrtc-ion ${GOPATH}/src/github.com/cloudwebrtc/ion/main.go
 
-ENTRYPOINT ["/app/cloud-ion", "-c=/app/conf/ion.toml"]
+RUN mkdir configs
+
+RUN cp ${GOPATH}/src/github.com/cloudwebrtc/ion/conf/ion.toml ./configs
+
+# generate key.pem and cert.pem using https://github.com/FiloSottile/mkcert 
+COPY ./key.pem ./configs/
+
+COPY ./cert.pem ./configs/
+
+ENTRYPOINT ["./cloudwebrtc-ion", "-c=./configs/ion.toml"]
