@@ -1,6 +1,6 @@
 # general housekeeping stuff
 
-# Pick a version !!!
+# Pick a version to want !!
 TAG_NAME=v1.0.1
 
 
@@ -24,6 +24,5 @@ git-tag-create: ## git-tag-create
 git-tag-delete: ## git-tag-delete
 	# this will delete a local tag and push that to Github
 
-	# alternative approach
 	git push --delete origin $(TAG_NAME)
 	git tag -d $(TAG_NAME)

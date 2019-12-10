@@ -25,11 +25,27 @@ SAMPLE_FSPATH=$(LIB_FSPATH)/$(SAMPLE_NAME)
 HOME_PATH=$(HOME)
 endif 
 
+GO_OS 		:= $(shell go env GOOS)
+GO_ARCH		:= $(shell go env GOARCH)
+
+GIT_VERSION	:= $(shell git describe --tags)
+
 help:  ## Display this help
 	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"} /^[a-zA-Z_-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
 
 
 print: ## print
+
+	@echo
+	@echo GO_OS: $(GO_OS)
+	@echo GO_OS: $(GO_ARCH)
+	@echo
+
+	@echo
+	@echo GIT_VERSION: $(GIT_VERSION)
+	@echo GIT_OTHER: $(shell git describe --all)
+	@echo
+
 	@echo
 	@echo LIB_NAME: $(LIB_NAME)
 	@echo LIB: $(LIB)
@@ -108,8 +124,33 @@ flu-desk-local-run: ## flu-desk-local-run
 	cd $(SAMPLE_FSPATH) && hover run
 
 flu-desk-local-build: ## flu-desk-local-build
-	cd $(SAMPLE_FSPATH) && hover build
+ifeq ($(GO_OS), linux)
+	@echo Linux detected
 
+	cd $(SAMPLE_FSPATH) && hover build $(GO_OS)-appimage
+	cd $(SAMPLE_FSPATH) && hover build $(GO_OS)-deb
+	cd $(SAMPLE_FSPATH) && hover build $(GO_OS)-rpm
+	cd $(SAMPLE_FSPATH) && hover build $(GO_OS)-snap
+
+endif
+
+ifeq ($(GO_OS), darwin)
+	@echo Mac detected
+
+	cd $(SAMPLE_FSPATH) && hover build $(GO_OS) --version-number $(GIT_VERSION)
+	#cd $(SAMPLE_FSPATH) && hover build $(GO_OS)-bundle
+	#cd $(SAMPLE_FSPATH) && hover build $(GO_OS)-pkg
+	#cd $(SAMPLE_FSPATH) && hover build $(GO_OS)-dmg
+
+endif
+
+ifeq ($(GO_OS), windows)
+	@echo Windows detected
+	cd $(SAMPLE_FSPATH) && hover build $(GO_OS)
+	cd $(SAMPLE_FSPATH) && hover build $(GO_OS)-msi
+endif
+
+	
 
 flu-desk-build-all: ## flu-desk-build-all
 	$(MAKE) flu-desk-build-clean
