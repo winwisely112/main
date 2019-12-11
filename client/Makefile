@@ -368,10 +368,7 @@ endif
 ifeq ($(GO_OS), windows)
 	@echo Windows detected
 	keytool -genkey -v -keystore c:/Users/USER_NAME/key.jks -storetype JKS -keyalg RSA -keysize 2048 -validity 10000 -alias key
-endif
-
-	# Create keystore
-	
+endif	
 
 	# TODO and sign
 	#cd $(SAMPLE_FSPATH) && flutter 
