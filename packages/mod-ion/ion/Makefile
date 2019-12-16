@@ -69,8 +69,7 @@ endif
 
 ifeq ($(GO_OS), windows)
 	@echo Windows detected
-
-	# mkcert needs nothing
+	# mkcert needs nothing i think. Need Windows Dev to try.
 endif
 
 
