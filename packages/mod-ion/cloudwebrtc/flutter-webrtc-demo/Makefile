@@ -1,9 +1,4 @@
 # https://github.com/cloudwebrtc/flutter-webrtc-demo
-# - Uses the Google Flutter Desktop.
-
-
-# TODO: Mac os needs to copy the Runner project from flutter-desktop-embedding to create a demo.
-
 
 LIB_NAME=flutter-webrtc-demo
 LIB=github.com/cloudwebrtc/$(LIB_NAME)
@@ -11,20 +6,26 @@ LIB=github.com/cloudwebrtc/$(LIB_NAME)
 LIB_BRANCH=master
 LIB_FSPATH=$(GOPATH)/src/$(LIB)
 
-# Flutter tools
-MAKE_IMPORT=$(GOPATH)/src/github.com/winwisely99/mod-videoconf/google-flutter-desktop
+SAMPLE=
+SAMPLE_FSPATH=$(LIB_FSPATH)
+
+help:  ## Display this help
+	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"} /^[a-zA-Z_-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
 
 
-print:
+print: ## print
 	@echo
 	@echo LIB_NAME: $(LIB_NAME)
 	@echo LIB: $(LIB)
 	@echo LIB_BRANCH: $(LIB_BRANCH)
 	@echo LIB_FSPATH: $(LIB_FSPATH)
-
-	@echo MAKE_IMPORT: $(MAKE_IMPORT)
-	cd $(MAKE_IMPORT) && ls -al
 	@echo
+
+	@echo
+	@echo SAMPLE_NAME: $(SAMPLE_NAME)
+	@echo SAMPLE_FSPATH: $(SAMPLE_FSPATH)
+	@echo
+
 
 git-print:
 	cd $(LIB_FSPATH) && git status
@@ -42,24 +43,6 @@ code:
 	code $(WEBRTC_WORKSPACE)
 	#code $(LIB_FSPATH)
 
-###
-
-
-flu-os-dep:
-	# Need master to have Google Desktop and Web available.
-	flutter channel master
-	flutter upgrade
-
-# Google Flutter Desktop
-export ENABLE_FLUTTER_DESKTOP=true
-SAMPLE=
-SAMPLE_FSPATH=$(LIB_FSPATH)
-
-flu-print:
-	@echo SAMPLE: $(SAMPLE)
-	@echo SAMPLE_FSPATH: $(SAMPLE_FSPATH)
-
-	cd $(MAKE_IMPORT) && $(MAKE) flu-config-print
 
 flu-fix:
 	# https://github.com/flutter/flutter/issues/20685
@@ -73,50 +56,47 @@ flu-fix:
 	# edit pod file to include this: https://github.com/flutter/flutter/blob/master/examples/platform_view/ios/Podfile#L78
 	# Add:
 	# install! 'cocoapods', :disable_input_output_paths => true
-	cd $(SAMPLE_FSPATH)/ios && code Podfile
+	#cd $(SAMPLE_FSPATH)/ios && code Podfile
 
 	# 3
-	cd $(SAMPLE_FSPATH)/ios && pod install
+	#cd $(SAMPLE_FSPATH)/ios && pod install
 
-flu-mob-run-debug:
-	# Make sure that "$(MAKE) flu-config-mobile" is run from another bash terminal first
 
-	
-	cd $(MAKE_IMPORT) && $(MAKE) flu-config-mobile
-	#cd $(LIB_FSPATH) && flutter clean
-	cd $(SAMPLE_FSPATH) && flutter packages get
 
+### Mob
+
+
+flu-mob-run: ## flu-mob-run
 	cd $(SAMPLE_FSPATH) && flutter run -d all
-	#cd $(SAMPLE_FSPATH) && flutter run -d "iPad (5th generation)" --track-widget-creation --profile
-	#cd $(SAMPLE_FSPATH) && flutter run -d "Nexus 5X" --track-widget-creation --profile
-	
-
-flu-mob-run:
-	cd $(MAKE_IMPORT) && $(MAKE) flu-config-mobile
-	#cd $(LIB_FSPATH) && flutter clean
-	cd $(SAMPLE_FSPATH) && flutter packages get
-	
-	cd $(SAMPLE_FSPATH) && flutter run -d all
-	#cd $(SAMPLE_FSPATH) && flutter run -d "iPhone 11 Pro Max "
-	#cd $(SAMPLE_FSPATH) && flutter run -d "iPad (5th generation)"	
-	#cd $(SAMPLE_FSPATH) && flutter run -d "Nexus 5X"
-
-flu-desk-run:
-	cd $(MAKE_IMPORT) && $(MAKE) flu-config-desktop
-
-	#cd $(LIB_FSPATH) && flutter clean
-	cd $(SAMPLE_FSPATH) && flutter packages get
-	#cd $(LIB_FSPATH) && flutter pub get
-	cd $(SAMPLE_FSPATH) && flutter run -d "macOS"
 
 
-flu-web-run:
-	cd $(MAKE_IMPORT) && $(MAKE) flu-config-web
 
-	#cd $(LIB_FSPATH) && flutter clean
-	cd $(SAMPLE_FSPATH) && flutter packages get
-	#cd $(LIB_FSPATH) && flutter pub get
-	cd $(SAMPLE_FSPATH) && flutter run 
-	
-flu-web-open:
-	open http://$(LIB)
+
+### WEB
+
+flu-web-config:
+	# flutter channel ?
+	#flutter channel dev
+	#flutter upgrade
+
+	flutter config --enable-web
+	# turn off any desktop
+	flutter config --no-enable-linux-desktop
+	flutter config --no-enable-macos-desktop
+	flutter config --no-enable-windows-desktop
+flu-web-create: flu-web-config
+	# works 
+	# make sure using new dir.
+	mkdir -p $(SAMPLE_FSPATH)
+	cd $(SAMPLE_FSPATH) && flutter create --web .
+flu-web-run: flu-web-config ## flu-web-run
+	# works
+	# Reload works too :)
+	cd $(SAMPLE_FSPATH) && flutter run -d chrome
+flu-web-build: flu-web-config ## flu-web-build
+	# works :)
+	cd $(SAMPLE_FSPATH) && flutter build web --release
+flu-web-test: flu-web-config ## flu-web-test
+	# works :)
+	cd $(SAMPLE_FSPATH) && flutter test --platform=chrome
+

@@ -2,6 +2,25 @@
 
 Running notepad ....
 
+## status
+
+Web
+- works well and easy 
+
+IOS
+- pod install issues
+
+AND
+- works well
+- forces and SDK 28 install. 
+
+## BASIC TODO
+
+- Server - Get NodesJs containerised and run on google cloud
+	- OR try ion
+
+
+
 
 Flutter GUI
 https://github.com/cloudwebrtc/flutter-webrtc

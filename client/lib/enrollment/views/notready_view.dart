@@ -29,7 +29,7 @@ class _NotReadyView extends StatefulWidget {
 class __NotReadyViewState extends State<_NotReadyView> {
   final TextEditingController _controller = TextEditingController();
   final Map<int, dynamic> _value = <int, dynamic>{
-    1: '30.0',
+    1: '0.0',
     2: false,
     3: false,
     4: false,

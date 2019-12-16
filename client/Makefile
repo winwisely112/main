@@ -90,6 +90,8 @@ ifeq ($(GO_OS), windows)
 	@echo Windows detected
 endif
 
+### FLU
+
 flu-config: ## flu-config
 	flutter config
 	flutter doctor -v
@@ -97,9 +99,6 @@ flu-config: ## flu-config
 
 flu-config-desk: ## flu-config-desk
 	hover -h
-
-
-
 
 flu-clean:
 	cd $(SAMPLE_FSPATH) && flutter clean
@@ -109,6 +108,9 @@ flu-update:
 	$(MAKE) gen-hive
 	$(MAKE) gen-proto
 	cd $(SAMPLE_FSPATH) && flutter analyze 
+
+
+### GEN 
 
 gen-icons:
 	# mobile and web
@@ -122,12 +124,13 @@ gen-icons:
 	@echo Copying icon-png from flutter assets into go assets, so hover can use it
 	@echo
 	cp $(SAMPLE_FSPATH)/assets/icon/icon.png $(SAMPLE_FSPATH)/go/assets
+
 gen-hive:
 	cd $(SAMPLE_FSPATH) && flutter packages pub run build_runner build --delete-conflicting-outputs
+
 gen-proto:
 	pub global activate protoc_plugin
 	mkdir -p $(SAMPLE_FSPATH)/lib/api/v1/google/protobuf
-
 
 ifeq ($(GO_OS), windows)
 	@echo Windows detected
