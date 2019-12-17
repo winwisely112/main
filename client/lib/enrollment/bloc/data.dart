@@ -17,8 +17,14 @@ class Campaign implements Entity {
     @required this.description,
     @required this.crgIdsMany,
     @required this.crgQuantityMany,
+    @required this.alreadyPledged,
+    @required this.when,
+    @required this.where,
   })  : assert(id != null),
         assert(name != null),
+        assert(when != null),
+        assert(where != null),
+        assert(alreadyPledged != null),
         assert(other != null),
         assert(logoUrl != null),
         assert(description != null),
@@ -26,7 +32,7 @@ class Campaign implements Entity {
         assert(crgIdsMany != null);
 
   Campaign.fromJson(dynamic data)
-      : id = Id<Campaign>(data['_id']),
+      : id = Id<Campaign>(data['campaign_id']),
         crgIdsMany = data['crg_ids_many'] != null
             ? data['crg_ids_many'].split(',')
             : <String>[],
@@ -36,6 +42,9 @@ class Campaign implements Entity {
         description = data['description'],
         logoUrl = data['logo_url'],
         name = data['name'],
+        where = data['location'],
+        when = DateTime.parse(data['datetime']),
+        alreadyPledged = int.parse(data['already_pledged']),
         other = data['other'];
 
   @HiveField(0)
@@ -58,4 +67,57 @@ class Campaign implements Entity {
 
   @HiveField(6)
   final List<String> crgIdsMany;
+
+  @HiveField(7)
+  final int alreadyPledged;
+
+  @HiveField(8)
+  final DateTime when;
+
+  @HiveField(9)
+  final String where;
+}
+
+@immutable
+@HiveType()
+class Roles implements Entity {
+  const Roles({
+    @required this.id,
+    @required this.name,
+    @required this.comment,
+    @required this.mandatory,
+    @required this.description,
+    @required this.uom,
+  })  : assert(id != null),
+        assert(name != null),
+        assert(comment != null),
+        assert(mandatory != null),
+        assert(description != null),
+        assert(uom != null);
+
+  Roles.fromJson(dynamic data)
+      : id = Id<Roles>(data['id']),
+        description = data['description'],
+        comment = data['comment'],
+        name = data['name'],
+        uom = data['uom'],
+        mandatory = data['mandatory'] == 1 ? true : false;
+
+  @HiveField(0)
+  final Id<Roles> id;
+
+  @HiveField(1)
+  final String description;
+
+  @HiveField(2)
+  final String comment;
+
+  @HiveField(3)
+  final bool mandatory;
+
+  @HiveField(4)
+  final String name;
+
+  @HiveField(5)
+  final String uom;
 }

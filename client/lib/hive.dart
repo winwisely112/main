@@ -46,6 +46,7 @@ Future<void> initializeHive() async {
     ..registerAdapter(IdAdapter<ChatModel>(), 5)
     // Campaign
     ..registerAdapter(IdAdapter<Campaign>(), 13)
+    ..registerAdapter(IdAdapter<Roles>(), 14)
     // TODO(FlutterDevelopers): Register the adapter generated in data.g here
     // with a unique typeID. Do not change the typeID.
     //
@@ -60,7 +61,8 @@ Future<void> initializeHive() async {
     // News Module
     ..registerAdapter(NewsAdapter(), 8)
     // Campaign
-    ..registerAdapter(CampaignAdapter(), 12);
+    ..registerAdapter(CampaignAdapter(), 12)
+    ..registerAdapter(RolesAdapter(), 15);
 }
 
 class IdAdapter<T> extends TypeAdapter<Id<T>> {

@@ -108,6 +108,7 @@ class NetworkService {
     mockData['chats'] = await loadFile('chat');
     mockData['chatgroup'] = await loadFile('chatgroup');
     mockData['news'] = await loadFile('news');
+    mockData['roles'] = await loadFile('roles');
     mockData['campaign'] = await loadFile('campaign');
     networkServiceReadyCompleter.complete();
   }

@@ -26,6 +26,7 @@ class ServicesProvider extends StatelessWidget {
             hiveBox['users'] = await Hive.openBox<User>('users');
             hiveBox['chatgroup'] = await Hive.openBox<ChatGroup>('chatgroup');
             hiveBox['campaign'] = await Hive.openBox<Campaign>('campaign');
+            hiveBox['roles'] = await Hive.openBox<Roles>('roles');
             final StorageService storage = StorageService();
             // TODO(Vineeth): Removed await for now. Need to fix this later
             storage.initialize();
