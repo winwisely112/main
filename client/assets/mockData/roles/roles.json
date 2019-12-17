@@ -1,0 +1,254 @@
+[
+  {
+    "comment": "No quantity",
+    "description": "Nonviolent direct action with possibiltiy of getting arrested",
+    "dev notes": "we only ask the quantity later",
+    "id": "crg001",
+    "mandatory": "1",
+    "name": "nvda resister ",
+    "uom": "days"
+  }, 
+  {
+    "comment": "No quantity",
+    "description": "Striking with a large group of other resisters (no risk of arrest)",
+    "dev notes": "we only ask the quantity later",
+    "id": "crg002",
+    "mandatory": "1",
+    "name": "striker",
+    "uom": "days"
+  }, 
+  {
+    "comment": "any service",
+    "description": "Provide legal advice and support to NVDA volunteers and leaders before, during, and after their interaction with police and the justice system.  Law students and paralegls also welcome",
+    "dev notes": "e.g 50 hrs",
+    "id": "crg003",
+    "mandatory": "0",
+    "name": "lawyer",
+    "uom": "hrs"
+  }, 
+  {
+    "comment": "any service",
+    "description": "Be a witness to NVDA volunteers who might get arrested. One time or ongoing.",
+    "dev notes": "e.g 50 hrs",
+    "id": "crg004",
+    "mandatory": "0",
+    "name": "witness",
+    "uom": "hrs"
+  }, 
+  {
+    "comment": "any service",
+    "description": "Provide social media help (e.g., advertise the event on social media, live stream the event, take photos and video footage for social media pages). Are you an influencer or microinfluencer? Do you know how to get peoples attention on social media? This role could be for you! ",
+    "dev notes": "e.g 50 hrs",
+    "id": "crg005",
+    "mandatory": "0",
+    "name": "social media",
+    "uom": "hrs"
+  }, 
+  {
+    "comment": "any service",
+    "description": "Help medical teams to provide medical advice and support to strike and NVDA volunteers, especially for longer actions and hunger strikes. Nurses, LVNs, paramedics as well as MDs welcome",
+    "dev notes": "e.g 50 hrs",
+    "id": "crg006",
+    "mandatory": "0",
+    "name": "medical",
+    "uom": "hrs"
+  }, 
+  {
+    "comment": "??",
+    "description": "Carpooling! Give a lift to someone in your area if they can't take public transport. Let us know if you have a van or access to one",
+    "dev notes": "",
+    "id": "crg007",
+    "mandatory": "0",
+    "name": "transport",
+    "uom": ""
+  }, 
+  {
+    "comment": "money for professional carer",
+    "description": "This is a huge need for campaigns, since it enables the campaign to attract many more volunteers - parents of infants and very young children. Let us know if you are licensed or willing to find a licensed childcare provider willing to donate, or if you will help cover childcare costs at least for one parent for one shift.",
+    "dev notes": "e.g 100 USD",
+    "id": "crg008",
+    "mandatory": "0",
+    "name": "childcare",
+    "uom": "USD"
+  }, 
+  {
+    "comment": "bail money",
+    "description": "Donate money to the campaign that would go towards paying the bail of rebels who get arrested. Remember that unless your supportee skips court date, you will get your money back.",
+    "dev notes": "e.g 100 USD",
+    "id": "crg009",
+    "mandatory": "0",
+    "name": "bail support for nvda resisters",
+    "uom": "USD"
+  }, 
+  {
+    "comment": "any service",
+    "description": "Hugely important to meet our infrastructure needs. Organize weekly or biweekly meetings of neighborhood resisters and resister supporters for NVDA training, updates, friendship making, etc. Campaign will provide you with call or text lists,scripts, training and other support. Minimum time commitment: 2hours/wk",
+    "dev notes": "e.g 50 hrs",
+    "id": "crg010",
+    "mandatory": "0",
+    "name": "neighborhood team leader",
+    "uom": "hrs"
+  }, 
+  {
+    "comment": "any service",
+    "description": "Call or text campaign volunteers with important reminders, to confirm their commitments, etc Script and training provided. Evenings or wkends best. Minimum Time commitment: 2hrs/wk.",
+    "dev notes": "e.g 50 hrs",
+    "id": "crg011",
+    "mandatory": "0",
+    "name": "phonebanker or peer2peer texter",
+    "uom": "hrs"
+  }, 
+  {
+    "comment": "venue space",
+    "description": "",
+    "dev notes": "e.g. 10 m2 ",
+    "id": "crg012",
+    "mandatory": "0",
+    "name": "provide my space for a house party ",
+    "uom": "m2"
+  }, 
+  {
+    "comment": "any service",
+    "description": "Help in the set up and take down or cleanup of NVDA actions or local houseparty, ensuring that we leave nothing but positive impression",
+    "dev notes": "e.g 50 hrs",
+    "id": "crg013",
+    "mandatory": "0",
+    "name": "setup/clean up",
+    "uom": "hrs"
+  }, 
+  {
+    "comment": "any service",
+    "description": "Provide digital marketing support to help the campaign reach a wider audience and increase the turnout of the event.",
+    "dev notes": "e.g 50 hrs",
+    "id": "crg014",
+    "mandatory": "0",
+    "name": "digital marketing help",
+    "uom": "hrs"
+  }, 
+  {
+    "comment": "any service",
+    "description": "Help us arrange face2face meetings or speaking opportunities with local school, civic, business or large membership possible partners to recruit coalition partners, and volunteers . Do you know any celebrities or heads of name recognized companies or nonprofits willing to speak on our behalf",
+    "dev notes": "e.g 50 hrs",
+    "id": "crg015",
+    "mandatory": "0",
+    "name": "outreach connector",
+    "uom": "hrs"
+  }, 
+  {
+    "comment": "any service",
+    "description": "Being willing to find or be a speaer to speak at PTAs, Chambers of Commerce or Rotary club meetings, or to your own union, association, or church group.",
+    "dev notes": "e.g 50 hrs",
+    "id": "crg016",
+    "mandatory": "0",
+    "name": "outreach speaker help",
+    "uom": "hrs"
+  }, 
+  {
+    "comment": "any service",
+    "description": "Help us enter critical data (eg. to keep keep track of attendance rates during events, those offering to volunteer at house parties, speaking events, who offer to help via email, text, our site, etc).",
+    "dev notes": "e.g 50 hrs",
+    "id": "crg017",
+    "mandatory": "0",
+    "name": "data entry",
+    "uom": "hrs"
+  }, 
+  {
+    "comment": "any service",
+    "description": "Tech savvy? You can support this campaign by giving tech support leading up to and during the event. Experienced programmers, UX experts, designers, PMs, SEO and security experts, user testers all often needed.",
+    "dev notes": "e.g 50 hrs",
+    "id": "crg018",
+    "mandatory": "0",
+    "name": "tech help",
+    "uom": "hrs"
+  }, 
+  {
+    "comment": "phsical thing",
+    "description": "Have a computer, camera, sound system, video projector, or microphone that could help us with the event? You can lend these for a single event or even donate them to your local chapter. ",
+    "dev notes": "e.g 5 computers",
+    "id": "crg019",
+    "mandatory": "0",
+    "name": "donation of computers etc",
+    "uom": "tech"
+  }, 
+  {
+    "comment": "physical or service?",
+    "description": "Help us with graphics, image search, signs and posters, materials, printing and printing supplies,  that will send a clear message to the public and the companies destroying the planet",
+    "dev notes": "",
+    "id": "crg020",
+    "mandatory": "0",
+    "name": "art, design, audio, video, graphics or printing help",
+    "uom": ""
+  }, 
+  {
+    "comment": "any service",
+    "description": "Great for your kids to be doing while you are nearby in the same or nearby room phone banking, or if old enough to leave with college age child care supervisers, while you are out helping at an NVDA or strike event",
+    "dev notes": "e.g 50 hrs",
+    "id": "crg021",
+    "mandatory": "0",
+    "name": "assembling packets or kits",
+    "uom": "hrs"
+  }, 
+  {
+    "comment": "phsical thing",
+    "description": "Our rebels need snacks! You can help them stay strong and energised by donating food, whether it be fruit, nuts, coffee, or your mum's homebaked cookies!",
+    "dev notes": "e.g 100 meals",
+    "id": "crg022",
+    "mandatory": "0",
+    "name": "donating food",
+    "uom": "meals"
+  }, 
+  {
+    "comment": "venue space",
+    "description": "Want to help us fundraise much needed funds to run a strong campaign and have venue or an event we could be a part of? We would love to hear from you!",
+    "dev notes": "e.g. 10 m2 ",
+    "id": "crg023",
+    "mandatory": "0",
+    "name": "donating venues for fundraising events",
+    "uom": "m2"
+  }, 
+  {
+    "comment": "office space",
+    "description": "Do you have a space available, day or night time? We could use it for team meetings, phonebanking and peer to peer texting, etc",
+    "dev notes": "e.g. 10 m2 ",
+    "id": "crg024",
+    "mandatory": "0",
+    "name": "donating office space",
+    "uom": "m2"
+  }, 
+  {
+    "comment": "phsical thing",
+    "description": "This is to provide a couch, extra room, or even floor space (air mattress can be provided), short or longer term, for an out of town organizer willing to help for free if given free housing. It might also be a godsend for someone losing their housing due to longterm participation in a strike.The host can specify duration and gender preference. Landlord and roommate References can of course be required.",
+    "dev notes": "e.g 2 people (how long in user comments)",
+    "id": "crg025",
+    "mandatory": "0",
+    "name": "emergency housing",
+    "uom": "int"
+  }, 
+  {
+    "comment": "any service",
+    "description": "If some activists leave work to commit to a climate saving longterm strike or NVDA action, they could benefit from some help finding employment to keep them on their feet. ",
+    "dev notes": "e.g 50 hrs",
+    "id": "crg026",
+    "mandatory": "0",
+    "name": "short term employment help",
+    "uom": "hrs"
+  }, 
+  {
+    "comment": "donation",
+    "description": "Can't get to the action? You can donate an hour of your salary to the cause - every bit makes a difference!",
+    "dev notes": "e.g 15 USD",
+    "id": "crg027",
+    "mandatory": "",
+    "name": "donate an hour of my wage",
+    "uom": "USD"
+  }, 
+  {
+    "comment": "",
+    "description": "If you think you can help the campaign in another way, however small or big, please let us know! ",
+    "dev notes": "freetext",
+    "id": "crg028",
+    "mandatory": "0",
+    "name": "other",
+    "uom": ""
+  }
+]

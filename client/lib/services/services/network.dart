@@ -35,8 +35,8 @@ class NetworkService {
       _cache[_name] = _instance;
       _cache[_name].storage = storage;
       _cache[_name].subscriptions = subscriptions;
-      _cache[_name]._startSending();
-      _cache[_name]._startReceiving();
+      // _cache[_name]._startSending();
+      //_cache[_name]._startReceiving();
       _cache[_name]._loadMockData();
       return _instance;
     }

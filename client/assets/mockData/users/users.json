@@ -7,7 +7,7 @@
     "email": "kjones@gmail.com001",
     "firstName": "Kevin001",
     "lastName": "Jones001"
-  },
+  }, 
   {
     "_id": "user002",
     "avatar_url": "assets/mockData/users/1rhxmb9a1ndegKfwzzKkHsdhQaVWs0m-N.png",
@@ -16,7 +16,7 @@
     "email": "garciaj@gmail.com002",
     "firstName": "John002",
     "lastName": "Garcia002"
-  },
+  }, 
   {
     "_id": "user003",
     "avatar_url": "assets/mockData/users/1CtTV1DvICQwIOa6rZqDGxG71xbkjcfbS.png",
@@ -25,7 +25,7 @@
     "email": "sarah@gmail.com003",
     "firstName": "Sarah003",
     "lastName": "Hoffman003"
-  },
+  }, 
   {
     "_id": "user004",
     "avatar_url": "assets/mockData/users/1E07UQ9W_F63DUmWmRvhxGv6u1a0TSKhl.png",
@@ -34,7 +34,7 @@
     "email": "rosiemack@gmail.com004",
     "firstName": "Rosie004",
     "lastName": "Mackintosh004"
-  },
+  }, 
   {
     "_id": "user005",
     "avatar_url": "assets/mockData/users/1YZcapv_s3kKrp8a9rSnG9N1KcdC7m80V.png",
@@ -43,7 +43,7 @@
     "email": "gretaforeva@gmail.com005",
     "firstName": "Gary005",
     "lastName": "Lane005"
-  },
+  }, 
   {
     "_id": "user006",
     "avatar_url": "assets/mockData/users/1HiMD5wvVwYRPie7qwhJsLEv0tPxYEne4.png",
@@ -52,7 +52,7 @@
     "email": "yagni@gmail.com006",
     "firstName": "Joe006",
     "lastName": "Toms006"
-  },
+  }, 
   {
     "_id": "user007",
     "avatar_url": "assets/mockData/users/1kdS_b1fO8Vc_LLta8UtwL4tjlOwcY0Ie.png",
@@ -61,7 +61,7 @@
     "email": "stevie@gmail.com007",
     "firstName": "Steve007",
     "lastName": "Loraine007"
-  },
+  }, 
   {
     "_id": "user008",
     "avatar_url": "assets/mockData/users/1DmNfdAyAd5umsKK2cKIBw47XS1az4-ba.png",
@@ -70,7 +70,7 @@
     "email": "kimmy@gmail.com008",
     "firstName": "Kim008",
     "lastName": "Johnson008"
-  },
+  }, 
   {
     "_id": "user009",
     "avatar_url": "assets/mockData/users/1d0tsCuB12EH3TTFKsYbWDbg1bGxg0SSZ.png",
@@ -79,7 +79,7 @@
     "email": "tesla@gmail.com009",
     "firstName": "Tess009",
     "lastName": "Rincon009"
-  },
+  }, 
   {
     "_id": "user010",
     "avatar_url": "assets/mockData/users/1Pxbz9eH0ZOk6lsxPnnSaL6aFVlBnZM5I.png",
@@ -88,7 +88,7 @@
     "email": "michelada@gmail.com010",
     "firstName": "Michelle010",
     "lastName": "Gracie010"
-  },
+  }, 
   {
     "_id": "user011",
     "avatar_url": "assets/mockData/users/1nT3ofoLUvzW429WINGC8L3TFKLY3necc.png",
@@ -97,7 +97,7 @@
     "email": "yanxi@gmail.com011",
     "firstName": "Yan011",
     "lastName": "Xi011"
-  },
+  }, 
   {
     "_id": "user012",
     "avatar_url": "assets/mockData/users/1NVIMwVyt28jOVkUEgJUP7ZvQfwC-T3-v.png",
@@ -106,7 +106,7 @@
     "email": "santibee@gmail.com012",
     "firstName": "Santiago012",
     "lastName": "Barrera012"
-  },
+  }, 
   {
     "_id": "user013",
     "avatar_url": "assets/mockData/users/1rOU0K4QaAbFziz15xf5aTmTEZauXLLrn.png",
@@ -115,7 +115,7 @@
     "email": "george99@gmail.com013",
     "firstName": "George013",
     "lastName": "Milton013"
-  },
+  }, 
   {
     "_id": "user014",
     "avatar_url": "assets/mockData/users/18UTT64lMhdpgF_jP6nDRKHy5eJPXUQuU.png",
@@ -124,7 +124,7 @@
     "email": "kalhoberg@hotmail.com014",
     "firstName": "Kalena014",
     "lastName": "Hoberg014"
-  },
+  }, 
   {
     "_id": "user015",
     "avatar_url": "assets/mockData/users/1CI7cPeDkxgv3os2-g1rJ0KILGOiqHULu.png",
@@ -133,7 +133,7 @@
     "email": "knightinshining@protonmail.com015",
     "firstName": "Jackson015",
     "lastName": "Knight015"
-  },
+  }, 
   {
     "_id": "user016",
     "avatar_url": "assets/mockData/users/1Z71jwlpZZgUiIXhWN3zeFZKwIHAhjPS-.png",
@@ -142,7 +142,7 @@
     "email": "sillyphilly@gmail.com016",
     "firstName": "Philly016",
     "lastName": "Johns016"
-  },
+  }, 
   {
     "_id": "user017",
     "avatar_url": "assets/mockData/users/1O2OgxEzJIIg_xljdXVHeCDPnNY5ikFMi.png",
@@ -151,7 +151,7 @@
     "email": "kamila@protonmail.com017",
     "firstName": "Kamila017",
     "lastName": "Esposito017"
-  },
+  }, 
   {
     "_id": "user018",
     "avatar_url": "assets/mockData/users/15AZibN01KM68SAAYpMhnihImbiKbYqTA.png",
@@ -160,7 +160,7 @@
     "email": "juliaxo@gmail.com018",
     "firstName": "Julia018",
     "lastName": "Miller018"
-  },
+  }, 
   {
     "_id": "user019",
     "avatar_url": "assets/mockData/users/1rJaeFVQNYeMsKdPDfAG1tp1VZzRu4ipQ.png",
@@ -169,7 +169,7 @@
     "email": "lizwiz@hotmail.com019",
     "firstName": "Elizabeth019",
     "lastName": "Wright019"
-  },
+  }, 
   {
     "_id": "user020",
     "avatar_url": "assets/mockData/users/1U6UxCPqEtOoIGAl7crtYaBWmmJjGIO-a.png",
@@ -178,7 +178,7 @@
     "email": "peterheis@gmail.com020",
     "firstName": "Peter020",
     "lastName": "Heisman020"
-  },
+  }, 
   {
     "_id": "user021",
     "avatar_url": "assets/mockData/users/1h098XBBj7ljRccZcjpR2LVY-rhz8HGec.png",
@@ -187,7 +187,7 @@
     "email": "periplatypus@protonmail.com021",
     "firstName": "Peri021",
     "lastName": "Tollman021"
-  },
+  }, 
   {
     "_id": "user022",
     "avatar_url": "assets/mockData/users/1fMINaTxu7-DhOYq6AJnwGffNcVaSs3vc.png",
@@ -196,7 +196,7 @@
     "email": "mayapapaya@protonmail.com022",
     "firstName": "Maya022",
     "lastName": "Filanca022"
-  },
+  }, 
   {
     "_id": "user023",
     "avatar_url": "assets/mockData/users/1UQRATTWbBQ-ny76s2ttxHYqyw3n_a4tu.png",
@@ -205,7 +205,7 @@
     "email": "emiplanetlover@protonmail.com023",
     "firstName": "Emilano023",
     "lastName": "Enrique023"
-  },
+  }, 
   {
     "_id": "user024",
     "avatar_url": "assets/mockData/users/1h5HQh23wNNK_KnClugzRa2kiuIn3fDJU.png",
@@ -214,7 +214,7 @@
     "email": "leolion@protonmail.com024",
     "firstName": "Francisco024",
     "lastName": "Leon024"
-  },
+  }, 
   {
     "_id": "user025",
     "avatar_url": "assets/mockData/users/1Rv7DHjowgFBJVX_V3jWT3dmUoZL7fRW5.png",
@@ -223,7 +223,7 @@
     "email": "chenlee@gmail.com025",
     "firstName": "Chen025",
     "lastName": "Lee025"
-  },
+  }, 
   {
     "_id": "user026",
     "avatar_url": "assets/mockData/users/1oRLvh2D5uJ3is0slj2P6tTe4kKeF-dDD.png",
@@ -232,7 +232,7 @@
     "email": "farfromrich01@hotmail.com026",
     "firstName": "Richeri026",
     "lastName": "Farrera026"
-  },
+  }, 
   {
     "_id": "user027",
     "avatar_url": "assets/mockData/users/1VPUzuPVpufvhoTCDLbSDNug8eIpcNwsd.png",
@@ -241,7 +241,7 @@
     "email": "millistewert@gmail.com027",
     "firstName": "Milli027",
     "lastName": "Stewert027"
-  },
+  }, 
   {
     "_id": "user028",
     "avatar_url": "assets/mockData/users/1KYMqJ655jlu6cBqkSnWShhnZNKT7BoBG.png",
@@ -250,7 +250,7 @@
     "email": "plantbased@yahoo.com028",
     "firstName": "Erin028",
     "lastName": "Konan028"
-  },
+  }, 
   {
     "_id": "user029",
     "avatar_url": "assets/mockData/users/1YDcCe41U91dyvAL2amDen50R1YRDDgXj.png",
@@ -259,7 +259,7 @@
     "email": "jose01@protonmail.com029",
     "firstName": "Alijandro029",
     "lastName": "Jose029"
-  },
+  }, 
   {
     "_id": "user050",
     "avatar_url": "",

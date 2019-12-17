@@ -62,6 +62,7 @@ flutter:
     - assets/mockData/chatgroup/
     - assets/mockData/news/
     - assets/mockData/users/
+    - assets/mockData/roles/
     - assets/mockData/campaign/
     - assets/icon/
   #  - images/a_dot_ham.jpeg

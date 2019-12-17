@@ -17,7 +17,7 @@ class NewsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ProxyProvider2<NetworkService, UserService, NewsBloc>(
-      builder: (
+      update: (
         BuildContext _,
         NetworkService network,
         UserService user,

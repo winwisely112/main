@@ -16,7 +16,7 @@ class ChatFeed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ProxyProvider2<NetworkService, UserService, ChatBloc>(
-      builder: (BuildContext _, NetworkService network, UserService user,
+      update: (BuildContext _, NetworkService network, UserService user,
               ChatBloc __) =>
           ChatBloc(
         network: network,

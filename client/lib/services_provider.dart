@@ -18,7 +18,7 @@ class ServicesProvider extends StatelessWidget {
       providers: <SingleChildCloneableWidget>[
         // Initializes hive and offers a service that stores app-wide data.
         FutureProvider<StorageService>(
-          builder: (BuildContext context) async {
+          create: (BuildContext context) async {
             await initializeHive();
             // TODO(FlutterDevelopers): Initial Hive store here
             hiveBox['chats'] = await Hive.openBox<ChatModel>('chats');
@@ -38,7 +38,7 @@ class ServicesProvider extends StatelessWidget {
         // header using the authentication provided by the
         // [AuthenticationStorageService].
         ProxyProvider<StorageService, NetworkService>(
-          builder: (
+          update: (
             BuildContext _,
             StorageService storage,
             NetworkService __,
@@ -62,7 +62,7 @@ class ServicesProvider extends StatelessWidget {
         ),
         // This service offers fetching of users.
         ProxyProvider<NetworkService, UserService>(
-          builder: (
+          update: (
             BuildContext _,
             NetworkService network,
             UserService __,
@@ -74,7 +74,7 @@ class ServicesProvider extends StatelessWidget {
         // This service offers fetching of the currently logged in user.
         ProxyProvider3<StorageService, UserService, NetworkService,
             AuthUserService>(
-          builder: (
+          update: (
             BuildContext _,
             StorageService storage,
             UserService user,
@@ -125,7 +125,7 @@ class ServicesProvider extends StatelessWidget {
         ),
       ],
       child: ChangeNotifierProvider<AppConfiguration>(
-        builder: (BuildContext context) => AppConfiguration(),
+        create: (BuildContext context) => AppConfiguration(),
         child: const App(
           key: ValueKey<String>('App'),
         ),

@@ -14,7 +14,7 @@ class CampaignView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ProxyProvider<NetworkService, CampaignBloc>(
-      builder: (
+      update: (
         BuildContext _,
         NetworkService network,
         CampaignBloc __,

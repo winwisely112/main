@@ -15,7 +15,7 @@ class MobileChatGroupFeed extends StatelessWidget {
     return MultiProvider(
       providers: <SingleChildCloneableWidget>[
         ProxyProvider2<NetworkService, UserService, ChatGroupBloc>(
-          builder: (BuildContext _, NetworkService network, UserService user,
+          update: (BuildContext _, NetworkService network, UserService user,
                   ChatGroupBloc __) =>
               ChatGroupBloc(
             network: network,
@@ -59,7 +59,7 @@ class _ChatGroupFeedBody extends StatelessWidget {
                     children: <Widget>[
                       const SizedBox(height: 10.0),
                       ProxyProvider2<NetworkService, UserService, ChatBloc>(
-                        builder: (BuildContext _, NetworkService network,
+                        update: (BuildContext _, NetworkService network,
                                 UserService user, ChatBloc __) =>
                             ChatBloc(
                                 network: network,
