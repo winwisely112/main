@@ -11,7 +11,7 @@ class NotReadyView extends StatelessWidget {
     return WebInfoView(
       title: TitleWidget(
         icon: FontAwesomeIcons.handsHelping,
-        title: 'Needs',
+        title: 'My Needs',
       ),
       child: const _NotReadyView(),
       index: -1,
@@ -27,9 +27,8 @@ class _NotReadyView extends StatefulWidget {
 }
 
 class __NotReadyViewState extends State<_NotReadyView> {
-  final TextEditingController _controller = TextEditingController();
   final Map<int, dynamic> _value = <int, dynamic>{
-    1: '0.0',
+    1: false,
     2: false,
     3: false,
     4: false,
@@ -37,39 +36,68 @@ class __NotReadyViewState extends State<_NotReadyView> {
     6: false,
     7: false,
     8: false,
-    9: false,
-    10: '',
+    9: '',
   };
+
+  bool validate() {
+    int count = 0;
+    for (int i = 1; i <= 8; i++) {
+      if (_value[i]) {
+        count = count + 1;
+        if (count > 3) {
+          showDialog<Widget>(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text('My Needs'),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+                elevation: 5.0,
+                content: const Text(
+                  'Please choose up to 3 supports or needs you need satisfied to join the action.',
+                ),
+                actions: <Widget>[
+                  RaisedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text('Ok'),
+                  ),
+                ],
+              );
+            },
+          );
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
     return ResponsiveListView(
       children: <Widget>[
-        ListTile(
-          title: Text(
-            'How can we help you be ready',
-            style: Theme.of(context).textTheme.display1,
-          ),
-        ),
         const ListTile(
-          title: Text('1. How much willing you are to join?'),
-        ),
-        ListTile(
-          //trailing: Text('${_value[1].toString()}%'),
-          title: Slider(
-            label: '${_value[1].toString()}%',
-            divisions: 10,
-            min: 0.0,
-            max: 100,
-            value: double.parse(_value[1]),
-            onChanged: (double value) {
-              setState(() {
-                _value[1] = value.toString();
-              });
-            },
+          title: Text(
+            'Please choose up to 3 supports or needs you need satisfied to join the action.',
           ),
         ),
         CheckboxListTile(
-          title: const Text('2. I need to be more confident re legal defense'),
+          title: const Text(
+              '1. I need to know that there will be enough people at the action for the campaign to have a high chance of success'),
+          value: _value[1],
+          onChanged: (bool value) {
+            setState(() {
+              _value[1] = value;
+            });
+          },
+          secondary: const Icon(FontAwesomeIcons.peopleCarry),
+        ),
+        CheckboxListTile(
+          title: const Text(
+              '2. I need to be more confident regarding legal defense'),
           value: _value[2],
           onChanged: (bool value) {
             setState(() {
@@ -79,101 +107,84 @@ class __NotReadyViewState extends State<_NotReadyView> {
           secondary: const Icon(FontAwesomeIcons.briefcase),
         ),
         CheckboxListTile(
-          title: const Text('3. I need to be more confident re legal defense'),
+          title: const Text('3. I need to be invited to join by a friend'),
           value: _value[3],
           onChanged: (bool value) {
             setState(() {
               _value[3] = value;
             });
           },
-          secondary: const Icon(FontAwesomeIcons.briefcase),
+          secondary: const Icon(FontAwesomeIcons.userFriends),
         ),
         CheckboxListTile(
-          title: const Text('4. I need to be invited to join by a friend'),
+          title: const Text(
+              '4. I’m a party animal: I need to be invited to a party of other strikers and conditional strikers'),
           value: _value[4],
           onChanged: (bool value) {
             setState(() {
               _value[4] = value;
             });
           },
-          secondary: const Icon(FontAwesomeIcons.userFriends),
+          secondary: const Icon(FontAwesomeIcons.fistRaised),
         ),
         CheckboxListTile(
-          title: const Text(
-              '5. I’m a party animal: I need to be invited to a party of other strikers and conditional strikers'),
+          title: const Text('5. I need transport to the event'),
           value: _value[5],
           onChanged: (bool value) {
             setState(() {
               _value[5] = value;
             });
           },
-          secondary: const Icon(FontAwesomeIcons.fistRaised),
+          secondary: const Icon(FontAwesomeIcons.bus),
         ),
         CheckboxListTile(
-          title: const Text('6. Need transport'),
+          title: const Text('6. I need bail support'),
           value: _value[6],
           onChanged: (bool value) {
             setState(() {
               _value[6] = value;
             });
           },
-          secondary: const Icon(FontAwesomeIcons.bus),
+          secondary: const Icon(FontAwesomeIcons.link),
         ),
         CheckboxListTile(
-          title: const Text('7. Need bail support'),
+          title: const Text('7. I need help with childcare'),
           value: _value[7],
           onChanged: (bool value) {
             setState(() {
               _value[7] = value;
             });
           },
-          secondary: const Icon(FontAwesomeIcons.link),
+          secondary: const Icon(FontAwesomeIcons.babyCarriage),
         ),
         CheckboxListTile(
-          title: const Text('8. Need childcare'),
+          title: const Text(
+              '8. I need housing (if long term strike and worry about losing housing)'),
           value: _value[8],
           onChanged: (bool value) {
             setState(() {
               _value[8] = value;
             });
           },
-          secondary: const Icon(FontAwesomeIcons.babyCarriage),
-        ),
-        CheckboxListTile(
-          title: const Text(
-              '9. Need housing (if long term strike and worry about losing housing)'),
-          value: _value[9],
-          onChanged: (bool value) {
-            setState(() {
-              _value[9] = value;
-            });
-          },
           secondary: const Icon(FontAwesomeIcons.home),
         ),
         const SizedBox(height: 8.0),
         TextFormField(
+          initialValue: _value[9],
           maxLines: 5,
-          controller: _controller,
           decoration: InputDecoration(
-            labelText: 'Is there any other need you have....',
+            labelText: 'I need something else...',
             alignLabelWithHint: true,
-            hintText: 'Is there any other need you have....',
+            hintText: 'I need something else...',
             fillColor: Theme.of(context).inputDecorationTheme.fillColor,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(4.0),
               borderSide: const BorderSide(),
             ),
           ),
-          validator: (String val) {
-            if (val.isEmpty) {
-              return 'Email cannot be empty';
-            } else {
-              return null;
-            }
-          },
           onSaved: (String value) {
             setState(() {
-              _value[10] = value;
+              _value[9] = value;
             });
           },
           keyboardType: TextInputType.emailAddress,
@@ -182,26 +193,63 @@ class __NotReadyViewState extends State<_NotReadyView> {
           ),
         ),
         const SizedBox(height: 8.0),
-        const ListTile(
-          title: Text(
-            '10. If we cannot satisfy your conditions, would you be willing to consider providing a support role to those willing to strike?',
-          ),
-        ),
         ButtonBar(
           children: <Widget>[
-            FlatButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('No'),
-            ),
             RaisedButton(
               onPressed: () {
-                Navigator.of(context).pushNamed('/supportroles');
+                if (validate()) {
+                  if (_value[1]) {
+                    Navigator.of(context).pushNamed('/conditional');
+                  } else {
+                    showDialog<Widget>(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return const CustomDialog();
+                      },
+                    );
+                  }
+                }
               },
-              child: const Text('Yes'),
+              child: const Text('Next'),
             ),
           ],
+        ),
+      ],
+    );
+  }
+}
+
+class CustomDialog extends StatelessWidget {
+  const CustomDialog();
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(5.0),
+      ),
+      elevation: 5.0,
+      title: Text(
+        'Support Role',
+        style: Theme.of(context).textTheme.title,
+      ),
+      content: const Text(
+        'If we cannot satisfy your chosen conditions, would you consider providing a support role to those willing to go on strike?',
+      ),
+      actions: <Widget>[
+        FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+            Navigator.of(context).pushNamed('/signup');
+          },
+          child: const Text('No'),
+        ),
+        RaisedButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+            Navigator.of(context).pushNamed('/supportroles');
+          },
+          child: const Text('Yes'),
         ),
       ],
     );
