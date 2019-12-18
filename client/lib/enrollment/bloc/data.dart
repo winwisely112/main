@@ -25,7 +25,6 @@ class Campaign implements Entity {
         assert(when != null),
         assert(where != null),
         assert(alreadyPledged != null),
-        assert(other != null),
         assert(logoUrl != null),
         assert(description != null),
         assert(crgQuantityMany != null),
@@ -44,7 +43,8 @@ class Campaign implements Entity {
         name = data['name'],
         where = data['location'],
         when = DateTime.parse(data['datetime']),
-        alreadyPledged = int.parse(data['already_pledged']),
+        alreadyPledged =
+            int.parse(data['already_pledged'].replaceAll(RegExp(','), '')),
         other = data['other'];
 
   @HiveField(0)
