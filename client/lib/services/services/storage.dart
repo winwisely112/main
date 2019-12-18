@@ -34,12 +34,15 @@ class StorageService {
       print('${DateTime.now().toUtc().toString()} Error ${e.toString()}');
     }); */
     // TODO(FlutterDevelopers): Initial Hive store here
-    hiveBox[Cache.Chats] = await Hive.openBox<ChatModel>('chats');
-    hiveBox[Cache.News] = await Hive.openBox<News>('news');
-    hiveBox[Cache.Users] = await Hive.openBox<User>('users');
-    hiveBox[Cache.ChatGroup] = await Hive.openBox<ChatGroup>('chatgroup');
-    hiveBox[Cache.Campaign] = await Hive.openBox<Campaign>('campaign');
-    hiveBox[Cache.Roles] = await Hive.openBox<Roles>('roles');
+    hiveBox[Cache.Chats] =
+        await Hive.openBox<ChatModel>(Cache.Chats.toString());
+    hiveBox[Cache.News] = await Hive.openBox<News>(Cache.News.toString());
+    hiveBox[Cache.Users] = await Hive.openBox<User>(Cache.Users.toString());
+    hiveBox[Cache.ChatGroup] =
+        await Hive.openBox<ChatGroup>(Cache.ChatGroup.toString());
+    hiveBox[Cache.Campaign] =
+        await Hive.openBox<Campaign>(Cache.Campaign.toString());
+    hiveBox[Cache.Roles] = await Hive.openBox<Roles>(Cache.Roles.toString());
     storageServiceReadyCompleter.complete();
   }
 

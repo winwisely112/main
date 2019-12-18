@@ -17,7 +17,7 @@ class NewsBloc {
         _news = CachedRepository<News>(
           strategy: CacheStrategy.onlyFetchFromSourceIfNotInCache,
           source: _NewsDownloader(network: network, user: user),
-          cache: HiveRepository<News>('news'),
+          cache: HiveRepository<News>(Cache.News.toString()),
         );
   final NetworkService network;
   final UserService user;

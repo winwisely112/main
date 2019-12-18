@@ -12,7 +12,7 @@ class UserService {
       : assert(network != null),
         _storage = CachedRepository<User>(
           source: _UserDownloader(network: network),
-          cache: HiveRepository<User>('users'),
+          cache: HiveRepository<User>(Cache.Users.toString()),
         ) {
     userServiceReadyCompleter.complete();
   }

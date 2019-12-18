@@ -14,6 +14,15 @@ class CacheService {
   })  : assert(auth != null),
         assert(network != null),
         assert(user != null) {
+    repos[Cache.Roles] = ItemRepository<Roles>(
+      user: user,
+      network: network,
+      globalUser: auth,
+      source: RolesRepository(
+        network: network,
+      ),
+      cache: Cache.Roles.toString(),
+    );
     repos[Cache.Campaign] = ItemRepository<Campaign>(
       user: user,
       network: network,
@@ -21,7 +30,7 @@ class CacheService {
       source: CampaignRepository(
         network: network,
       ),
-      cache: 'campaign',
+      cache: Cache.Campaign.toString(),
     );
     if (auth != null) {
       // this order is important
@@ -34,7 +43,7 @@ class CacheService {
           network: network,
           globalUser: auth,
         ),
-        cache: 'chatgroup',
+        cache: Cache.ChatGroup.toString(),
       );
       repos[Cache.Chats] = ItemRepository<ChatModel>(
         user: user,
@@ -45,7 +54,7 @@ class CacheService {
           network: network,
           globalUser: auth,
         ),
-        cache: 'chats',
+        cache: Cache.Chats.toString(),
       );
     }
     cacheServiceReadyCompleter.complete();
