@@ -91,3 +91,6 @@ coverage/
 # Firebase Public folder
 .firebase
 public/
+
+# siging key
+_keys

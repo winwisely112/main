@@ -30,6 +30,11 @@ GO_ARCH		:= $(shell go env GOARCH)
 
 GIT_VERSION	:= $(shell git describe --tags)
 
+
+# Signing
+AND_KEYSTORE_APP_NAME=main
+AND_KEYSTORE_FSPATH=$(PWD)/_keys/$(AND_KEYSTORE_APP_NAME)
+
 help:  ## Display this help
 	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"} /^[a-zA-Z_-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
 
@@ -44,6 +49,12 @@ print: ## print
 	@echo
 	@echo GIT_VERSION: $(GIT_VERSION)
 	@echo GIT_OTHER: $(shell git describe --all)
+	@echo
+
+	@echo
+	@echo SIGNING --
+	@echo AND_KEYSTORE_APP_NAME: $(AND_KEYSTORE_APP_NAME)
+	@echo AND_KEYSTORE_FSPATH: $(AND_KEYSTORE_FSPATH)
 	@echo
 
 	@echo
@@ -353,28 +364,66 @@ flu-desk-dist-unzip:
 flu-mob-run: ## flu-mob-run
 	cd $(SAMPLE_FSPATH) && flutter run -d all
 
-flu-mob-build-and: ## flu-mob-build-and
+
+
+
+flu-mob-release-and-init: ## flu-mob-release-and-init
+
+	mkdir -p $(AND_KEYSTORE_FSPATH)
+
+	# open keystore
+	#code $(AND_KEYSTORE_MAC_FSPATH)
 
 	# Create keystore
 	# Warning: Keep the keystore file private; do not check it into public source control.
-	@echo Creating Keystore 
-ifeq ($(GO_OS), linux)
-	@echo Linux detected
-	keytool -genkey -v -keystore ~/key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias key
-endif
+	# Cannot overwrite existing....
+	keytool -genkey -v -keystore $(AND_KEYSTORE_FSPATH)/key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias key
 
-ifeq ($(GO_OS), darwin)
-	@echo Mac detected
-	keytool -genkey -v -keystore ~/key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias key
-endif
+	# windows is a littel diff
+	# keytool -genkey -v -keystore $(AND_KEYSTORE_FSPATH)/key.jks -keyalg RSA -storetype JKS -keysize 2048 -validity 10000 -alias key
 
-ifeq ($(GO_OS), windows)
-	@echo Windows detected
-	keytool -genkey -v -keystore c:/Users/USER_NAME/key.jks -storetype JKS -keyalg RSA -keysize 2048 -validity 10000 -alias key
-endif	
 
-	# TODO and sign
-	#cd $(SAMPLE_FSPATH) && flutter 
+flu-mob-release-and-gen: ## flu-mob-release-and-gen
+
+	# https://flutter.dev/docs/deployment/android
+	
+	touch $(SAMPLE_FSPATH)/android/key.properties
+	code $(SAMPLE_FSPATH)/android/key.properties
+	# TODO gen this
+	#- add the 4 lines
+
+	touch $(SAMPLE_FSPATH)/android/app/proguard-rules.pro 
+	code $(SAMPLE_FSPATH)/android/app/proguard-rules.pro 
+	# TODO gen this
+	# - add a few lines
+
+	touch $(SAMPLE_FSPATH)/android/app/build.gradle
+	code $(SAMPLE_FSPATH)/android/app/build.gradle
+	# TODO: gen this
+	# - add a few lines, etc etc
+	# - add ref to proguard
+
+	# Build it
+	cd $(SAMPLE_FSPATH) && flutter build appbundle
+
+	# Create an account on Google Play Store
+	# https://play.google.com/apps/publish/?account=7105100900922845210
+
+	# DO BETA RELEASE: https://play.google.com/apps/publish/?account=7105100900922845210#PrepareReleasePlace:p=tmp.05109091238716120360.1538517246276.1913796864&appid=4972552978345084231&releaseTrackId=4699993911531051870&releaseId=4701866095568168106
+	# Just uplaod the "build/app/outputs/bundle/release/app.aab"
+
+	## TODO: https://play.google.com/apps/publish/?account=7105100900922845210#MarketListingPlace:p=com.winwisely.whitelabel&appid=4972552978345084231
+	# all the screenshots!!
+
+
+
+
+
+
+
+
+
+
 
 
 

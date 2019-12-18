@@ -88,10 +88,8 @@ else
 	mv 127.0.0.1-key.pem ./pion/key.pem
 	mv 127.0.0.1.pem ./pion/cert.pem 
 
-	cd ./pion && sudo docker-compose up	
+	cd ./pion && sudo docker-compose up
 endif
-
-
 
 # https://github.com/pion/ion
 git-clone: ##git-clone
