@@ -1,11 +1,10 @@
 import 'dart:async';
-import 'package:hive/hive.dart';
-import './services/item_repository.dart';
 
 export './bloc/app_config.dart';
 export './bloc/data.dart';
 export './config/chat_config.dart';
 export './services/auth_user_service.dart';
+export './services/cache_service.dart';
 export './services/item_repository.dart';
 export './services/network.dart';
 export './services/storage.dart';
@@ -27,10 +26,9 @@ Completer<dynamic> storageServiceReadyCompleter = Completer<dynamic>();
 Completer<dynamic> networkServiceReadyCompleter = Completer<dynamic>();
 Completer<dynamic> userServiceReadyCompleter = Completer<dynamic>();
 Completer<dynamic> authUserServiceReadyCompleter = Completer<dynamic>();
+Completer<dynamic> cacheServiceReadyCompleter = Completer<dynamic>();
 Future<dynamic> get storageReady => storageServiceReadyCompleter.future;
 Future<dynamic> get networkReady => networkServiceReadyCompleter.future;
 Future<dynamic> get userServiceReady => userServiceReadyCompleter.future;
 Future<dynamic> get authUserReady => userServiceReadyCompleter.future;
-final Map<String, Box<dynamic>> hiveBox = <String, Box<dynamic>>{};
-final Map<String, ItemRepository<dynamic>> repos =
-    <String, ItemRepository<dynamic>>{};
+Future<dynamic> get cacheReady => cacheServiceReadyCompleter.future;

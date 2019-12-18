@@ -16,26 +16,6 @@ class WebNewsFeed extends StatelessWidget {
   const WebNewsFeed({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return ProxyProvider2<NetworkService, UserService, NewsBloc>(
-      update: (
-        BuildContext _,
-        NetworkService network,
-        UserService user,
-        NewsBloc __,
-      ) =>
-          NewsBloc(
-        network: network,
-        user: user,
-      ),
-      child: const _NewsFeedBody(),
-    );
-  }
-}
-
-class _NewsFeedBody extends StatelessWidget {
-  const _NewsFeedBody({Key key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
     return HomeScaffold(
       child: StreamBuilder<List<News>>(
         stream: Provider.of<NewsBloc>(context).getNews(),

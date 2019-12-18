@@ -15,13 +15,15 @@ class ChatFeed extends StatelessWidget {
   final String chatGroupId;
   @override
   Widget build(BuildContext context) {
-    return ProxyProvider2<NetworkService, UserService, ChatBloc>(
+    return ProxyProvider3<NetworkService, UserService, StorageService,
+        ChatBloc>(
       update: (BuildContext _, NetworkService network, UserService user,
-              ChatBloc __) =>
+              StorageService storage, ChatBloc __) =>
           ChatBloc(
         network: network,
         user: user,
         chatGroupId: chatGroupId,
+        storage: storage,
       ),
       child: _ChatFeedView(chatGroupId: chatGroupId),
     );
@@ -39,7 +41,9 @@ class _ChatFeedView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //repos['conversations'].fetch(Id<Conversations>(conversationsId)).first;
-    final ChatGroup chatGroup = hiveBox['chatgroup'].get(chatGroupId);
+    final StorageService _storage = Provider.of<StorageService>(context);
+    final ChatGroup chatGroup =
+        _storage.hiveBox[Cache.ChatGroup].get(chatGroupId);
     return Scaffold(
       appBar: AppBar(
         title: ListTile(

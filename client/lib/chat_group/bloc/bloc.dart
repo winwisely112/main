@@ -12,7 +12,9 @@ class ChatGroupBloc {
   ChatGroupBloc({
     @required this.network,
     @required this.user,
+    @required this.storage,
   })  : assert(network != null),
+        assert(storage != null),
         assert(user != null) {
     _chatGroupFetcher.stream
         .transform(_chatListTransformer())
@@ -22,7 +24,7 @@ class ChatGroupBloc {
 
   final NetworkService network;
   final UserService user;
-
+  final StorageService storage;
 // Streams for building chatscreen
   final PublishSubject<ChatGroup> _chatGroupFetcher =
       PublishSubject<ChatGroup>();
@@ -45,13 +47,13 @@ class ChatGroupBloc {
 
   Future<bool> _initializeScreen() async {
     for (MapEntry<dynamic, ChatGroup> entry
-        in hiveBox['chatgroup'].toMap().entries) {
+        in storage.hiveBox[Cache.ChatGroup].toMap().entries) {
       if (entry.value is ChatGroup) {
         _addToList(entry.value);
       }
     }
 
-    hiveBox['chatgroup'].watch().listen((BoxEvent event) async {
+    storage.hiveBox[Cache.ChatGroup].watch().listen((BoxEvent event) async {
       if (event.value is ChatGroup) {
         _addToList(event.value);
       }

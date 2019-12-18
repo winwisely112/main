@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
+enum Cache {
+  Chats,
+  News,
+  Users,
+  ChatGroup,
+  Campaign,
+  Roles,
+}
+
 class AppConfiguration with ChangeNotifier {
   bool _debugShowGrid = false;
   bool _debugShowSizes = false;

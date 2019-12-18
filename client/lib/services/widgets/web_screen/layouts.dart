@@ -50,7 +50,7 @@ class HomeScaffold extends StatelessWidget {
               padding: EdgeInsets.all(8.0),
               child: CircleAvatar(
                 backgroundColor: Colors.transparent,
-                backgroundImage: AssetImage('assets/icon/icon-old.png'),
+                backgroundImage: AssetImage('assets/icon/icon.png'),
               ),
             ),
             title: Text(

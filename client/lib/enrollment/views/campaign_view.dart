@@ -13,14 +13,16 @@ class CampaignView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ProxyProvider<NetworkService, CampaignBloc>(
+    return ProxyProvider2<NetworkService, StorageService, CampaignBloc>(
       update: (
         BuildContext _,
         NetworkService network,
+        StorageService storage,
         CampaignBloc __,
       ) =>
           CampaignBloc(
         network: network,
+        storage: storage,
       ),
       child:
           kIsWeb || debugDefaultTargetPlatformOverride == TargetPlatform.fuchsia

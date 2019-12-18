@@ -15,10 +15,10 @@ class MobileCampaignView extends StatelessWidget {
         title: const Text('Select Campaign'),
         centerTitle: true,
       ),
-      body: StreamBuilder<List<Campaign>>(
-        stream: Provider.of<CampaignBloc>(context).getCampaign(),
+      body: StreamBuilder<Map<int, Campaign>>(
+        stream: Provider.of<CampaignBloc>(context).campaignList,
         builder:
-            (BuildContext context, AsyncSnapshot<List<Campaign>> snapshot) {
+            (BuildContext context, AsyncSnapshot<Map<int, Campaign>> snapshot) {
           if (snapshot.hasError) {
             return Center(child: Text('Error occurred: ${snapshot.error}'));
           } else if (!snapshot.hasData) {

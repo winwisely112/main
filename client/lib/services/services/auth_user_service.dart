@@ -18,7 +18,7 @@ class AuthUserService {
     @required this.user,
   })  : assert(storage != null),
         assert(user != null) {
-    storage.dataStream.map((StorageData data) => data.token).distinct().listen(
+/*     storage.dataStream.map((StorageData data) => data.token).distinct().listen(
       _updateUser,
       onError: (dynamic error) {
         if (error is ItemNotFound) {
@@ -27,7 +27,7 @@ class AuthUserService {
           throw error;
         }
       },
-    );
+    ); */
     authUserServiceReadyCompleter.complete();
   }
 

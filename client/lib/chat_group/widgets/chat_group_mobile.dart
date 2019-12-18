@@ -3,32 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:com.whitelabel/services/services.dart';
+import 'package:com.whitelabel/chat_group/chat_group.dart';
 import 'package:com.whitelabel/chat_view/chat_view.dart';
 
-import '../bloc/bloc.dart';
-import '../bloc/data.dart';
-
 class MobileChatGroupFeed extends StatelessWidget {
-  const MobileChatGroupFeed({Key key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: <SingleChildCloneableWidget>[
-        ProxyProvider2<NetworkService, UserService, ChatGroupBloc>(
-          update: (BuildContext _, NetworkService network, UserService user,
-                  ChatGroupBloc __) =>
-              ChatGroupBloc(
-            network: network,
-            user: user,
-          ),
-        ),
-      ],
-      child: _ChatGroupFeedBody(),
-    );
-  }
-}
-
-class _ChatGroupFeedBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<Map<int, ChatGroup>>(
@@ -58,13 +36,19 @@ class _ChatGroupFeedBody extends StatelessWidget {
                   Column(
                     children: <Widget>[
                       const SizedBox(height: 10.0),
-                      ProxyProvider2<NetworkService, UserService, ChatBloc>(
-                        update: (BuildContext _, NetworkService network,
-                                UserService user, ChatBloc __) =>
+                      ProxyProvider3<NetworkService, UserService,
+                          StorageService, ChatBloc>(
+                        update: (BuildContext _,
+                                NetworkService network,
+                                UserService user,
+                                StorageService storage,
+                                ChatBloc __) =>
                             ChatBloc(
-                                network: network,
-                                user: user,
-                                chatGroupId: chatGroup.id.id),
+                          network: network,
+                          user: user,
+                          chatGroupId: chatGroup.id.id,
+                          storage: storage,
+                        ),
                         child: _ConversationTile(
                           chatGroup: chatGroup,
                         ),

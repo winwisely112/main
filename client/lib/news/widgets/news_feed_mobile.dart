@@ -3,32 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import 'package:com.whitelabel/services/services.dart';
-
 import '../bloc/bloc.dart';
 import '../bloc/data.dart';
 
 class MobileNewsFeed extends StatelessWidget {
   const MobileNewsFeed({Key key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return ProxyProvider2<NetworkService, UserService, NewsBloc>(
-      update: (
-        BuildContext _,
-        NetworkService network,
-        UserService user,
-        NewsBloc __,
-      ) =>
-          NewsBloc(
-        network: network,
-        user: user,
-      ),
-      child: _NewsFeedBody(),
-    );
-  }
-}
-
-class _NewsFeedBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<News>>(
@@ -37,7 +16,7 @@ class _NewsFeedBody extends StatelessWidget {
         if (snapshot.hasError) {
           return Center(child: Text('Error occurred: ${snapshot.error}'));
         } else if (!snapshot.hasData) {
-          return Center(child: const CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
 
         final Map<DateTime, List<News>> news = groupBy<News, DateTime>(

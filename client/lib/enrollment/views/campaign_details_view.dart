@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'package:com.whitelabel/services/services.dart';
 
@@ -26,7 +27,8 @@ class _CampainDetailsBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Campaign campaign = hiveBox['campaign'].get(campaignID);
+    final StorageService _storage = Provider.of<StorageService>(context);
+    final Campaign campaign = _storage.hiveBox[Cache.Campaign].get(campaignID);
     return ResponsiveListView(
       children: <Widget>[
         ListTile(

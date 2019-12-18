@@ -1,52 +1,18 @@
-//import 'package:collection/collection.dart' show groupBy;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:repository/repository.dart';
-//import 'package:responsive_scaffold/responsive_scaffold.dart';
 
 import 'package:com.whitelabel/services/services.dart';
+import 'package:com.whitelabel/chat_group/chat_group.dart';
 import 'package:com.whitelabel/chat_view/chat_view.dart';
 import 'package:com.whitelabel/vendor_plugins/vendor_plugins.dart';
 
-import '../bloc/bloc.dart';
-import '../bloc/data.dart';
-
-class WebChatGroupFeed extends StatelessWidget {
-  const WebChatGroupFeed({Key key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: <SingleChildCloneableWidget>[
-        ProxyProvider2<NetworkService, UserService, ChatGroupBloc>(
-          update: (BuildContext _, NetworkService network, UserService user,
-                  ChatGroupBloc __) =>
-              ChatGroupBloc(
-            network: network,
-            user: user,
-          ),
-        ),
-        ProxyProvider2<NetworkService, UserService, ChatBloc>(
-          update: (BuildContext _, NetworkService network, UserService user,
-                  ChatBloc __) =>
-              ChatBloc(
-            network: network,
-            user: user,
-            chatGroupId: null,
-          ),
-        )
-      ],
-      child: _ChatGroupFeedBody(),
-    );
-  }
-}
-
-class _ChatGroupFeedBody extends StatefulWidget {
+class WebChatGroupFeed extends StatefulWidget {
   @override
   __ChatGroupFeedBodyState createState() => __ChatGroupFeedBodyState();
 }
 
-class __ChatGroupFeedBodyState extends State<_ChatGroupFeedBody> {
+class __ChatGroupFeedBodyState extends State<WebChatGroupFeed> {
   @override
   Widget build(BuildContext context) {
     return HomeScaffold(

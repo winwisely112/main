@@ -9,8 +9,12 @@ import 'package:com.whitelabel/chat_group/chat_group.dart';
 import 'data.dart';
 
 class ChatBloc {
-  ChatBloc({@required this.network, @required this.user, this.chatGroupId})
-      : assert(network != null),
+  ChatBloc({
+    @required this.network,
+    @required this.user,
+    @required this.storage,
+    this.chatGroupId,
+  })  : assert(network != null),
         assert(user != null) {
     _chatFetcher.stream
         .transform(_chatScreenTransformer())
@@ -20,6 +24,7 @@ class ChatBloc {
 
   final NetworkService network;
   final UserService user;
+  final StorageService storage;
   final String chatGroupId;
 
 // Streams for building chatscreen
@@ -46,13 +51,13 @@ class ChatBloc {
 
   Future<bool> _initializeScreen() async {
     for (MapEntry<dynamic, ChatModel> entry
-        in hiveBox['chats'].toMap().entries) {
+        in storage.hiveBox[Cache.Chats].toMap().entries) {
       if (entry.value is ChatModel) {
         _addToStream(entry.value);
       }
     }
 
-    hiveBox['chats'].watch().listen((BoxEvent event) async {
+    storage.hiveBox[Cache.Chats].watch().listen((BoxEvent event) async {
       if (event.value is ChatModel) {
         _addToStream(event.value);
       }
@@ -84,7 +89,7 @@ class ChatBloc {
       return <ChatModel>[
         // ignore: sdk_version_ui_as_code
         for (MapEntry<dynamic, ChatModel> entry
-            in hiveBox['chats'].toMap().entries)
+            in storage.hiveBox[Cache.Chats].toMap().entries)
           entry.value.chatGroupId == id.id ? entry.value : null
       ];
     }
@@ -95,7 +100,7 @@ class ChatBloc {
     // leads to unexpected behavior:
     // https://github.com/dart-lang/sdk/issues/34685
     await Future<dynamic>.delayed(Duration.zero);
-    await for (BoxEvent _ in hiveBox['chats'].watch()) {
+    await for (BoxEvent _ in storage.hiveBox[Cache.Chats].watch()) {
       yield getCurrent();
     }
   }
@@ -106,7 +111,7 @@ class ChatBloc {
   }
 
   Future<dynamic> sendChat(ChatModel chat) async {
-    hiveBox['chats'].put(chat.id.id, chat);
+    storage.hiveBox[Cache.Chats].put(chat.id.id, chat);
     network.send(
       MessageHandler<ChatModel>(
         message: chat,

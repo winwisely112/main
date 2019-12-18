@@ -31,6 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
       await userServiceReady;
       // TODO(Vineeth): Add the authentication logic here
       await authUserReady;
+      await cacheReady;
       Navigator.of(context)
           .pushNamedAndRemoveUntil('/login', ModalRoute.withName('/'));
     });

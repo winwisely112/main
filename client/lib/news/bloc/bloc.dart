@@ -11,6 +11,7 @@ class NewsBloc {
   NewsBloc({
     @required this.network,
     @required this.user,
+    @required this.storage,
   })  : assert(network != null),
         assert(user != null),
         _news = CachedRepository<News>(
@@ -20,6 +21,7 @@ class NewsBloc {
         );
   final NetworkService network;
   final UserService user;
+  final StorageService storage;
   final Repository<News> _news;
   Stream<List<News>> getNews() => _news.fetchAllItems();
   Future<News> getNewsId(String id) => _news.fetch(Id<News>(id)).first;

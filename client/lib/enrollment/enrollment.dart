@@ -1,4 +1,5 @@
 export 'bloc/data.dart';
+export 'bloc/repository.dart';
 export 'views/campaign_details_view.dart';
 export 'views/campaign_view.dart';
 export 'views/notready_view.dart';

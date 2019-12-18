@@ -17,10 +17,10 @@ class WebCampaignView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return HomeScaffold(
-      child: StreamBuilder<List<Campaign>>(
-        stream: Provider.of<CampaignBloc>(context).getCampaign(),
+      child: StreamBuilder<Map<int, Campaign>>(
+        stream: Provider.of<CampaignBloc>(context).campaignList,
         builder:
-            (BuildContext context, AsyncSnapshot<List<Campaign>> snapshot) {
+            (BuildContext context, AsyncSnapshot<Map<int, Campaign>> snapshot) {
           return WebLayoutBody(
             drawerSelection: -1,
             title: TitleWidget(

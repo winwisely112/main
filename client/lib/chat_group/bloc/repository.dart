@@ -22,21 +22,13 @@ class ChatGroupRepository extends CollectionFetcher<ChatGroup> {
     final User _globalUser = await globalUser.globalUser;
 
     for (String chatGroupId in _globalUser.chatGroupIds) {
-      _dataList.addAll(
-        await network.getAllItemForId(
-          path: 'chatgroup',
-          field: '_id',
-          id: chatGroupId,
-        ),
-      );
-    }
-/*     _dataList.addAll(
-      await network.getAllItemForId(
+      final List<Map<String, dynamic>> _results = await network.getAllItemForId(
         path: 'chatgroup',
-        field: 'member_ids',
-        id: _globalUser.id.id,
-      ),
-    ); */
+        field: '_id',
+        id: chatGroupId,
+      );
+      _dataList.addAll(_results);
+    }
 
     return <ChatGroup>[
       // ignore: sdk_version_ui_as_code
