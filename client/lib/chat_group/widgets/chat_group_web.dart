@@ -1,3 +1,4 @@
+import 'package:floating_search_bar/floating_search_bar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,10 +23,25 @@ class __ChatGroupFeedBodyState extends State<WebChatGroupFeed> {
               AsyncSnapshot<Map<int, ChatGroup>> snapshot) {
             return WebLayoutBody(
               drawerSelection: 1,
-              title: TitleWidget(
-                title: 'Groups',
-                icon: Icons.chat_bubble,
-              ),
+              slivers: <Widget>[
+                SliverFloatingBar(
+                  floating: true,
+                  automaticallyImplyLeading: false,
+                  title: TextField(
+                    decoration: const InputDecoration.collapsed(
+                        hintText: 'Search Groups'),
+                  ),
+                ),
+                SliverList(
+                  delegate: SliverChildListDelegate(<Widget>[
+                    TitleWidget(
+                      title: 'Groups',
+                      icon: Icons.chat_bubble,
+                    ),
+                    const Divider()
+                  ]),
+                ),
+              ],
               detailBuilder: (
                 BuildContext context,
                 int index,

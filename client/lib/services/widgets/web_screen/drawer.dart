@@ -34,7 +34,7 @@ class LeftDrawer extends StatelessWidget {
               },
             ),
             DrawerListTile(
-              icon: Icons.settings_input_antenna,
+              icon: Icons.event_note,
               selected: index == 2,
               index: 2,
               onPressed: () {

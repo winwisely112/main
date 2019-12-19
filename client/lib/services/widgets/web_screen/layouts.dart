@@ -71,13 +71,13 @@ class HomeScaffold extends StatelessWidget {
 class WebLayoutBody extends StatefulWidget {
   const WebLayoutBody(
       {Key key,
-      this.title,
+      this.slivers,
       this.detailBuilder,
       this.drawerSelection = 0,
       this.itemBuilder,
       this.itemCount})
       : super(key: key);
-  final Widget title;
+  final List<Widget> slivers;
   final DetailsScreen Function(BuildContext, int, bool) detailBuilder;
   final int drawerSelection;
   final int itemCount;
@@ -99,12 +99,7 @@ class _WebLayoutState extends State<WebLayoutBody> {
               : BottomNav(
                   index: widget.drawerSelection,
                 ),
-      slivers: <Widget>[
-        SliverList(
-          delegate:
-              SliverChildListDelegate(<Widget>[widget.title, const Divider()]),
-        ),
-      ],
+      slivers: widget.slivers ?? <Widget>[],
       detailBuilder: widget.detailBuilder,
       drawer: ProfileInfo(),
       tabletSideMenu: (kIsWeb ||

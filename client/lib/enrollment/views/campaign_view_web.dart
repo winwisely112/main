@@ -1,3 +1,4 @@
+import 'package:floating_search_bar/floating_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -23,10 +24,25 @@ class WebCampaignView extends StatelessWidget {
             (BuildContext context, AsyncSnapshot<Map<int, Campaign>> snapshot) {
           return WebLayoutBody(
             drawerSelection: -1,
-            title: TitleWidget(
-              icon: FontAwesomeIcons.fistRaised,
-              title: 'Campaign',
-            ),
+            slivers: <Widget>[
+              SliverFloatingBar(
+                floating: true,
+                automaticallyImplyLeading: false,
+                title: TextField(
+                  decoration: const InputDecoration.collapsed(
+                      hintText: 'Search Campaigns'),
+                ),
+              ),
+              SliverList(
+                delegate: SliverChildListDelegate(<Widget>[
+                  TitleWidget(
+                    icon: FontAwesomeIcons.fistRaised,
+                    title: 'Campaign',
+                  ),
+                  const Divider()
+                ]),
+              ),
+            ],
             detailBuilder: (
               BuildContext context,
               int index,

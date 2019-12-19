@@ -1,4 +1,5 @@
 //import 'package:collection/collection.dart' show groupBy;
+import 'package:floating_search_bar/floating_search_bar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -22,10 +23,25 @@ class WebNewsFeed extends StatelessWidget {
         builder: (BuildContext context, AsyncSnapshot<List<News>> snapshot) {
           return WebLayoutBody(
             drawerSelection: 0,
-            title: TitleWidget(
-              title: 'News',
-              icon: Icons.home,
-            ),
+            slivers: <Widget>[
+              SliverFloatingBar(
+                floating: true,
+                automaticallyImplyLeading: false,
+                title: TextField(
+                  decoration:
+                      const InputDecoration.collapsed(hintText: 'Search News'),
+                ),
+              ),
+              SliverList(
+                delegate: SliverChildListDelegate(<Widget>[
+                  TitleWidget(
+                    title: 'News',
+                    icon: Icons.home,
+                  ),
+                  const Divider()
+                ]),
+              ),
+            ],
             detailBuilder: (
               BuildContext context,
               int index,
