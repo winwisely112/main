@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 import 'package:com.whitelabel/services/services.dart';
 
-class NotReadyView extends StatelessWidget {
-  const NotReadyView({Key key}) : super(key: key);
+import '../bloc/data.dart';
 
+class NotReadyView extends StatelessWidget {
+  const NotReadyView({Key key, this.campaignID}) : super(key: key);
+  final String campaignID;
   @override
   Widget build(BuildContext context) {
     return WebInfoView(
@@ -13,15 +16,15 @@ class NotReadyView extends StatelessWidget {
         icon: FontAwesomeIcons.handsHelping,
         title: 'My Needs',
       ),
-      child: const _NotReadyView(),
+      child: _NotReadyView(campaignID: campaignID),
       index: -1,
     );
   }
 }
 
 class _NotReadyView extends StatefulWidget {
-  const _NotReadyView({Key key}) : super(key: key);
-
+  const _NotReadyView({Key key, this.campaignID}) : super(key: key);
+  final String campaignID;
   @override
   __NotReadyViewState createState() => __NotReadyViewState();
 }
@@ -36,52 +39,39 @@ class __NotReadyViewState extends State<_NotReadyView> {
     6: false,
     7: false,
     8: false,
-    9: '',
+    9: ''
   };
-
-  bool validate() {
-    int count = 0;
-    for (int i = 1; i <= 8; i++) {
-      if (_value[i]) {
-        count = count + 1;
-        if (count > 3) {
-          showDialog<Widget>(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: const Text('My Needs'),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5.0),
-                ),
-                elevation: 5.0,
-                content: const Text(
-                  'Please choose up to 3 supports or needs you need satisfied to join the action.',
-                ),
-                actions: <Widget>[
-                  RaisedButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: const Text('Ok'),
-                  ),
-                ],
-              );
-            },
-          );
-          return false;
-        }
-      }
-    }
-    return true;
-  }
 
   @override
   Widget build(BuildContext context) {
+    final StorageService _storage = Provider.of<StorageService>(context);
+    final Campaign _campaign =
+        _storage.hiveBox[Cache.Campaign].get(widget.campaignID);
     return ResponsiveListView(
       children: <Widget>[
-        const ListTile(
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListTile(
+              leading: Container(
+                child: Image.asset(_campaign.logoUrl),
+              ),
+              title: Text(
+                _campaign.name,
+                //style: Theme.of(context).textTheme.title,
+              ),
+              subtitle: Text(
+                _campaign.description,
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ),
+        ),
+        ListTile(
           title: Text(
             'Please choose up to 3 supports or needs you need satisfied to join the action.',
+            style: Theme.of(context).textTheme.title,
           ),
         ),
         CheckboxListTile(
@@ -197,14 +187,17 @@ class __NotReadyViewState extends State<_NotReadyView> {
           children: <Widget>[
             RaisedButton(
               onPressed: () {
-                if (validate()) {
+                if (_validate()) {
                   if (_value[1]) {
-                    Navigator.of(context).pushNamed('/conditional');
+                    Navigator.of(context).pop();
+                    Navigator.of(context)
+                        .pushNamed('/conditional/${widget.campaignID}');
                   } else {
                     showDialog<Widget>(
                       context: context,
                       builder: (BuildContext context) {
-                        return const CustomDialog();
+                        return SupportRolesDialog(
+                            campaignID: widget.campaignID);
                       },
                     );
                   }
@@ -217,11 +210,47 @@ class __NotReadyViewState extends State<_NotReadyView> {
       ],
     );
   }
+
+  bool _validate() {
+    int count = 0;
+    for (int i = 1; i <= 8; i++) {
+      if (_value[i]) {
+        count = count + 1;
+        if (count > 3) {
+          showDialog<Widget>(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text('My Needs'),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+                elevation: 5.0,
+                content: const Text(
+                  'Please choose up to 3 supports or needs you need satisfied to join the action.',
+                ),
+                actions: <Widget>[
+                  RaisedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text('Ok'),
+                  ),
+                ],
+              );
+            },
+          );
+          return false; // more than 3
+        }
+      }
+    }
+    return true; // valid
+  }
 }
 
-class CustomDialog extends StatelessWidget {
-  const CustomDialog();
-
+class SupportRolesDialog extends StatelessWidget {
+  const SupportRolesDialog({Key key, this.campaignID}) : super(key: key);
+  final String campaignID;
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -234,7 +263,7 @@ class CustomDialog extends StatelessWidget {
         style: Theme.of(context).textTheme.title,
       ),
       content: const Text(
-        'If we cannot satisfy your chosen conditions, would you consider providing a support role to those willing to go on strike?',
+        'If we cannot satisfy your chosen conditions, would you consider providing a support role to those willing to go on strike ?',
       ),
       actions: <Widget>[
         FlatButton(
@@ -247,7 +276,7 @@ class CustomDialog extends StatelessWidget {
         RaisedButton(
           onPressed: () {
             Navigator.of(context).pop();
-            Navigator.of(context).pushNamed('/supportroles');
+            Navigator.of(context).pushNamed('/supportroles/$campaignID');
           },
           child: const Text('Yes'),
         ),

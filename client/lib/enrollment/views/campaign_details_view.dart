@@ -49,7 +49,6 @@ class _CampainDetailsBody extends StatelessWidget {
             ),
           ),
         ),
-        const Divider(),
         const SizedBox(height: 24.0),
         ListTile(
           title: Card(
@@ -101,6 +100,7 @@ class _CampainDetailsBody extends StatelessWidget {
                     style: Theme.of(context).textTheme.title,
                   ),
                 ),
+                const Divider(),
                 for (int index = 0; index < campaign.crgIdsMany.length; index++)
                   RolesLoader(
                     index: index,
@@ -117,7 +117,7 @@ class _CampainDetailsBody extends StatelessWidget {
           children: <Widget>[
             FlatButton(
               onPressed: () {
-                Navigator.of(context).pushNamed('/notready');
+                Navigator.of(context).pushNamed('/notready/$campaignID');
               },
               child: const Text('Not Ready'),
             ),

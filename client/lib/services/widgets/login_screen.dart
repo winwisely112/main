@@ -63,7 +63,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
                 child: const Text(
                   'Get Started',
-                  style: TextStyle(color: Colors.black),
+                  style: TextStyle(
+                    color: Colors.blue,
+                    decoration: TextDecoration.underline,
+                  ),
                 ),
               ),
             ),

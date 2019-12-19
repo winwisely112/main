@@ -81,15 +81,7 @@ Route<dynamic> routes(RouteSettings settings) {
         },
       );
       break;
-    case '/notready':
-      _route = MaterialPageRoute<dynamic>(
-        builder: (BuildContext context) {
-          return NotReadyView(
-            key: ValueKey<String>(settings.name),
-          );
-        },
-      );
-      break;
+
     case '/signout':
       _route = MaterialPageRoute<dynamic>(
         builder: (BuildContext context) {
@@ -103,15 +95,6 @@ Route<dynamic> routes(RouteSettings settings) {
       _route = MaterialPageRoute<dynamic>(
         builder: (BuildContext context) {
           return SignUpView(
-            key: ValueKey<String>(settings.name),
-          );
-        },
-      );
-      break;
-    case '/supportroles':
-      _route = MaterialPageRoute<dynamic>(
-        builder: (BuildContext context) {
-          return SupportRolesView(
             key: ValueKey<String>(settings.name),
           );
         },
@@ -143,6 +126,18 @@ Route<dynamic> routes(RouteSettings settings) {
             },
           );
           break;
+        case 'conditional':
+          // /campaigndetails/{campaignID}
+          _route = MaterialPageRoute<dynamic>(
+            builder: (BuildContext context) {
+              return ConditionalCommitmentView(
+                key: ValueKey<String>(settings.name),
+                campaignID: info[2],
+                // need to add campaign
+              );
+            },
+          );
+          break;
         case 'chatfeed':
           // /chatfeed/{conversationID}
           _route = MaterialPageRoute<dynamic>(
@@ -165,6 +160,26 @@ Route<dynamic> routes(RouteSettings settings) {
                 key: ValueKey<String>(settings.name),
                 newsId: info[2],
                 //         user: ,
+              );
+            },
+          );
+          break;
+        case 'notready':
+          _route = MaterialPageRoute<dynamic>(
+            builder: (BuildContext context) {
+              return NotReadyView(
+                key: ValueKey<String>(settings.name),
+                campaignID: info[2],
+              );
+            },
+          );
+          break;
+        case 'supportroles':
+          _route = MaterialPageRoute<dynamic>(
+            builder: (BuildContext context) {
+              return SupportRolesView(
+                key: ValueKey<String>(settings.name),
+                campaignID: info[2],
               );
             },
           );

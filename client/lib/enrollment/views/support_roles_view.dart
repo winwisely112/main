@@ -1,151 +1,234 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+
 import 'package:com.whitelabel/services/services.dart';
 
-class SupportRoles {
-  SupportRoles(this.title, this.description, this.icon)
-      : hours = 1,
-        selected = false;
-  String title;
-  String description;
-  double hours;
-  bool selected;
-  IconData icon;
-}
+import '../bloc/data.dart';
 
 class SupportRolesView extends StatelessWidget {
-  const SupportRolesView({Key key}) : super(key: key);
-
+  const SupportRolesView({Key key, this.campaignID}) : super(key: key);
+  final String campaignID;
   @override
   Widget build(BuildContext context) {
-    return const WebInfoView(
+    final StorageService _storage = Provider.of<StorageService>(context);
+    final Campaign _campaign = _storage.hiveBox[Cache.Campaign].get(campaignID);
+    final List<Roles> _list = _storage.hiveBox[Cache.Roles].values.toList();
+    _list.removeWhere((Roles role) => role.mandatory);
+
+    return WebInfoView(
       title: TitleWidget(
         icon: Icons.supervisor_account,
         title: 'Support Roles',
       ),
-      child: _SupportRolesView(),
+      child: _SupportRolesView(
+        campaign: _campaign,
+        supportRoles: _list.asMap(),
+      ),
       index: -1,
     );
   }
 }
 
 class _SupportRolesView extends StatefulWidget {
-  const _SupportRolesView({Key key}) : super(key: key);
-
+  const _SupportRolesView({
+    Key key,
+    this.campaign,
+    this.supportRoles,
+  }) : super(key: key);
+  final Campaign campaign;
+  final Map<int, Roles> supportRoles;
   @override
   _SupportRolesViewState createState() => _SupportRolesViewState();
 }
 
 class _SupportRolesViewState extends State<_SupportRolesView> {
-  final Map<int, SupportRoles> supportRoles = <SupportRoles>[
-    SupportRoles(
-      'Lawyer',
-      'Provide legal advise, support and consulting for event permits and members in need.',
-      FontAwesomeIcons.briefcase,
-    ),
-    SupportRoles(
-      'Social Media ',
-      'Provide support by spreading the message to the masses.',
-      Icons.share,
-    ),
-    SupportRoles(
-      'Transport',
-      'Provide logistical services for the members.',
-      FontAwesomeIcons.bus,
-    ),
-    SupportRoles(
-      'Child care',
-      'Provide child care support for members.',
-      FontAwesomeIcons.babyCarriage,
-    ),
-    SupportRoles(
-      'Bail support',
-      'Provide legal / financial support for members that need bail.',
-      FontAwesomeIcons.hammer,
-    ),
-    SupportRoles(
-      'Phonebanker or p2p texter',
-      'Coordinate finance and events',
-      FontAwesomeIcons.mobile,
-    ),
-  ].asMap();
+  final Map<int, bool> selections = <int, bool>{};
+  final Map<int, double> hours = <int, double>{};
+
+  @override
+  void initState() {
+    selections
+        .addAll(List<bool>.filled(widget.supportRoles.length, false).asMap());
+    hours.addAll(List<double>.filled(widget.supportRoles.length, 0).asMap());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    // ignore: prefer_const_constructors
-    return ResponsiveListView(children: <Widget>[
-      for (int index in supportRoles.keys)
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: _supportRole(context, index),
-        ),
-    ]);
-  }
-
-  Widget _supportRole(BuildContext context, int index) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            CheckboxListTile(
+    return ResponsiveListView(
+      children: <Widget>[
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListTile(
+              leading: Container(
+                child: Image.asset(widget.campaign.logoUrl),
+              ),
               title: Text(
-                supportRoles[index].title,
+                widget.campaign.name,
                 style: Theme.of(context).textTheme.title,
               ),
-              value: supportRoles[index].selected,
-              onChanged: (bool value) {
-                setState(() {
-                  supportRoles[index].selected = value;
-                  if (!value) {
-                    supportRoles[index].hours = 1;
-                  }
-                });
+              subtitle: Text(
+                widget.campaign.description,
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: 16.0),
+        ListTile(
+          title: Text(
+            'Please choose up to 3 support roles :',
+            style: Theme.of(context).textTheme.title,
+          ),
+        ),
+        for (int index in widget.supportRoles.keys)
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: _supportRole(context, index),
+          ),
+        const SizedBox(height: 16.0),
+        ButtonBar(
+          children: <Widget>[
+            RaisedButton(
+              onPressed: () {
+                if (_validate()) {
+                  Navigator.of(context).pushNamed('/signup');
+                }
               },
-              secondary: Card(
-                shape: const CircleBorder(),
-                child: CircleAvatar(
-                  backgroundColor: Theme.of(context).cardColor,
-                  child: Icon(
-                    supportRoles[index].icon,
-                    color: Theme.of(context).accentColor,
-                  ),
-                ),
-              ),
-            ),
-            ListTile(
-              subtitle: Text(supportRoles[index].description),
-            ),
-            ListTile(
-              title: Text(
-                'Minimum hours you can dedicate  : ',
-                style: Theme.of(context).textTheme.subtitle,
-              ),
-              trailing: Text(
-                '${supportRoles[index].hours} hr',
-                style: Theme.of(context)
-                    .textTheme
-                    .body1
-                    .copyWith(fontWeight: FontWeight.bold),
-              ),
-              subtitle: Slider(
-                divisions: 8,
-                min: 0.0,
-                max: 8,
-                value: supportRoles[index].hours,
-                onChanged: !supportRoles[index].selected
-                    ? null
-                    : (double value) {
-                        setState(() {
-                          supportRoles[index].hours = value;
-                        });
-                      },
-              ),
+              child: const Text('Next'),
             ),
           ],
         ),
+      ],
+    );
+  }
+
+  Widget _supportRole(BuildContext context, int index) {
+    final List<String> _text = widget.supportRoles[index].name.split(' ');
+    String _name = '';
+    for (String _t in _text) {
+      _name = _name + toBeginningOfSentenceCase(_t) + ' ';
+    }
+    return InkWell(
+      onTap: () {
+        setState(() {
+          selections[index] = !selections[index];
+          if (!selections[index]) {
+            hours[index] = 1;
+          }
+        });
+      },
+      child: Container(
+        color: selections[index]
+            ? Theme.of(context).accentColor
+            : Theme.of(context).scaffoldBackgroundColor,
+        child: Card(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                CheckboxListTile(
+                  title: Text(
+                    _name,
+                    style: Theme.of(context).textTheme.title,
+                  ),
+                  subtitle: Text(
+                    widget.supportRoles[index].description,
+                  ),
+                  value: selections[index],
+                  onChanged: (bool value) {
+                    setState(() {
+                      selections[index] = value;
+                      if (!value) {
+                        hours[index] = 1;
+                      }
+                    });
+                  },
+/*               secondary: Card(
+                    shape: const CircleBorder(),
+                    child: CircleAvatar(
+                      backgroundColor: Theme.of(context).cardColor,
+                      child: Icon(
+                        supportRoles[index].icon,
+                        color: Theme.of(context).accentColor,
+                      ),
+                    ),
+                  ), */
+                ),
+                const SizedBox(height: 8.0),
+                ListTile(
+                  title: Text(
+                    'Minimum hours you can dedicate  : ',
+                    style: Theme.of(context).textTheme.subtitle,
+                  ),
+                  trailing: Text(
+                    '${hours[index]} hr',
+                    style: Theme.of(context)
+                        .textTheme
+                        .body1
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Slider(
+                    label: hours[index].toString(),
+                    divisions: 8,
+                    min: 0.0,
+                    max: 8,
+                    value: hours[index],
+                    onChanged: !selections[index]
+                        ? null
+                        : (double value) {
+                            setState(() {
+                              hours[index] = value;
+                            });
+                          },
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
+  }
+
+  bool _validate() {
+    int count = 0;
+    for (int i = 0; i < selections.length; i++) {
+      if (selections[i]) {
+        count = count + 1;
+        if (count > 3) {
+          showDialog<Widget>(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text('Support Roles'),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+                elevation: 5.0,
+                content: const Text(
+                  'Please choose up to 3 supports roles.',
+                ),
+                actions: <Widget>[
+                  RaisedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text('Ok'),
+                  ),
+                ],
+              );
+            },
+          );
+          return false; // more than 3
+        }
+      }
+    }
+    return true; // valid
   }
 }

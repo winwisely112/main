@@ -23,7 +23,7 @@ class CampaignTile extends StatelessWidget {
         title: Text(campaign.name),
         subtitle: Text(
           campaign.description,
-          maxLines: 2,
+          maxLines: 3,
           overflow: TextOverflow.ellipsis,
         ),
       ),

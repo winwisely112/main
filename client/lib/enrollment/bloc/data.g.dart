@@ -16,41 +16,50 @@ class CampaignAdapter extends TypeAdapter<Campaign> {
     return Campaign(
       id: fields[0] as Id,
       name: fields[1] as String,
-      other: fields[2] as String,
-      logoUrl: fields[3] as String,
-      description: fields[4] as String,
-      crgIdsMany: (fields[6] as List)?.cast<String>(),
-      crgQuantityMany: (fields[5] as List)?.cast<String>(),
-      alreadyPledged: fields[7] as int,
-      when: fields[8] as DateTime,
-      where: fields[9] as String,
+      logoUrl: fields[2] as String,
+      description: fields[3] as String,
+      crgIdsMany: (fields[5] as List)?.cast<String>(),
+      crgQuantityMany: (fields[4] as List)?.cast<String>(),
+      alreadyPledged: fields[6] as int,
+      when: fields[7] as DateTime,
+      where: fields[8] as String,
+      campaignStill: fields[9] as String,
+      minStart: fields[10] as int,
+      minSocialMedia: fields[11] as int,
+      minWin: fields[12] as int,
     );
   }
 
   @override
   void write(BinaryWriter writer, Campaign obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(13)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
       ..write(obj.name)
       ..writeByte(2)
-      ..write(obj.other)
-      ..writeByte(3)
       ..write(obj.logoUrl)
-      ..writeByte(4)
+      ..writeByte(3)
       ..write(obj.description)
-      ..writeByte(5)
+      ..writeByte(4)
       ..write(obj.crgQuantityMany)
-      ..writeByte(6)
+      ..writeByte(5)
       ..write(obj.crgIdsMany)
-      ..writeByte(7)
+      ..writeByte(6)
       ..write(obj.alreadyPledged)
-      ..writeByte(8)
+      ..writeByte(7)
       ..write(obj.when)
+      ..writeByte(8)
+      ..write(obj.where)
       ..writeByte(9)
-      ..write(obj.where);
+      ..write(obj.campaignStill)
+      ..writeByte(10)
+      ..write(obj.minStart)
+      ..writeByte(11)
+      ..write(obj.minSocialMedia)
+      ..writeByte(12)
+      ..write(obj.minWin);
   }
 }
 

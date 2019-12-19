@@ -12,7 +12,6 @@ class Campaign implements Entity {
   const Campaign({
     @required this.id,
     @required this.name,
-    @required this.other,
     @required this.logoUrl,
     @required this.description,
     @required this.crgIdsMany,
@@ -20,8 +19,16 @@ class Campaign implements Entity {
     @required this.alreadyPledged,
     @required this.when,
     @required this.where,
+    @required this.campaignStill,
+    @required this.minStart,
+    @required this.minSocialMedia,
+    @required this.minWin,
   })  : assert(id != null),
         assert(name != null),
+        assert(campaignStill != null),
+        assert(minStart != null),
+        assert(minSocialMedia != null),
+        assert(minWin != null),
         assert(when != null),
         assert(where != null),
         assert(alreadyPledged != null),
@@ -45,7 +52,10 @@ class Campaign implements Entity {
         when = DateTime.parse(data['datetime']),
         alreadyPledged =
             int.parse(data['already_pledged'].replaceAll(RegExp(','), '')),
-        other = data['other'];
+        minSocialMedia = int.parse(data['mass_media']),
+        minStart = int.parse(data['start']),
+        minWin = int.parse(data['win']),
+        campaignStill = data['campaign_still'];
 
   @HiveField(0)
   final Id<Campaign> id;
@@ -54,28 +64,37 @@ class Campaign implements Entity {
   final String name;
 
   @HiveField(2)
-  final String other;
-
-  @HiveField(3)
   final String logoUrl;
 
-  @HiveField(4)
+  @HiveField(3)
   final String description;
 
-  @HiveField(5)
+  @HiveField(4)
   final List<String> crgQuantityMany;
 
-  @HiveField(6)
+  @HiveField(5)
   final List<String> crgIdsMany;
 
-  @HiveField(7)
+  @HiveField(6)
   final int alreadyPledged;
 
-  @HiveField(8)
+  @HiveField(7)
   final DateTime when;
 
-  @HiveField(9)
+  @HiveField(8)
   final String where;
+
+  @HiveField(9)
+  final String campaignStill;
+
+  @HiveField(10)
+  final int minStart;
+
+  @HiveField(11)
+  final int minSocialMedia;
+
+  @HiveField(12)
+  final int minWin;
 }
 
 @immutable
