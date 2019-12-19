@@ -57,6 +57,7 @@ class _SupportRolesViewState extends State<_SupportRolesView> {
 
   @override
   Widget build(BuildContext context) {
+    final AuthUserService _user = Provider.of<AuthUserService>(context);
     return ResponsiveListView(
       children: <Widget>[
         Card(
@@ -96,7 +97,11 @@ class _SupportRolesViewState extends State<_SupportRolesView> {
             RaisedButton(
               onPressed: () {
                 if (_validate()) {
-                  Navigator.of(context).pushNamed('/signup');
+                  if (_user.isLoggedIn) {
+                    Navigator.of(context).pushNamed('/campaignview');
+                  } else {
+                    Navigator.of(context).pushNamed('/signup');
+                  }
                 }
               },
               child: const Text('Next'),

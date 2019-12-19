@@ -38,7 +38,7 @@ class LeftDrawer extends StatelessWidget {
               selected: index == 2,
               index: 2,
               onPressed: () {
-                Navigator.of(context).pushNamed('/enrollments');
+                Navigator.of(context).pushNamed('/campaignview');
               },
             ),
           ];

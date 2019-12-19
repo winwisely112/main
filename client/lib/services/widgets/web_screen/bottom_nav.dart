@@ -20,7 +20,7 @@ class BottomNav extends StatelessWidget {
         ),
         buildWidget(
           icon: Icons.event_note,
-          title: 'Enrollments',
+          title: 'My Campaigns',
           context: context,
         ),
       ],
@@ -34,7 +34,7 @@ class BottomNav extends StatelessWidget {
             Navigator.of(context).pushNamed('/chatgroup');
             break;
           case 2:
-            Navigator.of(context).pushNamed('/enrollments');
+            Navigator.of(context).pushNamed('/campaignview');
             break;
           default:
             Navigator.of(context).pushNamed('/news');

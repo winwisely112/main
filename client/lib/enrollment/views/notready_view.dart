@@ -68,12 +68,14 @@ class __NotReadyViewState extends State<_NotReadyView> {
             ),
           ),
         ),
+        const SizedBox(height: 8.0),
         ListTile(
           title: Text(
             'Please choose up to 3 supports or needs you need satisfied to join the action.',
-            style: Theme.of(context).textTheme.title,
+            style: Theme.of(context).textTheme.body1,
           ),
         ),
+        const SizedBox(height: 8.0),
         CheckboxListTile(
           title: const Text(
               '1. I need to know that there will be enough people at the action for the campaign to have a high chance of success'),
@@ -253,6 +255,7 @@ class SupportRolesDialog extends StatelessWidget {
   final String campaignID;
   @override
   Widget build(BuildContext context) {
+    final AuthUserService _user = Provider.of<AuthUserService>(context);
     return AlertDialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(5.0),
@@ -269,7 +272,11 @@ class SupportRolesDialog extends StatelessWidget {
         FlatButton(
           onPressed: () {
             Navigator.of(context).pop();
-            Navigator.of(context).pushNamed('/signup');
+            if (_user.isLoggedIn) {
+              Navigator.of(context).pushNamed('/campaignview');
+            } else {
+              Navigator.of(context).pushNamed('/signup');
+            }
           },
           child: const Text('No'),
         ),

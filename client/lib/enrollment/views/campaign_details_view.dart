@@ -32,7 +32,7 @@ class _CampainDetailsBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final StorageService _storage = Provider.of<StorageService>(context);
     final Campaign campaign = _storage.hiveBox[Cache.Campaign].get(campaignID);
-
+    final AuthUserService _user = Provider.of<AuthUserService>(context);
     return ResponsiveListView(
       children: <Widget>[
         Card(
@@ -123,7 +123,11 @@ class _CampainDetailsBody extends StatelessWidget {
             ),
             RaisedButton(
               onPressed: () {
-                Navigator.of(context).pushNamed('/signup');
+                if (_user.isLoggedIn) {
+                  Navigator.of(context).pushNamed('/campaignview');
+                } else {
+                  Navigator.of(context).pushNamed('/signup');
+                }
               },
               child: const Text('Ready'),
             ),

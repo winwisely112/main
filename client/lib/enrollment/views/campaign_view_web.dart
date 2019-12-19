@@ -17,13 +17,14 @@ class WebCampaignView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AuthUserService _user = Provider.of<AuthUserService>(context);
     return HomeScaffold(
       child: StreamBuilder<Map<int, Campaign>>(
         stream: Provider.of<CampaignBloc>(context).campaignList,
         builder:
             (BuildContext context, AsyncSnapshot<Map<int, Campaign>> snapshot) {
           return WebLayoutBody(
-            drawerSelection: -1,
+            drawerSelection: _user.isLoggedIn ? 2 : -1,
             slivers: <Widget>[
               SliverFloatingBar(
                 floating: true,
