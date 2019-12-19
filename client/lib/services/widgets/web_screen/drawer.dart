@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import '../../services/auth_user_service.dart';
@@ -18,11 +19,11 @@ class LeftDrawer extends StatelessWidget {
         ? <Widget>[]
         : <Widget>[
             DrawerListTile(
-              icon: Icons.home,
+              icon: FontAwesomeIcons.bullhorn,
               selected: index == 0,
               index: 0,
               onPressed: () {
-                Navigator.of(context).pushNamed('/news');
+                Navigator.of(context).pushNamed('/campaignview');
               },
             ),
             DrawerListTile(
@@ -34,11 +35,11 @@ class LeftDrawer extends StatelessWidget {
               },
             ),
             DrawerListTile(
-              icon: Icons.event_note,
+              icon: FontAwesomeIcons.newspaper,
               selected: index == 2,
               index: 2,
               onPressed: () {
-                Navigator.of(context).pushNamed('/campaignview');
+                Navigator.of(context).pushNamed('/news');
               },
             ),
           ];

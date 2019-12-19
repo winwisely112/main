@@ -47,7 +47,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.winwisely.whitelabel"
+        applicationId "com.whitelabel"
         minSdkVersion 16
         targetSdkVersion 28
         versionCode flutterVersionCode.toInteger()
@@ -56,14 +56,14 @@ android {
     }
 
     // ADDED for Signing
-    signingConfigs {
+/*     signingConfigs {
         release {
             keyAlias keystoreProperties['keyAlias']
             keyPassword keystoreProperties['keyPassword']
             storeFile file(keystoreProperties['storeFile'])
             storePassword keystoreProperties['storePassword']
         }
-    }
+    } */
 
     buildTypes {
         release {
@@ -73,7 +73,7 @@ android {
             // signingConfig signingConfigs.debug
 
             // ADDED for signing
-            signingConfig signingConfigs.release
+            //signingConfig signingConfigs.release
 
             minifyEnabled true
             useProguard true

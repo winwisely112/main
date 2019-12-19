@@ -22,14 +22,19 @@ class WebNewsFeed extends StatelessWidget {
         stream: Provider.of<NewsBloc>(context).getNews(),
         builder: (BuildContext context, AsyncSnapshot<List<News>> snapshot) {
           return WebLayoutBody(
-            drawerSelection: 0,
+            drawerSelection: 2,
             slivers: <Widget>[
-              SliverFloatingBar(
-                floating: true,
-                automaticallyImplyLeading: false,
-                title: TextField(
-                  decoration:
-                      const InputDecoration.collapsed(hintText: 'Search News'),
+              const SliverPadding(
+                padding: EdgeInsets.symmetric(vertical: 8.0),
+                sliver: SliverFloatingBar(
+                  elevation: 1.0,
+                  floating: true,
+                  pinned: true,
+                  automaticallyImplyLeading: false,
+                  title: TextField(
+                    decoration: const InputDecoration.collapsed(
+                        hintText: 'Search News'),
+                  ),
                 ),
               ),
               SliverList(

@@ -7,26 +7,39 @@ import 'package:com.whitelabel/vendor_plugins/vendor_plugins.dart';
 
 import '../../services/auth_user_service.dart';
 import '../profile_info.dart';
-import '../title_widget.dart';
 import './bottom_nav.dart';
 import './drawer.dart';
 
 class HomeScaffold extends StatelessWidget {
-  const HomeScaffold({Key key, this.child, this.bottomNavigationBar})
+  const HomeScaffold(
+      {Key key,
+      this.child,
+      this.bottomNavigationBar,
+      this.showBackButton = false})
       : super(key: key);
   final Widget child;
   final Widget bottomNavigationBar;
+  final bool showBackButton;
 
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
     final AuthUserService _user = Provider.of<AuthUserService>(context);
+    bool _showBackButton = showBackButton;
+    if (!showBackButton) {
+      if (!_user.isLoggedIn) {
+        _showBackButton = true;
+      } else {
+        _showBackButton = false;
+      }
+    }
+
     return Scaffold(
         key: _key,
         drawer: ProfileInfo(),
         appBar: AppBar(
           backgroundColor: Theme.of(context).primaryColorDark,
-          leading: !_user.isLoggedIn
+          leading: _showBackButton
               ? IconButton(
                   icon: Icon(
                     Icons.arrow_back,
@@ -222,6 +235,7 @@ class _WebView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return HomeScaffold(
+      showBackButton: !(MediaQuery.of(context).size.width >= 720.0),
       child: MediaQuery.of(context).size.width >= 720.0
           ? Flex(
               direction: Axis.horizontal,

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import 'package:com.whitelabel/chat_group/chat_group.dart';
+import 'package:com.whitelabel/enrollment/enrollment.dart';
 import 'package:com.whitelabel/news/news.dart';
 
 import './web_screen/layouts.dart';
@@ -14,15 +17,14 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
-    NewsFeed(
-      key: ValueKey<String>('/news'),
+    CampaignView(
+      key: ValueKey<String>('/campaignview'),
     ),
     ChatGroupFeed(
       key: ValueKey<String>('/conversations'),
     ),
-    Text(
-      'Enrollments',
-      style: optionStyle,
+    NewsFeed(
+      key: ValueKey<String>('/news'),
     ),
   ];
 
@@ -39,23 +41,50 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text('News'),
+        items: <BottomNavigationBarItem>[
+          buildWidget(
+            icon: FontAwesomeIcons.bullhorn,
+            title: 'My Campaigns',
+            context: context,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.chat_bubble),
-            title: Text('Chats'),
+          buildWidget(
+            icon: Icons.chat_bubble,
+            title: 'My Chats',
+            context: context,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.event_note),
-            title: Text('Enrollments'),
+          buildWidget(
+            icon: FontAwesomeIcons.newspaper,
+            title: 'News',
+            context: context,
           ),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Theme.of(context).colorScheme.secondary,
         onTap: _onItemTapped,
+      ),
+    );
+  }
+
+  BottomNavigationBarItem buildWidget(
+      {BuildContext context, IconData icon, String title}) {
+    return BottomNavigationBarItem(
+      activeIcon: Card(
+        shape: const CircleBorder(),
+        child: CircleAvatar(
+          backgroundColor: Theme.of(context).cardColor,
+          child: Icon(
+            icon,
+            color: Theme.of(context).colorScheme.secondary,
+          ),
+        ),
+      ),
+      icon: Icon(
+        icon,
+        color: Theme.of(context).primaryColorLight,
+      ),
+      title: Text(
+        title,
+        style: Theme.of(context).textTheme.subtitle,
       ),
     );
   }

@@ -24,12 +24,17 @@ class __ChatGroupFeedBodyState extends State<WebChatGroupFeed> {
             return WebLayoutBody(
               drawerSelection: 1,
               slivers: <Widget>[
-                SliverFloatingBar(
-                  floating: true,
-                  automaticallyImplyLeading: false,
-                  title: TextField(
-                    decoration: const InputDecoration.collapsed(
-                        hintText: 'Search Groups'),
+                const SliverPadding(
+                  padding: EdgeInsets.symmetric(vertical: 8.0),
+                  sliver: SliverFloatingBar(
+                    elevation: 1.0,
+                    floating: true,
+                    pinned: true,
+                    automaticallyImplyLeading: false,
+                    title: TextField(
+                      decoration: const InputDecoration.collapsed(
+                          hintText: 'Search Groups'),
+                    ),
                   ),
                 ),
                 SliverList(

@@ -24,14 +24,19 @@ class WebCampaignView extends StatelessWidget {
         builder:
             (BuildContext context, AsyncSnapshot<Map<int, Campaign>> snapshot) {
           return WebLayoutBody(
-            drawerSelection: _user.isLoggedIn ? 2 : -1,
+            drawerSelection: _user.isLoggedIn ? 0 : -1,
             slivers: <Widget>[
-              SliverFloatingBar(
-                floating: true,
-                automaticallyImplyLeading: false,
-                title: TextField(
-                  decoration: const InputDecoration.collapsed(
-                      hintText: 'Search Campaigns'),
+              const SliverPadding(
+                padding: EdgeInsets.symmetric(vertical: 8.0),
+                sliver: SliverFloatingBar(
+                  elevation: 1.0,
+                  floating: true,
+                  pinned: true,
+                  automaticallyImplyLeading: false,
+                  title: TextField(
+                    decoration: const InputDecoration.collapsed(
+                        hintText: 'Search Campaigns'),
+                  ),
                 ),
               ),
               SliverList(

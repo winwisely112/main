@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'package:com.whitelabel/services/services.dart';
 import '../bloc/bloc.dart';
 import '../bloc/data.dart';
 import 'campaign_master_tile.dart';
@@ -10,11 +12,17 @@ class MobileCampaignView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AuthUserService _user = Provider.of<AuthUserService>(context);
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Select Campaign'),
-        centerTitle: true,
-      ),
+      appBar: _user.isLoggedIn
+          ? null
+          : AppBar(
+              title: TitleWidget(
+                icon: FontAwesomeIcons.fistRaised,
+                title: 'Campaign',
+              ),
+              centerTitle: true,
+            ),
       body: StreamBuilder<Map<int, Campaign>>(
         stream: Provider.of<CampaignBloc>(context).campaignList,
         builder:

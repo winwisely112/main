@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class BottomNav extends StatelessWidget {
   const BottomNav({Key key, this.index}) : super(key: key);
@@ -9,35 +10,35 @@ class BottomNav extends StatelessWidget {
     return BottomNavigationBar(
       items: <BottomNavigationBarItem>[
         buildWidget(
-          icon: Icons.home,
-          title: 'News',
+          icon: FontAwesomeIcons.bullhorn,
+          title: 'My Campaigns',
           context: context,
         ),
         buildWidget(
           icon: Icons.chat_bubble,
-          title: 'Chats',
+          title: 'My Chats',
           context: context,
         ),
         buildWidget(
-          icon: Icons.event_note,
-          title: 'My Campaigns',
+          icon: FontAwesomeIcons.newspaper,
+          title: 'News',
           context: context,
         ),
       ],
       currentIndex: index,
       onTap: (int value) {
         switch (value) {
-          case 0:
+          case 2:
             Navigator.of(context).pushNamed('/news');
             break;
           case 1:
             Navigator.of(context).pushNamed('/chatgroup');
             break;
-          case 2:
+          case 0:
             Navigator.of(context).pushNamed('/campaignview');
             break;
           default:
-            Navigator.of(context).pushNamed('/news');
+            Navigator.of(context).pushNamed('/campaignview');
         }
       },
     );

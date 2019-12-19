@@ -20,7 +20,7 @@ class CampaignTile extends StatelessWidget {
         leading: Container(
           child: Image.asset(campaign.logoUrl),
         ),
-        title: Text(campaign.name),
+        title: Text(campaign.name, style: Theme.of(context).textTheme.subtitle),
         subtitle: Text(
           campaign.description,
           maxLines: 3,

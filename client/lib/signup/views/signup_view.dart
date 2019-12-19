@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:toast/toast.dart';
 
 import 'package:com.whitelabel/services/services.dart';
 
@@ -47,15 +48,40 @@ class __SignUpViewState extends State<_SignUpView> {
           ),
         ),
         ListTile(
-          title: Text('Sign up for you account',
+          title: Text('Sign up for your account',
               style: Theme.of(context).textTheme.display1),
         ),
         ListTile(
           title: TextFormField(
             decoration: InputDecoration(
-              labelText: 'Email Address',
+              labelText: 'Email Address *',
               labelStyle: Theme.of(context).textTheme.body2,
               suffix: Icon(MdiIcons.emailOutline),
+            ),
+          ),
+          subtitle: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                const Text(
+                  '* Need a protonmail ? ',
+                  style: TextStyle(fontStyle: FontStyle.italic),
+                ),
+                InkWell(
+                  onTap: () {
+                    _showBottomSheet(context);
+                  },
+                  child: Text(
+                    ' Explain why?',
+                    style: Theme.of(context).textTheme.body2.copyWith(
+                          color: Theme.of(context).accentColor,
+                          fontStyle: FontStyle.italic,
+                        ),
+                  ),
+                )
+              ],
             ),
           ),
         ),
@@ -70,7 +96,7 @@ class __SignUpViewState extends State<_SignUpView> {
           ),
         ),
         const ListTile(
-          title: Text('Meet up with others?'),
+          title: Text('Meet others with shared interests?'),
         ),
         RadioListTile<MeetUpWithOthers>(
           title: const Text('Yes'),
@@ -131,6 +157,11 @@ class __SignUpViewState extends State<_SignUpView> {
                     _user.userLoggedIn = true;
                     Navigator.of(context).pushNamedAndRemoveUntil(
                         '/home', ModalRoute.withName('/signup'));
+                    Toast.show('Thank you for signing Up', context,
+                        backgroundColor: Theme.of(context).accentColor,
+                        textColor: Theme.of(context).colorScheme.onSecondary,
+                        duration: Toast.LENGTH_SHORT,
+                        gravity: Toast.CENTER);
                   },
                 ),
               ),
@@ -138,26 +169,6 @@ class __SignUpViewState extends State<_SignUpView> {
           ),
         ),
         const SizedBox(height: 16.0),
-        Container(
-          width: MediaQuery.of(context).size.width,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const Text('Need a protonmail?'),
-              InkWell(
-                onTap: () {
-                  _showBottomSheet(context);
-                },
-                child: Text(
-                  'Explain why?',
-                  style: Theme.of(context).textTheme.body2.copyWith(
-                        color: Theme.of(context).accentColor,
-                      ),
-                ),
-              )
-            ],
-          ),
-        ),
       ],
     );
   }
