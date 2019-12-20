@@ -2,6 +2,8 @@
 
 This is the repo where we bring all the modules together into one app.
 
+Check out what we are about here:
+
 https://getcouragenow.org/
 
 ## Developer setup
