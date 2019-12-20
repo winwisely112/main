@@ -14,11 +14,11 @@ Run the examples using the Makefile to ensure you have an environment that works
 
 ## Working on an issue
 
-The [roadmap](https://github.com/winwisely99/main/projects/1) should be looked at to work out what to work on.
+The [Kan Ban](https://github.com/users/winwisely99/projects/1) should be looked at to work out what to work on.
 
-Is you want to work on an issue, please first ensure that you understand the issue and the suggested approach .
+Is you want to work on an issue, please first ensure that you understand the issue and the suggested approach.
 
-When you take an issue, please assign yourself to it and et everyone know on the Telegram group called "winwisely-dev", so we everyone knows your taking it.
+When you take an issue, please assign yourself to it and let everyone know on the Telegram group called "winwisely-dev", so we everyone knows your taking it.
 
 ## Builds
 
@@ -53,12 +53,14 @@ Its worth reading this to get an idea of what the system is intended to do.
 
 ## Plugins
 
-This project is designed to run on Desktops and Mobiles.
+This project is designed to run on Web, Desktops and Mobiles using Flutter.
 
-This means that plugins must work on both and so when choosing a plugin we careful.
+This means that plugins must work on all clients and so when choosing a plugin be careful to avoid breaking things.
 
 All plugins that use native code should live here.
 https://github.com/winwisely99/plugins
+
+We try to avoid native plugins in general.
 
 
 ## FAQ
