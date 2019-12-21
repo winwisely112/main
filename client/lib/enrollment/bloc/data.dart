@@ -10,21 +10,31 @@ part 'data.g.dart';
 @HiveType()
 class Campaign implements Entity {
   const Campaign({
-    @required this.id,
-    @required this.name,
-    @required this.logoUrl,
-    @required this.description,
+    @required this.actionLength,
+    @required this.actionType,
+    @required this.alreadyPledged,
+    @required this.backingOrg,
+    @required this.campaignName,
+    @required this.campaignStill,
+    @required this.category,
+    @required this.contact,
     @required this.crgIdsMany,
     @required this.crgQuantityMany,
-    @required this.alreadyPledged,
-    @required this.when,
-    @required this.where,
-    @required this.campaignStill,
+    @required this.goal,
+    @required this.histPrecedents,
+    @required this.id,
+    @required this.logoUrl,
     @required this.minStart,
     @required this.minSocialMedia,
     @required this.minWin,
+    @required this.organization,
+    @required this.strategy,
+    @required this.uom,
+    @required this.videoURL,
+    @required this.when,
+    @required this.where,
   })  : assert(id != null),
-        assert(name != null),
+        assert(campaignName != null),
         assert(campaignStill != null),
         assert(minStart != null),
         assert(minSocialMedia != null),
@@ -33,41 +43,62 @@ class Campaign implements Entity {
         assert(where != null),
         assert(alreadyPledged != null),
         assert(logoUrl != null),
-        assert(description != null),
         assert(crgQuantityMany != null),
+        assert(actionLength != null),
+        assert(actionType != null),
+        assert(backingOrg != null),
+        assert(category != null),
+        assert(contact != null),
+        assert(goal != null),
+        assert(histPrecedents != null),
+        assert(organization != null),
+        assert(strategy != null),
+        assert(videoURL != null),
+        assert(uom != null),
         assert(crgIdsMany != null);
 
   Campaign.fromJson(dynamic data)
-      : id = Id<Campaign>(data['campaign_id']),
+      : actionLength = data['action_length'],
+        actionType = data['action_type'],
+        alreadyPledged = data['already_pledged'],
+        backingOrg = data['backing_org'] != null
+            ? data['backing_org'].split(',')
+            : <String>[],
+        campaignName = data['camaign_name'],
+        id = Id<Campaign>(data['campaign_id']),
+        campaignStill = data['campaign_still'],
+        category = data['catagory'],
+        contact = data['contact'],
         crgIdsMany = data['crg_ids_many'] != null
             ? data['crg_ids_many'].split(',')
             : <String>[],
         crgQuantityMany = data['crg_quantity_many'] != null
             ? data['crg_quantity_many'].split(',')
             : <int>[],
-        description = data['description'],
-        logoUrl = data['logo_url'],
-        name = data['name'],
-        where = data['location'],
         when = DateTime.parse(data['datetime']),
-        alreadyPledged =
-            int.parse(data['already_pledged'].replaceAll(RegExp(','), '')),
-        minSocialMedia = int.parse(data['mass_media']),
-        minStart = int.parse(data['start']),
-        minWin = int.parse(data['win']),
-        campaignStill = data['campaign_still'];
+        goal = data['goal'],
+        histPrecedents = data['historical_precedents'],
+        where = data['location'],
+        logoUrl = data['logo_url'],
+        minSocialMedia = data['mass_media'],
+        organization = data['organization'],
+        minStart = data['start'],
+        strategy = data['strategy'],
+        uom = data['uom'],
+        videoURL = data['video_url'],
+        minWin = data['win'];
 
   @HiveField(0)
   final Id<Campaign> id;
 
   @HiveField(1)
-  final String name;
+  final String campaignName;
 
   @HiveField(2)
   final String logoUrl;
 
   @HiveField(3)
-  final String description;
+  final String goal;
 
   @HiveField(4)
   final List<String> crgQuantityMany;
@@ -76,7 +107,7 @@ class Campaign implements Entity {
   final List<String> crgIdsMany;
 
   @HiveField(6)
-  final int alreadyPledged;
+  final String alreadyPledged;
 
   @HiveField(7)
   final DateTime when;
@@ -88,13 +119,43 @@ class Campaign implements Entity {
   final String campaignStill;
 
   @HiveField(10)
-  final int minStart;
+  final String minStart;
 
   @HiveField(11)
-  final int minSocialMedia;
+  final String minSocialMedia;
 
   @HiveField(12)
-  final int minWin;
+  final String minWin;
+
+  @HiveField(13)
+  final String actionLength;
+
+  @HiveField(14)
+  final String actionType;
+
+  @HiveField(15)
+  final List<String> backingOrg;
+
+  @HiveField(16)
+  final String category;
+
+  @HiveField(17)
+  final String contact;
+
+  @HiveField(18)
+  final String histPrecedents;
+
+  @HiveField(19)
+  final String organization;
+
+  @HiveField(20)
+  final String strategy;
+
+  @HiveField(21)
+  final String videoURL;
+
+  @HiveField(22)
+  final String uom;
 }
 
 @immutable

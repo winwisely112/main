@@ -162,6 +162,7 @@ class WebInfoView extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 child,
+                const SizedBox(height: 16.0),
               ],
             ),
           ),
@@ -197,6 +198,7 @@ class ResponsiveDetailView extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               child,
+              const SizedBox(height: 16.0),
             ],
           ),
         ),
@@ -217,6 +219,7 @@ class ResponsiveDetailView extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 child,
+                const SizedBox(height: 16.0),
               ],
             ),
           ),
@@ -253,6 +256,7 @@ class _WebView extends StatelessWidget {
                       title,
                       const Divider(),
                       child,
+                      const SizedBox(height: 16.0),
                     ],
                   ),
                 ),
@@ -263,6 +267,7 @@ class _WebView extends StatelessWidget {
                 title,
                 const Divider(),
                 child,
+                const SizedBox(height: 16.0),
               ],
             ),
     );

@@ -32,7 +32,8 @@ class _SignUpView extends StatefulWidget {
 }
 
 class __SignUpViewState extends State<_SignUpView> {
-  MeetUpWithOthers _character = MeetUpWithOthers.No;
+  MeetUpWithOthers _interests = MeetUpWithOthers.No;
+  MeetUpWithOthers _training = MeetUpWithOthers.No;
   bool _emailSwitch = false;
   bool _appMessagingSwitch = false;
   @override
@@ -101,20 +102,43 @@ class __SignUpViewState extends State<_SignUpView> {
         RadioListTile<MeetUpWithOthers>(
           title: const Text('Yes'),
           value: MeetUpWithOthers.Yes,
-          groupValue: _character,
+          groupValue: _interests,
           onChanged: (MeetUpWithOthers value) {
             setState(() {
-              _character = value;
+              _interests = value;
             });
           },
         ),
         RadioListTile<MeetUpWithOthers>(
           title: const Text('No'),
           value: MeetUpWithOthers.No,
-          groupValue: _character,
+          groupValue: _interests,
           onChanged: (MeetUpWithOthers value) {
             setState(() {
-              _character = value;
+              _interests = value;
+            });
+          },
+        ),
+        const ListTile(
+          title: Text('I have civil disobedience training'),
+        ),
+        RadioListTile<MeetUpWithOthers>(
+          title: const Text('Yes'),
+          value: MeetUpWithOthers.Yes,
+          groupValue: _training,
+          onChanged: (MeetUpWithOthers value) {
+            setState(() {
+              _training = value;
+            });
+          },
+        ),
+        RadioListTile<MeetUpWithOthers>(
+          title: const Text('No'),
+          value: MeetUpWithOthers.No,
+          groupValue: _training,
+          onChanged: (MeetUpWithOthers value) {
+            setState(() {
+              _training = value;
             });
           },
         ),
@@ -143,27 +167,75 @@ class __SignUpViewState extends State<_SignUpView> {
         ),
         Container(
           width: MediaQuery.of(context).size.width,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: Column(
             children: <Widget>[
-              Center(
-                child: RaisedButton(
-                  padding: const EdgeInsets.symmetric(vertical: 12),
-                  child:
-                      Text('Sign Up', style: Theme.of(context).textTheme.body2),
-                  onPressed: () {
-                    final AuthUserService _user =
-                        Provider.of<AuthUserService>(context);
-                    _user.userLoggedIn = true;
-                    Navigator.of(context).pushNamedAndRemoveUntil(
-                        '/home', ModalRoute.withName('/signup'));
-                    Toast.show('Thank you for signing Up', context,
-                        backgroundColor: Theme.of(context).accentColor,
-                        textColor: Theme.of(context).colorScheme.onSecondary,
-                        duration: Toast.LENGTH_SHORT,
-                        gravity: Toast.CENTER);
-                  },
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Center(
+                    child: RaisedButton(
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      child: Text('Sign Up',
+                          style: Theme.of(context).textTheme.body2),
+                      onPressed: () {
+/*                         Toast.show('Thank you for joining our cause!', context,
+                            backgroundColor: Theme.of(context).accentColor,
+                            textColor:
+                                Theme.of(context).colorScheme.onSecondary,
+                            duration: Toast.LENGTH_SHORT,
+                            gravity: Toast.CENTER); */
+                        showDialog<Widget>(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: const Text(
+                                  'Thank you for joining our cause!'),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                              elevation: 5.0,
+                              content: const Text(
+                                'We’ll keep you updated on goals met, training opportunities, transportation, and location information as we get closer to the date.',
+                              ),
+                              actions: <Widget>[
+                                RaisedButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                    final AuthUserService _user =
+                                        Provider.of<AuthUserService>(context);
+                                    _user.userLoggedIn = true;
+                                    Navigator.of(context)
+                                        .pushNamedAndRemoveUntil('/home',
+                                            ModalRoute.withName('/signup'));
+                                  },
+                                  child: const Text('Ok'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  InkWell(
+                    onTap: () {
+                      _showBottomSheet(context);
+                    },
+                    child: Text(
+                      'Privacy Policy',
+                      style: Theme.of(context).textTheme.body2.copyWith(
+                            color: Theme.of(context).accentColor,
+                            decoration: TextDecoration.underline,
+                          ),
+                    ),
+                  )
+                ],
               ),
             ],
           ),
@@ -206,7 +278,7 @@ class __SignUpViewState extends State<_SignUpView> {
                     const SizedBox(height: 24),
                     ListTile(
                       title: Text(
-                        'Why Protonmail',
+                        'Privacy Policy',
                         style: Theme.of(context).textTheme.display1,
                       ),
                     ),
@@ -214,29 +286,6 @@ class __SignUpViewState extends State<_SignUpView> {
                     const ListTile(
                       title: Text(
                           ' It uses end-to-end encryption, meaning that only the people sending and receiving messages can read them, and it was founded by former CERN and MIT scientists, so the implication is that it’s basically the Fort Knox of email providers. It’s the email provider of choice for Elliot, the hacker protagonist on Mr. Robot.'),
-                    ),
-                    const ListTile(
-                      title: Text('Would you like to get the protonmail?'),
-                    ),
-                    ListTile(
-                      title: ButtonBar(
-                        children: <Widget>[
-                          FlatButton(
-                            padding: const EdgeInsets.symmetric(vertical: 12),
-                            child: Text('No',
-                                style: Theme.of(context).textTheme.body2),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                          ),
-                          RaisedButton(
-                            padding: const EdgeInsets.symmetric(vertical: 12),
-                            child: Text('Yes',
-                                style: Theme.of(context).textTheme.body2),
-                            onPressed: () {},
-                          ),
-                        ],
-                      ),
                     ),
                   ],
                 ),

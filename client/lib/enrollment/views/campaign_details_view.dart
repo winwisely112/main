@@ -43,35 +43,71 @@ class _CampainDetailsBody extends StatelessWidget {
                 child: Image.asset(campaign.logoUrl),
               ),
               title: Text(
-                campaign.name,
+                campaign.campaignName,
                 style: Theme.of(context).textTheme.title,
               ),
             ),
           ),
         ),
-        const SizedBox(height: 24.0),
-        ListTile(
-          title: Card(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5.0)),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(5.0),
-              child: Image.asset(
-                'assets/mockData/campaign/${Random().nextInt(2)}.gif',
-                fit: BoxFit.contain,
+        Container(
+          height: MediaQuery.of(context).size.height * 0.40,
+          child: Center(
+            child: AspectRatio(
+              aspectRatio: 16 / 9,
+              child: Card(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0)),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(5.0),
+                  child: Image.asset(
+                    'assets/mockData/campaign/${Random().nextInt(2)}.gif',
+                    fit: BoxFit.fill,
+                  ),
+                ),
               ),
             ),
           ),
         ),
-        const SizedBox(height: 24.0),
         ListTile(
           title: Text(
-            'Description',
+            'Category',
             style: Theme.of(context).textTheme.title,
           ),
-          subtitle: Text(campaign.description),
+          subtitle: Text(campaign.category),
         ),
-        const SizedBox(height: 24.0),
+        const SizedBox(height: 16.0),
+        ListTile(
+          title: Text(
+            'Type of Action',
+            style: Theme.of(context).textTheme.title,
+          ),
+          subtitle: Text(campaign.actionType),
+        ),
+        const SizedBox(height: 16.0),
+        ListTile(
+          title: Text(
+            'Goal',
+            style: Theme.of(context).textTheme.title,
+          ),
+          subtitle: Text(campaign.goal),
+        ),
+        const SizedBox(height: 16.0),
+        ListTile(
+          title: Text(
+            'Strategy',
+            style: Theme.of(context).textTheme.title,
+          ),
+          subtitle: Text(campaign.strategy),
+        ),
+        const SizedBox(height: 16.0),
+        ListTile(
+          title: Text(
+            'Historical Precedents',
+            style: Theme.of(context).textTheme.title,
+          ),
+          subtitle: Text(campaign.histPrecedents),
+        ),
+        const SizedBox(height: 16.0),
         ListTile(
           title: Text(
             'Action Location / Time',
@@ -80,7 +116,15 @@ class _CampainDetailsBody extends StatelessWidget {
           subtitle: Text(
               '${campaign.where} / ${DateFormat('yyyy MMM dd HH:MM').format(campaign.when)}'),
         ),
-        const SizedBox(height: 24.0),
+        const SizedBox(height: 16.0),
+        ListTile(
+          title: Text(
+            'Length of the Action',
+            style: Theme.of(context).textTheme.title,
+          ),
+          subtitle: Text(campaign.actionLength),
+        ),
+        const SizedBox(height: 16.0),
         ListTile(
           title: Text(
             'People already pledged',
@@ -88,81 +132,95 @@ class _CampainDetailsBody extends StatelessWidget {
           ),
           subtitle: Text(campaign.alreadyPledged.toString()),
         ),
-        const SizedBox(height: 24.0),
+        const SizedBox(height: 16.0),
+        ListTile(
+          title: Text(
+            'Backing/Endorsing Organizations',
+            style: Theme.of(context).textTheme.title,
+          ),
+          subtitle: Text(campaign.backingOrg.join('\n')),
+        ),
+        const SizedBox(height: 16.0),
         Card(
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: Column(
-              children: <Widget>[
-                ListTile(
-                  title: Text(
-                    'Needs',
-                    style: Theme.of(context).textTheme.title,
+            child: ListTile(
+              title: Text(
+                'We Need :',
+                style: Theme.of(context).textTheme.title,
+              ),
+              subtitle: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  ListTile(
+                    title: const Text('Pioneers needed to start'),
+                    trailing: Text(
+                      '${campaign.minStart}',
+                      style: TextStyle(color: Theme.of(context).accentColor),
+                    ),
                   ),
-                ),
-                const Divider(),
-                for (int index = 0; index < campaign.crgIdsMany.length; index++)
-                  RolesLoader(
-                    index: index,
-                    crgId: campaign.crgIdsMany[index],
-                    crgQuantity: campaign.crgQuantityMany[index],
+                  ListTile(
+                    title: const Text('Rebels needed to trigger media'),
+                    trailing: Text(
+                      '${campaign.minSocialMedia}',
+                      style: TextStyle(color: Theme.of(context).accentColor),
+                    ),
                   ),
-                const SizedBox(height: 8.0),
-              ],
+                  ListTile(
+                    title: const Text('Rebels needed to win'),
+                    trailing: Text(
+                      '${campaign.minWin}',
+                      style: TextStyle(color: Theme.of(context).accentColor),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
-        const SizedBox(height: 8.0),
-        ButtonBar(
-          children: <Widget>[
-            FlatButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed('/notready/$campaignID');
-              },
-              child: const Text('Not Ready'),
-            ),
-            RaisedButton(
-              onPressed: () {
-                if (_user.isLoggedIn) {
-                  Navigator.of(context).pushNamed('/campaignview');
-                } else {
-                  Navigator.of(context).pushNamed('/signup');
-                }
-              },
-              child: const Text('Ready'),
-            ),
-          ],
-        )
-      ],
-    );
-  }
-}
-
-class RolesLoader extends StatelessWidget {
-  const RolesLoader({Key key, this.index, this.crgId, this.crgQuantity})
-      : super(key: key);
-  final String crgId;
-  final String crgQuantity;
-  final int index;
-  @override
-  Widget build(BuildContext context) {
-    final StorageService _storage = Provider.of<StorageService>(context);
-    final Roles _roles = _storage.hiveBox[Cache.Roles].get(crgId);
-    final List<String> _text = _roles.name.split(' ');
-    String _name = '';
-    for (String _t in _text) {
-      _name = _name + toBeginningOfSentenceCase(_t) + ' ';
-    }
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8.0),
-      child: ListTile(
-        title: Text(_name),
-        subtitle: Text(_roles.description),
-        trailing: Text(
-          '$crgQuantity ${_roles.uom}',
-          style: TextStyle(color: Theme.of(context).accentColor),
+        const SizedBox(height: 16.0),
+        ListTile(
+          title: Text(
+            'Contact Details',
+            style: Theme.of(context).textTheme.title,
+          ),
+          subtitle: Text(campaign.contact),
         ),
-      ),
+        const SizedBox(height: 16.0),
+        _user.isLoggedIn
+            ? const SizedBox(height: 0)
+            : ListTile(
+                title: const Text(
+                  'Are you ready to be a resister in this strike/nonviolent direct action ?',
+                ),
+                subtitle: Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: ButtonBar(
+                    children: <Widget>[
+                      FlatButton(
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushNamed('/notready/$campaignID');
+                        },
+                        child: const Text('Not Ready'),
+                      ),
+                      RaisedButton(
+                        onPressed: () {
+                          if (_user.isLoggedIn) {
+                            Navigator.of(context).pushNamed('/campaignview');
+                          } else {
+                            Navigator.of(context).pushNamed('/signup');
+                          }
+                        },
+                        child: const Text('Ready'),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+        const SizedBox(height: 8.0),
+      ],
     );
   }
 }

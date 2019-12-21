@@ -14,34 +14,44 @@ class CampaignAdapter extends TypeAdapter<Campaign> {
       for (var i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Campaign(
-      id: fields[0] as Id,
-      name: fields[1] as String,
-      logoUrl: fields[2] as String,
-      description: fields[3] as String,
+      actionLength: fields[13] as String,
+      actionType: fields[14] as String,
+      alreadyPledged: fields[6] as String,
+      backingOrg: (fields[15] as List)?.cast<String>(),
+      campaignName: fields[1] as String,
+      campaignStill: fields[9] as String,
+      category: fields[16] as String,
+      contact: fields[17] as String,
       crgIdsMany: (fields[5] as List)?.cast<String>(),
       crgQuantityMany: (fields[4] as List)?.cast<String>(),
-      alreadyPledged: fields[6] as int,
+      goal: fields[3] as String,
+      histPrecedents: fields[18] as String,
+      id: fields[0] as Id,
+      logoUrl: fields[2] as String,
+      minStart: fields[10] as String,
+      minSocialMedia: fields[11] as String,
+      minWin: fields[12] as String,
+      organization: fields[19] as String,
+      strategy: fields[20] as String,
+      uom: fields[22] as String,
+      videoURL: fields[21] as String,
       when: fields[7] as DateTime,
       where: fields[8] as String,
-      campaignStill: fields[9] as String,
-      minStart: fields[10] as int,
-      minSocialMedia: fields[11] as int,
-      minWin: fields[12] as int,
     );
   }
 
   @override
   void write(BinaryWriter writer, Campaign obj) {
     writer
-      ..writeByte(13)
+      ..writeByte(23)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.name)
+      ..write(obj.campaignName)
       ..writeByte(2)
       ..write(obj.logoUrl)
       ..writeByte(3)
-      ..write(obj.description)
+      ..write(obj.goal)
       ..writeByte(4)
       ..write(obj.crgQuantityMany)
       ..writeByte(5)
@@ -59,7 +69,27 @@ class CampaignAdapter extends TypeAdapter<Campaign> {
       ..writeByte(11)
       ..write(obj.minSocialMedia)
       ..writeByte(12)
-      ..write(obj.minWin);
+      ..write(obj.minWin)
+      ..writeByte(13)
+      ..write(obj.actionLength)
+      ..writeByte(14)
+      ..write(obj.actionType)
+      ..writeByte(15)
+      ..write(obj.backingOrg)
+      ..writeByte(16)
+      ..write(obj.category)
+      ..writeByte(17)
+      ..write(obj.contact)
+      ..writeByte(18)
+      ..write(obj.histPrecedents)
+      ..writeByte(19)
+      ..write(obj.organization)
+      ..writeByte(20)
+      ..write(obj.strategy)
+      ..writeByte(21)
+      ..write(obj.videoURL)
+      ..writeByte(22)
+      ..write(obj.uom);
   }
 }
 

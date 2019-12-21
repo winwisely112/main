@@ -68,11 +68,11 @@ class _SupportRolesViewState extends State<_SupportRolesView> {
                 child: Image.asset(widget.campaign.logoUrl),
               ),
               title: Text(
-                widget.campaign.name,
+                widget.campaign.campaignName,
                 style: Theme.of(context).textTheme.title,
               ),
               subtitle: Text(
-                widget.campaign.description,
+                widget.campaign.goal,
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
               ),

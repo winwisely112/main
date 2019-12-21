@@ -55,11 +55,11 @@ class __ConditionalCommitmentViewState
                 child: Image.asset(_campaign.logoUrl),
               ),
               title: Text(
-                _campaign.name,
+                _campaign.campaignName,
                 style: Theme.of(context).textTheme.title,
               ),
               subtitle: Text(
-                _campaign.description,
+                _campaign.goal,
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
               ),
