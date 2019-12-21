@@ -20,6 +20,9 @@ general running list of things to build
 
 ## qr code for key pairs
 
+- qr code animated with CRC checks can do Device data transfer with no network needed
+- Spain used QR code with bluetooth to sign up others. Helps mitigate Agent Provocateur users joining. Was reported as a huge pain 
+
 ## analytics
 
 - chats

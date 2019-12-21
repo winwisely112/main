@@ -482,6 +482,11 @@ GCLOUD_SESSION_PROJECT_CONSOLE_URL=https://console.cloud.google.com/home/dashboa
 
 GIT_HASH=$(shell git log -1 --pretty=format:"%H")
 
+fb-dep:
+	# mac specific for now - sorry
+	brew install node
+	npm i -g firebase-tools
+
 fb-print: ## fb-print
 	@echo
 	@echo FB_SESSION_PROJECT_ID: $(FB_SESSION_PROJECT_ID)
@@ -524,7 +529,7 @@ fb-serve: ## fb-serve
 	$(MAKE) flu-web-build
 
 	# copy code from web build folder to public folder
-	rm -R ./public
+	rm -R -f ./public
 	cp -R $(LIB_FSPATH)/client/build/web ./public
 
 	firebase serve --only hosting
@@ -534,7 +539,7 @@ fb-deploy: ## fb-deploy
 	$(MAKE) flu-web-build
 
 	# copy code from web build folder to public folder
-	rm -R ./public
+	rm -R -f ./public
 	cp -R $(LIB_FSPATH)/client/build/web ./public
 
 	firebase deploy --only hosting -m "githash: $(GIT_HASH)"
