@@ -33,7 +33,7 @@ class App extends StatelessWidget {
       fontFamily: 'Roboto',
     );
     return MaterialApp(
-      title: 'WinWisely99',
+      title: 'GetCourage',
       initialRoute: '/',
       locale: DevicePreview.of(context)?.locale, // <--
       builder: DevicePreview.appBuilder, // <--

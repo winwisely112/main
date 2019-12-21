@@ -67,7 +67,7 @@ class HomeScaffold extends StatelessWidget {
               ),
             ),
             title: Text(
-              'Winwisely99',
+              'GetCourage',
               style: Theme.of(context).textTheme.title.copyWith(
                     color: Theme.of(context).colorScheme.onPrimary,
                   ),
