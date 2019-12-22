@@ -54,7 +54,7 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
           ),
           buildWidget(
             icon: FontAwesomeIcons.newspaper,
-            title: 'News',
+            title: 'News Feed',
             context: context,
           ),
         ],
