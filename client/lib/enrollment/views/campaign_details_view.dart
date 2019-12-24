@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -189,7 +187,38 @@ class _CampainDetailsBody extends StatelessWidget {
         ),
         const SizedBox(height: 16.0),
         _user.isLoggedIn
-            ? const SizedBox(height: 0)
+            ? ListTile(
+                subtitle: ButtonBar(
+                  buttonPadding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  children: <Widget>[
+                    IconButton(
+                      icon: Icon(
+                        Icons.favorite,
+                        color: Theme.of(context).colorScheme.secondaryVariant,
+                      ),
+                      onPressed: () {},
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        Icons.share,
+                        color: Theme.of(context).colorScheme.secondaryVariant,
+                      ),
+                      onPressed: () {},
+                    ),
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.of(context)
+                            .pushNamed('/notready/$campaignID');
+                      },
+                      child: const Text('Not Ready'),
+                    ),
+                    RaisedButton(
+                      onPressed: () {},
+                      child: const Text('Unenroll'),
+                    ),
+                  ],
+                ),
+              )
             : ListTile(
                 title: const Text(
                   'Are you ready to be a resister in this strike/nonviolent direct action ?',

@@ -19,7 +19,7 @@ class MobileCampaignView extends StatelessWidget {
           : AppBar(
               title: TitleWidget(
                 icon: FontAwesomeIcons.fistRaised,
-                title: 'Campaign',
+                title: 'Campaigns',
               ),
               centerTitle: true,
             ),

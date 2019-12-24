@@ -43,7 +43,7 @@ class WebCampaignView extends StatelessWidget {
                 delegate: SliverChildListDelegate(<Widget>[
                   TitleWidget(
                     icon: FontAwesomeIcons.fistRaised,
-                    title: 'Campaign',
+                    title: _user.isLoggedIn ? 'My Campaigns' : 'Campaigns',
                   ),
                   const Divider()
                 ]),
