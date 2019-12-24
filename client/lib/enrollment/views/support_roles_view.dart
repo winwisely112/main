@@ -100,7 +100,8 @@ class _SupportRolesViewState extends State<_SupportRolesView> {
                   if (_user.isLoggedIn) {
                     Navigator.of(context).pushNamed('/campaignview');
                   } else {
-                    Navigator.of(context).pushNamed('/signup');
+                    Navigator.of(context)
+                        .pushNamed('/signup/${widget.campaign.id.toString()}');
                   }
                 }
               },

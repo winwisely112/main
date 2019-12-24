@@ -9,7 +9,7 @@ part 'data.g.dart';
 @immutable
 @HiveType()
 class User implements Entity {
-  const User({
+  User({
     @required this.id,
     @required this.firstName,
     @required this.lastName,
@@ -17,6 +17,7 @@ class User implements Entity {
     @required this.displayName,
     @required this.avatarURL,
     this.chatGroupIds,
+    this.campaignIds,
   })  : assert(id != null),
         assert(firstName != null),
         assert(lastName != null),
@@ -44,8 +45,23 @@ class User implements Entity {
   @HiveField(6)
   final List<String> chatGroupIds;
 
+  @HiveField(7)
+  List<String> campaignIds;
+
   String get name => '$firstName $lastName';
   String get shortName => '${firstName[0]}. $lastName';
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      '_id': id.toString(),
+      'avatar_url': avatarURL,
+      'chatgroup_ids': chatGroupIds.isEmpty ? '' : chatGroupIds.join(','),
+      'campaign_ids': campaignIds.isEmpty ? '' : campaignIds.join(','),
+      'displayName': displayName,
+      'email': email,
+      'firstName': firstName,
+      'lastName': lastName
+    };
+  }
 }
 
 /// App-wide data to be stored by the [StorageService].

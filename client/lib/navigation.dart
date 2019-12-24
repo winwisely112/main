@@ -41,6 +41,15 @@ Route<dynamic> routes(RouteSettings settings) {
         },
       );
       break;
+    case '/mycampaign':
+      _route = MaterialPageRoute<dynamic>(
+        builder: (BuildContext context) {
+          return CampaignView(
+            key: ValueKey<String>(settings.name),
+          );
+        },
+      );
+      break;
     case '/chatgroup':
       _route = MaterialPageRoute<dynamic>(
         builder: (BuildContext context) {
@@ -86,15 +95,6 @@ Route<dynamic> routes(RouteSettings settings) {
       _route = MaterialPageRoute<dynamic>(
         builder: (BuildContext context) {
           return LoginScreen(
-            key: ValueKey<String>(settings.name),
-          );
-        },
-      );
-      break;
-    case '/signup':
-      _route = MaterialPageRoute<dynamic>(
-        builder: (BuildContext context) {
-          return SignUpView(
             key: ValueKey<String>(settings.name),
           );
         },
@@ -168,6 +168,16 @@ Route<dynamic> routes(RouteSettings settings) {
           _route = MaterialPageRoute<dynamic>(
             builder: (BuildContext context) {
               return NotReadyView(
+                key: ValueKey<String>(settings.name),
+                campaignID: info[2],
+              );
+            },
+          );
+          break;
+        case 'signup':
+          _route = MaterialPageRoute<dynamic>(
+            builder: (BuildContext context) {
+              return SignUpView(
                 key: ValueKey<String>(settings.name),
                 campaignID: info[2],
               );

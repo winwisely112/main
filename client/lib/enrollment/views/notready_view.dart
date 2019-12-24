@@ -275,7 +275,7 @@ class SupportRolesDialog extends StatelessWidget {
             if (_user.isLoggedIn) {
               Navigator.of(context).pushNamed('/campaignview');
             } else {
-              Navigator.of(context).pushNamed('/signup');
+              Navigator.of(context).pushNamed('/signup/$campaignID');
             }
           },
           child: const Text('No'),

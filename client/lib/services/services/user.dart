@@ -48,10 +48,18 @@ class _UserDownloader extends CollectionFetcher<User> {
           email: data['email'],
           displayName: data['displayName'],
           avatarURL: data['avatar_url'],
-          chatGroupIds: <String>[
-            for (dynamic item in _getMemberIDs(data['chatgroup_ids']))
-              item.toString()
-          ],
+          chatGroupIds: data['chatgroup_ids'] == null
+              ? <String>[]
+              : <String>[
+                  for (dynamic item in _getMemberIDs(data['chatgroup_ids']))
+                    item.toString()
+                ],
+          campaignIds: data['campaign_ids'] == null
+              ? <String>[]
+              : <String>[
+                  for (dynamic item in _getMemberIDs(data['campaign_ids']))
+                    item.toString()
+                ],
         ),
     ];
   }
@@ -69,10 +77,18 @@ class _UserDownloader extends CollectionFetcher<User> {
       email: data['email'],
       displayName: data['displayName'],
       avatarURL: data['avatar_url'],
-      chatGroupIds: <String>[
-        for (dynamic item in _getMemberIDs(data['chatgroup_ids']))
-          item.toString()
-      ],
+      chatGroupIds: data['chatgroup_ids'] == null
+          ? <String>[]
+          : <String>[
+              for (dynamic item in _getMemberIDs(data['chatgroup_ids']))
+                item.toString()
+            ],
+      campaignIds: data['campaign_ids'] == null
+          ? <String>[]
+          : <String>[
+              for (dynamic item in _getMemberIDs(data['campaign_ids']))
+                item.toString()
+            ],
     );
   }
 

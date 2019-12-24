@@ -18,7 +18,7 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     CampaignView(
-      key: ValueKey<String>('/campaignview'),
+      key: ValueKey<String>('/mycampaign'),
     ),
     ChatGroupFeed(
       key: ValueKey<String>('/conversations'),

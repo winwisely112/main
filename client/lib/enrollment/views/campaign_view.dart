@@ -13,17 +13,20 @@ class CampaignView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ProxyProvider2<NetworkService, StorageService, CampaignBloc>(
+    return ProxyProvider3<NetworkService, StorageService, AuthUserService,
+        CampaignBloc>(
       update: (
         BuildContext _,
         NetworkService network,
         StorageService storage,
+        AuthUserService globalUser,
         CampaignBloc __,
       ) =>
           CampaignBloc(
-        network: network,
-        storage: storage,
-      ),
+              network: network,
+              storage: storage,
+              globalUser: globalUser,
+              showMyCampaigns: key == const ValueKey<String>('/mycampaign')),
       child:
           kIsWeb || debugDefaultTargetPlatformOverride == TargetPlatform.fuchsia
               ? const WebCampaignView()

@@ -23,7 +23,7 @@ class LeftDrawer extends StatelessWidget {
               selected: index == 0,
               index: 0,
               onPressed: () {
-                Navigator.of(context).pushNamed('/campaignview');
+                Navigator.of(context).pushNamed('/mycampaign');
               },
             ),
             DrawerListTile(

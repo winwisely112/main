@@ -10,8 +10,8 @@ import 'package:com.whitelabel/services/services.dart';
 enum MeetUpWithOthers { Yes, No }
 
 class SignUpView extends StatelessWidget {
-  const SignUpView({Key key}) : super(key: key);
-
+  const SignUpView({Key key, this.campaignID}) : super(key: key);
+  final String campaignID;
   @override
   Widget build(BuildContext context) {
     return WebInfoView(
@@ -19,15 +19,15 @@ class SignUpView extends StatelessWidget {
         icon: Icons.lock,
         title: 'Sign Up',
       ),
-      child: const _SignUpView(),
+      child: _SignUpView(campaignID: campaignID),
       index: -1,
     );
   }
 }
 
 class _SignUpView extends StatefulWidget {
-  const _SignUpView({Key key}) : super(key: key);
-
+  const _SignUpView({Key key, this.campaignID}) : super(key: key);
+  final String campaignID;
   @override
   __SignUpViewState createState() => __SignUpViewState();
 }
@@ -185,6 +185,28 @@ class __SignUpViewState extends State<_SignUpView> {
                                 Theme.of(context).colorScheme.onSecondary,
                             duration: Toast.LENGTH_SHORT,
                             gravity: Toast.CENTER); */
+                        final StorageService _storage =
+                            Provider.of<StorageService>(context);
+                        User _user =
+                            _storage.hiveBox[Cache.Users].get('user001');
+                        List<String> _campaigns =
+                            _user.campaignIds ?? <String>[];
+                        _campaigns.add(widget.campaignID);
+                        _user.campaignIds = _campaigns;
+                        // TODO(developer): Remove this logic when network is implemented and make it network updates
+                        final NetworkService _network =
+                            Provider.of<NetworkService>(context);
+                        final List<Map<String, dynamic>> _maps =
+                            _network.mockData['users'];
+                        _maps.removeWhere((Map<String, dynamic> value) =>
+                            value['_id'] == 'user001');
+                        _maps.add(_user.toMap());
+                        _network.mockData['users'] = _maps;
+                        print(_maps.where((Map<String, dynamic> value) =>
+                            value['_id'] == 'user001'));
+                        // till here
+                        _storage.hiveBox[Cache.Users]
+                            .put(_user.id.toString(), _user);
                         showDialog<Widget>(
                           context: context,
                           builder: (BuildContext context) {
@@ -206,8 +228,10 @@ class __SignUpViewState extends State<_SignUpView> {
                                         Provider.of<AuthUserService>(context);
                                     _user.userLoggedIn = true;
                                     Navigator.of(context)
-                                        .pushNamedAndRemoveUntil('/home',
-                                            ModalRoute.withName('/signup'));
+                                        .pushNamedAndRemoveUntil(
+                                            '/home',
+                                            ModalRoute.withName(
+                                                '/signup/${widget.campaignID}'));
                                   },
                                   child: const Text('Ok'),
                                 ),
