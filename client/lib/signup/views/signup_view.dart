@@ -1,6 +1,7 @@
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:provider/provider.dart';
 import 'package:toast/toast.dart';
 
@@ -43,7 +44,7 @@ class __SignUpViewState extends State<_SignUpView> {
         Align(
           alignment: Alignment.centerLeft,
           child: Image.asset(
-            'assets/icon/Logo.png',
+            'assets/icon/placeholder.png',
             width: 200,
             height: 100,
           ),
@@ -57,7 +58,7 @@ class __SignUpViewState extends State<_SignUpView> {
             decoration: InputDecoration(
               labelText: 'Email Address *',
               labelStyle: Theme.of(context).textTheme.body2,
-              suffix: Icon(MdiIcons.emailOutline),
+              suffix: const Icon(Icons.email),
             ),
           ),
           subtitle: Padding(
@@ -246,6 +247,7 @@ class __SignUpViewState extends State<_SignUpView> {
   }
 
   void _showBottomSheet(BuildContext context) {
+    final StorageService _storage = Provider.of<StorageService>(context);
     showModalBottomSheet<Widget>(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -277,15 +279,7 @@ class __SignUpViewState extends State<_SignUpView> {
                   children: <Widget>[
                     const SizedBox(height: 24),
                     ListTile(
-                      title: Text(
-                        'Privacy Policy',
-                        style: Theme.of(context).textTheme.display1,
-                      ),
-                    ),
-                    Utils.verticalMargin(32),
-                    const ListTile(
-                      title: Text(
-                          ' It uses end-to-end encryption, meaning that only the people sending and receiving messages can read them, and it was founded by former CERN and MIT scientists, so the implication is that it’s basically the Fort Knox of email providers. It’s the email provider of choice for Elliot, the hacker protagonist on Mr. Robot.'),
+                      title: MarkdownBody(data: _storage.privacyPolicy),
                     ),
                   ],
                 ),

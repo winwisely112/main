@@ -60,7 +60,7 @@ class _CampainDetailsBody extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(5.0),
                   child: Image.asset(
-                    'assets/mockData/campaign/${Random().nextInt(2)}.gif',
+                    campaign.videoURL,
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -82,6 +82,23 @@ class _CampainDetailsBody extends StatelessWidget {
             style: Theme.of(context).textTheme.title,
           ),
           subtitle: Text(campaign.actionType),
+        ),
+        const SizedBox(height: 16.0),
+        ListTile(
+          title: Text(
+            'Action Location / Time',
+            style: Theme.of(context).textTheme.title,
+          ),
+          subtitle: Text(
+              '${campaign.where} / ${DateFormat('yyyy MMM dd HH:MM').format(campaign.when)}'),
+        ),
+        const SizedBox(height: 16.0),
+        ListTile(
+          title: Text(
+            'Length of the Action',
+            style: Theme.of(context).textTheme.title,
+          ),
+          subtitle: Text(campaign.actionLength),
         ),
         const SizedBox(height: 16.0),
         ListTile(
@@ -110,19 +127,10 @@ class _CampainDetailsBody extends StatelessWidget {
         const SizedBox(height: 16.0),
         ListTile(
           title: Text(
-            'Action Location / Time',
+            'Backing/Endorsing Organizations',
             style: Theme.of(context).textTheme.title,
           ),
-          subtitle: Text(
-              '${campaign.where} / ${DateFormat('yyyy MMM dd HH:MM').format(campaign.when)}'),
-        ),
-        const SizedBox(height: 16.0),
-        ListTile(
-          title: Text(
-            'Length of the Action',
-            style: Theme.of(context).textTheme.title,
-          ),
-          subtitle: Text(campaign.actionLength),
+          subtitle: Text(campaign.backingOrg.join('\n')),
         ),
         const SizedBox(height: 16.0),
         ListTile(
@@ -131,14 +139,6 @@ class _CampainDetailsBody extends StatelessWidget {
             style: Theme.of(context).textTheme.title,
           ),
           subtitle: Text(campaign.alreadyPledged.toString()),
-        ),
-        const SizedBox(height: 16.0),
-        ListTile(
-          title: Text(
-            'Backing/Endorsing Organizations',
-            style: Theme.of(context).textTheme.title,
-          ),
-          subtitle: Text(campaign.backingOrg.join('\n')),
         ),
         const SizedBox(height: 16.0),
         Card(

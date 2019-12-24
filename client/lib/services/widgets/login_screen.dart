@@ -36,10 +36,11 @@ class _LoginScreenState extends State<LoginScreen> {
             //child:
             Center(
               child: Image.asset(
-                'assets/icon/Logo.png',
+                'assets/icon/placeholder.png',
+                height: MediaQuery.of(context).size.width * 0.20,
+                width: MediaQuery.of(context).size.width * 0.20,
                 //scale: 0.25,
-                fit: BoxFit.contain,
-                //height: MediaQuery.of(context).size.height * 0.8,
+                fit: BoxFit.fill,
               ),
             ),
             //),

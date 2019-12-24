@@ -1,4 +1,4 @@
-import 'package:device_preview/device_preview.dart';
+//import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/rendering.dart'
@@ -27,16 +27,12 @@ class App extends StatelessWidget {
       debugRepaintRainbowEnabled = _configuration.debugShowRainbow;
       return true;
     }());
-    final ThemeData _theme = ThemeData(
-      brightness: Brightness.light,
-      primaryColor: Colors.indigo,
-      fontFamily: 'Roboto',
-    );
+
     return MaterialApp(
       title: 'GetCourage',
       initialRoute: '/',
-      locale: DevicePreview.of(context)?.locale, // <--
-      builder: DevicePreview.appBuilder, // <--
+      //locale: DevicePreview.of(context)?.locale, // <--
+      //builder: DevicePreview.appBuilder, // <--
       debugShowMaterialGrid: _configuration.debugShowGrid,
       showPerformanceOverlay: _configuration.showPerformanceOverlay,
       showSemanticsDebugger: _configuration.showSemanticsDebugger,
