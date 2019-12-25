@@ -14,6 +14,7 @@ class CampaignBloc {
     @required this.storage,
     @required this.showMyCampaigns,
     @required this.globalUser,
+    @required this.user,
   }) : assert(network != null) {
     _campaignFetcher.stream
         .transform(_campaignListTransformer())
@@ -24,6 +25,7 @@ class CampaignBloc {
   final NetworkService network;
   final StorageService storage;
   final AuthUserService globalUser;
+  final UserService user;
   final bool showMyCampaigns;
 
 // Streams for building chatscreen
@@ -45,6 +47,10 @@ class CampaignBloc {
       _campaignList.sort((Campaign a, Campaign b) => a.when.compareTo(b.when));
       return _campaignList.asMap();
     }, <int, Campaign>{});
+  }
+
+  void rebuildCampaignScreen() {
+    _initializeScreen();
   }
 
   Future<bool> _initializeScreen() async {

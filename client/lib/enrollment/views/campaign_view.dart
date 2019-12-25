@@ -13,19 +13,21 @@ class CampaignView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ProxyProvider3<NetworkService, StorageService, AuthUserService,
-        CampaignBloc>(
+    return ProxyProvider4<NetworkService, StorageService, AuthUserService,
+        UserService, CampaignBloc>(
       update: (
         BuildContext _,
         NetworkService network,
         StorageService storage,
         AuthUserService globalUser,
+        UserService user,
         CampaignBloc __,
       ) =>
           CampaignBloc(
         network: network,
         storage: storage,
         globalUser: globalUser,
+        user: user,
         showMyCampaigns: key == const ValueKey<String>('/mycampaign'),
       ),
       child:

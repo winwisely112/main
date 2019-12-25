@@ -1,6 +1,8 @@
+import 'package:flutter/material.dart' show BuildContext;
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:hive/hive.dart';
 import 'package:repository/repository.dart';
+import 'package:provider/provider.dart';
 
 // TODO(FlutterDevelopers): Import modules here
 import 'package:com.whitelabel/chat_view/chat_view.dart';
@@ -63,4 +65,7 @@ class StorageService {
       data = data.copy((MutableStorageData data) => data..token = token);
 
   Future<void> clear() => _storage.clear();
+
+  static StorageService of(BuildContext context) =>
+      Provider.of<StorageService>(context);
 }

@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart' show BuildContext;
 import 'package:meta/meta.dart';
+import 'package:provider/provider.dart';
 import 'package:repository/repository.dart';
 import 'package:rxdart/subjects.dart';
 
@@ -30,6 +32,9 @@ class AuthUserService {
     ); */
     authUserServiceReadyCompleter.complete();
   }
+
+  static AuthUserService of(BuildContext context) =>
+      Provider.of<AuthUserService>(context);
 
   final StorageService storage;
   final UserService user;
