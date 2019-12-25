@@ -5,10 +5,9 @@
 
 LIB_NAME=ion
 LIB=github.com/pion/$(LIB_NAME)
-LIB_FORKED=github.com/cloudwebrtc/$(LIB_NAME)
 LIB_BRANCH=master
 LIB_FSPATH=$(GOPATH)/src/$(LIB)
-LIB_FSPATH_FORKED=$(GOPATH)/src/$(LIB_FORKED)
+
 
 BIN_NAME=$(LIB_NAME)
 BIN_FSPATH=$(GOPATH)/bin/$(BIN_NAME)

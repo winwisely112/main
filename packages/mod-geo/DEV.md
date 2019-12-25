@@ -1,6 +1,6 @@
 # dev
 
-## Golang Server:
+## Golang Geo location Server:
 
 - Geo search and reactive updates
 - Hooks for integration into our NATS Message queue
@@ -10,7 +10,7 @@
 		- These are sends from tile38 to others but easy to add sends the other way around
 
 
-## Redis Client OR golang wrapper clent ?
+### Redis Client OR golang wrapper clent ?
 
 - Redis for dart 👍 https://redis.io/clients#dart
 
@@ -23,11 +23,16 @@
 - integrate tile38 this map gui for real time updates.
 https://github.com/johnpryan/flutter_map
 
+- this one looks pretty good
+- We just have to replace the calls to https://api.tiles.mapbox.com/v4/ with calls to the golang maps sever ( below )  
+	- SO then we can provide maps but NOT leak users to any third party :)
+
 Linking: https://pub.dev/packages/map_launcher
-- really awesome. We can add our map app as another URL scheme for Mobile and desktop
+- really awesome. We can add our map app as another URL scheme for Mobile and desktop.
 
 Image cache and pan and editing: https://github.com/mattermoran/extended_image
-- purt dart and will handle alot of corner cases for MAPS but also DOC and CHAT module
+- pure dart and will handle alot of corner cases for MAPS but also DOC and CHAT module
+- Might not need this as we already have one now.
 
 
 ## Maps Server
