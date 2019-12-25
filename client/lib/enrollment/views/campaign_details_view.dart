@@ -9,13 +9,18 @@ import '../bloc/data.dart';
 import '../widgets/video_player.dart';
 
 class CampainDetailsView extends StatelessWidget {
-  const CampainDetailsView({Key key, this.campaignID}) : super(key: key);
+  const CampainDetailsView({Key key, this.campaignID, this.showUserButtonBar})
+      : super(key: key);
   final String campaignID;
+  final bool showUserButtonBar;
 
   @override
   Widget build(BuildContext context) {
     return ResponsiveDetailView(
-      child: _CampainDetailsBody(campaignID: campaignID),
+      child: _CampainDetailsBody(
+        campaignID: campaignID,
+        showUserButtonBar: showUserButtonBar,
+      ),
       title: 'Campaign Details',
       icon: Icons.details,
     );
@@ -23,8 +28,10 @@ class CampainDetailsView extends StatelessWidget {
 }
 
 class _CampainDetailsBody extends StatelessWidget {
-  const _CampainDetailsBody({Key key, this.campaignID}) : super(key: key);
+  const _CampainDetailsBody({Key key, this.campaignID, this.showUserButtonBar})
+      : super(key: key);
   final String campaignID;
+  final bool showUserButtonBar;
 
   @override
   Widget build(BuildContext context) {
@@ -186,7 +193,7 @@ class _CampainDetailsBody extends StatelessWidget {
           subtitle: Text(campaign.contact),
         ),
         const SizedBox(height: 16.0),
-        _user.isLoggedIn
+        showUserButtonBar
             ? ListTile(
                 subtitle: ButtonBar(
                   buttonPadding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -213,7 +220,30 @@ class _CampainDetailsBody extends StatelessWidget {
                       child: const Text('Not Ready'),
                     ),
                     RaisedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        final StorageService _storage =
+                            Provider.of<StorageService>(context);
+                        final User _user =
+                            _storage.hiveBox[Cache.Users].get('user001');
+                        final List<String> _campaigns =
+                            _user.campaignIds ?? <String>[];
+                        _campaigns.remove(campaignID);
+                        _user.campaignIds = _campaigns;
+                        // TODO(developer): Remove this logic when network is implemented and make it network updates
+                        final NetworkService _network =
+                            Provider.of<NetworkService>(context);
+                        final List<Map<String, dynamic>> _maps =
+                            _network.mockData['users'];
+                        _maps.removeWhere((Map<String, dynamic> value) =>
+                            value['_id'] == 'user001');
+                        _maps.add(_user.toMap());
+                        _network.mockData['users'] = _maps;
+                        //print(_maps.where((Map<String, dynamic> value) =>
+                        //    value['_id'] == 'user001'));
+                        // till here
+                        _storage.hiveBox[Cache.Users]
+                            .put(_user.id.toString(), _user);
+                      },
                       child: const Text('Unenroll'),
                     ),
                   ],
@@ -237,7 +267,29 @@ class _CampainDetailsBody extends StatelessWidget {
                       RaisedButton(
                         onPressed: () {
                           if (_user.isLoggedIn) {
-                            Navigator.of(context).pushNamed('/campaignview');
+                            final StorageService _storage =
+                                Provider.of<StorageService>(context);
+                            final User _user =
+                                _storage.hiveBox[Cache.Users].get('user001');
+                            final List<String> _campaigns =
+                                _user.campaignIds ?? <String>[];
+                            _campaigns.add(campaignID);
+                            _user.campaignIds = _campaigns;
+                            // TODO(developer): Remove this logic when network is implemented and make it network updates
+                            final NetworkService _network =
+                                Provider.of<NetworkService>(context);
+                            final List<Map<String, dynamic>> _maps =
+                                _network.mockData['users'];
+                            _maps.removeWhere((Map<String, dynamic> value) =>
+                                value['_id'] == 'user001');
+                            _maps.add(_user.toMap());
+                            _network.mockData['users'] = _maps;
+                            //print(_maps.where((Map<String, dynamic> value) =>
+                            //    value['_id'] == 'user001'));
+                            // till here
+                            _storage.hiveBox[Cache.Users]
+                                .put(_user.id.toString(), _user);
+                            Navigator.of(context).pushNamed('/mycampaign');
                           } else {
                             Navigator.of(context)
                                 .pushNamed('/signup/$campaignID');

@@ -23,14 +23,15 @@ class CampaignView extends StatelessWidget {
         CampaignBloc __,
       ) =>
           CampaignBloc(
-              network: network,
-              storage: storage,
-              globalUser: globalUser,
-              showMyCampaigns: key == const ValueKey<String>('/mycampaign')),
+        network: network,
+        storage: storage,
+        globalUser: globalUser,
+        showMyCampaigns: key == const ValueKey<String>('/mycampaign'),
+      ),
       child:
           kIsWeb || debugDefaultTargetPlatformOverride == TargetPlatform.fuchsia
-              ? const WebCampaignView()
-              : const MobileCampaignView(),
+              ? WebCampaignView(key: key)
+              : MobileCampaignView(key: key),
     );
   }
 }

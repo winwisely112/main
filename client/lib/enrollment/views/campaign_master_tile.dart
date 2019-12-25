@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import '../bloc/data.dart';
 
 class CampaignTile extends StatelessWidget {
-  const CampaignTile({Key key, this.campaign}) : super(key: key);
+  const CampaignTile({Key key, this.campaign, this.showUserButtonBar})
+      : super(key: key);
   final Campaign campaign;
+  final bool showUserButtonBar;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -14,8 +16,13 @@ class CampaignTile extends StatelessWidget {
                 debugDefaultTargetPlatformOverride == TargetPlatform.fuchsia
             ? null
             : () {
-                Navigator.of(context)
-                    .pushNamed('/campaigndetails/${campaign.id.id}');
+                if (showUserButtonBar) {
+                  Navigator.of(context)
+                      .pushNamed('/mycampaigndetails/${campaign.id.id}');
+                } else {
+                  Navigator.of(context)
+                      .pushNamed('/campaigndetails/${campaign.id.id}');
+                }
               },
         leading: Container(
           child: Image.asset(campaign.logoUrl),

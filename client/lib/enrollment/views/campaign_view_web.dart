@@ -24,7 +24,47 @@ class WebCampaignView extends StatelessWidget {
         builder:
             (BuildContext context, AsyncSnapshot<Map<int, Campaign>> snapshot) {
           return WebLayoutBody(
-            drawerSelection: _user.isLoggedIn ? 0 : -1,
+            floatingActionButton: key == const ValueKey<String>('/mycampaign')
+                ? FloatingActionButton.extended(
+                    icon: Icon(Icons.add),
+                    label: const Text('Explore More'),
+                    onPressed: () {
+                      Navigator.of(context).pushNamed('/userinfo');
+                    },
+                  )
+                : null,
+            emptyItems: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  FlatButton(
+                    child: Text(
+                      'Haven\'t Found Your Cause Yet?',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.secondaryVariant,
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pushNamed('/userinfo');
+                    },
+                  ),
+                  FlatButton(
+                    child: Text(
+                      'Explore more',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.secondaryVariant,
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pushNamed('/userinfo');
+                    },
+                  ),
+                ],
+              ),
+            ),
+            drawerSelection:
+                key == const ValueKey<String>('/mycampaign') ? 0 : -1,
             slivers: <Widget>[
               const SliverPadding(
                 padding: EdgeInsets.symmetric(vertical: 8.0),
@@ -43,7 +83,9 @@ class WebCampaignView extends StatelessWidget {
                 delegate: SliverChildListDelegate(<Widget>[
                   TitleWidget(
                     icon: FontAwesomeIcons.fistRaised,
-                    title: _user.isLoggedIn ? 'My Campaigns' : 'Campaigns',
+                    title: key == const ValueKey<String>('/mycampaign')
+                        ? 'My Campaigns'
+                        : 'Campaigns',
                   ),
                   const Divider()
                 ]),
@@ -60,13 +102,18 @@ class WebCampaignView extends StatelessWidget {
                   elevation: 8.0,
                   child: CampainDetailsView(
                     campaignID: snapshot.data[index].id.id,
+                    showUserButtonBar:
+                        key == const ValueKey<String>('/mycampaign'),
                   ),
                 ),
               );
             },
             itemCount: snapshot.hasData ? snapshot.data.length : 0,
             itemBuilder: (BuildContext context, int index) {
-              return CampaignTile(campaign: snapshot.data[index]);
+              return CampaignTile(
+                campaign: snapshot.data[index],
+                showUserButtonBar: key == const ValueKey<String>('/mycampaign'),
+              );
             },
           );
         },

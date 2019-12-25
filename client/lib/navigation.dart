@@ -121,6 +121,20 @@ Route<dynamic> routes(RouteSettings settings) {
               return CampainDetailsView(
                 key: ValueKey<String>(settings.name),
                 campaignID: info[2],
+                showUserButtonBar: false,
+                // need to add campaign
+              );
+            },
+          );
+          break;
+        case 'mycampaigndetails':
+          // /campaigndetails/{campaignID}
+          _route = MaterialPageRoute<dynamic>(
+            builder: (BuildContext context) {
+              return CampainDetailsView(
+                key: ValueKey<String>(settings.name),
+                campaignID: info[2],
+                showUserButtonBar: true,
                 // need to add campaign
               );
             },

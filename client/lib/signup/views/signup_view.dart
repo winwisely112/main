@@ -187,9 +187,9 @@ class __SignUpViewState extends State<_SignUpView> {
                             gravity: Toast.CENTER); */
                         final StorageService _storage =
                             Provider.of<StorageService>(context);
-                        User _user =
+                        final User _user =
                             _storage.hiveBox[Cache.Users].get('user001');
-                        List<String> _campaigns =
+                        final List<String> _campaigns =
                             _user.campaignIds ?? <String>[];
                         _campaigns.add(widget.campaignID);
                         _user.campaignIds = _campaigns;
@@ -202,8 +202,8 @@ class __SignUpViewState extends State<_SignUpView> {
                             value['_id'] == 'user001');
                         _maps.add(_user.toMap());
                         _network.mockData['users'] = _maps;
-                        print(_maps.where((Map<String, dynamic> value) =>
-                            value['_id'] == 'user001'));
+                        //print(_maps.where((Map<String, dynamic> value) =>
+                        //    value['_id'] == 'user001'));
                         // till here
                         _storage.hiveBox[Cache.Users]
                             .put(_user.id.toString(), _user);
@@ -244,6 +244,7 @@ class __SignUpViewState extends State<_SignUpView> {
                   ),
                 ],
               ),
+              const SizedBox(height: 16.0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
