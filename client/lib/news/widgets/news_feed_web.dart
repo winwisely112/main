@@ -40,7 +40,7 @@ class WebNewsFeed extends StatelessWidget {
               SliverList(
                 delegate: SliverChildListDelegate(<Widget>[
                   TitleWidget(
-                    title: 'News',
+                    title: 'News Feed',
                     icon: Icons.home,
                   ),
                   const Divider()

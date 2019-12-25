@@ -39,7 +39,7 @@ class Redirect extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future<dynamic>.microtask(() async {
-      Navigator.of(context).pushNamed('/campaignview');
+      Navigator.of(context).pushNamed('/mycampaign');
     });
 
     return Container(

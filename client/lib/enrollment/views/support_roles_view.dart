@@ -68,11 +68,11 @@ class _SupportRolesViewState extends State<_SupportRolesView> {
                 child: Image.asset(widget.campaign.logoUrl),
               ),
               title: Text(
-                widget.campaign.name,
+                widget.campaign.campaignName,
                 style: Theme.of(context).textTheme.title,
               ),
               subtitle: Text(
-                widget.campaign.description,
+                widget.campaign.goal,
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -98,9 +98,32 @@ class _SupportRolesViewState extends State<_SupportRolesView> {
               onPressed: () {
                 if (_validate()) {
                   if (_user.isLoggedIn) {
-                    Navigator.of(context).pushNamed('/campaignview');
+                    final StorageService _storage =
+                        Provider.of<StorageService>(context);
+                    final User _user =
+                        _storage.hiveBox[Cache.Users].get('user001');
+                    final List<String> _campaigns =
+                        _user.campaignIds ?? <String>[];
+                    _campaigns.add(widget.campaign.id.toString());
+                    _user.campaignIds = _campaigns;
+                    // TODO(developer): Remove this logic when network is implemented and make it network updates
+                    final NetworkService _network =
+                        Provider.of<NetworkService>(context);
+                    final List<Map<String, dynamic>> _maps =
+                        _network.mockData['users'];
+                    _maps.removeWhere((Map<String, dynamic> value) =>
+                        value['_id'] == 'user001');
+                    _maps.add(_user.toMap());
+                    _network.mockData['users'] = _maps;
+                    //print(_maps.where((Map<String, dynamic> value) =>
+                    //     value['_id'] == 'user001'));
+                    // till here
+                    _storage.hiveBox[Cache.Users]
+                        .put(_user.id.toString(), _user);
+                    Navigator.of(context).pushNamed('/mycampaign');
                   } else {
-                    Navigator.of(context).pushNamed('/signup');
+                    Navigator.of(context)
+                        .pushNamed('/signup/${widget.campaign.id.toString()}');
                   }
                 }
               },

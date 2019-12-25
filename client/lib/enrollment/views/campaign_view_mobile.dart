@@ -14,12 +14,23 @@ class MobileCampaignView extends StatelessWidget {
   Widget build(BuildContext context) {
     final AuthUserService _user = Provider.of<AuthUserService>(context);
     return Scaffold(
+      floatingActionButton: key == const ValueKey<String>('/mycampaign')
+          ? FloatingActionButton.extended(
+              icon: Icon(Icons.add),
+              label: const Text('Explore More'),
+              onPressed: () {
+                Navigator.of(context).pushNamed('/userinfo');
+              },
+            )
+          : null,
       appBar: _user.isLoggedIn
           ? null
           : AppBar(
               title: TitleWidget(
                 icon: FontAwesomeIcons.fistRaised,
-                title: 'Campaign',
+                title: key == const ValueKey<String>('/mycampaign')
+                    ? 'My Campaigns'
+                    : 'Campaigns',
               ),
               centerTitle: true,
             ),
@@ -35,7 +46,10 @@ class MobileCampaignView extends StatelessWidget {
           return ListView.builder(
             itemCount: snapshot.data.length,
             itemBuilder: (BuildContext context, int index) {
-              return CampaignTile(campaign: snapshot.data[index]);
+              return CampaignTile(
+                campaign: snapshot.data[index],
+                showUserButtonBar: key == const ValueKey<String>('/mycampaign'),
+              );
             },
           );
         },

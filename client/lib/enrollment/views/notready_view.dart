@@ -57,11 +57,11 @@ class __NotReadyViewState extends State<_NotReadyView> {
                 child: Image.asset(_campaign.logoUrl),
               ),
               title: Text(
-                _campaign.name,
+                _campaign.campaignName,
                 //style: Theme.of(context).textTheme.title,
               ),
               subtitle: Text(
-                _campaign.description,
+                _campaign.goal,
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -273,9 +273,9 @@ class SupportRolesDialog extends StatelessWidget {
           onPressed: () {
             Navigator.of(context).pop();
             if (_user.isLoggedIn) {
-              Navigator.of(context).pushNamed('/campaignview');
+              Navigator.of(context).pushNamed('/mycampaign');
             } else {
-              Navigator.of(context).pushNamed('/signup');
+              Navigator.of(context).pushNamed('/signup/$campaignID');
             }
           },
           child: const Text('No'),

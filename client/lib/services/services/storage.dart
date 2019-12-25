@@ -1,5 +1,8 @@
+import 'package:flutter/material.dart' show BuildContext;
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:hive/hive.dart';
 import 'package:repository/repository.dart';
+import 'package:provider/provider.dart';
 
 // TODO(FlutterDevelopers): Import modules here
 import 'package:com.whitelabel/chat_view/chat_view.dart';
@@ -23,6 +26,7 @@ class StorageService {
   CachedRepository<StorageData> _storage;
 
   final Map<Cache, Box<dynamic>> hiveBox = <Cache, Box<dynamic>>{};
+  String privacyPolicy;
 
   Future<void> initialize() async {
     await _inMemory.update(_dataId, StorageData());
@@ -43,6 +47,7 @@ class StorageService {
     hiveBox[Cache.Campaign] =
         await Hive.openBox<Campaign>(Cache.Campaign.toString());
     hiveBox[Cache.Roles] = await Hive.openBox<Roles>(Cache.Roles.toString());
+    privacyPolicy = await rootBundle.loadString('assets/commons/privacy.md');
     storageServiceReadyCompleter.complete();
   }
 
@@ -60,4 +65,7 @@ class StorageService {
       data = data.copy((MutableStorageData data) => data..token = token);
 
   Future<void> clear() => _storage.clear();
+
+  static StorageService of(BuildContext context) =>
+      Provider.of<StorageService>(context);
 }

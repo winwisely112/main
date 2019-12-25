@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart' show BuildContext;
 import 'package:meta/meta.dart';
+import 'package:provider/provider.dart';
 import 'package:repository/repository.dart';
 
 import 'package:com.whitelabel/vendor_plugins/vendor_plugins.dart';
@@ -22,6 +24,9 @@ class UserService {
   final Repository<User> _storage;
 
   Future<User> getUser(Id<User> id) => _storage.fetch(id).first;
+
+  static UserService of(BuildContext context) =>
+      Provider.of<UserService>(context);
 }
 
 class _UserDownloader extends CollectionFetcher<User> {
@@ -48,10 +53,18 @@ class _UserDownloader extends CollectionFetcher<User> {
           email: data['email'],
           displayName: data['displayName'],
           avatarURL: data['avatar_url'],
-          chatGroupIds: <String>[
-            for (dynamic item in _getMemberIDs(data['chatgroup_ids']))
-              item.toString()
-          ],
+          chatGroupIds: data['chatgroup_ids'] == null
+              ? <String>[]
+              : <String>[
+                  for (dynamic item in _getMemberIDs(data['chatgroup_ids']))
+                    item.toString()
+                ],
+          campaignIds: data['campaign_ids'] == null
+              ? <String>[]
+              : <String>[
+                  for (dynamic item in _getMemberIDs(data['campaign_ids']))
+                    item.toString()
+                ],
         ),
     ];
   }
@@ -69,10 +82,18 @@ class _UserDownloader extends CollectionFetcher<User> {
       email: data['email'],
       displayName: data['displayName'],
       avatarURL: data['avatar_url'],
-      chatGroupIds: <String>[
-        for (dynamic item in _getMemberIDs(data['chatgroup_ids']))
-          item.toString()
-      ],
+      chatGroupIds: data['chatgroup_ids'] == null
+          ? <String>[]
+          : <String>[
+              for (dynamic item in _getMemberIDs(data['chatgroup_ids']))
+                item.toString()
+            ],
+      campaignIds: data['campaign_ids'] == null
+          ? <String>[]
+          : <String>[
+              for (dynamic item in _getMemberIDs(data['campaign_ids']))
+                item.toString()
+            ],
     );
   }
 

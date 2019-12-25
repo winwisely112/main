@@ -1,7 +1,9 @@
 import 'dart:isolate';
 
 import 'package:collection/collection.dart' show groupBy;
+import 'package:flutter/material.dart' show BuildContext;
 import 'package:meta/meta.dart';
+import 'package:provider/provider.dart';
 
 import '../services.dart';
 import 'message_handler.dart';
@@ -54,6 +56,9 @@ class NetworkService {
   Map<MessageType, Subscriptions<dynamic>> subscriptions;
   Map<String, List<Map<String, dynamic>>> mockData =
       <String, List<Map<String, dynamic>>>{};
+
+  static NetworkService of(BuildContext context) =>
+      Provider.of<NetworkService>(context);
 
   /// Start thread to send messages
   Future<bool> _startSending() async {

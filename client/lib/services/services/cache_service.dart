@@ -1,5 +1,6 @@
+import 'package:flutter/material.dart' show BuildContext;
 import 'package:meta/meta.dart';
-
+import 'package:provider/provider.dart';
 // TODO(FlutterDevelopers): Import modules here
 import 'package:com.whitelabel/chat_view/chat_view.dart';
 import 'package:com.whitelabel/chat_group/chat_group.dart';
@@ -65,4 +66,7 @@ class CacheService {
   final UserService user;
   final Map<Cache, ItemRepository<dynamic>> repos =
       <Cache, ItemRepository<dynamic>>{};
+
+  static CacheService of(BuildContext context) =>
+      Provider.of<CacheService>(context);
 }

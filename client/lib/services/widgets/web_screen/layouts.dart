@@ -63,7 +63,9 @@ class HomeScaffold extends StatelessWidget {
               padding: EdgeInsets.all(8.0),
               child: CircleAvatar(
                 backgroundColor: Colors.transparent,
-                backgroundImage: AssetImage('assets/icon/icon.png'),
+                backgroundImage: AssetImage(
+                  'assets/icon/placeholder.png',
+                ),
               ),
             ),
             title: Text(
@@ -88,6 +90,8 @@ class WebLayoutBody extends StatefulWidget {
       this.detailBuilder,
       this.drawerSelection = 0,
       this.itemBuilder,
+      this.floatingActionButton,
+      this.emptyItems,
       this.itemCount})
       : super(key: key);
   final List<Widget> slivers;
@@ -95,6 +99,8 @@ class WebLayoutBody extends StatefulWidget {
   final int drawerSelection;
   final int itemCount;
   final Widget Function(BuildContext, int) itemBuilder;
+  final Widget floatingActionButton;
+  final Widget emptyItems;
 
   @override
   _WebLayoutState createState() => _WebLayoutState();
@@ -105,6 +111,7 @@ class _WebLayoutState extends State<WebLayoutBody> {
   Widget build(BuildContext context) {
     final AuthUserService _user = Provider.of<AuthUserService>(context);
     return ResponsiveListScaffold.builder(
+      floatingActionButton: widget.floatingActionButton,
       bottomNavigationBar: !_user.isLoggedIn
           ? null
           : MediaQuery.of(context).size.width >= 720.0
@@ -127,7 +134,9 @@ class _WebLayoutState extends State<WebLayoutBody> {
           : null,
       tabletFlexListView: 4,
       nullItems: const Center(child: CircularProgressIndicator()),
-      emptyItems: const Center(child: CircularProgressIndicator()),
+      emptyItems: widget.emptyItems != null
+          ? widget.emptyItems
+          : const Center(child: CircularProgressIndicator()),
       itemCount: widget.itemCount,
       itemBuilder: widget.itemBuilder,
     );
@@ -162,6 +171,7 @@ class WebInfoView extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 child,
+                const SizedBox(height: 16.0),
               ],
             ),
           ),
@@ -197,6 +207,7 @@ class ResponsiveDetailView extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               child,
+              const SizedBox(height: 16.0),
             ],
           ),
         ),
@@ -217,6 +228,7 @@ class ResponsiveDetailView extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 child,
+                const SizedBox(height: 16.0),
               ],
             ),
           ),
@@ -253,6 +265,7 @@ class _WebView extends StatelessWidget {
                       title,
                       const Divider(),
                       child,
+                      const SizedBox(height: 16.0),
                     ],
                   ),
                 ),
@@ -263,6 +276,7 @@ class _WebView extends StatelessWidget {
                 title,
                 const Divider(),
                 child,
+                const SizedBox(height: 16.0),
               ],
             ),
     );

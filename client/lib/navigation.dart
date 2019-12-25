@@ -41,6 +41,15 @@ Route<dynamic> routes(RouteSettings settings) {
         },
       );
       break;
+    case '/mycampaign':
+      _route = MaterialPageRoute<dynamic>(
+        builder: (BuildContext context) {
+          return CampaignView(
+            key: ValueKey<String>(settings.name),
+          );
+        },
+      );
+      break;
     case '/chatgroup':
       _route = MaterialPageRoute<dynamic>(
         builder: (BuildContext context) {
@@ -91,15 +100,6 @@ Route<dynamic> routes(RouteSettings settings) {
         },
       );
       break;
-    case '/signup':
-      _route = MaterialPageRoute<dynamic>(
-        builder: (BuildContext context) {
-          return SignUpView(
-            key: ValueKey<String>(settings.name),
-          );
-        },
-      );
-      break;
     case '/userinfo':
       _route = MaterialPageRoute<dynamic>(
         builder: (BuildContext context) {
@@ -121,6 +121,20 @@ Route<dynamic> routes(RouteSettings settings) {
               return CampainDetailsView(
                 key: ValueKey<String>(settings.name),
                 campaignID: info[2],
+                showUserButtonBar: false,
+                // need to add campaign
+              );
+            },
+          );
+          break;
+        case 'mycampaigndetails':
+          // /campaigndetails/{campaignID}
+          _route = MaterialPageRoute<dynamic>(
+            builder: (BuildContext context) {
+              return CampainDetailsView(
+                key: ValueKey<String>(settings.name),
+                campaignID: info[2],
+                showUserButtonBar: true,
                 // need to add campaign
               );
             },
@@ -168,6 +182,16 @@ Route<dynamic> routes(RouteSettings settings) {
           _route = MaterialPageRoute<dynamic>(
             builder: (BuildContext context) {
               return NotReadyView(
+                key: ValueKey<String>(settings.name),
+                campaignID: info[2],
+              );
+            },
+          );
+          break;
+        case 'signup':
+          _route = MaterialPageRoute<dynamic>(
+            builder: (BuildContext context) {
+              return SignUpView(
                 key: ValueKey<String>(settings.name),
                 campaignID: info[2],
               );

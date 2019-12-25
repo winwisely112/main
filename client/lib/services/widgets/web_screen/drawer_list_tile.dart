@@ -40,7 +40,7 @@ class DrawerListTile extends StatelessWidget {
                 icon: Icon(
                   icon,
                   color: selected
-                      ? Theme.of(context).colorScheme.secondary
+                      ? Theme.of(context).colorScheme.secondaryVariant
                       : Theme.of(context).primaryColorLight,
                 ),
                 onPressed: onPressed,

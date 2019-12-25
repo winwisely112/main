@@ -12,6 +12,9 @@ class CampaignBloc {
   CampaignBloc({
     @required this.network,
     @required this.storage,
+    @required this.showMyCampaigns,
+    @required this.globalUser,
+    @required this.user,
   }) : assert(network != null) {
     _campaignFetcher.stream
         .transform(_campaignListTransformer())
@@ -21,6 +24,9 @@ class CampaignBloc {
 
   final NetworkService network;
   final StorageService storage;
+  final AuthUserService globalUser;
+  final UserService user;
+  final bool showMyCampaigns;
 
 // Streams for building chatscreen
   final PublishSubject<Campaign> _campaignFetcher = PublishSubject<Campaign>();
@@ -43,17 +49,54 @@ class CampaignBloc {
     }, <int, Campaign>{});
   }
 
+  void rebuildCampaignScreen() {
+    _initializeScreen();
+  }
+
   Future<bool> _initializeScreen() async {
+    final User _globalUser = await globalUser.globalUser;
     for (MapEntry<dynamic, Campaign> entry
         in storage.hiveBox[Cache.Campaign].toMap().entries) {
       if (entry.value is Campaign) {
-        _addToList(entry.value);
+        if (showMyCampaigns) {
+          if (_globalUser.campaignIds != null) {
+            final Campaign _campaign = entry.value;
+            if (_globalUser.campaignIds.contains(_campaign.id.toString())) {
+              _addToList(entry.value);
+            }
+          }
+        } else {
+          if (_globalUser.campaignIds != null) {
+            final Campaign _campaign = entry.value;
+            if (!_globalUser.campaignIds.contains(_campaign.id.toString())) {
+              _addToList(entry.value);
+            }
+          } else {
+            _addToList(entry.value);
+          }
+        }
       }
     }
 
     storage.hiveBox[Cache.Campaign].watch().listen((BoxEvent event) async {
       if (event.value is Campaign) {
-        _addToList(event.value);
+        if (showMyCampaigns) {
+          if (_globalUser.campaignIds != null) {
+            final Campaign _campaign = event.value;
+            if (_globalUser.campaignIds.contains(_campaign.id.toString())) {
+              _addToList(event.value);
+            }
+          }
+        } else {
+          if (_globalUser.campaignIds != null) {
+            final Campaign _campaign = event.value;
+            if (!_globalUser.campaignIds.contains(_campaign.id.toString())) {
+              _addToList(event.value);
+            }
+          } else {
+            _addToList(event.value);
+          }
+        }
       }
     });
     return true;

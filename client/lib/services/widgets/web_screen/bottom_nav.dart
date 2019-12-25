@@ -21,7 +21,7 @@ class BottomNav extends StatelessWidget {
         ),
         buildWidget(
           icon: FontAwesomeIcons.newspaper,
-          title: 'News',
+          title: 'News Feed',
           context: context,
         ),
       ],
@@ -35,10 +35,10 @@ class BottomNav extends StatelessWidget {
             Navigator.of(context).pushNamed('/chatgroup');
             break;
           case 0:
-            Navigator.of(context).pushNamed('/campaignview');
+            Navigator.of(context).pushNamed('/mycampaign');
             break;
           default:
-            Navigator.of(context).pushNamed('/campaignview');
+            Navigator.of(context).pushNamed('/mycampaign');
         }
       },
     );

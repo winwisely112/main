@@ -1,0 +1,12 @@
+{
+    "short_name": "Your Label Here",
+    "name": "Your Label Here",
+    "icons": [
+        {
+            "src": "\/assets/icons/placeholder.png",
+            "sizes": "36x36",
+            "type": "image\/png",
+            "density": "0.75"
+        }
+    ]
+}
