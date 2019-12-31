@@ -22,6 +22,7 @@ class WebNewsFeed extends StatelessWidget {
         stream: Provider.of<NewsBloc>(context).getNews(),
         builder: (BuildContext context, AsyncSnapshot<List<News>> snapshot) {
           return WebLayoutBody(
+            showBottomNav: true,
             drawerSelection: 2,
             slivers: <Widget>[
               const SliverPadding(

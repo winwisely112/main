@@ -92,7 +92,8 @@ class WebLayoutBody extends StatefulWidget {
       this.itemBuilder,
       this.floatingActionButton,
       this.emptyItems,
-      this.itemCount})
+      this.itemCount,
+      this.showBottomNav})
       : super(key: key);
   final List<Widget> slivers;
   final DetailsScreen Function(BuildContext, int, bool) detailBuilder;
@@ -101,6 +102,7 @@ class WebLayoutBody extends StatefulWidget {
   final Widget Function(BuildContext, int) itemBuilder;
   final Widget floatingActionButton;
   final Widget emptyItems;
+  final bool showBottomNav;
 
   @override
   _WebLayoutState createState() => _WebLayoutState();
@@ -110,15 +112,23 @@ class _WebLayoutState extends State<WebLayoutBody> {
   @override
   Widget build(BuildContext context) {
     final AuthUserService _user = Provider.of<AuthUserService>(context);
+    bool _showBottomNav = widget.showBottomNav;
+/*     if (!widget.showBottomNav) {
+      if (!_user.isLoggedIn) {
+        _showBottomNav = true;
+      } else {
+        _showBottomNav = false;
+      }
+    } */
     return ResponsiveListScaffold.builder(
       floatingActionButton: widget.floatingActionButton,
-      bottomNavigationBar: !_user.isLoggedIn
-          ? null
-          : MediaQuery.of(context).size.width >= 720.0
+      bottomNavigationBar: _showBottomNav
+          ? MediaQuery.of(context).size.width >= 720.0
               ? null
               : BottomNav(
                   index: widget.drawerSelection,
-                ),
+                )
+          : null,
       slivers: widget.slivers ?? <Widget>[],
       detailBuilder: widget.detailBuilder,
       drawer: ProfileInfo(),

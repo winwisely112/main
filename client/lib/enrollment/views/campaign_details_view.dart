@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -54,7 +55,8 @@ class _CampainDetailsBody extends StatelessWidget {
             ),
           ),
         ),
-        Container(
+        CarouselWithIndicator(),
+/*         Container(
           height: MediaQuery.of(context).size.height * 0.40,
           child: Center(
             child: AspectRatio(
@@ -72,7 +74,7 @@ class _CampainDetailsBody extends StatelessWidget {
               ),
             ),
           ),
-        ),
+        ), */
         ListTile(
           title: Text(
             'Category',
@@ -306,6 +308,73 @@ class _CampainDetailsBody extends StatelessWidget {
                 ),
               ),
         const SizedBox(height: 8.0),
+      ],
+    );
+  }
+}
+
+class CarouselWithIndicator extends StatefulWidget {
+  @override
+  _CarouselWithIndicatorState createState() => _CarouselWithIndicatorState();
+}
+
+class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
+  int _current = 0;
+  final List<String> imgList = <String>[
+    'assets/mockData/campaign/0B7wX_ITm_duBaXlqSzlibkdGajFfbzNsYXYwaGNfZFZiS3p3.gif',
+    'assets/mockData/campaign/0B7wX_ITm_duBYzNxbjRLYzJocG9mNmRvUGQxM21mTEpMV0xR.gif',
+    'assets/mockData/campaign/0B7wX_ITm_duBRDNQTHVWcmZxYTBXbVNpUDRNdkJvVlJUTC1r.gif',
+    'assets/mockData/campaign/0B7wX_ITm_duBeTBWM1RFck5hMWlydm02V1paZjFwb1lKTExz.gif',
+    'assets/mockData/campaign/0B7wX_ITm_duBMnltaGZPOWp0dVZLVzFNZFZ3VjdSQmNfYVZV.gif',
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        CarouselSlider(
+          viewportFraction: 0.55,
+          enlargeCenterPage: true,
+          height: MediaQuery.of(context).size.height * 0.40,
+          items: imgList
+              .map(
+                (String url) => Card(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0)),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(5.0),
+                    child: Image.asset(
+                      url,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                ),
+              )
+              .toList(),
+          autoPlay: true,
+          pauseAutoPlayOnTouch: const Duration(milliseconds: 800),
+          onPageChanged: (int index) {
+            setState(() {
+              _current = index;
+            });
+          },
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            for (int i = 0; i < imgList.length; i++)
+              Container(
+                width: 8.0,
+                height: 8.0,
+                margin:
+                    const EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: _current == i
+                        ? const Color.fromRGBO(0, 0, 0, 0.9)
+                        : const Color.fromRGBO(0, 0, 0, 0.4)),
+              )
+          ],
+        ),
       ],
     );
   }

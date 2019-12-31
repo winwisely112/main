@@ -22,6 +22,7 @@ class __ChatGroupFeedBodyState extends State<WebChatGroupFeed> {
           builder: (BuildContext context,
               AsyncSnapshot<Map<int, ChatGroup>> snapshot) {
             return WebLayoutBody(
+              showBottomNav: true,
               drawerSelection: 1,
               slivers: <Widget>[
                 const SliverPadding(

@@ -33,6 +33,7 @@ class WebCampaignView extends StatelessWidget {
                     },
                   )
                 : null,
+            showBottomNav: key == const ValueKey<String>('/mycampaign'),
             emptyItems: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
