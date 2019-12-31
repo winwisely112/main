@@ -41,6 +41,9 @@ code:
 
 ### certs 
 
+# Start using https://github.com/mholt/certmagic
+# - For k8 or any cluster just need to use the smae storgae
+
 CERT_LIB=github.com/foomo/simplecert
 CERT_FSPATH=$(GOPATH)/src/$(CERT_LIB)
 cert-dep:
