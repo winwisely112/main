@@ -333,16 +333,29 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
           height: MediaQuery.of(context).size.height * 0.32,
           items: widget.imgList
               .map(
-                (String url) => Card(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5.0)),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(5.0),
-                    child: Image.asset(
-                      url,
-                      fit: BoxFit.fill,
+                (String url) => Stack(
+                  alignment: AlignmentDirectional.center,
+                  children: <Widget>[
+                    Card(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.0)),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(5.0),
+                        child: Image.asset(
+                          url,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
                     ),
-                  ),
+                    Card(
+                      shape: const CircleBorder(),
+                      child: Icon(
+                        Icons.play_circle_outline,
+                        size: 48,
+                        color: Theme.of(context).primaryColorDark,
+                      ),
+                    ),
+                  ],
                 ),
               )
               .toList(),
