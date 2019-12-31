@@ -24,6 +24,7 @@ Route<dynamic> routes(RouteSettings settings) {
       break;
     case '/settings':
       _route = MaterialPageRoute<dynamic>(
+        settings: settings,
         builder: (BuildContext context) {
           return ChangeNotifierProvider<AppConfiguration>.value(
             value: Provider.of<AppConfiguration>(context),
@@ -34,6 +35,7 @@ Route<dynamic> routes(RouteSettings settings) {
       break;
     case '/campaignview':
       _route = MaterialPageRoute<dynamic>(
+        settings: settings,
         builder: (BuildContext context) {
           return CampaignView(
             key: ValueKey<String>(settings.name),
@@ -43,6 +45,7 @@ Route<dynamic> routes(RouteSettings settings) {
       break;
     case '/mycampaign':
       _route = MaterialPageRoute<dynamic>(
+        settings: settings,
         builder: (BuildContext context) {
           return CampaignView(
             key: ValueKey<String>(settings.name),
@@ -52,6 +55,7 @@ Route<dynamic> routes(RouteSettings settings) {
       break;
     case '/chatgroup':
       _route = MaterialPageRoute<dynamic>(
+        settings: settings,
         builder: (BuildContext context) {
           return ChatGroupFeed(
             key: ValueKey<String>(settings.name),
@@ -64,6 +68,7 @@ Route<dynamic> routes(RouteSettings settings) {
         _route = HomeScreen.route();
       } else { */
       _route = MaterialPageRoute<dynamic>(
+        settings: settings,
         builder: (BuildContext context) {
           return HomeScreen(
             key: ValueKey<String>(settings.name),
@@ -74,6 +79,7 @@ Route<dynamic> routes(RouteSettings settings) {
       break;
     case '/login':
       _route = MaterialPageRoute<dynamic>(
+        settings: settings,
         builder: (BuildContext context) {
           return LoginScreen(
             key: ValueKey<String>(settings.name),
@@ -83,6 +89,7 @@ Route<dynamic> routes(RouteSettings settings) {
       break;
     case '/news':
       _route = MaterialPageRoute<dynamic>(
+        settings: settings,
         builder: (BuildContext context) {
           return NewsFeed(
             key: ValueKey<String>(settings.name),
@@ -93,6 +100,7 @@ Route<dynamic> routes(RouteSettings settings) {
 
     case '/signout':
       _route = MaterialPageRoute<dynamic>(
+        settings: settings,
         builder: (BuildContext context) {
           return LoginScreen(
             key: ValueKey<String>(settings.name),
@@ -102,6 +110,7 @@ Route<dynamic> routes(RouteSettings settings) {
       break;
     case '/userinfo':
       _route = MaterialPageRoute<dynamic>(
+        settings: settings,
         builder: (BuildContext context) {
           return UserInfoView(
             key: ValueKey<String>(settings.name),
@@ -117,6 +126,7 @@ Route<dynamic> routes(RouteSettings settings) {
         case 'campaigndetails':
           // /campaigndetails/{campaignID}
           _route = MaterialPageRoute<dynamic>(
+            settings: settings,
             builder: (BuildContext context) {
               return CampainDetailsView(
                 key: ValueKey<String>(settings.name),
@@ -130,6 +140,7 @@ Route<dynamic> routes(RouteSettings settings) {
         case 'mycampaigndetails':
           // /campaigndetails/{campaignID}
           _route = MaterialPageRoute<dynamic>(
+            settings: settings,
             builder: (BuildContext context) {
               return CampainDetailsView(
                 key: ValueKey<String>(settings.name),
@@ -143,6 +154,7 @@ Route<dynamic> routes(RouteSettings settings) {
         case 'conditional':
           // /campaigndetails/{campaignID}
           _route = MaterialPageRoute<dynamic>(
+            settings: settings,
             builder: (BuildContext context) {
               return ConditionalCommitmentView(
                 key: ValueKey<String>(settings.name),
@@ -180,6 +192,7 @@ Route<dynamic> routes(RouteSettings settings) {
           break;
         case 'notready':
           _route = MaterialPageRoute<dynamic>(
+            settings: settings,
             builder: (BuildContext context) {
               return NotReadyView(
                 key: ValueKey<String>(settings.name),
@@ -190,6 +203,7 @@ Route<dynamic> routes(RouteSettings settings) {
           break;
         case 'signup':
           _route = MaterialPageRoute<dynamic>(
+            settings: settings,
             builder: (BuildContext context) {
               return SignUpView(
                 key: ValueKey<String>(settings.name),
@@ -200,6 +214,7 @@ Route<dynamic> routes(RouteSettings settings) {
           break;
         case 'supportroles':
           _route = MaterialPageRoute<dynamic>(
+            settings: settings,
             builder: (BuildContext context) {
               return SupportRolesView(
                 key: ValueKey<String>(settings.name),
@@ -210,6 +225,7 @@ Route<dynamic> routes(RouteSettings settings) {
           break;
         default:
           _route = MaterialPageRoute<dynamic>(
+            settings: settings,
             builder: (BuildContext context) {
               return HomeScreen(
                 key: ValueKey<String>(settings.name),
