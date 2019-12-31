@@ -50,3 +50,18 @@ https://github.com/notedit/media-server-go-demo
 https://github.com/notedit/rtclive/blob/master/go.mod
 - uses media-server-go
 - he is also changing to gstreamer
+
+
+# Foreground / Background approach
+
+https://github.com/rwrz/flutter-webrtc
+
+Background does all Webrtc using pion and gomobile.
+
+
+https://github.com/poi5305/go-yuv2webRTC
+- 
+
+
+
+
