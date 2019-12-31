@@ -149,38 +149,42 @@ class _CampainDetailsBody extends StatelessWidget {
         Card(
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: ListTile(
-              title: Text(
-                'We Need :',
-                style: Theme.of(context).textTheme.title,
-              ),
-              subtitle: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  ListTile(
-                    title: const Text('Pioneers needed to start'),
-                    trailing: Text(
-                      '${campaign.minStart}',
-                      style: TextStyle(color: Theme.of(context).accentColor),
-                    ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                ListTile(
+                  title: Text(
+                    'We Need :',
+                    style: Theme.of(context).textTheme.title,
                   ),
-                  ListTile(
-                    title: const Text('Rebels needed to trigger media'),
-                    trailing: Text(
-                      '${campaign.minSocialMedia}',
-                      style: TextStyle(color: Theme.of(context).accentColor),
-                    ),
+                  subtitle: const Text(
+                    'The following figures are extrapolated from similar past actions that both succeeded and failed',
+                    style: TextStyle(fontStyle: FontStyle.italic),
                   ),
-                  ListTile(
-                    title: const Text('Rebels needed to win'),
-                    trailing: Text(
-                      '${campaign.minWin}',
-                      style: TextStyle(color: Theme.of(context).accentColor),
-                    ),
+                ),
+                ListTile(
+                  title: const Text('Pioneers needed to start'),
+                  trailing: Text(
+                    '${campaign.minStart}',
+                    style: TextStyle(color: Theme.of(context).accentColor),
                   ),
-                ],
-              ),
+                ),
+                ListTile(
+                  title: const Text('Rebels needed to trigger media'),
+                  trailing: Text(
+                    '${campaign.minSocialMedia}',
+                    style: TextStyle(color: Theme.of(context).accentColor),
+                  ),
+                ),
+                ListTile(
+                  title: const Text('Rebels needed to win'),
+                  trailing: Text(
+                    '${campaign.minWin}',
+                    style: TextStyle(color: Theme.of(context).accentColor),
+                  ),
+                ),
+              ],
             ),
           ),
         ),

@@ -96,6 +96,23 @@ class __SignUpViewState extends State<_SignUpView> {
               suffix: Icon(Icons.lock_outline),
             ),
           ),
+          subtitle: const Padding(
+            padding: EdgeInsets.symmetric(vertical: 8.0),
+            child: Text(
+              'Your password should be a minimum of 8 of characters and use at least three of the four available character types: lowercase letters, uppercase letters, numbers, and symbols.',
+              style: TextStyle(fontStyle: FontStyle.italic),
+            ),
+          ),
+        ),
+        ListTile(
+          title: TextFormField(
+            obscureText: true,
+            decoration: InputDecoration(
+              labelText: 'Re-enter Password',
+              labelStyle: Theme.of(context).textTheme.body2,
+              suffix: Icon(Icons.lock_outline),
+            ),
+          ),
         ),
         const ListTile(
           title: Text('Meet others with shared interests?'),
@@ -170,6 +187,18 @@ class __SignUpViewState extends State<_SignUpView> {
           width: MediaQuery.of(context).size.width,
           child: Column(
             children: <Widget>[
+              Center(
+                child: Container(
+                  height: 72,
+                  width: 128,
+                  child: ListTile(
+                    title: Image.asset(
+                      'assets/commons/download.png',
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                ),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[

@@ -73,7 +73,7 @@ class __ConditionalCommitmentViewState
             style: Theme.of(context).textTheme.title,
           ),
           subtitle: const Text(
-            'The following figures is derived from extrapolating from similar struggles against similar powerful companies, both that succeeded and that failed.',
+            'The following figures are extrapolated from similar past actions that both succeeded and failed',
             style: TextStyle(fontStyle: FontStyle.italic),
           ),
         ),
