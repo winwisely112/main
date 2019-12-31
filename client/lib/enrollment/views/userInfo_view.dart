@@ -27,20 +27,52 @@ class _UserInfoView extends StatefulWidget {
 }
 
 class _UserInfoViewState extends State<_UserInfoView> {
-  final List<String> countries = ['Germany', 'Australia', 'Pakistan', 'USA'];
+  final List<String> countries = <String>[
+    'Germany',
+    'Australia',
+    'Pakistan',
+    'USA'
+  ];
 
-  final List<String> cities = ['Berlin', 'Newyork', 'Vancouver', 'Shanghai'];
+  final List<String> cities = <String>[
+    'Berlin',
+    'Newyork',
+    'Vancouver',
+    'Shanghai'
+  ];
 
-  final List<String> issues = ['Student Debt', 'Health Care', 'Climate'];
+  final List<String> issues = <String>[
+    'Student Debt',
+    'Health Care',
+    'Climate'
+  ];
 
-  final List<String> campaings = ['XR', 'Fridays for future'];
+  final List<String> campaings = <String>[
+    'XR',
+    'Fridays for future',
+    'None',
+  ];
+  final List<String> ages = <String>[
+    '10-15',
+    '16-20',
+    '21-30',
+    '31-40',
+    '41-50',
+    '51-60',
+    '61-65',
+    '66-70',
+    '71 and over'
+  ];
   final Map<String, String> dropdownValue = <String, String>{};
+
   @override
   void initState() {
     dropdownValue['countries'] = countries[0];
     dropdownValue['cities'] = cities[0];
     dropdownValue['issues'] = issues[0];
     dropdownValue['campaings'] = campaings[0];
+    dropdownValue['ages'] = ages[0];
+    dropdownValue['others'] = '';
     super.initState();
   }
 
@@ -67,13 +99,13 @@ class _UserInfoViewState extends State<_UserInfoView> {
             ),
           ),
         ),
-        ListTile(
+/*         ListTile(
           title: TextFormField(
             keyboardType: TextInputType.number,
             decoration: InputDecoration(
                 hintText: 'Your Location', suffix: Icon(Icons.search)),
           ),
-        ),
+        ), */
         const SizedBox(height: 48.0),
         ListTile(
           title: Text(
@@ -92,11 +124,20 @@ class _UserInfoViewState extends State<_UserInfoView> {
         const SizedBox(height: 48.0),
         ListTile(
           title: Text(
+            '3. Age',
+            style: Theme.of(context).textTheme.title,
+          ),
+        ),
+        ListTile(title: _select(ages, 'Select Age Range', 'ages')),
+        // TODO(me): Commented Cause for demo
+/*         const SizedBox(height: 48.0),
+        ListTile(
+          title: Text(
             '3. Cause',
             style: Theme.of(context).textTheme.title,
           ),
         ),
-        ListTile(title: _select(issues, 'Your Issue', 'issues')),
+        ListTile(title: _select(issues, 'Your Issue', 'issues')), */
         const SizedBox(height: 48.0),
         ListTile(
           title: Text(
@@ -104,7 +145,32 @@ class _UserInfoViewState extends State<_UserInfoView> {
             style: Theme.of(context).textTheme.title,
           ),
         ),
-        ListTile(title: _select(campaings, 'Select Affiliation ', 'campaings')),
+        ListTile(
+          title: _select(campaings, 'Select Affiliation ', 'campaings'),
+          subtitle: TextFormField(
+            initialValue: dropdownValue['others'],
+            maxLines: 3,
+            decoration: InputDecoration(
+              labelText: 'Others',
+              alignLabelWithHint: true,
+              hintText: 'Others',
+              fillColor: Theme.of(context).inputDecorationTheme.fillColor,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(4.0),
+                borderSide: const BorderSide(),
+              ),
+            ),
+            onSaved: (String value) {
+              setState(() {
+                dropdownValue['others'] = value;
+              });
+            },
+            keyboardType: TextInputType.emailAddress,
+            style: const TextStyle(
+              fontFamily: 'Poppins',
+            ),
+          ),
+        ),
         const SizedBox(height: 48.0),
         ListTile(
           title: ButtonBar(
