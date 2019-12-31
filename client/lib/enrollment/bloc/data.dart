@@ -85,7 +85,9 @@ class Campaign implements Entity {
         minStart = data['start'],
         strategy = data['strategy'],
         uom = data['uom'],
-        videoURL = data['video_url'],
+        videoURL = data['video_url'] != null
+            ? data['video_url'].split(',')
+            : <String>[],
         minWin = data['win'];
 
   @HiveField(0)
@@ -152,7 +154,7 @@ class Campaign implements Entity {
   final String strategy;
 
   @HiveField(21)
-  final String videoURL;
+  final List<String> videoURL;
 
   @HiveField(22)
   final String uom;

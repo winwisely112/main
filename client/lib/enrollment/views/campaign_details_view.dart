@@ -55,7 +55,7 @@ class _CampainDetailsBody extends StatelessWidget {
             ),
           ),
         ),
-        CarouselWithIndicator(),
+        CarouselWithIndicator(imgList: campaign.videoURL),
 /*         Container(
           height: MediaQuery.of(context).size.height * 0.40,
           child: Center(
@@ -314,28 +314,24 @@ class _CampainDetailsBody extends StatelessWidget {
 }
 
 class CarouselWithIndicator extends StatefulWidget {
+  const CarouselWithIndicator({this.imgList});
+  final List<String> imgList;
   @override
   _CarouselWithIndicatorState createState() => _CarouselWithIndicatorState();
 }
 
 class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
   int _current = 0;
-  final List<String> imgList = <String>[
-    'assets/mockData/campaign/0B7wX_ITm_duBaXlqSzlibkdGajFfbzNsYXYwaGNfZFZiS3p3.gif',
-    'assets/mockData/campaign/0B7wX_ITm_duBYzNxbjRLYzJocG9mNmRvUGQxM21mTEpMV0xR.gif',
-    'assets/mockData/campaign/0B7wX_ITm_duBRDNQTHVWcmZxYTBXbVNpUDRNdkJvVlJUTC1r.gif',
-    'assets/mockData/campaign/0B7wX_ITm_duBeTBWM1RFck5hMWlydm02V1paZjFwb1lKTExz.gif',
-    'assets/mockData/campaign/0B7wX_ITm_duBMnltaGZPOWp0dVZLVzFNZFZ3VjdSQmNfYVZV.gif',
-  ];
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
         CarouselSlider(
-          viewportFraction: 0.55,
+          //viewportFraction: 0.55,
           enlargeCenterPage: true,
-          height: MediaQuery.of(context).size.height * 0.40,
-          items: imgList
+          height: MediaQuery.of(context).size.height * 0.32,
+          items: widget.imgList
               .map(
                 (String url) => Card(
                   shape: RoundedRectangleBorder(
@@ -350,6 +346,7 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
                 ),
               )
               .toList(),
+          //aspectRatio: 4 / 3,
           autoPlay: true,
           pauseAutoPlayOnTouch: const Duration(milliseconds: 800),
           onPageChanged: (int index) {
@@ -361,17 +358,18 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            for (int i = 0; i < imgList.length; i++)
+            for (int i = 0; i < widget.imgList.length; i++)
               Container(
                 width: 8.0,
                 height: 8.0,
                 margin:
                     const EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
                 decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: _current == i
-                        ? const Color.fromRGBO(0, 0, 0, 0.9)
-                        : const Color.fromRGBO(0, 0, 0, 0.4)),
+                  shape: BoxShape.circle,
+                  color: _current == i
+                      ? Theme.of(context).primaryColorDark
+                      : Theme.of(context).primaryColorLight,
+                ),
               )
           ],
         ),
