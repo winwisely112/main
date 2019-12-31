@@ -96,6 +96,23 @@ class __SignUpViewState extends State<_SignUpView> {
               suffix: Icon(Icons.lock_outline),
             ),
           ),
+          subtitle: const Padding(
+            padding: EdgeInsets.symmetric(vertical: 8.0),
+            child: Text(
+              'Your password should be a minimum of 8 of characters and use at least three of the four available character types: lowercase letters, uppercase letters, numbers, and symbols.',
+              style: TextStyle(fontStyle: FontStyle.italic),
+            ),
+          ),
+        ),
+        ListTile(
+          title: TextFormField(
+            obscureText: true,
+            decoration: InputDecoration(
+              labelText: 'Re-enter Password',
+              labelStyle: Theme.of(context).textTheme.body2,
+              suffix: Icon(Icons.lock_outline),
+            ),
+          ),
         ),
         const ListTile(
           title: Text('Meet others with shared interests?'),
@@ -170,6 +187,18 @@ class __SignUpViewState extends State<_SignUpView> {
           width: MediaQuery.of(context).size.width,
           child: Column(
             children: <Widget>[
+              Center(
+                child: Container(
+                  height: 72,
+                  width: 128,
+                  child: ListTile(
+                    title: Image.asset(
+                      'assets/commons/download.png',
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                ),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -297,7 +326,11 @@ class __SignUpViewState extends State<_SignUpView> {
                 ),
               ),
               const SizedBox(height: 8),
-              Expanded(
+              const ListTile(
+                title: Text(
+                    'Currently in development, to assure a highly secure system based on End to End encryption principles. On the users devices all user data is encrypted at rest against the users public key. On our servers, all data in transit or at rest is encrypted against the users public key. User aggregation is not done.'),
+              ),
+/*               Expanded(
                 child: ListView(
                   shrinkWrap: true,
                   padding: const EdgeInsets.all(8.0),
@@ -308,7 +341,7 @@ class __SignUpViewState extends State<_SignUpView> {
                     ),
                   ],
                 ),
-              ),
+              ), */
             ],
           ),
         );
