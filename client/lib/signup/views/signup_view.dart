@@ -326,11 +326,11 @@ class __SignUpViewState extends State<_SignUpView> {
                 ),
               ),
               const SizedBox(height: 8),
-              const ListTile(
+/*               const ListTile(
                 title: Text(
                     'Currently in development, to assure a highly secure system based on End to End encryption principles. On the users devices all user data is encrypted at rest against the users public key. On our servers, all data in transit or at rest is encrypted against the users public key. User aggregation is not done.'),
-              ),
-/*               Expanded(
+              ), */
+              Expanded(
                 child: ListView(
                   shrinkWrap: true,
                   padding: const EdgeInsets.all(8.0),
@@ -341,7 +341,7 @@ class __SignUpViewState extends State<_SignUpView> {
                     ),
                   ],
                 ),
-              ), */
+              ),
             ],
           ),
         );

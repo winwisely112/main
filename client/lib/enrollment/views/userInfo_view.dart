@@ -147,27 +147,32 @@ class _UserInfoViewState extends State<_UserInfoView> {
         ),
         ListTile(
           title: _select(campaings, 'Select Affiliation ', 'campaings'),
-          subtitle: TextFormField(
-            initialValue: dropdownValue['others'],
-            maxLines: 3,
-            decoration: InputDecoration(
-              labelText: 'Others',
-              alignLabelWithHint: true,
-              hintText: 'Others',
-              fillColor: Theme.of(context).inputDecorationTheme.fillColor,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(4.0),
-                borderSide: const BorderSide(),
-              ),
+          subtitle: Padding(
+            padding: EdgeInsets.only(
+              right: MediaQuery.of(context).size.width * 0.40,
             ),
-            onSaved: (String value) {
-              setState(() {
-                dropdownValue['others'] = value;
-              });
-            },
-            keyboardType: TextInputType.emailAddress,
-            style: const TextStyle(
-              fontFamily: 'Poppins',
+            child: TextFormField(
+              initialValue: dropdownValue['others'],
+              maxLines: 1,
+              decoration: InputDecoration(
+                labelText: 'Others',
+                alignLabelWithHint: true,
+                hintText: 'Others',
+                fillColor: Theme.of(context).inputDecorationTheme.fillColor,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(4.0),
+                  borderSide: const BorderSide(),
+                ),
+              ),
+              onSaved: (String value) {
+                setState(() {
+                  dropdownValue['others'] = value;
+                });
+              },
+              keyboardType: TextInputType.emailAddress,
+              style: const TextStyle(
+                fontFamily: 'Poppins',
+              ),
             ),
           ),
         ),

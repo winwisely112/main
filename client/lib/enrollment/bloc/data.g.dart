@@ -34,7 +34,7 @@ class CampaignAdapter extends TypeAdapter<Campaign> {
       organization: fields[19] as String,
       strategy: fields[20] as String,
       uom: fields[22] as String,
-      videoURL: fields[21] as String,
+      videoURL: (fields[21] as List)?.cast<String>(),
       when: fields[7] as DateTime,
       where: fields[8] as String,
     );
