@@ -7,11 +7,10 @@ https://medium.com/@pulyaevskiy/announcing-zefyr-a-soft-and-gentle-rich-text-edi
 ## printing
 Supports markdown, and so can then print via markdown to PDF.
 
-Or write a dedicatd print class
 
 ## sync
 
-support quilljs and so we can run a sync server
+support quilljs and so we can run a sync server Or use it P2P as quill is designed based on OT ( operational transforms) and so the converges naturally.
 
 https://github.com/fmpwizard/go-quilljs-delta
 

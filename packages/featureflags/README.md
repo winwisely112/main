@@ -1,14 +1,14 @@
 # feature flags
 
-Allows us to easily bring in Modules at runtime.
+Allows us to easily turn on Modules at runtime.
 
 This will make it safe to deploy stuff to production and then turn it on as needed.
 
 
-a great explanation of why and how.
+A great explanation of why and how.
 https://github.com/launchdarkly/featureflags?files=1
 
-
+Basic Approach for Versioning:
 
 1. Tags in git
 - master, dev, stable.
@@ -19,3 +19,8 @@ https://github.com/vsco/dcdr
 
 3. deploy to web and app stores 3 versions that match the tags
 
+---
+
+Special tags:
+
+- Like Chrome flags where we can turn on and off specific functionality.
