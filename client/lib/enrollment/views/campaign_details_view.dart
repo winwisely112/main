@@ -348,11 +348,12 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
                       ),
                     ),
                     Card(
+                      color: Theme.of(context).cardColor.withOpacity(0.5),
                       shape: const CircleBorder(),
                       child: Icon(
                         Icons.play_circle_outline,
                         size: 48,
-                        color: Theme.of(context).primaryColorDark,
+                        color: Theme.of(context).colorScheme.secondaryVariant,
                       ),
                     ),
                   ],
@@ -380,7 +381,7 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: _current == i
-                      ? Theme.of(context).primaryColorDark
+                      ? Theme.of(context).colorScheme.secondaryVariant
                       : Theme.of(context).primaryColorLight,
                 ),
               )

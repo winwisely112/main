@@ -17,8 +17,8 @@ class WebCampaignView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AuthUserService _user = Provider.of<AuthUserService>(context);
     return HomeScaffold(
+      showBackButton: key != const ValueKey<String>('/mycampaign'),
       child: StreamBuilder<Map<int, Campaign>>(
         stream: Provider.of<CampaignBloc>(context).campaignList,
         builder:
@@ -75,8 +75,8 @@ class WebCampaignView extends StatelessWidget {
                   pinned: true,
                   automaticallyImplyLeading: false,
                   title: TextField(
-                    decoration: const InputDecoration.collapsed(
-                        hintText: 'Search Campaigns'),
+                    decoration:
+                        InputDecoration.collapsed(hintText: 'Search Campaigns'),
                   ),
                 ),
               ),

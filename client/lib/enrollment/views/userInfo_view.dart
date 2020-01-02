@@ -48,8 +48,10 @@ class _UserInfoViewState extends State<_UserInfoView> {
   ];
 
   final List<String> campaings = <String>[
-    'XR',
-    'Fridays for future',
+    'Extinction Rebellion (XR)',
+    'Fridays for Future',
+    'Children\'s Climate Strike',
+    'GreenPeace',
     'None',
   ];
   final List<String> ages = <String>[
@@ -71,7 +73,7 @@ class _UserInfoViewState extends State<_UserInfoView> {
     dropdownValue['cities'] = cities[0];
     dropdownValue['issues'] = issues[0];
     dropdownValue['campaings'] = campaings[0];
-    dropdownValue['ages'] = ages[0];
+    dropdownValue['ages'] = ages[2];
     dropdownValue['others'] = '';
     super.initState();
   }
@@ -92,10 +94,17 @@ class _UserInfoViewState extends State<_UserInfoView> {
           title: _select(cities, 'Select City', 'cities'),
         ),
         ListTile(
-          title: TextFormField(
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              hintText: 'Zip Code',
+          title: Padding(
+            padding: EdgeInsets.only(
+              right: MediaQuery.of(context).size.width >= 720.0
+                  ? MediaQuery.of(context).size.width * 0.60
+                  : 0,
+            ),
+            child: TextFormField(
+              keyboardType: TextInputType.number,
+              decoration: const InputDecoration(
+                hintText: 'Zip Code',
+              ),
             ),
           ),
         ),
@@ -114,10 +123,17 @@ class _UserInfoViewState extends State<_UserInfoView> {
           ),
         ),
         ListTile(
-          title: TextFormField(
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              hintText: 'Distance in KM',
+          title: Padding(
+            padding: EdgeInsets.only(
+              right: MediaQuery.of(context).size.width >= 720.0
+                  ? MediaQuery.of(context).size.width * 0.60
+                  : 0,
+            ),
+            child: TextFormField(
+              keyboardType: TextInputType.number,
+              decoration: const InputDecoration(
+                hintText: 'Distance in KM',
+              ),
             ),
           ),
         ),
@@ -149,7 +165,9 @@ class _UserInfoViewState extends State<_UserInfoView> {
           title: _select(campaings, 'Select Affiliation ', 'campaings'),
           subtitle: Padding(
             padding: EdgeInsets.only(
-              right: MediaQuery.of(context).size.width * 0.40,
+              right: MediaQuery.of(context).size.width >= 720.0
+                  ? MediaQuery.of(context).size.width * 0.60
+                  : 0,
             ),
             child: TextFormField(
               initialValue: dropdownValue['others'],
@@ -178,15 +196,22 @@ class _UserInfoViewState extends State<_UserInfoView> {
         ),
         const SizedBox(height: 48.0),
         ListTile(
-          title: ButtonBar(
-            children: <Widget>[
-              RaisedButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed('/campaignview');
-                },
-                child: const Text('Next'),
-              ),
-            ],
+          title: Padding(
+            padding: EdgeInsets.only(
+              right: MediaQuery.of(context).size.width >= 720.0
+                  ? MediaQuery.of(context).size.width * 0.60
+                  : 0,
+            ),
+            child: ButtonBar(
+              children: <Widget>[
+                RaisedButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/campaignview');
+                  },
+                  child: const Text('Next'),
+                ),
+              ],
+            ),
           ),
         ),
       ],
@@ -195,25 +220,36 @@ class _UserInfoViewState extends State<_UserInfoView> {
     );
   }
 
-  DropdownButton<String> _select(List<String> items, String hint, String item) {
-    return DropdownButton<String>(
-      value: dropdownValue[item],
-      icon: Icon(Icons.arrow_drop_down),
-      iconSize: 24,
-      elevation: 5,
-      isExpanded: true,
-      hint: Text(hint),
-      onChanged: (String newValue) {
-        setState(() {
-          dropdownValue[item] = newValue;
-        });
-      },
-      items: items.map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
+  Widget _select(List<String> items, String hint, String item) {
+    return Padding(
+      padding: EdgeInsets.only(
+        right: MediaQuery.of(context).size.width >= 720.0
+            ? MediaQuery.of(context).size.width * 0.60
+            : 0,
+      ),
+      child: DropdownButton<String>(
+        value: dropdownValue[item],
+        icon: Icon(Icons.arrow_downward),
+        underline: Container(
+          height: 2,
+          color: Theme.of(context).colorScheme.secondaryVariant,
+        ),
+        iconSize: 24,
+        elevation: 5,
+        isExpanded: true,
+        hint: Text(hint),
+        onChanged: (String newValue) {
+          setState(() {
+            dropdownValue[item] = newValue;
+          });
+        },
+        items: items.map<DropdownMenuItem<String>>((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+          );
+        }).toList(),
+      ),
     );
   }
 }
