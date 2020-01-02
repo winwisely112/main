@@ -95,6 +95,11 @@ class ProfileInfo extends StatelessWidget {
                               Navigator.of(context).pushNamed('/signout');
                             },
                           ),
+                          Tile(
+                            iconData: Icons.feedback,
+                            title: 'Your Feedback',
+                            onTap: () {},
+                          ),
                         ],
                       ),
                     ),
