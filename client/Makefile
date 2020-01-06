@@ -161,6 +161,9 @@ gen-mockdata:
 
 ### DESK
 
+flu-desk-local-init: ## flu-desk-local-init
+	cd $(SAMPLE_FSPATH) && hover init
+
 flu-desk-local-run: ## flu-desk-local-run
 	cd $(SAMPLE_FSPATH) && hover run
 
