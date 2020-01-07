@@ -39,6 +39,33 @@ class HomeScaffold extends StatelessWidget {
         drawer: ProfileInfo(),
         appBar: AppBar(
           backgroundColor: Theme.of(context).primaryColorDark,
+          actions: <Widget>[
+            MediaQuery.of(context).size.width >= 720.0
+                ? Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Icon(
+                        Icons.help,
+                        color: Colors.orange,
+                      ),
+                      const SizedBox(width: 8.0),
+                      Text(
+                        'Your Feedback',
+                        style: Theme.of(context).textTheme.title.copyWith(
+                              color: Theme.of(context).colorScheme.onPrimary,
+                            ),
+                      ),
+                      const SizedBox(width: 8.0),
+                    ],
+                  )
+                : Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Icon(
+                      Icons.help,
+                      color: Colors.orange,
+                    ),
+                  ),
+          ],
           leading: _showBackButton
               ? IconButton(
                   icon: Icon(
@@ -162,6 +189,15 @@ class WebInfoView extends StatelessWidget {
       return SafeArea(
         child: Scaffold(
           appBar: AppBar(
+            actions: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.help,
+                  color: Colors.orange,
+                ),
+              ),
+            ],
             centerTitle: true,
             title: title,
           ),
@@ -216,6 +252,15 @@ class ResponsiveDetailView extends StatelessWidget {
       return SafeArea(
         child: Scaffold(
           appBar: AppBar(
+            actions: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.help,
+                  color: Colors.orange,
+                ),
+              ),
+            ],
             centerTitle: true,
             title: Text(
               title,

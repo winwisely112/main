@@ -105,7 +105,7 @@ class _CampainDetailsBody extends StatelessWidget {
             'Length of the Action',
             style: Theme.of(context).textTheme.title,
           ),
-          subtitle: Text(campaign.actionLength),
+          subtitle: Text('${campaign.actionLength} ${campaign.uom}'),
         ),
         const SizedBox(height: 16.0),
         ListTile(

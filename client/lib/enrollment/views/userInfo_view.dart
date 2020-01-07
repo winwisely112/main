@@ -94,17 +94,10 @@ class _UserInfoViewState extends State<_UserInfoView> {
           title: _select(cities, 'Select City', 'cities'),
         ),
         ListTile(
-          title: Padding(
-            padding: EdgeInsets.only(
-              right: MediaQuery.of(context).size.width >= 720.0
-                  ? MediaQuery.of(context).size.width * 0.60
-                  : 0,
-            ),
-            child: TextFormField(
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                hintText: 'Zip Code',
-              ),
+          title: TextFormField(
+            keyboardType: TextInputType.number,
+            decoration: const InputDecoration(
+              hintText: 'Zip Code',
             ),
           ),
         ),
@@ -123,17 +116,10 @@ class _UserInfoViewState extends State<_UserInfoView> {
           ),
         ),
         ListTile(
-          title: Padding(
-            padding: EdgeInsets.only(
-              right: MediaQuery.of(context).size.width >= 720.0
-                  ? MediaQuery.of(context).size.width * 0.60
-                  : 0,
-            ),
-            child: TextFormField(
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                hintText: 'Distance in KM',
-              ),
+          title: TextFormField(
+            keyboardType: TextInputType.number,
+            decoration: const InputDecoration(
+              hintText: 'Distance in KM',
             ),
           ),
         ),
@@ -163,55 +149,41 @@ class _UserInfoViewState extends State<_UserInfoView> {
         ),
         ListTile(
           title: _select(campaings, 'Select Affiliation ', 'campaings'),
-          subtitle: Padding(
-            padding: EdgeInsets.only(
-              right: MediaQuery.of(context).size.width >= 720.0
-                  ? MediaQuery.of(context).size.width * 0.60
-                  : 0,
+          subtitle: TextFormField(
+            initialValue: dropdownValue['others'],
+            maxLines: 1,
+            decoration: InputDecoration(
+              labelText: 'Others',
+              alignLabelWithHint: true,
+              hintText: 'Others',
+              fillColor: Theme.of(context).inputDecorationTheme.fillColor,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(4.0),
+                borderSide: const BorderSide(),
+              ),
             ),
-            child: TextFormField(
-              initialValue: dropdownValue['others'],
-              maxLines: 1,
-              decoration: InputDecoration(
-                labelText: 'Others',
-                alignLabelWithHint: true,
-                hintText: 'Others',
-                fillColor: Theme.of(context).inputDecorationTheme.fillColor,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(4.0),
-                  borderSide: const BorderSide(),
-                ),
-              ),
-              onSaved: (String value) {
-                setState(() {
-                  dropdownValue['others'] = value;
-                });
-              },
-              keyboardType: TextInputType.emailAddress,
-              style: const TextStyle(
-                fontFamily: 'Poppins',
-              ),
+            onSaved: (String value) {
+              setState(() {
+                dropdownValue['others'] = value;
+              });
+            },
+            keyboardType: TextInputType.emailAddress,
+            style: const TextStyle(
+              fontFamily: 'Poppins',
             ),
           ),
         ),
         const SizedBox(height: 48.0),
         ListTile(
-          title: Padding(
-            padding: EdgeInsets.only(
-              right: MediaQuery.of(context).size.width >= 720.0
-                  ? MediaQuery.of(context).size.width * 0.60
-                  : 0,
-            ),
-            child: ButtonBar(
-              children: <Widget>[
-                RaisedButton(
-                  onPressed: () {
-                    Navigator.of(context).pushNamed('/campaignview');
-                  },
-                  child: const Text('Next'),
-                ),
-              ],
-            ),
+          title: ButtonBar(
+            children: <Widget>[
+              RaisedButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/campaignview');
+                },
+                child: const Text('Next'),
+              ),
+            ],
           ),
         ),
       ],
@@ -221,35 +193,28 @@ class _UserInfoViewState extends State<_UserInfoView> {
   }
 
   Widget _select(List<String> items, String hint, String item) {
-    return Padding(
-      padding: EdgeInsets.only(
-        right: MediaQuery.of(context).size.width >= 720.0
-            ? MediaQuery.of(context).size.width * 0.60
-            : 0,
+    return DropdownButton<String>(
+      value: dropdownValue[item],
+      icon: Icon(Icons.arrow_downward),
+      underline: Container(
+        height: 2,
+        color: Theme.of(context).colorScheme.secondaryVariant,
       ),
-      child: DropdownButton<String>(
-        value: dropdownValue[item],
-        icon: Icon(Icons.arrow_downward),
-        underline: Container(
-          height: 2,
-          color: Theme.of(context).colorScheme.secondaryVariant,
-        ),
-        iconSize: 24,
-        elevation: 5,
-        isExpanded: true,
-        hint: Text(hint),
-        onChanged: (String newValue) {
-          setState(() {
-            dropdownValue[item] = newValue;
-          });
-        },
-        items: items.map<DropdownMenuItem<String>>((String value) {
-          return DropdownMenuItem<String>(
-            value: value,
-            child: Text(value),
-          );
-        }).toList(),
-      ),
+      iconSize: 24,
+      elevation: 5,
+      isExpanded: true,
+      hint: Text(hint),
+      onChanged: (String newValue) {
+        setState(() {
+          dropdownValue[item] = newValue;
+        });
+      },
+      items: items.map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
     );
   }
 }

@@ -35,7 +35,6 @@ class Campaign implements Entity {
     @required this.where,
   })  : assert(id != null),
         assert(campaignName != null),
-        assert(campaignStill != null),
         assert(minStart != null),
         assert(minSocialMedia != null),
         assert(minWin != null),
@@ -183,7 +182,7 @@ class Roles implements Entity {
         comment = data['comment'],
         name = data['name'],
         uom = data['uom'],
-        mandatory = data['mandatory'] == 1 ? true : false;
+        mandatory = data['mandatory'] == '1' ? true : false;
 
   @HiveField(0)
   final Id<Roles> id;

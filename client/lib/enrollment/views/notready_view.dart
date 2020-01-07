@@ -89,7 +89,7 @@ class __NotReadyViewState extends State<_NotReadyView> {
         ),
         CheckboxListTile(
           title: const Text(
-              '2. I need to be more confident regarding legal defense'),
+              '2. I need to be more confident that I will be able to recieve the necessary legal defence if I am arrested, and that being arrested will not effect my chances of getting a desired job.'),
           value: _value[2],
           onChanged: (bool value) {
             setState(() {

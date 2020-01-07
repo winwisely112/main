@@ -73,7 +73,7 @@ class __SignUpViewState extends State<_SignUpView> {
                 ),
                 InkWell(
                   onTap: () {
-                    _showBottomSheet(context);
+                    _showProtonMail(context);
                   },
                   child: Text(
                     ' Explain why?',
@@ -297,6 +297,52 @@ class __SignUpViewState extends State<_SignUpView> {
         ),
         const SizedBox(height: 16.0),
       ],
+    );
+  }
+
+  void _showProtonMail(BuildContext context) {
+    showModalBottomSheet<Widget>(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(16),
+          topRight: Radius.circular(16),
+        ),
+      ),
+      context: context,
+      builder: (BuildContext con) {
+        return Scrollbar(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              const SizedBox(height: 4),
+              Align(
+                alignment: Alignment.center,
+                child: Container(
+                  width: 40,
+                  color: Theme.of(context).colorScheme.secondaryVariant,
+                  height: 4,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    const SizedBox(height: 24),
+                    const ListTile(
+                      title: Text('Why ProtonMail ?'),
+                      subtitle: Text(
+                          'ProtonMail to ProtonMail emails are considered to be secure by Information Security professionals. They’re both free to use on Android and Apple smart phones and Windows and Mac computers.'),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 
