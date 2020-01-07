@@ -1,3 +1,0 @@
-# mod-draw
-
-Drawing Module
