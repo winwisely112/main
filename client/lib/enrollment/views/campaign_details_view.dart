@@ -256,8 +256,9 @@ class _CampainDetailsBody extends StatelessWidget {
                 ),
               )
             : ListTile(
-                title: const Text(
+                title: Text(
                   'Are you ready to be a resister in this strike/nonviolent direct action ?',
+                  style: Theme.of(context).textTheme.title,
                 ),
                 subtitle: Padding(
                   padding: const EdgeInsets.all(4.0),
@@ -268,7 +269,14 @@ class _CampainDetailsBody extends StatelessWidget {
                           Navigator.of(context)
                               .pushNamed('/notready/$campaignID');
                         },
-                        child: const Text('Not Ready'),
+                        child: Text(
+                          'Not Ready',
+                          style: Theme.of(context).textTheme.button.copyWith(
+                              fontSize: 18,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .secondaryVariant),
+                        ),
                       ),
                       RaisedButton(
                         onPressed: () {
@@ -301,7 +309,11 @@ class _CampainDetailsBody extends StatelessWidget {
                                 .pushNamed('/signup/$campaignID');
                           }
                         },
-                        child: const Text('Ready'),
+                        child: Text('Ready',
+                            style: Theme.of(context)
+                                .textTheme
+                                .button
+                                .copyWith(fontSize: 18)),
                       ),
                     ],
                   ),
