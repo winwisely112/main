@@ -58,8 +58,8 @@ class UserInfoView extends StatelessWidget {
                     width: MediaQuery.of(context).size.width * 0.56,
                     child: CarouselSlider(
                       enlargeCenterPage: true,
-                      autoPlayInterval: const Duration(seconds: 4),
-                      autoPlayAnimationDuration: const Duration(seconds: 1),
+                      autoPlayInterval: const Duration(seconds: 5),
+                      autoPlayAnimationDuration: const Duration(seconds: 2),
                       height: MediaQuery.of(context).size.height * 0.80,
                       items: imgList
                           .map(
