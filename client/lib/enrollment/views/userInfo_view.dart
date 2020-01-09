@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -8,12 +9,82 @@ class UserInfoView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<String> imgList = <String>[
+      'assets/splash/splash01.png',
+      'assets/splash/splash02.png',
+      'assets/splash/splash03.png',
+      'assets/splash/splash04.png',
+      'assets/splash/splash-05.png',
+      'assets/splash/splash-06.png',
+      'assets/splash/splash-07.png',
+      'assets/splash/splash-08.png',
+      'assets/splash/splash-09.png',
+      'assets/splash/splash-10.png',
+      'assets/splash/splash-11.png',
+      'assets/splash/splash-12.png',
+      'assets/splash/splash-13.png',
+    ];
     return WebInfoView(
       title: TitleWidget(
         icon: FontAwesomeIcons.fistRaised,
         title: 'Campaign for Your Cause',
       ),
-      child: const _UserInfoView(),
+      child: MediaQuery.of(context).size.width >= 720.0
+          ? Container(
+              margin: const EdgeInsets.all(0),
+              alignment: Alignment.topLeft,
+              width: MediaQuery.of(context).size.width * 0.88,
+              height: MediaQuery.of(context).size.height * 0.81,
+              child: Row(
+                //mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    margin: const EdgeInsets.all(0),
+                    alignment: Alignment.topLeft,
+                    width: MediaQuery.of(context).size.width * 0.32,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisSize: MainAxisSize.min,
+                      children: const <Widget>[
+                        _UserInfoView(),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.all(0),
+                    width: MediaQuery.of(context).size.width * 0.56,
+                    child: CarouselSlider(
+                      enlargeCenterPage: true,
+                      autoPlayInterval: const Duration(seconds: 4),
+                      autoPlayAnimationDuration: const Duration(seconds: 1),
+                      height: MediaQuery.of(context).size.height * 0.80,
+                      items: imgList
+                          .map(
+                            (String url) => Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5.0)),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(5.0),
+                                child: Image.asset(
+                                  url,
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                            ),
+                          )
+                          .toList(),
+                      //aspectRatio: 4 / 3,
+                      autoPlay: true,
+                      pauseAutoPlayOnTouch: const Duration(milliseconds: 800),
+                    ),
+                  ),
+                ],
+              ),
+            )
+          : const _UserInfoView(),
       index: -1,
     );
   }
@@ -28,17 +99,20 @@ class _UserInfoView extends StatefulWidget {
 
 class _UserInfoViewState extends State<_UserInfoView> {
   final List<String> countries = <String>[
-    'Germany',
+    'United Kingdom',
     'Australia',
+    'Canada',
+    'Germany',
     'Pakistan',
-    'USA'
+    'USA',
   ];
 
   final List<String> cities = <String>[
+    'London',
     'Berlin',
-    'Newyork',
+    'New York',
     'Vancouver',
-    'Shanghai'
+    'Shanghai',
   ];
 
   final List<String> issues = <String>[
