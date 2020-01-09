@@ -127,6 +127,7 @@ class _UserInfoViewState extends State<_UserInfoView> {
     'Children\'s Climate Strike',
     'GreenPeace',
     'None',
+    'Others',
   ];
   final List<String> ages = <String>[
     '10-15',
@@ -223,29 +224,31 @@ class _UserInfoViewState extends State<_UserInfoView> {
         ),
         ListTile(
           title: _select(campaings, 'Select Affiliation ', 'campaings'),
-          subtitle: TextFormField(
-            initialValue: dropdownValue['others'],
-            maxLines: 1,
-            decoration: InputDecoration(
-              labelText: 'Others',
-              alignLabelWithHint: true,
-              hintText: 'Others',
-              fillColor: Theme.of(context).inputDecorationTheme.fillColor,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(4.0),
-                borderSide: const BorderSide(),
-              ),
-            ),
-            onSaved: (String value) {
-              setState(() {
-                dropdownValue['others'] = value;
-              });
-            },
-            keyboardType: TextInputType.emailAddress,
-            style: const TextStyle(
-              fontFamily: 'Poppins',
-            ),
-          ),
+          subtitle: dropdownValue['campaings'] == 'Others'
+              ? TextFormField(
+                  initialValue: dropdownValue['others'],
+                  maxLines: 1,
+                  decoration: InputDecoration(
+                    labelText: 'Others',
+                    alignLabelWithHint: true,
+                    hintText: 'Others',
+                    fillColor: Theme.of(context).inputDecorationTheme.fillColor,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(4.0),
+                      borderSide: const BorderSide(),
+                    ),
+                  ),
+                  onSaved: (String value) {
+                    setState(() {
+                      dropdownValue['others'] = value;
+                    });
+                  },
+                  keyboardType: TextInputType.emailAddress,
+                  style: const TextStyle(
+                    fontFamily: 'Poppins',
+                  ),
+                )
+              : const SizedBox(height: 0),
         ),
         const SizedBox(height: 48.0),
         ListTile(
