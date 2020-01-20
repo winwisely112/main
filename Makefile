@@ -1,7 +1,7 @@
 # general housekeeping stuff
 
 # Pick a version to want !!
-TAG_NAME=v1.0.6
+TAG_NAME=v1.0.7
 
 
 help:  ## Display this help
