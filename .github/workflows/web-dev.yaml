@@ -67,7 +67,7 @@ jobs:
           docker build -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE":"$GITHUB_SHA" \
             --build-arg GITHUB_SHA="$GITHUB_SHA" \
             --build-arg GITHUB_REF="$GITHUB_REF" server/
-          cp -rf client/build/web server/flutter
+          cp -rf web-build server/flutter/web
           docker build -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/flutter-web-"$IMAGE":"$GITHUB_SHA" server/flutter
           
       # Push the Docker image to Google Container Registry
