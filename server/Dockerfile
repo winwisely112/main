@@ -11,7 +11,7 @@ RUN go mod download
 COPY . ./
 
 # Build the binary.
-RUN CGO_ENABLED=0 GOOS=linux go build -mod=readonly -v -o server cmd/api/main.go
+RUN CGO_ENABLED=0 GOOS=linux go build -mod=readonly -v -o server go-server/cmd/server/main.go
 
 
 FROM alpine:3
