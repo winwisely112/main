@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: grpc-web
+  name: main-server
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: grpc-web
+      app: main-server
   template:
     metadata:
       labels:
-        app: grpc-web
+        app: main-server
     spec:
       containers:
-      - name: grpc-web
-        image: gcr.io/GKE_PROJECT/IMAGE
+      - name: main-server
+        image: gcr.io/GKE_PROJECT/IMAGE:TAG
         imagePullPolicy: Always
         ports:
         - containerPort: 3000

@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: flutter
+  name: main-flutter
 spec:
   selector:
-    app: flutter
+    app: main-flutter
   type: NodePort
   ports:
   - name: http

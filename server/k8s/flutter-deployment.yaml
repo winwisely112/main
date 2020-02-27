@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: flutter
+  name: main-flutter
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: flutter
+      app: main-flutter
   template:
     metadata:
       labels:
-        app: flutter
+        app: main-flutter
     spec:
       containers:
-      - name: flutter
-        image: gcr.io/GKE_PROJECT/flutter-web-IMAGE
+      - name: main-flutter
+        image: gcr.io/GKE_PROJECT/flutter-web-IMAGE:TAG
         imagePullPolicy: Always
         ports:
         - containerPort: 80
