@@ -37,6 +37,7 @@ dependencies:
   floating_search_bar: ^0.2.0
   toast: ^0.1.5
   carousel_slider: ^1.4.0
+  hive: 1.2.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
