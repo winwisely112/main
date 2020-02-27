@@ -3,6 +3,17 @@ on:
   push:
     branches:
       - master
+      - ci
+
+# Environment variables available to all jobs and steps in this workflow
+env:
+  GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
+  GKE_EMAIL: ${{ secrets.GKE_EMAIL }}
+  GITHUB_SHA: ${{ github.sha }}
+  GKE_ZONE: ${{ secrets.GKE_ZONE }}
+  IMAGE: main
+  REGISTRY_HOSTNAME: gcr.io
+
 jobs:
   build:
     name: Build Web
@@ -36,6 +47,54 @@ jobs:
         uses: actions/download-artifact@v1 # https://github.com/actions/download-artifact
         with:
           name: web-build
+
+      # Setup gcloud CLI
+      - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          version: '270.0.0'
+          service_account_email: ${{ secrets.GKE_EMAIL }}
+          service_account_key: ${{ secrets.GKE_KEY }}
+
+      # Configure docker to use the gcloud command-line tool as a credential helper
+      - run: |
+          # Set up docker to authenticate
+          # via gcloud command-line tool.
+          gcloud auth configure-docker
+          
+      # Build the Docker image
+      - name: Build
+        run: |        
+          docker build -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE":"$GITHUB_SHA" \
+            --build-arg GITHUB_SHA="$GITHUB_SHA" \
+            --build-arg GITHUB_REF="$GITHUB_REF" server/
+          cp -rf client/build/web server/flutter
+          docker build -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/flutter-web-"$IMAGE":"$GITHUB_SHA" server/flutter
+          
+      # Push the Docker image to Google Container Registry
+      - name: Publish
+        run: |
+          docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE:$GITHUB_SHA
+          docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/flutter-web-$IMAGE:$GITHUB_SHA
+      # Set up kustomize
+      - name: Set up Kustomize
+        run: |
+          curl -o kustomize --location https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
+          chmod u+x ./kustomize
+      # Deploy the Docker image to the GKE cluster
+      - name: Deploy
+        run: |
+          gcloud container clusters get-credentials $GKE_PROJECT --zone $GKE_ZONE --project $GKE_PROJECT
+          touch kustomization.yaml
+          ./kustomize edit add resource server/k8s/*
+          ./kustomize edit set image gcr.io/GKE_PROJECT/IMAGE:TAG=gcr.io/$GKE_PROJECT/$IMAGE:$GITHUB_SHA
+          ./kustomize edit set image gcr.io/GKE_PROJECT/flutter-web-IMAGE:TAG=gcr.io/$GKE_PROJECT/flutter-web-$IMAGE:$GITHUB_SHA
+          ./kustomize build . | kubectl apply -f -
+          kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.30.0/deploy/static/mandatory.yaml
+          kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.30.0/deploy/static/provider/cloud-generic.yaml
+          kubectl --namespace ingress-nginx patch svc ingress-nginx -p '{"spec": {"loadBalancerIP": "${{ secrets.GKE_IP }}"}}'
+          kubectl get services -o wide
+          echo ${{ secrets.GKE_IP }}
+
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@v1.2.0 # https://github.com/w9jds/firebase-action
         with:
