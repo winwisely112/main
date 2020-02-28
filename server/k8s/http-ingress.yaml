@@ -12,7 +12,7 @@ spec:
       - main.ci.getcouragenow.org
       secretName: main-ci-tls 
   rules:
-  - host: main.getcouragenow.org
+  - host: main.ci.getcouragenow.org
     http:
       paths:
       - backend:
